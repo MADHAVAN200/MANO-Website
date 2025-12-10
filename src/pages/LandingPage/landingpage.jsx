@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronRight, Circle } from 'lucide-react';
 
 export default function LandingPage() {
@@ -13,6 +13,11 @@ export default function LandingPage() {
     { name: 'Ariana Residency', image: '/image.webp' },
     { name: 'Ariana Residency', image: '/image.webp' },
     { name: 'Ariana Residency', image: '/image.webp' },
+    { name: 'Ariana Residency', image: '/image.webp' },
+    { name: 'Ariana Residency', image: '/image.webp' },
+    { name: 'Ariana Residency', image: '/image.webp' },
+    { name: 'Ariana Residency', image: '/image.webp' },
+    
   ];
 
   const handleMouseMove = (e) => {
@@ -66,6 +71,31 @@ export default function LandingPage() {
     'Project Management Consultants'
   ];
 
+  // --- Smooth carousel animation refs ---
+  const currentIndexRef = useRef(0); // float value
+  const targetIndexRef = useRef(0);  // fractional target
+
+  // initialize target to middle on mount
+  useEffect(() => {
+    targetIndexRef.current = Math.round(projects.length / 2);
+  }, []);
+
+  // animation loop: ease currentIndexRef toward targetIndexRef and update state
+  useEffect(() => {
+    let rafId = null;
+    const step = () => {
+      // simple easing
+      currentIndexRef.current += (targetIndexRef.current - currentIndexRef.current) * 0.08;
+      const rounded = Math.round(currentIndexRef.current) % projects.length;
+      // keep in bounds positive
+      const idx = ((rounded % projects.length) + projects.length) % projects.length;
+      setCurrentProjectIndex(idx);
+      rafId = requestAnimationFrame(step);
+    };
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [projects.length]);
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hero Section with Navigation */}
@@ -77,12 +107,15 @@ export default function LandingPage() {
         
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-center mb-24">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-8 py-3 flex gap-12 items-center">
-            <a href="#" className="text-white font-medium text-sm">Home</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Services</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Projects</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Careers</a>
+          <div
+            className="backdrop-blur-xl bg-white/5 border border-white/30 rounded-full px-8 py-3 flex items-center"
+            style={{ width: '86%', maxWidth: '780px', '--nav-text-size': '16px' }}
+          >
+            <a href="#" className="text-white font-medium text-[var(--nav-text-size)] flex-1 text-center">Home</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center">About Us</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center">Services</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center">Projects</a>
+            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center">Careers</a>
           </div>
         </nav>
 
@@ -95,15 +128,18 @@ export default function LandingPage() {
             Delivering expert project management, cost consultancy, quality assurance, and<br />
             execution excellence backed by 12+ years of industry trust.
           </p>
-          <div className="flex gap-6 justify-center">
-            <button className="group relative px-8 py-4 rounded-full overflow-hidden backdrop-blur-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all">
-              <span className="relative z-10 flex items-center gap-2 text-white font-medium">
-                Start Your Project <ChevronRight className="w-4 h-4" />
+          <div className="flex gap-12 justify-center">
+            <button className="group relative px-12 py-3 rounded-xl overflow-hidden border-1 border-white/60 hover:border-white/80 transition-all backdrop-blur-sm bg-black/20 flex items-center justify-center w-[320px] h-14">
+              <span className="relative z-10 text-white font-bold tracking-wide text-lg">Start Your Project</span>
+              <span className="relative z-10 w-9 h-9 ml-4 rounded-full bg-white/5 flex items-center justify-center">
+                <ChevronRight className="w-4 h-4 text-white" />
               </span>
             </button>
-            <button className="group relative px-8 py-4 rounded-full overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
-              <span className="relative z-10 flex items-center gap-2 text-white font-medium">
-                View Our Services <ChevronRight className="w-4 h-4" />
+
+            <button className="group relative px-12 py-3 rounded-xl overflow-hidden border-1 border-white/60 hover:border-white/80 transition-all backdrop-blur-sm bg-black/20 flex items-center justify-center w-[320px] h-14">
+              <span className="relative z-10 text-white font-bold tracking-wide text-lg">View Our Services</span>
+              <span className="relative z-10 w-9 h-9 ml-4 rounded-full bg-white/5 flex items-center justify-center">
+                <ChevronRight className="w-4 h-4 text-white" />
               </span>
             </button>
           </div>
@@ -138,38 +174,83 @@ export default function LandingPage() {
           approach to deliver measurable results in every project.
         </p>
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <div className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">End-to-End Project Expertise</h3>
-                <p className="text-gray-400">
-                  From inception to completion, we handle every phase with precision, ensuring seamless
-                  project delivery.
-                </p>
+          {/* Card 1 */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-black/40 via-black/30 to-black/20 p-6">
+            <div className="flex items-start gap-6">
+              <div className="flex flex-col items-center -ml-2">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-md">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95"/>
+                    <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95"/>
+                  </svg>
+                </div>
+                <div className="w-px h-16 bg-gradient-to-b from-purple-500 to-transparent mt-2 rounded"></div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-4">End-to-End Project Expertise</h3>
+                <div className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1 w-4 h-4 rounded-full bg-purple-500 flex items-center justify-center shrink-0">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <p className="text-gray-300">From feasibility to final handover — complete lifecycle management under one roof.</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <div className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Cost Efficiency & Transparency</h3>
-                <p className="text-gray-400">
-                  Accurate cost estimations, budgeting, and regular audits ensure that your projects stay on
-                  track and within budget.
-                </p>
+
+          {/* Card 2 */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-black/40 via-black/30 to-black/20 p-6">
+            <div className="flex items-start gap-6">
+              <div className="flex flex-col items-center -ml-2">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-md">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95"/>
+                    <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95"/>
+                  </svg>
+                </div>
+                <div className="w-px h-16 bg-gradient-to-b from-purple-500 to-transparent mt-2 rounded"></div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-4">Cost Efficiency & Transparency</h3>
+                <div className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1 w-4 h-4 rounded-full bg-purple-500 flex items-center justify-center shrink-0">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <p className="text-gray-300">Accurate estimations, budgeting, and specialist cost control ensure optimal financial performance.</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <div className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Quality-Focused Delivery</h3>
-                <p className="text-gray-400">
-                  Strict QA/QC processes, quality, and compliance requirements for flawless execution.
-                </p>
+
+          {/* Card 3 */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-black/40 via-black/30 to-black/20 p-6">
+            <div className="flex items-start gap-6">
+              <div className="flex flex-col items-center -ml-2">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-md">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95"/>
+                    <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95"/>
+                  </svg>
+                </div>
+                <div className="w-px h-16 bg-gradient-to-b from-purple-500 to-transparent mt-2 rounded"></div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-4">Quality-Focused Delivery</h3>
+                <div className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1 w-4 h-4 rounded-full bg-purple-500 flex items-center justify-center shrink-0">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                  <p className="text-gray-300">Strict QA/QC processes, audits, and compliance frameworks for flawless execution.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -178,132 +259,168 @@ export default function LandingPage() {
 
       {/* Services Section */}
       <section className="px-12 py-16">
-        <h2 className="text-4xl font-bold text-center mb-16">Our Core Services</h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-6">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">Project Planning</h3>
-            <p className="text-gray-400 text-sm">
-              Strategic blueprints, feasibility studies, and project scoping to set the foundation for
-              success.
-            </p>
+        <h2 className="text-4xl font-bold text-center mb-12">Our Core Services</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-2 gap-8">
+          {/* Left Top */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">Project Planning</h3>
+            <p className="text-gray-300 mb-4">Smart scheduling, resource planning & project roadmap design.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">Project Management</h3>
-            <p className="text-gray-400 text-sm">
-              Comprehensive scheduling, budgeting, and team coordination for seamless project delivery.
-            </p>
+
+          {/* Right Top */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">Project Management</h3>
+            <p className="text-gray-300 mb-4">Seamless execution, monitoring, and milestone-driven progress.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">Cost Consultancy</h3>
-            <p className="text-gray-400 text-sm">
-              Budgeting & ROC calculations, cost control & forecasting, and contract administration.
-            </p>
+
+          {/* Left Middle */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">Cost Consultancy</h3>
+            <p className="text-gray-300 mb-4">Budgeting, BOQs, material cost verification.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">Project Execution</h3>
-            <p className="text-gray-400 text-sm">
-              On-site monitoring, resource planning & quality assurance ensuring timely completion.
-            </p>
+
+          {/* Right Middle */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">Project Execution</h3>
+            <p className="text-gray-300 mb-4">Smart scheduling, resource planning & project roadmap design.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">QUANTITY SURVEY & Audit</h3>
-            <p className="text-gray-400 text-sm">
-              Accurate cost estimations, material take-offs, and variance analysis for informed financial
-              decisions.
-            </p>
+
+          {/* Left Bottom */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">QUANTITY SURVEY & Audit</h3>
+            <p className="text-gray-300 mb-4">Process optimization, compliance checks, risk audits.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">EHS & Safety Audits</h3>
-            <p className="text-gray-400 text-sm">
-              Safety compliance, risk assessment, and health & safety training for secure project
-              environments.
-            </p>
+
+          {/* Right Bottom */}
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3">EHS & Safety Audits</h3>
+            <p className="text-gray-300 mb-4">Safety standards, certifications, risk assessments.</p>
+            <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+              Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+            </a>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto mt-6">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-xl font-bold mb-2">Quality Assurance & Audit</h3>
-            <p className="text-gray-400 text-sm">
-              Rigorous inspections, compliance checks, audit reports, ensuring highest quality standards
-              throughout.
-            </p>
+
+        {/* Centered last feature */}
+        <div className="max-w-3xl mx-auto mt-8 flex justify-center">
+          <div className="backdrop-blur-xl rounded-2xl p-8 relative overflow-hidden w-1/2" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03))', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <h3 className="text-2xl font-semibold mb-3 text-center">Quality Assurance & Audit</h3>
+            <p className="text-gray-300 mb-4 text-center">Process optimization, compliance checks, risk audits.</p>
+            <div className="flex justify-center">
+              <a href="#" className="inline-flex items-center text-sm text-blue-400 hover:text-white">
+                Explore More <span className="ml-2"><ChevronRight className="w-4 h-4" /></span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Projects Carousel */}
+      <user__selection>{/* Featured Projects Carousel */}
       <section 
         className="py-24 overflow-hidden relative"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseMove={(e) => {
+          const section = e.currentTarget;
+          const rect = section.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          // map x to a fractional target index across projects
+          const frac = x / rect.width;
+          targetIndexRef.current = frac * (projects.length - 1);
+        }}
+        onMouseLeave={() => { targetIndexRef.current = Math.round(projects.length / 2); }}
       >
         <h2 className="text-4xl font-bold text-center mb-20">Featured Projects</h2>
-        <div className="relative h-[500px] flex items-center justify-center">
+        <div className="relative h-[520px] flex items-center justify-center">
           <div className="relative w-full max-w-7xl mx-auto flex items-center justify-center">
             {projects.map((project, index) => {
+              // compute positions based on the current (rounded) index
               const position = (index - currentProjectIndex + projects.length) % projects.length;
               const isCenter = position === 0;
               const isLeft1 = position === projects.length - 1;
               const isLeft2 = position === projects.length - 2;
               const isRight1 = position === 1;
               const isRight2 = position === 2;
-              
-              let transform = 'translateX(-50%) scale(0.6) translateZ(-200px)';
+
+              let transform = 'translateX(-50%) scale(0.6) translateZ(-160px)';
               let zIndex = 1;
-              let opacity = 0.3;
-              
+              let opacity = 0.22;
+              let blur = 'blur(1px)';
+
               if (isCenter) {
                 transform = 'translateX(-50%) scale(1) translateZ(0px)';
-                zIndex = 50;
+                zIndex = 60;
                 opacity = 1;
+                blur = 'blur(0px)';
               } else if (isLeft1) {
-                transform = 'translateX(-130%) scale(0.75) translateZ(-100px)';
-                zIndex = 40;
-                opacity = 0.6;
+                transform = 'translateX(-110%) scale(0.88) translateZ(-60px)';
+                zIndex = 50;
+                opacity = 0.75;
               } else if (isLeft2) {
-                transform = 'translateX(-180%) scale(0.6) translateZ(-200px)';
-                zIndex = 30;
-                opacity = 0.4;
-              } else if (isRight1) {
-                transform = 'translateX(30%) scale(0.75) translateZ(-100px)';
+                transform = 'translateX(-170%) scale(0.72) translateZ(-120px)';
                 zIndex = 40;
-                opacity = 0.6;
+                opacity = 0.55;
+              } else if (isRight1) {
+                transform = 'translateX(-10%) scale(0.88) translateZ(-60px)';
+                zIndex = 50;
+                opacity = 0.75;
               } else if (isRight2) {
-                transform = 'translateX(80%) scale(0.6) translateZ(-200px)';
-                zIndex = 30;
-                opacity = 0.4;
+                transform = 'translateX(60%) scale(0.72) translateZ(-120px)';
+                zIndex = 40;
+                opacity = 0.55;
               }
-              
+
               return (
                 <div
                   key={index}
-                  className="absolute left-1/2 transition-all duration-700 ease-out"
+                  className="absolute left-1/2 transition-all duration-500 ease-out"
                   style={{
                     transform,
                     zIndex,
                     opacity,
-                    filter: isCenter ? 'blur(0px)' : 'blur(1px)'
+                    filter: blur
                   }}
                 >
-                  <div className="w-[600px] h-[400px] relative group">
-                    <div className="relative h-full rounded-3xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10">
-                      <img 
-                        src={project.image} 
-                        alt={project.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                      <div className="absolute top-8 left-8">
-                        <h3 className="text-2xl font-bold text-white">{project.name}</h3>
+                  <div className="w-[560px] h-[520px] relative group">
+                    {/* Liquid glass card */}
+                    <div className="relative h-full rounded-3xl overflow-hidden backdrop-blur-[14px] bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.06)] shadow-2xl">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+
+                      {/* Project title */}
+                      <div className="absolute top-6 left-6 z-20">
+                        <h3 className="text-3xl font-bold text-white">{project.name}</h3>
+                      </div>
+
+                      {/* Image area with padding and inner frame */}
+                      <div className="absolute left-6 right-6 bottom-6 top-20 z-10 rounded-lg overflow-hidden bg-black">
+                        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                       </div>
                     </div>
+
+                    {/* soft outer stroke */}
+                    <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.6) inset' }} />
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
-      </section>
+      </section></user__selection>
 
       {/* Testimonials */}
       <section className="px-12 py-24">
