@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronRight, Circle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -185,9 +186,9 @@ export default function LandingPage() {
             className="backdrop-blur-md bg-white/5 border border-white/10 rounded-full px-8 py-3 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
             style={{ width: '86%', maxWidth: '780px', '--nav-text-size': '16px' }}
           >
-            <a href="#" className="text-white font-bold text-[var(--nav-text-size)] flex-1 text-center drop-shadow-md">Home</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">About Us</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">Services</a>
+            <Link to="/" className="text-white font-bold text-[var(--nav-text-size)] flex-1 text-center drop-shadow-md">Home</Link>
+            <Link to="/about-us" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">About Us</Link>
+            <Link to="/services/qa-audit" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">Services</Link>
             <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">Projects</a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors text-[var(--nav-text-size)] flex-1 text-center font-medium">Careers</a>
           </div>
@@ -202,19 +203,15 @@ export default function LandingPage() {
             Delivering expert project management, cost consultancy, quality assurance, and<br />
             execution excellence backed by 12+ years of industry trust.
           </p>
-          <div className="flex gap-12 justify-center">
-            <button className="group relative px-12 py-3 rounded-full overflow-hidden border border-white/20 hover:border-white/40 transition-all backdrop-blur-md bg-white/5 hover:bg-white/10 flex items-center justify-center w-[320px] h-14 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-              <span className="relative z-10 text-white font-semibold tracking-wide text-lg">Start Your Project</span>
-              <span className="relative z-10 ml-3">
-                <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-              </span>
+          <div className="flex flex-wrap justify-center gap-8">
+            <button className="px-12 py-4 text-xl rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
+              <span className="relative z-10 text-white font-semibold tracking-wide">Start Your Project</span>
+              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
             </button>
 
-            <button className="group relative px-12 py-3 rounded-full overflow-hidden border border-white/20 hover:border-white/40 transition-all backdrop-blur-md bg-white/5 hover:bg-white/10 flex items-center justify-center w-[320px] h-14 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-              <span className="relative z-10 text-white font-semibold tracking-wide text-lg">View Our Services</span>
-              <span className="relative z-10 ml-3">
-                <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors" />
-              </span>
+            <button className="px-12 py-4 text-xl rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
+              <span className="relative z-10 text-white font-semibold tracking-wide">View Our Services</span>
+              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
             </button>
           </div>
         </div>
@@ -263,21 +260,21 @@ export default function LandingPage() {
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-transparent to-white/5 backdrop-blur-xl p-6 hover:to-white/10 transition-all duration-300">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
-                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95" />
+                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-purple-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-4 text-white">End-to-End Project Expertise</h3>
                   <div className="flex items-start gap-3 text-gray-300">
-                    <span className="mt-1 w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 border border-purple-500/30">
+                    <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 6L9 17L4 12" stroke="#A855F7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <p className="text-gray-300 leading-relaxed">From feasibility to final handover — complete lifecycle management under one roof.</p>
@@ -290,21 +287,21 @@ export default function LandingPage() {
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-transparent to-white/5 backdrop-blur-xl p-6 hover:to-white/10 transition-all duration-300">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
-                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95" />
+                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-purple-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-4 text-white">Cost Efficiency & Transparency</h3>
                   <div className="flex items-start gap-3 text-gray-300">
-                    <span className="mt-1 w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 border border-purple-500/30">
+                    <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 6L9 17L4 12" stroke="#A855F7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <p className="text-gray-300 leading-relaxed">Accurate estimations, budgeting, and specialist cost control ensure optimal financial performance.</p>
@@ -317,21 +314,21 @@ export default function LandingPage() {
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-transparent to-white/5 backdrop-blur-xl p-6 hover:to-white/10 transition-all duration-300">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-purple-500 to-purple-600 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
-                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#C084FC" opacity="0.95" />
+                      <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-purple-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-4 text-white">Quality-Focused Delivery</h3>
                   <div className="flex items-start gap-3 text-gray-300">
-                    <span className="mt-1 w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 border border-purple-500/30">
+                    <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 6L9 17L4 12" stroke="#A855F7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <p className="text-gray-300 leading-relaxed">Strict QA/QC processes, audits, and compliance frameworks for flawless execution.</p>
