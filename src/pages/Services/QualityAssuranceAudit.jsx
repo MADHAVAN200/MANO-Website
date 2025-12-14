@@ -28,7 +28,34 @@ const RevealOnScroll = ({ children }) => {
     );
 };
 
+const AnimatedBar = ({ children, className, widthClass, isVisible }) => {
+    return (
+        <div
+            className={`${className} transition-all duration-[3000ms] ease-out ${isVisible ? widthClass : 'w-[0px]'}`}
+        >
+            <div className="w-full">
+                {children}
+            </div>
+        </div>
+    );
+};
+
 const QualityAssuranceAudit = () => {
+    const [chartVisible, setChartVisible] = useState(false);
+    const chartRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setChartVisible(true);
+                observer.disconnect();
+            }
+        }, { threshold: 0.1 });
+
+        if (chartRef.current) observer.observe(chartRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -50,7 +77,7 @@ const QualityAssuranceAudit = () => {
             </nav>
 
             {/* Hero Section */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-[60vh] flex flex-col justify-center items-center">
+            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-screen flex flex-col justify-center items-center">
                 {/* Background Glow */}
                 <div className="absolute inset-0 pointer-events-none" style={{
                     background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
@@ -59,16 +86,16 @@ const QualityAssuranceAudit = () => {
                 }}></div>
 
                 <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight">
+                    <h1 className="text-6xl md:text-8xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
                         Quality Assurance & Audit Services
                     </h1>
-                    <p className="text-xl text-gray-200 mb-10 leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="text-2xl text-gray-200 mb-12 leading-relaxed max-w-4xl mx-auto font-light">
                         Ensuring excellence in every process through precision-driven quality assurance, compliance audits, and continuous process improvement.
                     </p>
 
-                    <button className="group flex items-center gap-2 px-8 py-3 rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all text-white font-medium shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]">
+                    <button className="group flex items-center gap-3 px-10 py-4 rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all text-white text-lg font-medium shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]">
                         Get Started
-                        <ChevronRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                        <ChevronRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
                     </button>
                 </div>
             </section>
@@ -177,7 +204,7 @@ const QualityAssuranceAudit = () => {
             {/* Why Quality Audits Matter Section */}
             <section className="py-24 px-6 relative z-10">
                 <RevealOnScroll>
-                    <div className="max-w-4xl mx-auto relative">
+                    <div className="max-w-6xl mx-auto relative">
                         {/* Blue Circular Gradient Glow */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
 
@@ -190,27 +217,35 @@ const QualityAssuranceAudit = () => {
 
                             <h3 className="text-3xl md:text-4xl font-bold mb-10 pb-2 relative z-10 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-gray-100">Project Efficiency Comparison</h3>
 
-                            <div className="space-y-4 relative z-10">
+                            <div ref={chartRef} className="space-y-4 relative z-10">
                                 {/* Negative Row */}
                                 <div className="flex flex-col md:flex-row items-center gap-6">
-                                    <div className="w-full md:w-[65%] p-4 rounded-xl bg-gradient-to-r from-red-500/30 to-red-900/10 border border-red-500/20 text-center md:text-left shadow-[0_0_15px_rgba(239,68,68,0.1)] backdrop-blur-md flex items-center overflow-hidden">
-                                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-300 to-white whitespace-nowrap truncate">
+                                    <AnimatedBar
+                                        isVisible={chartVisible}
+                                        widthClass="w-full md:w-[55%]"
+                                        className="p-4 rounded-xl bg-gradient-to-r from-red-500/30 to-red-900/10 border border-red-500/20 text-center md:text-left shadow-[0_0_15px_rgba(239,68,68,0.1)] backdrop-blur-md flex items-center overflow-hidden"
+                                    >
+                                        <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-red-500 to-red-200 whitespace-nowrap truncate">
                                             High error rate, rework, delays
                                         </span>
-                                    </div>
-                                    <div className="font-bold whitespace-nowrap text-lg bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-gray-200">
+                                    </AnimatedBar>
+                                    <div className="font-bold whitespace-nowrap text-2xl bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-gray-200">
                                         Without Quality Control
                                     </div>
                                 </div>
 
                                 {/* Positive Row */}
                                 <div className="flex flex-col md:flex-row items-center gap-6">
-                                    <div className="w-full md:w-full p-4 rounded-xl bg-gradient-to-r from-blue-500/30 to-blue-900/10 border border-blue-500/30 text-center md:text-left shadow-[0_0_15px_rgba(37,99,235,0.2)] backdrop-blur-md flex items-center overflow-hidden">
-                                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-200 to-white whitespace-nowrap truncate">
+                                    <AnimatedBar
+                                        isVisible={chartVisible}
+                                        widthClass="w-full"
+                                        className="p-4 rounded-xl bg-gradient-to-r from-blue-500/30 to-blue-900/10 border border-blue-500/30 text-center md:text-left shadow-[0_0_15px_rgba(37,99,235,0.2)] backdrop-blur-md flex items-center overflow-hidden"
+                                    >
+                                        <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-200 to-white whitespace-nowrap truncate">
                                             Compliance, precision, zero defects
                                         </span>
-                                    </div>
-                                    <div className="font-bold whitespace-nowrap text-lg bg-clip-text text-transparent bg-gradient-to-t from-gray-400 to-white">
+                                    </AnimatedBar>
+                                    <div className="font-bold whitespace-nowrap text-2xl bg-clip-text text-transparent bg-gradient-to-t from-gray-400 to-white">
                                         With Mano Consultants
                                     </div>
                                 </div>
