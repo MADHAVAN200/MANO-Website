@@ -72,16 +72,16 @@ export default function LandingPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
 
   const projects = [
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
+    { name: 'Ariana Residency', image: 'image2.webp' },
 
   ];
 
@@ -110,19 +110,19 @@ export default function LandingPage() {
     {
       name: 'David J. Karem',
       role: 'Businessmen 1 day ago',
-      image: 'image.webp',
+      image: 'image2.webp',
       text: 'Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address. Stalkers and disgruntled acquaintances use the Internet to find addresses, phone numbers and other personal details about their targets. Identity thieves use personal information numbers and other personal details.'
     },
     {
       name: 'Sarah Johnson',
       role: 'CEO 2 days ago',
-      image: 'image.webp',
+      image: 'image2.webp',
       text: 'Outstanding service and professionalism. The team delivered beyond our expectations and helped us achieve our project goals efficiently.'
     },
     {
       name: 'Michael Chen',
       role: 'Project Manager 3 days ago',
-      image: 'image.webp',
+      image: 'image2.webp',
       text: 'Excellent project management and communication throughout. Would highly recommend their services to anyone looking for quality work.'
     }
   ];
