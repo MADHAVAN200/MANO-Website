@@ -25,7 +25,7 @@ const Footer = () => {
                         <div className="space-y-6 max-w-sm">
                             <Link to="/">
                                 <div className="bg-white/10 p-2 rounded-lg inline-block">
-                                    <img src="/mano-logo.svg" alt="Mano Logo" className="h-12" />
+                                    <img src="mano-logo.svg" alt="Mano Logo" className="h-12" />
                                 </div>
                             </Link>
                             <div className="space-y-4 text-gray-400">

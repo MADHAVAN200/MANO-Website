@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage/landingpage"
 import AboutUs from "./pages/AboutUs/AboutUs"
@@ -43,6 +43,9 @@ function App() {
         <Route path="/services/project-planning" element={<ProjectPlanning />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/careers" element={<Careers />} />
+        
+        {/* Catch-all route - redirect any undefined route to home page */}
+        <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
       <Footer />

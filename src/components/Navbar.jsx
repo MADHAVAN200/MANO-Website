@@ -45,7 +45,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-between px-8 py-4 w-full">
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
-                        <img src="/mano-logo.svg" alt="Mano Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
+                        <img src="mano-logo.svg" alt="Mano Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
                         <span className="text-2xl font-bold text-white tracking-wide">MANO</span>
                     </Link>
 

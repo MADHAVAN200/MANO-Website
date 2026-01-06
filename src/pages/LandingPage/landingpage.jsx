@@ -204,7 +204,6 @@ export default function LandingPage() {
             <span>Trusted by 500+ Clients</span>
           </div>
 
-<<<<<<< HEAD
           <h1 className="text-5xl md:text-6xl font-medium leading-tight text-white mb-6 max-w-xl">
             Building Excellence Through Precision.
           </h1>
@@ -220,33 +219,13 @@ export default function LandingPage() {
             <button className="flex items-center gap-2 border border-white/20 hover:bg-white/10 active:scale-95 transition-all text-gray-300 rounded-md px-6 h-11 font-medium">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play-circle"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
               <span>Watch demo</span>
-=======
-        {/* Hero Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-center">
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 drop-shadow-xl">
-            Transforming Projects Into<br />Success Stories
-          </h1>
-          <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto font-light tracking-wide leading-relaxed">
-            Delivering expert project management, cost consultancy, quality assurance, and<br />
-            execution excellence backed by 12+ years of industry trust.
-          </p>
-          <div className="flex flex-wrap justify-center gap-8">
-            <button className="px-10 py-4 text-lg rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
-              <span className="relative z-10 text-white font-semibold tracking-wide">Start Your Project</span>
-              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
-            </button>
-
-            <button className="px-10 py-4 text-lg rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
-              <span className="relative z-10 text-white font-semibold tracking-wide">View Our Services</span>
-              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
->>>>>>> e698cb8f6a8b9bc284944d23b2caac16fe1f422c
             </button>
           </div>
         </div>
 
         {/* Hero Image (Right) */}
         <img
-          src="/image.webp"
+          src="image.webp"
           alt="Hero Showcase"
           className="w-full max-w-md md:max-w-lg rounded-2xl border border-white/10 shadow-2xl z-10"
         />
