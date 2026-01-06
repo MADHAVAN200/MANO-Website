@@ -73,16 +73,16 @@ export default function LandingPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
 
   const projects = [
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
-    { name: 'Ariana Residency', image: '/image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
+    { name: 'Ariana Residency', image: 'image.webp' },
 
   ];
 
@@ -111,19 +111,19 @@ export default function LandingPage() {
     {
       name: 'David J. Karem',
       role: 'Businessmen 1 day ago',
-      image: '/image.webp',
+      image: 'image.webp',
       text: 'Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address. Stalkers and disgruntled acquaintances use the Internet to find addresses, phone numbers and other personal details about their targets. Identity thieves use personal information numbers and other personal details.'
     },
     {
       name: 'Sarah Johnson',
       role: 'CEO 2 days ago',
-      image: '/image.webp',
+      image: 'image.webp',
       text: 'Outstanding service and professionalism. The team delivered beyond our expectations and helped us achieve our project goals efficiently.'
     },
     {
       name: 'Michael Chen',
       role: 'Project Manager 3 days ago',
-      image: '/image.webp',
+      image: 'image.webp',
       text: 'Excellent project management and communication throughout. Would highly recommend their services to anyone looking for quality work.'
     }
   ];
@@ -204,6 +204,7 @@ export default function LandingPage() {
             <span>Trusted by 500+ Clients</span>
           </div>
 
+<<<<<<< HEAD
           <h1 className="text-5xl md:text-6xl font-medium leading-tight text-white mb-6 max-w-xl">
             Building Excellence Through Precision.
           </h1>
@@ -219,6 +220,26 @@ export default function LandingPage() {
             <button className="flex items-center gap-2 border border-white/20 hover:bg-white/10 active:scale-95 transition-all text-gray-300 rounded-md px-6 h-11 font-medium">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play-circle"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
               <span>Watch demo</span>
+=======
+        {/* Hero Content */}
+        <div className="relative z-10 flex-1 flex flex-col justify-center items-center">
+          <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 drop-shadow-xl">
+            Transforming Projects Into<br />Success Stories
+          </h1>
+          <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto font-light tracking-wide leading-relaxed">
+            Delivering expert project management, cost consultancy, quality assurance, and<br />
+            execution excellence backed by 12+ years of industry trust.
+          </p>
+          <div className="flex flex-wrap justify-center gap-8">
+            <button className="px-10 py-4 text-lg rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
+              <span className="relative z-10 text-white font-semibold tracking-wide">Start Your Project</span>
+              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
+            </button>
+
+            <button className="px-10 py-4 text-lg rounded-full border border-white/20 hover:border-white/50 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-3 group min-w-[280px] justify-center backdrop-blur-sm">
+              <span className="relative z-10 text-white font-semibold tracking-wide">View Our Services</span>
+              <ChevronRight className="w-6 h-6 text-gray-300 group-hover:text-white transition-colors group-hover:translate-x-1" />
+>>>>>>> e698cb8f6a8b9bc284944d23b2caac16fe1f422c
             </button>
           </div>
         </div>
