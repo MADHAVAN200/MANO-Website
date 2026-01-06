@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
-    ChevronRight, Shield, BookOpen, ClipboardCheck, Factory,
-    BarChart2, ShieldCheck, Users, Activity, Target, Zap, Search,
-    FileText, Layers, CheckCircle, AlertTriangle, Briefcase, Building
+    ChevronRight, Shield, ShieldCheck, AlertTriangle, HardHat,
+    CheckCircle, BarChart2, FileText, Search, Users, Activity,
+    Target, Siren, BookOpen, ClipboardList, Zap, HeartPulse,
+    Factory, Building
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
@@ -70,128 +71,101 @@ const CountUp = ({ end, duration = 2000, suffix = "" }) => {
     return <span ref={ref}>{count}{suffix}</span>;
 };
 
-const AnimatedBar = ({ children, className, widthClass, isVisible }) => {
-    return (
-        <div
-            className={`${className} transition-all duration-[3000ms] ease-out ${isVisible ? widthClass : 'w-[0px]'}`}
-        >
-            <div className="w-full">
-                {children}
-            </div>
-        </div>
-    );
-};
-
-const QualityAssuranceAudit = () => {
-    const [chartVisible, setChartVisible] = useState(false);
-    const chartRef = useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setChartVisible(true);
-                observer.disconnect();
-            }
-        }, { threshold: 0.1 });
-
-        if (chartRef.current) observer.observe(chartRef.current);
-        return () => observer.disconnect();
-    }, []);
-
+const EHSAudit = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     const coreServices = [
         {
-            title: "QA System Development",
-            desc: "Designing standardized QA frameworks that align with industry norms and client requirements.",
+            title: "Workplace Safety Evaluation",
+            desc: "Comprehensive site inspections to identify hazards, unsafe behaviors, and system gaps.",
             items: [
-                { text: "Quality manuals & frameworks", icon: BookOpen },
-                { text: "Method statement preparation", icon: FileText },
-                { text: "SOPs development", icon: Layers },
-                { text: "QA dashboards & reporting", icon: BarChart2 }
+                { text: "Safety walkthroughs", icon: HardHat },
+                { text: "Hazard identification", icon: AlertTriangle },
+                { text: "Unsafe act & condition reporting", icon: Siren },
+                { text: "Emergency readiness checks", icon: Zap }
             ],
             icon: Shield
         },
         {
-            title: "Internal Quality Audits",
-            desc: "Comprehensive audits to measure adherence to approved processes and standards.",
+            title: "Regulatory & Compliance Audits",
+            desc: "Ensuring your project aligns with national, local, and industry safety regulations.",
             items: [
-                { text: "Process audits", icon: Activity },
-                { text: "Non-conformance detection", icon: AlertTriangle },
-                { text: "Audit scoring & grading", icon: Target },
-                { text: "Corrective action plans", icon: CheckCircle }
+                { text: "Regulatory compliance assessment", icon: BookOpen },
+                { text: "Documentation & permit verification", icon: FileText },
+                { text: "Legal requirement mapping", icon: Target },
+                { text: "Audit compliance scoring", icon: CheckCircle }
             ],
-            icon: ClipboardCheck
+            icon: ClipboardList
         },
         {
-            title: "Vendor & Material Audits",
-            desc: "Ensuring materials and vendors meet predefined specifications and performance criteria.",
+            title: "EHS Risk Assessment & Control",
+            desc: "Identifying risk exposures and implementing preventive and corrective measures.",
             items: [
-                { text: "Vendor capability assessments", icon: Users },
-                { text: "Material quality verification", icon: Factory },
-                { text: "Compliance with specs", icon: FileText },
-                { text: "Supplier audit reports", icon: BarChart2 }
+                { text: "Job Safety Analysis (JSA)", icon: Search },
+                { text: "Work-at-height risk checks", icon: Activity },
+                { text: "Environmental impact assessment", icon: Factory },
+                { text: "Control measure recommendations", icon: ShieldCheck }
             ],
-            icon: Factory
+            icon: AlertTriangle
         },
         {
-            title: "Workmanship & Performance",
-            desc: "Assessing the consistency, accuracy, and durability of onsite execution.",
+            title: "Safety Management System",
+            desc: "Creating and deploying structured safety systems to ensure long-term compliance.",
             items: [
-                { text: "Workmanship inspections", icon: Search },
-                { text: "Tolerance & alignment checks", icon: Target },
-                { text: "Finishing & installation audits", icon: Layers },
-                { text: "Corrective action follow-ups", icon: CheckCircle }
-            ],
-            icon: ShieldCheck
-        }
-    ];
-
-    const specializedServices = [
-        {
-            title: "ISO & Regulatory Compliance",
-            desc: "Ensuring your project meets local, national, and international quality standards.",
-            items: [
-                { text: "ISO audit preparation", icon: BookOpen },
-                { text: "Documentation compliance", icon: FileText },
-                { text: "Statutory requirement mapping", icon: Layers },
-                { text: "Certification support", icon: Shield }
-            ],
-            icon: Target
-        },
-        {
-            title: "Root Cause Analysis & CAPA",
-            desc: "Identifying underlying causes of defects and implementing sustainable corrective actions.",
-            items: [
-                { text: "Non-conformance mapping", icon: AlertTriangle },
-                { text: "Root cause evaluation", icon: Search },
-                { text: "Corrective & preventive actions", icon: CheckCircle },
-                { text: "Closure verification", icon: Activity }
-            ],
-            icon: Search
-        },
-        {
-            title: "Digital QA Reporting",
-            desc: "Real-time visibility into quality performance through structured reporting.",
-            items: [
-                { text: "QA dashboards", icon: BarChart2 },
-                { text: "Daily/weekly quality reports", icon: FileText },
-                { text: "Audit summaries", icon: ClipboardCheck },
-                { text: "Compliance scorecards", icon: Target }
+                { text: "SOP development", icon: FileText },
+                { text: "Safety checklists & documentation", icon: ClipboardList },
+                { text: "Safety communication frameworks", icon: Users },
+                { text: "Safety culture development", icon: HeartPulse }
             ],
             icon: BarChart2
         }
     ];
 
+    const specializedSupport = [
+        {
+            title: "EHS Training & Awareness",
+            desc: "Empowering workforce and contractors with knowledge and best practices.",
+            items: [
+                { text: "Site-specific safety training", icon: HardHat },
+                { text: "Hazard communication (HAZCOM)", icon: Siren },
+                { text: "PPE training & safety drills", icon: Shield },
+                { text: "Emergency response training", icon: Zap }
+            ],
+            icon: Users
+        },
+        {
+            title: "Accident Investigation & RCA",
+            desc: "Determining causes of incidents to prevent recurrence.",
+            items: [
+                { text: "Incident reporting & analysis", icon: AlertTriangle },
+                { text: "Root cause identification", icon: Search },
+                { text: "Corrective & preventive actions", icon: CheckCircle },
+                { text: "Safety improvement plans", icon: Activity }
+            ],
+            icon: Search
+        },
+        {
+            title: "Environmental Compliance",
+            desc: "Ensuring minimal environmental impact and adherence to sustainability norms.",
+            items: [
+                { text: "Waste management audits", icon: Factory },
+                { text: "Pollution control checks", icon: Activity },
+                { text: "Environmental monitoring", icon: BarChart2 },
+                { text: "Sustainable site practices", icon: Target }
+            ],
+            icon: Factory
+        }
+    ];
+
     const processFlow = [
-        { title: "Define Quality Standards & Framework", icon: BookOpen },
-        { title: "Conduct Audits & Identifications", icon: Search },
-        { title: "Issue Non-Conformance Reports (NCRs)", icon: AlertTriangle },
-        { title: "Root Cause Analysis & CAPA Planning", icon: Activity },
-        { title: "Monitor Corrective Implementation", icon: ShieldCheck },
-        { title: "Final Re-Audit & Compliance Closure", icon: CheckCircle }
+        { title: "Pre-Audit Review & Requirement Understanding", icon: Search },
+        { title: "On-Site Safety Inspection & Hazard Identification", icon: AlertTriangle },
+        { title: "Regulatory Compliance Assessment", icon: ClipboardList },
+        { title: "Risk Scoring & Recommendation Report", icon: BarChart2 },
+        { title: "Training & Preventive Action Implementation", icon: HardHat },
+        { title: "Follow-Up Audit & Compliance Confirmation", icon: CheckCircle }
     ];
 
     return (
@@ -206,14 +180,15 @@ const QualityAssuranceAudit = () => {
 
                 <RevealOnScroll>
                     <div className="relative z-10 max-w-4xl mx-auto space-y-8">
+
                         <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 pb-4 leading-tight">
-                            Quality Assurance & Audit Services
+                            EHS Audit
                         </h1>
                         <h2 className="text-2xl md:text-3xl text-gray-200 font-light max-w-3xl mx-auto leading-normal">
-                            Ensuring uncompromised quality, compliance, and consistency across every stage of the project lifecycle.
+                            Ensuring environment, health, and safety compliance across every stage of your project with expert audits and preventive risk management.
                         </h2>
                         <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our Quality Assurance & Audit Services focus on establishing systematic procedures, continuous inspections, and performance tracking methods that guarantee adherence to standards. We help clients identify issues early, reduce rework, enhance reliability, and ensure that final project outcomes meet all technical and regulatory requirements.
+                            At Mano Project Consultants Pvt. Ltd., our EHS Audit services ensure that all activities meet essential Environmental, Health, and Safety standards. We help organizations reduce risks, achieve regulatory compliance, and create safer workplaces through structured audits, hazard assessments, and proactive safety planning.
                         </p>
                     </div>
                 </RevealOnScroll>
@@ -224,20 +199,20 @@ const QualityAssuranceAudit = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
                         <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={92} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Rework</p>
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={70} suffix="%" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Risks</p>
                         </div>
                         <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={98} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Compliance Accuracy</p>
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Compliance Rate</p>
                         </div>
                         <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={400} suffix="+" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">QA/QC Audits</p>
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={300} suffix="+" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Audits Conducted</p>
                         </div>
                         <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={90} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Faster Resolution</p>
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Zero</h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Major Incidents</p>
                         </div>
                     </div>
                 </div>
@@ -248,7 +223,7 @@ const QualityAssuranceAudit = () => {
                 <RevealOnScroll>
                     <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core QA & Audit Services</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core EHS Audit Services</h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -286,14 +261,14 @@ const QualityAssuranceAudit = () => {
                 </RevealOnScroll>
             </section>
 
-            {/* 4. SPECIALIZED SERVICES */}
+            {/* 4. SPECIALIZED SUPPORT */}
             <section className="py-24 px-6 bg-white/[0.02]">
                 <RevealOnScroll>
                     <div className="max-w-7xl mx-auto">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized QA Services</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized EHS Support Services</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {specializedServices.map((service, index) => (
+                            {specializedSupport.map((service, index) => (
                                 <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden h-full flex flex-col">
                                     <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                         <service.icon size={180} />
@@ -326,89 +301,73 @@ const QualityAssuranceAudit = () => {
                 </RevealOnScroll>
             </section>
 
-            {/* 5. COMPARISON SECTION (DONUT CHART STYLE) */}
-            <section className="py-24 px-6 relative z-10 overflow-hidden">
-                <div className="max-w-7xl mx-auto relative">
-                    <RevealOnScroll>
+            {/* 5. COMPARISON SECTION - CENTRAL AXIS STYLE */}
+            <section className="py-24 px-6 relative overflow-hidden">
+                <RevealOnScroll>
+                    <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Why Quality Assurance & Audits Matter</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Why Professional EHS Audits Are Critical</h2>
                         </div>
-                    </RevealOnScroll>
 
-                    <div ref={chartRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        {/* LEFT: RED DONUT (Risk) */}
-                        <RevealOnScroll>
-                            <div className="bg-gradient-to-br from-red-900/10 to-transparent p-8 rounded-3xl border border-red-500/20 text-center relative overflow-hidden group hover:border-red-500/40 transition-all duration-500">
-                                <div className="absolute inset-0 bg-red-500/5 group-hover:bg-red-500/10 transition-colors duration-500"></div>
+                        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+                            {/* Central Axis Line (Visible only on LG screens) */}
+                            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2"></div>
+                            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black border border-white/20 items-center justify-center z-10 text-gray-500 font-bold text-xs ring-4 ring-black">VS</div>
 
-                                <div className="relative z-10 flex flex-col items-center">
-                                    <h3 className="text-2xl font-bold text-red-500 mb-6">Without QA & Audit</h3>
+                            {/* WITHOUT MANO (RED) */}
+                            <div className="space-y-6 text-right lg:pr-12 relative group">
+                                <div className="absolute inset-0 bg-red-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+                                <h3 className="text-2xl font-bold text-red-500 mb-6">Without Proper EHS Audit</h3>
 
-                                    {/* Horizontal Bar Chart Visual - Red (Risk) */}
-                                    <div className="w-full max-w-xs mb-8">
-                                        <div className="flex justify-between items-end mb-2">
-                                            <span className="text-5xl font-bold text-white drop-shadow-xl tracking-tighter">80%</span>
-                                            <span className="text-sm text-red-300 font-bold uppercase tracking-widest pb-2">Risk Level</span>
-                                        </div>
-                                        <div className="h-6 w-full bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-gray-600/30">
-                                            <div
-                                                className="h-full bg-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.5)] relative overflow-hidden"
-                                                style={{
-                                                    width: chartVisible ? '80%' : '0%',
-                                                    transition: 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                                                }}
-                                            >
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer"></div>
+                                <div className="space-y-6">
+                                    {[
+                                        { text: "High risk of accidents & injuries", icon: AlertTriangle },
+                                        { text: "Frequent regulatory violations", icon: Siren },
+                                        { text: "Unsafe work practices", icon: HardHat },
+                                        { text: "Poor contractor safety performance", icon: Users },
+                                        { text: "Increased project delays due to incidents", icon: Activity }
+                                    ].map((item, index) => (
+                                        <div key={index} className="flex items-center justify-end gap-4 p-4 rounded-xl bg-red-500/5 border border-red-500/10 hover:bg-red-500/10 hover:border-red-500/30 transition-all duration-300">
+                                            <span className="text-gray-400 font-medium">{item.text}</span>
+                                            <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                                                <item.icon size={20} />
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <ul className="space-y-4 text-left w-full max-w-sm px-6">
-                                        <li className="flex items-center text-gray-300 font-medium"><AlertTriangle className="w-5 h-5 text-red-500 mr-3 shrink-0" /> Frequent defects & hidden issues</li>
-                                        <li className="flex items-center text-gray-300 font-medium"><Activity className="w-5 h-5 text-red-500 mr-3 shrink-0" /> High rework costs (&gt;15%)</li>
-                                        <li className="flex items-center text-gray-300 font-medium"><FileText className="w-5 h-5 text-red-500 mr-3 shrink-0" /> No audit trail</li>
-                                    </ul>
+                                    ))}
                                 </div>
+                                <p className="text-red-300 font-medium text-sm mt-6 italic">
+                                    "Result: Dangerous work conditions, legal penalties, and disrupted progress."
+                                </p>
                             </div>
-                        </RevealOnScroll>
 
-                        {/* RIGHT: BLUE DONUT (Quality) */}
-                        <RevealOnScroll>
-                            <div className="bg-gradient-to-br from-blue-900/20 to-transparent p-10 rounded-[2.5rem] border border-blue-500/20 text-center relative overflow-hidden group hover:border-blue-500/50 transition-all duration-500 shadow-2xl shadow-blue-900/10">
-                                <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors duration-500"></div>
+                            {/* WITH MANO (BLUE) */}
+                            <div className="space-y-6 text-left lg:pl-12 relative group">
+                                <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+                                <h3 className="text-2xl font-bold text-blue-500 mb-6">With Mano EHS Services</h3>
 
-                                <div className="relative z-10 flex flex-col items-center">
-                                    <h3 className="text-3xl font-bold text-blue-400 mb-8 tracking-tight">With Mano QA</h3>
-
-                                    {/* Horizontal Bar Chart Visual - Blue (Quality) */}
-                                    <div className="w-full max-w-xs mb-8">
-                                        <div className="flex justify-between items-end mb-2">
-                                            <span className="text-5xl font-bold text-white drop-shadow-xl tracking-tighter">98%</span>
-                                            <span className="text-sm text-blue-300 font-bold uppercase tracking-widest pb-2">Quality Score</span>
-                                        </div>
-                                        <div className="h-6 w-full bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-gray-600/30">
-                                            <div
-                                                className="h-full bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)] relative overflow-hidden"
-                                                style={{
-                                                    width: chartVisible ? '98%' : '0%',
-                                                    transition: 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)'
-                                                }}
-                                            >
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-shimmer"></div>
+                                <div className="space-y-6">
+                                    {[
+                                        { text: "Proactive hazard identification & control", icon: ShieldCheck },
+                                        { text: "Strong compliance with EHS regulations", icon: BookOpen },
+                                        { text: "Improved worker safety & morale", icon: HeartPulse },
+                                        { text: "Minimal disruptions & zero major incidents", icon: CheckCircle },
+                                        { text: "Documented, transparent, audit-ready", icon: FileText }
+                                    ].map((item, index) => (
+                                        <div key={index} className="flex items-center justify-start gap-4 p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300">
+                                            <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-500 shrink-0">
+                                                <item.icon size={20} />
                                             </div>
+                                            <span className="text-gray-200 font-medium">{item.text}</span>
                                         </div>
-                                    </div>
-
-                                    <ul className="space-y-4 text-left w-full max-w-sm px-6">
-                                        <li className="flex items-center text-gray-200 font-medium"><ShieldCheck className="w-5 h-5 text-blue-400 mr-3 shrink-0" /> Zero-defect handover</li>
-                                        <li className="flex items-center text-gray-200 font-medium"><Target className="w-5 h-5 text-blue-400 mr-3 shrink-0" /> 98% Compliance rate</li>
-                                        <li className="flex items-center text-gray-200 font-medium"><CheckCircle className="w-5 h-5 text-blue-400 mr-3 shrink-0" /> Audit-ready records</li>
-                                    </ul>
+                                    ))}
                                 </div>
+                                <p className="text-blue-300 font-medium text-sm mt-6 italic">
+                                    "Result: Safe, compliant, and incident-free project environments."
+                                </p>
                             </div>
-                        </RevealOnScroll>
+                        </div>
                     </div>
-                </div>
+                </RevealOnScroll>
             </section>
 
             {/* 6. WHY MANO */}
@@ -417,14 +376,14 @@ const QualityAssuranceAudit = () => {
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                Why Mano for <span className="text-blue-500 block">QA & Audit Services?</span>
+                                Why Mano for <span className="text-blue-500 block">EHS Audit?</span>
                             </h2>
                             <div className="space-y-8">
                                 {[
-                                    { title: "Structured QA Frameworks", text: "System-driven quality processes with clear guidelines and checklists.", icon: Layers },
-                                    { title: "Audit Specialists", text: "Professionals trained in construction quality, methodologies, and compliance.", icon: Users },
-                                    { title: "Transparent Reporting", text: "Every quality parameter documented, verified, and communicated clearly.", icon: FileText },
-                                    { title: "Integrated Planning", text: "QA systems aligned with schedules, contracts, and cost management.", icon: ShieldCheck },
+                                    { title: "Safety-First Mindset", text: "We ensure safety is embedded at every level of project operations.", icon: Shield },
+                                    { title: "Certified EHS Specialists", text: "Experienced professionals with deep regulatory knowledge.", icon: HardHat },
+                                    { title: "Strong Documentation Discipline", text: "Complete and audit-ready EHS records for legal and compliance assurance.", icon: ClipboardList },
+                                    { title: "End-to-End Support", text: "From hazard assessment to implementation and training.", icon: HeartPulse },
                                 ].map((item, index) => (
                                     <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10">
                                         <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
@@ -443,21 +402,21 @@ const QualityAssuranceAudit = () => {
                             <div className="relative z-10 grid grid-cols-2 gap-4">
                                 <div className="space-y-4 mt-8">
                                     <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                        <span className="text-4xl font-bold text-white mb-2">92%</span>
-                                        <span className="text-sm text-gray-400">Rework Reduction</span>
+                                        <span className="text-4xl font-bold text-white mb-2">95%</span>
+                                        <span className="text-sm text-gray-400">Compliance Rate</span>
                                     </div>
                                     <div className="h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex flex-col justify-center">
-                                        <span className="text-white text-lg font-bold">Zero<br />Defects</span>
+                                        <span className="text-white text-lg font-bold">Total<br />Compliance</span>
                                     </div>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="h-40 rounded-2xl bg-[#111] border border-white/10 p-6 flex flex-col justify-center">
                                         <ShieldCheck className="w-10 h-10 text-blue-500 mb-4" />
-                                        <span className="text-gray-300 font-medium">Verified Quality</span>
+                                        <span className="text-gray-300 font-medium">Risk Free</span>
                                     </div>
                                     <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                        <span className="text-4xl font-bold text-white mb-2">100%</span>
-                                        <span className="text-sm text-gray-400">Audit Ready</span>
+                                        <span className="text-4xl font-bold text-white mb-2">Zero</span>
+                                        <span className="text-sm text-gray-400">Major Incidents</span>
                                     </div>
                                 </div>
                             </div>
@@ -475,29 +434,29 @@ const QualityAssuranceAudit = () => {
                         <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
                             {[
                                 {
-                                    name: "Residential & Commercial",
-                                    desc: "High-finish quality standards.",
-                                    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                                    name: "Construction & Infrastructure",
+                                    desc: "Ensuring safety in high-risk zones.",
+                                    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&h=600&auto=format&fit=crop"
                                 },
                                 {
-                                    name: "Industrial Units",
-                                    desc: "Structural integrity and durability.",
+                                    name: "Industrial & Manufacturing",
+                                    desc: "Factory safety and hazard controls.",
                                     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
                                 },
                                 {
-                                    name: "Corporate Offices",
-                                    desc: "Premium interior fit-outs.",
-                                    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&h=600&auto=format&fit=crop"
+                                    name: "Commercial Complexes",
+                                    desc: "Occupant safety and fire readiness.",
+                                    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
                                 },
                                 {
-                                    name: "Hospitality & Retail",
-                                    desc: "Aesthetics and guest experience focus.",
-                                    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                                    name: "Logistics & Warehousing",
+                                    desc: "Safe material handling and operations.",
+                                    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&h=600&auto=format&fit=crop"
                                 },
                                 {
-                                    name: "Institutional Projects",
-                                    desc: "Long-term reliability and compliance.",
-                                    image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                                    name: "Institutional & Healthcare",
+                                    desc: "Strict hygiene and safety protocols.",
+                                    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&h=600&auto=format&fit=crop"
                                 },
                             ].map((ind, index) => (
                                 <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
@@ -522,7 +481,7 @@ const QualityAssuranceAudit = () => {
                 <RevealOnScroll>
                     <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-20">
-                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">QA & Audit Process Flow</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">EHS Audit Process Flow</h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -547,7 +506,7 @@ const QualityAssuranceAudit = () => {
             <section className="py-24 px-6 text-center">
                 <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                     <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                        "Mano Project Consultants is trusted for delivering structured, transparent, and results-driven Quality Assurance & Audit systems that elevate project performance and ensure long-term reliability."
+                        "Organizations trust Mano Project Consultants for ensuring safe, compliant, and risk-free working environments through professional EHS audits and safety management systems."
                     </p>
                 </div>
             </section>
@@ -556,18 +515,18 @@ const QualityAssuranceAudit = () => {
             <section className="py-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-blue-900/20"></div>
                 <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Quality You Can Trust. Compliance You Can Prove.</h2>
+                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Safety First. Compliance Always.</h2>
                     <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                        Partner with Mano Project Consultants for robust quality assurance and audit frameworks that ensure excellence.
+                        Partner with Mano Project Consultants to build safer, compliant, and incident-free project environments.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
                         <RainbowButton>
                             <span className="flex items-center text-lg font-semibold px-4">
-                                Request a QA Audit <ChevronRight className="ml-2 w-5 h-5" />
+                                Book an EHS Audit <ChevronRight className="ml-2 w-5 h-5" />
                             </span>
                         </RainbowButton>
                         <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center">
-                            Talk to Our Quality Specialists <ChevronRight className="ml-2 w-5 h-5" />
+                            Speak to Our EHS Experts <ChevronRight className="ml-2 w-5 h-5" />
                         </button>
                     </div>
                 </div>
@@ -576,4 +535,4 @@ const QualityAssuranceAudit = () => {
     );
 };
 
-export default QualityAssuranceAudit;
+export default EHSAudit;

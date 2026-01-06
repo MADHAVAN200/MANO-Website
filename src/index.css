@@ -1,2 +1,18 @@
 @import "tailwindcss";
 /*Global CSS idhar likhhhhhh, bg, font, etc.. jo globally har page me use hoga, so that changing here will reflect on the entire web*/
+
+@theme {
+    --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+
+    @keyframes fade-in-up {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
