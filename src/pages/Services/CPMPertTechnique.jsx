@@ -207,10 +207,10 @@ const CPMPertTechnique = () => {
 
                 <RevealOnScroll>
                     <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 pb-4 leading-tight">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
                             CPM & PERT Technique
                         </h1>
-                        <h2 className="text-2xl md:text-3xl text-gray-200 font-light max-w-3xl mx-auto leading-normal">
+                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
                             Optimizing project timelines and performance using analytical planning and time-management methodologies.
                         </h2>
                         <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">

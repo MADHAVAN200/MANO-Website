@@ -221,7 +221,7 @@ const ServicesPage = () => {
                 <RevealOnScroll>
                     <div className="relative z-10 max-w-4xl mx-auto space-y-8">
                         <div>
-                            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 pb-4 leading-tight">
+                            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
                                 Comprehensive Project <br /> Consulting Solutions
                             </h1>
                         </div>
