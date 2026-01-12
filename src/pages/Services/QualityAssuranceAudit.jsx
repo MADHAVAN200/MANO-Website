@@ -199,13 +199,19 @@ const QualityAssuranceAudit = () => {
                 }}></div>
 
                 <RevealOnScroll>
-                    <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
+                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
+                        <div>
+                            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
                             Quality Assurance & Audit Services
-                        </h1>
+                            </h1>
+                        </div>
+                        
                         <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
                             Ensuring excellence in every process through precision-driven quality assurance, compliance audits, and continuous process improvement.
                         </h2>
+                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
+                            At Mano Project Consultants Pvt. Ltd., our Contract Management services are designed to safeguard project interests by establishing clear contractual frameworks, managing risks, and ensuring transparent compliance throughout the project lifecycle. We help clients minimize disputes, control variations, and maintain strong commercial discipline from contract award to closure.
+                        </p>
 
                     </div>
                 </RevealOnScroll>
