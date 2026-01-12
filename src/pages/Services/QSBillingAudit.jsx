@@ -163,8 +163,8 @@ const QSBillingAudit = () => {
 
                 <RevealOnScroll>
                     <div className="relative z-10 max-w-5xl mx-auto space-y-10">
-                        <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white via-blue-100 to-gray-500 pb-2 leading-tight tracking-tight">
-                            Quantity Survey & <br /> Billing Audit Services
+                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
+                            Quantity Survey & Billing Audit
                         </h1>
 
                         <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
@@ -182,25 +182,26 @@ const QSBillingAudit = () => {
                 </RevealOnScroll>
             </section>
 
-            {/* 2. VALUE METRICS STRIP - Neon Horizontal Cards */}
-            <section className="py-24 px-6 border-y border-white/5 bg-white/[0.02]">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            { value: 98, suffix: "%", label: "Billing Accuracy After Audit" },
-                            { value: 70, suffix: "%", label: "Reduction in Overbilling & Discrepancies" },
-                            { value: 400, suffix: "+", label: "Billing Audits Completed Successfully" },
-                            { value: 95, suffix: "%", label: "Accuracy in Quantity Verification" },
-                        ].map((stat, index) => (
-                            <RevealOnScroll key={index}>
-                                <div className="p-8 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] transition-all duration-300 text-center group h-full flex flex-col justify-center">
-                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">
-                                        <CountUp end={stat.value} suffix={stat.suffix} />
-                                    </h3>
-                                    <p className="text-sm font-bold text-gray-400 uppercase tracking-widest group-hover:text-gray-200 transition-colors">{stat.label}</p>
-                                </div>
-                            </RevealOnScroll>
-                        ))}
+            {/* 2. VALUE METRICS STRIP */}
+            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm">
+                <div className="max-w-7xl mx-auto px-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                        <div className="p-4">
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={98} suffix="%" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Billing Accuracy After Audit</p>
+                        </div>
+                        <div className="p-4">
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={70} suffix="%" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Overbilling</p>
+                        </div>
+                        <div className="p-4">
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={400} suffix="+" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Audits Completed</p>
+                        </div>
+                        <div className="p-4">
+                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
+                            <p className="text-gray-400 text-sm uppercase tracking-wider">Quantity Verification Accuracy</p>
+                        </div>
                     </div>
                 </div>
             </section>

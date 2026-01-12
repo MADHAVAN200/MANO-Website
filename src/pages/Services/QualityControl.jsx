@@ -31,7 +31,7 @@ const RevealOnScroll = ({ children }) => {
     }, []);
 
     return (
-        <div ref={ref} className={`transition - all duration - 1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} `}>
+        <div ref={ref} className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {children}
         </div>
     );
@@ -261,11 +261,11 @@ const QualityControl = () => {
                 <RevealOnScroll>
                     <div className="relative z-10 max-w-4xl mx-auto space-y-8">
                         <div>
-                            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 pb-4 leading-tight">
+                            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
                                 Quality Control
                             </h1>
                         </div>
-                        <h2 className="text-2xl md:text-3xl text-blue-400 font-medium">
+                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
                             Ensuring uncompromised quality through structured inspections, compliance checks, and performance-driven systems.
                         </h2>
                         <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto font-light">
