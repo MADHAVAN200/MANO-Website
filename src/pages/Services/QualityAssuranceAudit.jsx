@@ -186,20 +186,11 @@ const QualityAssuranceAudit = () => {
         <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* Navbar */}
             <nav className="absolute top-6 left-0 right-0 z-50 flex items-center justify-center pointer-events-none">
-                <div
-                    className="backdrop-blur-md bg-white/5 border border-white/10 rounded-full px-8 py-3 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto"
-                    style={{ width: '86%', maxWidth: '780px' }}
-                >
-                    <Link to="/" className="text-gray-400 hover:text-white transition-colors flex-1 text-center font-medium">Home</Link>
-                    <Link to="/about-us" className="text-gray-400 hover:text-white transition-colors flex-1 text-center font-medium">About Us</Link>
-                    <Link to="/services/qa-audit" className="text-white font-bold flex-1 text-center drop-shadow-md">Services</Link>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex-1 text-center font-medium">Projects</a>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors flex-1 text-center font-medium">Careers</a>
-                </div>
+
             </nav>
 
             {/* Hero Section */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-screen flex flex-col justify-center items-center">
+            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden flex flex-col justify-center items-center">
                 {/* Background Glow */}
                 <div className="absolute inset-0 pointer-events-none" style={{
                     background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
@@ -207,24 +198,22 @@ const QualityAssuranceAudit = () => {
                     width: '100%'
                 }}></div>
 
-                <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-                    <h1 className="text-6xl md:text-8xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                        Quality Assurance & Audit Services
-                    </h1>
-                    <p className="text-2xl text-gray-200 mb-12 leading-relaxed max-w-4xl mx-auto font-light">
-                        Ensuring excellence in every process through precision-driven quality assurance, compliance audits, and continuous process improvement.
-                    </p>
+                <RevealOnScroll>
+                    <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
+                            Quality Assurance & Audit Services
+                        </h1>
+                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
+                            Ensuring excellence in every process through precision-driven quality assurance, compliance audits, and continuous process improvement.
+                        </h2>
 
-                    <button className="group flex items-center gap-3 px-10 py-4 rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all text-white text-lg font-medium shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(255,255,255,0.1)]">
-                        Get Started
-                        <ChevronRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
-                    </button>
-                </div>
+                    </div>
+                </RevealOnScroll>
             </section>
 
             {/* 2. VALUE METRICS STRIP */}
             <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto px-6">
+                <div className="max-w-7xl mx-auto px-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
                         <div className="p-4">
                             <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={92} suffix="%" /></h3>
