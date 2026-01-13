@@ -225,7 +225,7 @@ export default function LandingPage() {
 
         {/* Hero Image (Right) */}
         <img
-          src="image.webp"
+          src={`${import.meta.env.BASE_URL}image.webp`}
           alt="Hero Showcase"
           className="w-full max-w-md md:max-w-lg rounded-2xl border border-white/10 shadow-2xl z-10"
         />
@@ -478,7 +478,7 @@ export default function LandingPage() {
 
                         {/* Image area with padding and inner frame */}
                         <div className="absolute left-6 right-6 bottom-6 top-20 z-10 rounded-lg overflow-hidden bg-black">
-                          <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+                          <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.name} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>
@@ -518,7 +518,7 @@ export default function LandingPage() {
               <div className="flex items-start gap-6 mb-8">
                 <div className="w-16 h-16 rounded-full bg-gray-700 flex-shrink-0 overflow-hidden">
                   <img
-                    src={testimonials[currentTestimonial].image}
+                    src={`${import.meta.env.BASE_URL}${testimonials[currentTestimonial].image}`}
                     alt={testimonials[currentTestimonial].name}
                     className="w-full h-full object-cover"
                   />
