@@ -2,6 +2,83 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronRight, Circle, Briefcase, Calculator, TrendingUp, ShieldCheck, FileText, Shield, Hammer, Map, Clock, Handshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import RainbowButton from '../../components/RainbowButton';
+import { motion } from "framer-motion";
+import { InfiniteSlider } from "../../components/ui/InfiniteSlider";
+import { ProgressiveBlur } from "../../components/ui/ProgressiveBlur";
+
+function LogoCloud({ logos }) {
+  return (
+    <div className="relative mx-auto w-full px-4 md:px-6">
+      <div className="relative overflow-hidden w-full">
+        <InfiniteSlider gap={60} speed={30}>
+          {logos.map((logo) => (
+            <div key={`logo-${logo.alt}`} className="flex items-center justify-center h-24 w-40 md:w-52 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                className="max-h-16 w-auto object-contain brightness-0 invert"
+              />
+            </div>
+          ))}
+        </InfiniteSlider>
+      </div>
+
+      <ProgressiveBlur
+        blurIntensity={2}
+        className="pointer-events-none absolute top-0 left-0 h-full w-24 md:w-40 z-10"
+        direction="left"
+      />
+      <ProgressiveBlur
+        blurIntensity={2}
+        className="pointer-events-none absolute top-0 right-0 h-full w-24 md:w-40 z-10"
+        direction="right"
+      />
+    </div>
+  );
+}
+
+const TestimonialsColumn = (props) => {
+  const { className, testimonials, duration } = props;
+  return (
+    <div className={className}>
+      <motion.div
+        animate={{
+          translateY: "-50%",
+        }}
+        transition={{
+          duration: duration || 10,
+          repeat: Infinity,
+          ease: "linear",
+          repeatType: "loop",
+        }}
+        className="flex flex-col gap-6 pb-6"
+      >
+        {[...new Array(2)].fill(0).map((_, index) => (
+          <React.Fragment key={index}>
+            {testimonials.map(({ text, image, name, role }, i) => (
+              <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 w-full max-w-sm md:max-w-md animated-white-border" key={i}>
+                <div className="text-gray-300 leading-relaxed mb-6">{text}</div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-br from-blue-500/50 to-transparent">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${image}`}
+                      alt={name}
+                      className="w-full h-full rounded-full object-cover border border-black/50"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="font-bold text-white tracking-wide">{name}</div>
+                    <div className="text-blue-400 text-sm font-medium">{role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 const RevealOnScroll = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +105,9 @@ const RevealOnScroll = ({ children }) => {
     </div>
   );
 };
+
+
+
 
 const CountUp = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
@@ -174,16 +254,16 @@ export default function LandingPage() {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hero Section with Navigation */}
       {/* Hero Section with Navigation */}
-      <section className="relative px-4 md:px-16 lg:px-24 xl:px-32 pt-32 pb-24 overflow-hidden min-h-screen flex flex-col md:flex-row items-center justify-center gap-24">
-
-        {/* Blue Gradient Background (Restored) */}
-        <div className="absolute inset-0 pointer-events-none -z-20" style={{
+      <section className="relative pt-40 pb-16 px-6 overflow-hidden min-h-screen flex flex-col justify-center">
+        {/* Background Glow */}
+        <div className="absolute inset-0 pointer-events-none" style={{
           background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
           height: '100%',
-          width: '100%'
+          width: '100%',
+          zIndex: 0
         }}></div>
 
-        {/* SVG Background Pattern (Snippet Style) */}
+        {/* SVG Background Pattern */}
         <svg className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none opacity-[0.15]" width="1440" height="720" viewBox="0 0 1440 720" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path stroke="white" strokeOpacity=".7" d="M-15.227 702.342H1439.7" />
           <circle cx="711.819" cy="372.562" r="308.334" stroke="white" strokeOpacity=".7" />
@@ -192,43 +272,49 @@ export default function LandingPage() {
           <circle cx="782.595" cy="411.166" r="308.334" stroke="white" strokeOpacity=".7" />
         </svg>
 
-        {/* Hero Content (Left) */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left z-10">
-          {/* Avatar Pill */}
-          <div className="flex flex-wrap items-center justify-center p-1.5 pl-2 pr-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-gray-400 text-xs mb-8">
-            <div className="flex items-center -space-x-2 mr-3">
-              <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50" alt="user1" />
-              <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50" alt="user2" />
-              <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50" alt="user3" />
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
+
+
+          {/* Hero Content (Left) */}
+          <div className="flex flex-col items-center text-center md:items-start md:text-left z-10 flex-1 max-w-2xl">
+            {/* Avatar Pill */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start p-1.5 pl-2 pr-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-gray-400 text-xs mb-8">
+              <div className="flex items-center -space-x-2 mr-3">
+                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50" alt="user1" />
+                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50" alt="user2" />
+                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50" alt="user3" />
+              </div>
+              <span>Trusted by 500+ Clients</span>
             </div>
-            <span>Trusted by 500+ Clients</span>
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-white mb-6">
+              Building Excellence Through Precision.
+            </h1>
+
+            <p className="text-sm md:text-base lg:text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
+              Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery.
+            </p>
+
+            <div className="flex items-center gap-4">
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 rounded-xl px-8 h-12 transition-colors font-medium text-lg">
+                Get started
+              </button>
+              <button className="flex items-center gap-2 border border-white/20 hover:bg-white/10 active:scale-95 transition-all text-gray-300 rounded-xl px-6 h-12 font-medium text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play-circle"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
+                <span>Watch demo</span>
+              </button>
+            </div>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-medium leading-tight text-white mb-6 max-w-xl">
-            Building Excellence Through Precision.
-          </h1>
-
-          <p className="text-sm md:text-base text-gray-400 mb-10 max-w-lg leading-relaxed">
-            Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery.
-          </p>
-
-          <div className="flex items-center gap-4">
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 rounded-md px-7 h-11 transition-colors font-medium">
-              Get started
-            </button>
-            <button className="flex items-center gap-2 border border-white/20 hover:bg-white/10 active:scale-95 transition-all text-gray-300 rounded-md px-6 h-11 font-medium">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play-circle"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
-              <span>Watch demo</span>
-            </button>
+          {/* Hero Image (Right) */}
+          <div className="flex-1 w-full flex justify-center md:justify-end z-10">
+            <img
+              src={`${import.meta.env.BASE_URL}image.webp`}
+              alt="Hero Showcase"
+              className="w-full max-w-full rounded-2xl border border-white/10 shadow-2xl"
+            />
           </div>
         </div>
-
-        {/* Hero Image (Right) */}
-        <img
-          src={`${import.meta.env.BASE_URL}image.webp`}
-          alt="Hero Showcase"
-          className="w-full max-w-md md:max-w-lg rounded-2xl border border-white/10 shadow-2xl z-10"
-        />
       </section>
 
       {/* Stats Section */}
@@ -271,7 +357,7 @@ export default function LandingPage() {
           </p>
           <div className="max-w-4xl mx-auto space-y-6">
             {/* Card 1 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
@@ -298,7 +384,7 @@ export default function LandingPage() {
             </div>
 
             {/* Card 2 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
@@ -325,7 +411,7 @@ export default function LandingPage() {
             </div>
 
             {/* Card 3 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
               <div className="flex items-start gap-6">
                 <div className="flex flex-col items-center -ml-2">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
@@ -368,7 +454,7 @@ export default function LandingPage() {
                 { title: "Cost & Risk Control", text: "Data-driven decisions ensure optimized cost and minimized risk.", icon: ShieldCheck },
                 { title: "End-to-End Support", text: "From drawings to handover — we manage everything.", icon: Handshake },
               ].map((item, index) => (
-                <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 flex flex-col items-start h-full">
+                <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 flex flex-col items-start h-full animated-white-border">
                   <div className="w-14 h-14 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
                     <item.icon size={28} />
                   </div>
@@ -396,7 +482,7 @@ export default function LandingPage() {
               { title: "Project Execution", desc: "On-ground leadership and coordination for flawless project delivery.", path: "/services/project-execution", icon: Hammer },
               { title: "Project Planning", desc: "Strategic resource planning and roadmap design for success.", path: "/services/project-planning", icon: Map }
             ].map((service, index) => (
-              <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+              <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
                 <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
                   <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
                 </div>
@@ -495,56 +581,37 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="px-12 py-24">
+      {/* Testimonials */}
+      <section className="px-4 py-24 overflow-hidden">
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Testimonials</h2>
-          <div className="max-w-6xl mx-auto relative">
-            {/* Navigation Buttons */}
-            <button
-              onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 w-14 h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-10"
-            >
-              <ChevronRight className="w-6 h-6 text-black rotate-180" />
-            </button>
+          <div className="mx-auto w-full">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Testimonials</h2>
 
-            <button
-              onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 w-14 h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-10"
-            >
-              <ChevronRight className="w-6 h-6 text-black" />
-            </button>
-
-            <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-12 relative shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-              <div className="flex items-start gap-6 mb-8">
-                <div className="w-16 h-16 rounded-full bg-gray-700 flex-shrink-0 overflow-hidden">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${testimonials[currentTestimonial].image}`}
-                    alt={testimonials[currentTestimonial].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl">{testimonials[currentTestimonial].name}</h4>
-                  <p className="text-gray-400 text-sm">{testimonials[currentTestimonial].role}</p>
-                </div>
-              </div>
-              <p className="text-gray-300 leading-relaxed mb-8 text-base">
-                {testimonials[currentTestimonial].text}
-              </p>
-              <div className="flex justify-center gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`transition-all ${index === currentTestimonial
-                      ? 'w-8 h-2 rounded-full bg-white'
-                      : 'w-2 h-2 rounded-full bg-gray-600 hover:bg-gray-500'
-                      }`}
-                  />
-                ))}
-              </div>
+            <div className="relative flex h-[700px] w-full flex-row items-center justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+              <TestimonialsColumn testimonials={testimonials} duration={15} />
+              <TestimonialsColumn testimonials={[...testimonials].reverse()} duration={19} className="hidden md:block" />
+              <TestimonialsColumn testimonials={testimonials} duration={17} className="hidden lg:block" />
             </div>
           </div>
+        </RevealOnScroll>
+      </section>
+
+      {/* Logo Cloud Section */}
+      <section className="py-10 border-y border-white/5 bg-white/[0.02] overflow-hidden">
+        <RevealOnScroll>
+          <div className="text-center mb-8">
+            <span className="text-blue-400 font-medium tracking-wider uppercase text-lg">Trusted Partners</span>
+          </div>
+          <LogoCloud logos={[
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png", alt: "Google" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png", alt: "Amazon" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png", alt: "Netflix" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png", alt: "Microsoft" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/LinkedIn_Logo.svg/2560px-LinkedIn_Logo.svg.png", alt: "LinkedIn" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png", alt: "Samsung" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png", alt: "Apple" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Y_Combinator_logo.svg/1200px-Y_Combinator_logo.svg.png", alt: "Y Combinator" },
+          ]} />
         </RevealOnScroll>
       </section>
 
@@ -602,6 +669,6 @@ export default function LandingPage() {
       </section>
 
 
-    </div>
+    </div >
   );
 }

@@ -16,3 +16,54 @@
         }
     }
 }
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate-gradient {
+    to {
+        --angle: 360deg;
+    }
+}
+
+.animated-white-border {
+    position: relative;
+    /* Ensure we don't clip the glowing border if we want it slightly outside? 
+       But mask approach keeps it INSIDE the border-box usually.
+       If we want it 'inset', it works fine with overflow-hidden. 
+    */
+}
+
+.animated-white-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    /* Ensure it stays on top of the card background/border */
+    pointer-events: none;
+    /* Let clicks pass through */
+    border-radius: inherit;
+    /* Match card roundedness */
+    padding: 1.5px;
+    /* Width of the animated border */
+
+    background: conic-gradient(from var(--angle), transparent 20%, white 50%, transparent 80%);
+
+    /* logic: create a mask that defines the border area */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: rotate-gradient 8s linear infinite;
+}
+
+.animated-white-border:hover::before {
+    opacity: 1;
+}

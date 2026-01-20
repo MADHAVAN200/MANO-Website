@@ -151,6 +151,14 @@ const RadarChart = () => {
 };
 
 const QualityControl = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -275,8 +283,9 @@ const QualityControl = () => {
                 </RevealOnScroll>
             </section>
 
+
             {/* 2. STATS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm">
+            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
                 <div className="max-w-7xl mx-auto px-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
                         <div className="p-4">
@@ -299,286 +308,291 @@ const QualityControl = () => {
                 </div>
             </section>
 
-            {/* 3. CORE SERVICES */}
-            <section className="py-24 px-12">
-                <RevealOnScroll>
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16">
-                            <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-2 block">Our Expertise</span>
-                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Quality Control Services</h2>
-                        </div>
+            {isLoaded && (
+                <>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {coreServices.map((service, index) => (
-                                <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
-                                    {/* Large Background Icon */}
-                                    <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                        <service.icon size={180} />
-                                    </div>
-
-                                    <div className="relative z-10">
-                                        <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                            <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                        </div>
-
-                                        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                        <p className="text-gray-400 mb-8 leading-relaxed h-20">{service.desc}</p>
-
-                                        <div className="bg-black/20 rounded-xl p-6 mb-8 border border-white/5 group-hover:border-white/10 transition-colors">
-                                            <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
-                                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                {service.items.map((item, idx) => (
-                                                    <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                        <item.icon className="w-4 h-4 text-blue-500 mr-2 shrink-0" />
-                                                        {item.text}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
+                    {/* 3. CORE SERVICES */}
+                    <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                        <RevealOnScroll>
+                            <div className="max-w-7xl mx-auto">
+                                <div className="text-center mb-16">
+                                    <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-2 block">Our Expertise</span>
+                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Quality Control Services</h2>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                </RevealOnScroll>
-            </section>
 
-            {/* 4. SPECIALIZED SERVICES */}
-            <section className="py-24 px-12 bg-white/[0.02]">
-                <RevealOnScroll>
-                    <div className="max-w-7xl mx-auto">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Quality Services</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {coreServices.map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                            {/* Large Background Icon */}
+                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
+                                                <service.icon size={180} />
+                                            </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {specializedServices.map((service, index) => (
-                                <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
-                                    <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                        <service.icon size={180} />
-                                    </div>
+                                            <div className="relative z-10">
+                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                                </div>
 
-                                    <div className="relative z-10">
-                                        <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                            <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                                <p className="text-gray-400 mb-8 leading-relaxed h-20">{service.desc}</p>
+
+                                                <div className="bg-black/20 rounded-xl p-6 mb-8 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
+                                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                        {service.items.map((item, idx) => (
+                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
+                                                                <item.icon className="w-4 h-4 text-blue-500 mr-2 shrink-0" />
+                                                                {item.text}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                        <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
-
-                                        <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                            <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
-                                            <ul className="grid grid-cols-1 gap-3">
-                                                {service.items.map((item, idx) => (
-                                                    <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                        <item.icon className="w-4 h-4 text-blue-500 mr-2 shrink-0" />
-                                                        {item.text}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 5. COMPARISON SECTION - RADAR CHART */}
-            <section className="py-24 px-12 bg-white/5 backdrop-blur-sm border-y border-white/5">
-                <RevealOnScroll>
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">The Quality Advantage</h2>
-                        </div>
-
-                        <div className="flex flex-col lg:flex-row items-center justify-center gap-16">
-
-                            {/* CHART */}
-                            <div className="w-full lg:w-1/2 flex justify-center py-8">
-                                <RadarChart />
-                            </div>
-
-                            {/* LEGEND & CONTEXT */}
-                            <div className="w-full lg:w-1/2 space-y-8">
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4 p-6 rounded-2xl bg-red-950/20 border border-red-500/20">
-                                        <div className="w-4 h-4 rounded-full bg-red-500 mt-1 shadow-[0_0_10px_rgba(239,68,68,0.5)] shrink-0"></div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-red-400 mb-2">Without Quality Control</h3>
-                                            <p className="text-gray-400 text-sm leading-relaxed">
-                                                Inconsistent results, frequent defects, and high non-compliance risks leads to increased costs and dangerous safety hazards. The project suffers from "shrinkage" in value and performance.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4 p-6 rounded-2xl bg-blue-950/20 border border-blue-500/20 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
-                                        <div className="w-4 h-4 rounded-full bg-blue-500 mt-1 shadow-[0_0_10px_rgba(59,130,246,0.5)] shrink-0"></div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-blue-400 mb-2">With Mano Quality Control</h3>
-                                            <p className="text-gray-300 text-sm leading-relaxed">
-                                                Optimized performance across all dimensions. We ensure <span className="text-white font-semibold">100% compliance</span>, zero defects, maximum cost efficiency, and total safety. The project achieves its full potential area.
-                                            </p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </RevealOnScroll>
-            </section>
+                        </RevealOnScroll>
+                    </section>
 
-            {/* 5. WHY CHOOSE MANO */}
-            {/* 5. WHY CHOOSE MANO */}
-            <section className="py-24 px-12 bg-white/[0.02]">
-                <div className="max-w-7xl mx-auto">
-                    <RevealOnScroll>
-                        <div className="mb-16">
-                            <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-4 block">Our Advantage</span>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white">
-                                Why Mano For <span className="text-blue-500">Quality Control?</span>
-                            </h2>
-                        </div>
-                    </RevealOnScroll>
+                    {/* 4. SPECIALIZED SERVICES */}
+                    <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
+                        <RevealOnScroll>
+                            <div className="max-w-7xl mx-auto">
+                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Quality Services</h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            { title: "Standard-Driven Approach", text: "Strict adherence to national and international quality standards.", icon: BookOpen },
-                            { title: "Proactive Issue Detection", text: "Quality risks identified early through rigorous checks to avoid rework.", icon: AlertTriangle },
-                            { title: "Transparent Reporting", text: "Clear, audit-ready documentation and traceable quality records.", icon: FileCheck },
-                            { title: "Cross-Disciplinary Expertise", text: "Quality control integrated with cost, contract, and schedule management.", icon: Layers },
-                        ].map((item, index) => (
-                            <RevealOnScroll key={index}>
-                                <div className="p-8 h-full rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-md hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-300 flex flex-col items-start gap-6 group">
-                                    <div className="p-4 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                        <item.icon size={32} />
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {specializedServices.map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
+                                                <service.icon size={180} />
+                                            </div>
+
+                                            <div className="relative z-10">
+                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                                </div>
+
+                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
+
+                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
+                                                    <ul className="grid grid-cols-1 gap-3">
+                                                        {service.items.map((item, idx) => (
+                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
+                                                                <item.icon className="w-4 h-4 text-blue-500 mr-2 shrink-0" />
+                                                                {item.text}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </RevealOnScroll>
+                    </section>
+
+                    {/* 5. COMPARISON SECTION - RADAR CHART */}
+                    <section className="py-24 px-12 bg-white/5 backdrop-blur-sm border-y border-white/5 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
+                        <RevealOnScroll>
+                            <div className="max-w-7xl mx-auto">
+                                <div className="text-center mb-16">
+                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">The Quality Advantage</h2>
+                                </div>
+
+                                <div className="flex flex-col lg:flex-row items-center justify-center gap-16">
+
+                                    {/* CHART */}
+                                    <div className="w-full lg:w-1/2 flex justify-center py-8">
+                                        <RadarChart />
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{item.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{item.text}</p>
+
+                                    {/* LEGEND & CONTEXT */}
+                                    <div className="w-full lg:w-1/2 space-y-8">
+                                        <div className="space-y-6">
+                                            <div className="flex items-start gap-4 p-6 rounded-2xl bg-red-950/20 border border-red-500/20">
+                                                <div className="w-4 h-4 rounded-full bg-red-500 mt-1 shadow-[0_0_10px_rgba(239,68,68,0.5)] shrink-0"></div>
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-red-400 mb-2">Without Quality Control</h3>
+                                                    <p className="text-gray-400 text-sm leading-relaxed">
+                                                        Inconsistent results, frequent defects, and high non-compliance risks leads to increased costs and dangerous safety hazards. The project suffers from "shrinkage" in value and performance.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-start gap-4 p-6 rounded-2xl bg-blue-950/20 border border-blue-500/20 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
+                                                <div className="w-4 h-4 rounded-full bg-blue-500 mt-1 shadow-[0_0_10px_rgba(59,130,246,0.5)] shrink-0"></div>
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-blue-400 mb-2">With Mano Quality Control</h3>
+                                                    <p className="text-gray-300 text-sm leading-relaxed">
+                                                        Optimized performance across all dimensions. We ensure <span className="text-white font-semibold">100% compliance</span>, zero defects, maximum cost efficiency, and total safety. The project achieves its full potential area.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </RevealOnScroll>
+                    </section>
+
+                    {/* 5. WHY CHOOSE MANO */}
+                    {/* 5. WHY CHOOSE MANO */}
+                    <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
+                        <div className="max-w-7xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="mb-16">
+                                    <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-4 block">Our Advantage</span>
+                                    <h2 className="text-4xl md:text-5xl font-bold text-white">
+                                        Why Mano For <span className="text-blue-500">Quality Control?</span>
+                                    </h2>
                                 </div>
                             </RevealOnScroll>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* 6. INDUSTRIES SERVED */}
-            <section className="py-24 px-12 border-y border-white/5 bg-black/50">
-                <RevealOnScroll>
-                    <div className="max-w-7xl mx-auto text-center">
-                        <h2 className="text-3xl font-bold text-white mb-16">Project Types We Support</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {[
+                                    { title: "Standard-Driven Approach", text: "Strict adherence to national and international quality standards.", icon: BookOpen },
+                                    { title: "Proactive Issue Detection", text: "Quality risks identified early through rigorous checks to avoid rework.", icon: AlertTriangle },
+                                    { title: "Transparent Reporting", text: "Clear, audit-ready documentation and traceable quality records.", icon: FileCheck },
+                                    { title: "Cross-Disciplinary Expertise", text: "Quality control integrated with cost, contract, and schedule management.", icon: Layers },
+                                ].map((item, index) => (
+                                    <RevealOnScroll key={index}>
+                                        <div className="p-8 h-full rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-md hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-300 flex flex-col items-start gap-6 group">
+                                            <div className="p-4 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                                                <item.icon size={32} />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{item.title}</h3>
+                                                <p className="text-gray-400 text-sm leading-relaxed">{item.text}</p>
+                                            </div>
+                                        </div>
+                                    </RevealOnScroll>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
 
-                        <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                            {[
-                                {
-                                    name: "Residential Developments",
-                                    desc: "High-rise apartments, townships, and luxury villas.",
-                                    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&h=600&auto=format&fit=crop"
-                                },
-                                {
-                                    name: "Commercial & Corporate",
-                                    desc: "Office parks, IT campuses, and retail complexes.",
-                                    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                },
-                                {
-                                    name: "Industrial Facilities",
-                                    desc: "Factories, warehouses, and logistic hubs.",
-                                    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                },
-                                {
-                                    name: "Hospitality Projects",
-                                    desc: "Hotels, resorts, and integrated developments.",
-                                    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                },
-                                {
-                                    name: "Infrastructure",
-                                    desc: "Roads, bridges, and public infrastructure.",
-                                    image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
-                                },
-                            ].map((ind, index) => (
-                                <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 backdrop-blur-md">
-                                    <img
-                                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                        src={ind.image}
-                                        alt={ind.name}
-                                    />
-                                    <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                        <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                        <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                    </div>
+                    {/* 6. INDUSTRIES SERVED */}
+                    <section className="py-24 px-12 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
+                        <RevealOnScroll>
+                            <div className="max-w-7xl mx-auto text-center">
+                                <h2 className="text-3xl font-bold text-white mb-16">Project Types We Support</h2>
+
+                                <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
+                                    {[
+                                        {
+                                            name: "Residential Developments",
+                                            desc: "High-rise apartments, townships, and luxury villas.",
+                                            image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&h=600&auto=format&fit=crop"
+                                        },
+                                        {
+                                            name: "Commercial & Corporate",
+                                            desc: "Office parks, IT campuses, and retail complexes.",
+                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                                        },
+                                        {
+                                            name: "Industrial Facilities",
+                                            desc: "Factories, warehouses, and logistic hubs.",
+                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                                        },
+                                        {
+                                            name: "Hospitality Projects",
+                                            desc: "Hotels, resorts, and integrated developments.",
+                                            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                                        },
+                                        {
+                                            name: "Infrastructure",
+                                            desc: "Roads, bridges, and public infrastructure.",
+                                            image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                                        },
+                                    ].map((ind, index) => (
+                                        <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 backdrop-blur-md">
+                                            <img
+                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
+                                                src={ind.image}
+                                                alt={ind.name}
+                                            />
+                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
+                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
+                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
+                        </RevealOnScroll>
+                    </section>
+
+                    {/* 7. QUALITY CONTROL PROCESS FLOW - Horizontal Glowing Timeline */}
+                    <section className="py-24 px-12 overflow-x-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
+                        <div className="max-w-7xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center mb-24">
+                                    <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">Quality Control Process Flow</h2>
+                                </div>
+                            </RevealOnScroll>
+
+                            <div className="relative">
+                                {/* Connecting Line (Desktop) */}
+                                <div className="hidden md:block absolute top-[2.5rem] left-0 w-full h-1 bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 opacity-30"></div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-6 gap-8 relative z-10">
+                                    {deliveryModel.map((step, i) => (
+                                        <RevealOnScroll key={i}>
+                                            <div className="flex flex-col items-center text-center group">
+                                                {/* Number Node */}
+                                                <div className="w-20 h-20 rounded-full bg-black border-2 border-blue-500/30 flex items-center justify-center text-2xl font-bold text-blue-500 mb-8 group-hover:border-blue-400 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 relative z-10 box-content">
+                                                    {i + 1}
+                                                    <div className="absolute inset-2 rounded-full border border-white/10"></div>
+                                                </div>
+
+                                                {/* Content */}
+                                                <div className="relative p-6 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 w-full backdrop-blur-md group-hover:to-blue-600/10 group-hover:border-blue-500/30 transition-all duration-300 min-h-[140px] flex items-center justify-center">
+                                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white/10"></div>
+                                                    <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors leading-tight">{step.title}</h3>
+                                                </div>
+                                            </div>
+                                        </RevealOnScroll>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </RevealOnScroll>
-            </section>
+                    </section>
 
-            {/* 7. QUALITY CONTROL PROCESS FLOW - Horizontal Glowing Timeline */}
-            <section className="py-24 px-12 overflow-x-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <RevealOnScroll>
-                        <div className="text-center mb-24">
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">Quality Control Process Flow</h2>
+                    {/* 8. TRUST STATEMENT */}
+                    <section className="py-24 px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
+                        <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
+                            <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
+                                "Mano Project Consultants is trusted for delivering structured, transparent, and results-oriented quality control systems that ensure long-term project performance and client confidence."
+                            </p>
                         </div>
-                    </RevealOnScroll>
+                    </section>
 
-                    <div className="relative">
-                        {/* Connecting Line (Desktop) */}
-                        <div className="hidden md:block absolute top-[2.5rem] left-0 w-full h-1 bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 opacity-30"></div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-6 gap-8 relative z-10">
-                            {deliveryModel.map((step, i) => (
-                                <RevealOnScroll key={i}>
-                                    <div className="flex flex-col items-center text-center group">
-                                        {/* Number Node */}
-                                        <div className="w-20 h-20 rounded-full bg-black border-2 border-blue-500/30 flex items-center justify-center text-2xl font-bold text-blue-500 mb-8 group-hover:border-blue-400 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300 relative z-10 box-content">
-                                            {i + 1}
-                                            <div className="absolute inset-2 rounded-full border border-white/10"></div>
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="relative p-6 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 w-full backdrop-blur-md group-hover:to-blue-600/10 group-hover:border-blue-500/30 transition-all duration-300 min-h-[140px] flex items-center justify-center">
-                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-white/10"></div>
-                                            <h3 className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors leading-tight">{step.title}</h3>
-                                        </div>
-                                    </div>
-                                </RevealOnScroll>
-                            ))}
+                    {/* 9. CTA */}
+                    <section className="py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
+                        <div className="absolute inset-0 bg-blue-900/20"></div>
+                        <div className="max-w-4xl mx-auto px-12 text-center relative z-10">
+                            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Build with Confidence. <br /> Deliver with Quality.</h2>
+                            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                                Let Mano Project Consultants safeguard your project quality through expert control and compliance.
+                            </p>
+                            <div className="flex justify-center flex-wrap gap-4">
+                                <RainbowButton>
+                                    <span className="flex items-center text-lg font-semibold px-4">
+                                        Request a Quality Audit <ChevronRight className="ml-2 w-5 h-5" />
+                                    </span>
+                                </RainbowButton>
+                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white font-medium text-sm md:text-base flex items-center">
+                                    Consult Our Experts <ChevronRight className="ml-2 w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 8. TRUST STATEMENT */}
-            <section className="py-24 px-12 text-center">
-                <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
-                    <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                        "Mano Project Consultants is trusted for delivering structured, transparent, and results-oriented quality control systems that ensure long-term project performance and client confidence."
-                    </p>
-                </div>
-            </section>
-
-            {/* 9. CTA */}
-            <section className="py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-blue-900/20"></div>
-                <div className="max-w-4xl mx-auto px-12 text-center relative z-10">
-                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Build with Confidence. <br /> Deliver with Quality.</h2>
-                    <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                        Let Mano Project Consultants safeguard your project quality through expert control and compliance.
-                    </p>
-                    <div className="flex justify-center flex-wrap gap-4">
-                        <RainbowButton>
-                            <span className="flex items-center text-lg font-semibold px-4">
-                                Request a Quality Audit <ChevronRight className="ml-2 w-5 h-5" />
-                            </span>
-                        </RainbowButton>
-                        <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white font-semibold flex items-center">
-                            Consult Our Experts <ChevronRight className="ml-2 w-5 h-5" />
-                        </button>
-                    </div>
-                </div>
-            </section>
+                    </section>
+                </>
+            )}
         </div>
     );
 };
