@@ -73,7 +73,7 @@ export default function AboutHero() {
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
 
                     {/* --- LEFT COLUMN --- */}
-                    <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8">
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8 text-center lg:text-left items-center lg:items-start">
 
                         {/* Badge */}
                         <motion.div
@@ -94,7 +94,7 @@ export default function AboutHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight pb-2"
+                            className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.1] sm:leading-tight pb-2"
                         >
                             Who<br />
                             <span className="bg-gradient-to-br from-white via-white to-[#3b82f6] bg-clip-text text-transparent">
@@ -107,7 +107,7 @@ export default function AboutHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="max-w-xl text-lg text-zinc-100 leading-relaxed font-semibold"
+                            className="max-w-xl text-base sm:text-lg text-zinc-100 leading-relaxed font-semibold"
                         >
                             We are a team of dedicated professionals committed to delivering excellence in every project we undertake. From concept to completion, we ensure quality and precision.
                         </motion.p>
@@ -117,7 +117,7 @@ export default function AboutHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
-                            className="flex flex-col sm:flex-row gap-4"
+                            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
                         >
                             <Link
                                 to="/contact"
@@ -176,16 +176,16 @@ export default function AboutHero() {
                                 <div className="h-px w-full bg-white/10 mb-6" />
 
                                 {/* Mini Stats Grid */}
-                                <div className="grid grid-cols-3 gap-4 text-center">
+                                <div className="flex justify-between items-center text-center gap-2">
                                     <StatItem value="12+" label="Years" />
-                                    <div className="w-px h-full bg-white/10 mx-auto" />
+                                    <div className="w-px h-8 bg-white/10" />
                                     <StatItem value="50+" label="Experts" />
-                                    <div className="w-px h-full bg-white/10 mx-auto" />
+                                    <div className="w-px h-8 bg-white/10" />
                                     <StatItem value="100%" label="Commitment" />
                                 </div>
 
                                 {/* Tag Pills */}
-                                <div className="mt-8 flex flex-wrap gap-2">
+                                <div className="mt-8 flex flex-wrap gap-2 justify-center sm:justify-start">
                                     <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
                                         <span className="relative flex h-2 w-2">
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -206,9 +206,9 @@ export default function AboutHero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl"
+                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-6 sm:py-8 backdrop-blur-xl"
                         >
-                            <h3 className="mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
+                            <h3 className="mb-4 sm:mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
 
                             <div
                                 className="relative flex overflow-hidden"
@@ -218,7 +218,7 @@ export default function AboutHero() {
                                 }}
                             >
                                 <motion.div
-                                    className="flex gap-12 whitespace-nowrap px-4"
+                                    className="flex gap-8 sm:gap-12 whitespace-nowrap px-4"
                                     animate={{ x: ["0%", "-50%"] }}
                                     transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
                                 >
@@ -232,7 +232,7 @@ export default function AboutHero() {
                                             <img
                                                 src={client.logo}
                                                 alt={client.name}
-                                                className="h-10 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                                                className="h-8 sm:h-10 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                             />
                                         </div>

@@ -24,10 +24,10 @@ const DigitalERPSection = ({
                         {/* Left Content */}
                         <div>
                             <h2
-                                className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
+                                className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
                                 dangerouslySetInnerHTML={{ __html: title }}
                             />
-                            <p className="text-gray-400 text-lg mb-10 leading-relaxed max-w-xl">
+                            <p className="text-gray-400 text-base md:text-lg mb-10 leading-relaxed max-w-xl">
                                 {description}
                             </p>
 

@@ -236,7 +236,7 @@ const EHSAudit = () => {
                         }}
                     >
                         <div className="max-w-7xl mx-auto px-6">
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:divide-x divide-white/10">
                                 <div className="p-4">
                                     <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={70} suffix="%" /></h3>
                                     <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Risks</p>
@@ -256,12 +256,11 @@ const EHSAudit = () => {
                             </div>
                         </div>
                     </section>
-                    {/* 3. CORE SERVICES */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
+                            <div className="max-w-7xl mx-auto px-6">
                                 <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Environment, Health & Safety Services</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Core Environment, Health & Safety Services</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -333,11 +332,11 @@ const EHSAudit = () => {
                     </section>
 
                     {/* 5. COMPARISON SECTION - CENTRAL AXIS STYLE */}
-                    <section className="py-24 px-6 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
+                    <section className="py-16 md:py-24 px-6 md:px-12 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Why Professional EHS Audits Are Critical</h2>
+                                <div className="text-center mb-12 md:mb-16">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Why Professional EHS Audits Are Critical</h2>
                                 </div>
 
                                 <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
@@ -416,12 +415,12 @@ const EHSAudit = () => {
                     </RevealOnScroll>
 
                     {/* 6. WHY MANO */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                        Why Mano for <span className="text-blue-500 block">Environment, Health & Safety Service & Audit?</span>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
+                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Environment, Health & Safety Service & Audit?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -471,12 +470,14 @@ const EHSAudit = () => {
                     </section>
 
                     {/* 7. INDUSTRIES */}
-                    <section className="py-24 px-6 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
+                    <section className="py-16 md:py-24 px-6 md:px-12 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto text-center">
-                                <h2 className="text-3xl font-bold text-white mb-16">Industries We Support</h2>
+                                <div className="text-center mb-12 md:mb-16">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Industries We Support</h2>
+                                </div>
 
-                                <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
+                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
                                     {[
                                         {
                                             name: "Construction & Infrastructure",
@@ -504,7 +505,7 @@ const EHSAudit = () => {
                                             image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&h=600&auto=format&fit=crop"
                                         },
                                     ].map((ind, index) => (
-                                        <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
+                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
                                             <img
                                                 className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
                                                 src={ind.image}
@@ -522,11 +523,11 @@ const EHSAudit = () => {
                     </section>
 
                     {/* 8. PROCESS FLOW */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-20">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">EHS Audit Process Flow</h2>
+                                <div className="text-center mb-12 md:mb-20">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-tight">EHS Audit Process Flow</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -548,20 +549,20 @@ const EHSAudit = () => {
                     </section>
 
                     {/* 9. TRUST STATEMENT */}
-                    <section className="py-24 px-6 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
-                        <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
-                            <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
+                    <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
+                        <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
+                            <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
                                 "Organizations trust Mano Project Consultants for ensuring safe, compliant, and risk-free working environments through professional EHS audits and safety management systems."
                             </p>
                         </div>
                     </section>
 
                     {/* 10. CTA */}
-                    <section className="py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
+                    <section className="py-16 md:py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
                         <div className="absolute inset-0 bg-blue-900/20"></div>
-                        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Safety First. Compliance Always.</h2>
-                            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Safety First. Compliance Always.</h2>
+                            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                                 Partner with Mano Project Consultants to build safer, compliant, and incident-free project environments.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -575,7 +576,7 @@ const EHSAudit = () => {
                     </section>
                 </>
             )}
-        </div>
+        </div >
     );
 };
 

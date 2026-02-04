@@ -240,7 +240,7 @@ const ProjectExecution = () => {
                         }}
                     >
                         <div className="max-w-7xl mx-auto px-6">
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:divide-x divide-white/10">
                                 <div className="p-4">
                                     <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
                                     <p className="text-gray-400 text-sm uppercase tracking-wider">On-Time Project Delivery Rate</p>
@@ -260,12 +260,11 @@ const ProjectExecution = () => {
                             </div>
                         </div>
                     </section>
-                    {/* 3. CORE SERVICES */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
                                 <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Project Execution Services</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Core Project Execution Services</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -318,7 +317,7 @@ const ProjectExecution = () => {
                                                 </div>
 
                                                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
+                                                <p className="text-gray-400 mb-8 leading-relaxed lg:h-14">{service.desc}</p>
 
                                                 <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
                                                     <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
@@ -340,11 +339,11 @@ const ProjectExecution = () => {
                     </section>
 
                     {/* 5. COMPARISON SECTION - CENTRAL AXIS STYLE */}
-                    <section className="py-24 px-6 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
+                    <section className="py-16 md:py-24 px-6 md:px-12 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Why Structured Project Execution Matters</h2>
+                                <div className="text-center mb-12 md:mb-16">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Why Structured Project Execution Matters</h2>
                                 </div>
 
                                 <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
@@ -423,12 +422,12 @@ const ProjectExecution = () => {
                     </RevealOnScroll>
 
                     {/* 6. WHY MANO */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                        Why Mano for <span className="text-blue-500 block">Project Execution?</span>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
+                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Project Execution?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -483,7 +482,7 @@ const ProjectExecution = () => {
                             <div className="max-w-7xl mx-auto text-center">
                                 <h2 className="text-3xl font-bold text-white mb-16">Project Types We Execute</h2>
 
-                                <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
+                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
                                     {[
                                         {
                                             name: "Residential & High-Rise",
@@ -511,7 +510,7 @@ const ProjectExecution = () => {
                                             image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
                                         },
                                     ].map((ind, index) => (
-                                        <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
+                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
                                             <img
                                                 className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
                                                 src={ind.image}
@@ -535,8 +534,8 @@ const ProjectExecution = () => {
 
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-20">
-                                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Project Execution <span className="text-blue-500">Process Flow</span></h2>
+                                <div className="text-center mb-12 md:mb-20">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Project Execution <span className="text-blue-500">Process Flow</span></h2>
                                     <div className="h-1 w-24 bg-blue-500/30 mx-auto rounded-full"></div>
                                 </div>
 
@@ -576,20 +575,20 @@ const ProjectExecution = () => {
                     </section>
 
                     {/* 9. TRUST STATEMENT */}
-                    <section className="py-24 px-6 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
-                        <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
-                            <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
+                    <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
+                        <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
+                            <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
                                 "Mano Project Consultants is trusted for delivering disciplined, execution-focused project management that ensures predictability, accountability, and successful outcomes on site."
                             </p>
                         </div>
                     </section>
 
                     {/* 10. CTA */}
-                    <section className="py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
+                    <section className="py-16 md:py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
                         <div className="absolute inset-0 bg-blue-900/20"></div>
-                        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Execute with Precision. <br /> Deliver with Confidence.</h2>
-                            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Execute with Precision. <br /> Deliver with Confidence.</h2>
+                            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                                 Partner with Mano Project Consultants to ensure flawless execution and timely project delivery.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -603,7 +602,7 @@ const ProjectExecution = () => {
                     </section>
                 </>
             )}
-        </div>
+        </div >
     );
 };
 

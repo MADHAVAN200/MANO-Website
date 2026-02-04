@@ -363,18 +363,17 @@ export default function PageHero({
                         </div>
 
                         {/* Centered Heading */}
-                        {/* Centered Heading */}
                         <h1
-                            className="animate-fade-in delay-200 text-6xl sm:text-7xl lg:text-9xl font-bold tracking-tighter leading-[1.1] pb-8"
+                            className="animate-fade-in delay-200 text-4xl sm:text-6xl lg:text-8xl xl:text-9xl font-bold tracking-tighter leading-[1.1] pb-6 sm:pb-8"
                         >
                             {title}
-                            <span className="bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent ml-3">
+                            <span className="bg-gradient-to-r from-blue-400 to-white bg-clip-text text-transparent ml-3 block sm:inline">
                                 {subtitle}
                             </span>
                         </h1>
 
                         {/* Centered Description */}
-                        <p className="animate-fade-in delay-300 max-w-2xl text-xl sm:text-2xl text-zinc-200 leading-relaxed font-medium mb-10">
+                        <p className="animate-fade-in delay-300 max-w-2xl text-lg sm:text-xl md:text-2xl text-zinc-200 leading-relaxed font-medium mb-10">
                             {description}
                         </p>
 
@@ -412,9 +411,8 @@ export default function PageHero({
                             </div>
 
                             {/* Heading */}
-                            {/* Heading */}
                             <h1
-                                className="animate-fade-in delay-200 text-6xl sm:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4"
+                                className="animate-fade-in delay-200 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4"
                             >
                                 <span className="bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
                                     {title}
@@ -430,7 +428,7 @@ export default function PageHero({
                             </h1>
 
                             {/* Description */}
-                            <p className="animate-fade-in delay-300 max-w-2xl text-xl text-zinc-100 leading-relaxed font-semibold">
+                            <p className="animate-fade-in delay-300 max-w-2xl text-base sm:text-lg md:text-xl text-zinc-100 leading-relaxed font-semibold">
                                 {description}
                             </p>
 

@@ -41,19 +41,19 @@ const Footer = () => {
                 {/* Beam of Light Effect */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] aspect-square -translate-y-[85%] bg-blue-600/30 blur-[100px] rounded-full pointer-events-none"></div>
 
-                <footer className="footer-font px-6 md:px-16 lg:px-24 xl:px-32 w-full text-sm text-gray-400 bg-black pt-24 pb-8 relative z-10">
-                    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-24">
+                <footer className="footer-font px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 w-full text-sm text-gray-400 bg-black pt-16 md:pt-24 pb-8 relative z-10">
+                    <div className="max-w-7xl mx-auto flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row justify-between gap-12 lg:gap-24">
 
                         {/* Column 1: Logo & Contact */}
                         <div className="space-y-6 max-w-sm">
                             <Link to={brandPath}>
                                 <div className="inline-block">
-                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-16" />
+                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-12 md:h-16" />
                                 </div>
                             </Link>
                             <div className="space-y-4 text-gray-400">
                                 <div>
-                                    <h3 className="font-bold text-white text-lg">Mano Project Consultants Pvt. Ltd.</h3>
+                                    <h3 className="font-bold text-white text-lg lg:text-xl">Mano Project Consultants Pvt. Ltd.</h3>
                                     <p className="italic text-blue-400 text-xs">A Complete Construction Engineering Solution</p>
                                 </div>
 
@@ -87,13 +87,13 @@ const Footer = () => {
                         </div>
 
                         {/* Column 2: Our Services */}
-                        <div className="flex flex-col">
+                        <div className="flex flex-col pt-4 lg:pt-0">
                             <h2 className="font-bold text-white text-lg mb-6">Our Services</h2>
-                            <div className="flex flex-col space-y-3 text-sm text-gray-400">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-x-8 gap-y-3 text-sm text-gray-400">
                                 {services.map((service, index) => (
                                     <Link
                                         key={index}
-                                        className="hover:text-blue-400 transition"
+                                        className="hover:text-blue-400 transition whitespace-nowrap"
                                         to={getLink(service.path)}
                                     >
                                         {service.title}
@@ -103,18 +103,14 @@ const Footer = () => {
                         </div>
 
                         {/* Column 3: Quick Links & CTA */}
-                        <div className="">
-                            <div className="mb-8">
-                                <h2 className="font-bold text-white text-lg mb-6">Quick Links</h2>
-                                <div className="flex flex-col space-y-3 text-sm text-gray-400">
-                                    <Link className="hover:text-blue-400 transition" to={getLink('/')}>Home</Link>
-                                    <Link className="hover:text-blue-400 transition" to={getLink('/about-us')}>About Us</Link>
-                                    <Link className="hover:text-blue-400 transition" to={getLink('/projects')}>Projects</Link>
-                                    <Link className="hover:text-blue-400 transition" to={getLink('/careers')}>Careers</Link>
-                                </div>
+                        <div className="pt-4 lg:pt-0">
+                            <h2 className="font-bold text-white text-lg mb-6">Quick Links</h2>
+                            <div className="grid grid-cols-2 lg:flex lg:flex-col gap-x-8 gap-y-3 text-sm text-gray-400">
+                                <Link className="hover:text-blue-400 transition" to={getLink('/')}>Home</Link>
+                                <Link className="hover:text-blue-400 transition" to={getLink('/about-us')}>About Us</Link>
+                                <Link className="hover:text-blue-400 transition" to={getLink('/projects')}>Projects</Link>
+                                <Link className="hover:text-blue-400 transition" to={getLink('/careers')}>Careers</Link>
                             </div>
-
-
                         </div>
                     </div>
 

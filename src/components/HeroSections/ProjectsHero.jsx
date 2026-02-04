@@ -40,12 +40,12 @@ export default function ProjectsHero() {
                         </div>
 
                         {/* Main Heading */}
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] sm:leading-tight">
                             Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Legacies</span> <br />
                             Across Horizons
                         </h1>
 
-                        <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 border-l-0 border-white/10 pl-0">
+                        <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 border-l-0 border-white/10 pl-0">
                             Showcasing our precision-engineered projects across residential, commercial, and industrial landscapes.
                         </p>
 

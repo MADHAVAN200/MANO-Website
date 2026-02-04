@@ -296,8 +296,8 @@ const AboutUs = () => {
             <section className="relative py-16 px-6 overflow-hidden border-t border-white/5">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
                 <RevealOnScroll>
-                    <div className="max-w-6xl mx-auto relative z-10">
-                        <h2 className="text-5xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">About The Team</h2>
+                    <div className="max-w-7xl mx-auto text-left">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">About The Team</h2>
 
                         <div className="space-y-20">
                             {[
@@ -376,13 +376,13 @@ const AboutUs = () => {
                         </div>
 
                         {/* Team Grid (Brief list) */}
-                        <div className="mt-32">
-                            <div className="text-center mb-16">
-                                <h3 className="text-3xl font-bold text-white mb-4">Our Engineering Strength</h3>
-                                <p className="text-gray-400">A dedicated team of 50+ young, dynamic & qualified engineers mentored by industry leaders.</p>
+                        <div className="mt-20 sm:mt-32">
+                            <div className="text-center mb-12 sm:mb-16">
+                                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">Our Engineering Strength</h3>
+                                <p className="text-gray-400 text-sm sm:text-base px-4">A dedicated team of 50+ young, dynamic & qualified engineers mentored by industry leaders.</p>
                             </div>
 
-                            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl">
+                            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-6 sm:py-8 backdrop-blur-xl">
                                 <div
                                     className="relative flex overflow-hidden group"
                                     style={{
@@ -390,7 +390,7 @@ const AboutUs = () => {
                                         WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
                                     }}
                                 >
-                                    <div className="animate-marquee flex gap-8 whitespace-nowrap px-4 group-hover:[animation-play-state:paused]">
+                                    <div className="animate-marquee flex gap-4 sm:gap-8 whitespace-nowrap px-4 group-hover:[animation-play-state:paused]">
                                         {[
                                             "Mrs. Gayathri Segar (M Arch)",
                                             "Mr. Raj Narayanan (BE- Civil)",
@@ -431,10 +431,10 @@ const AboutUs = () => {
             </section>
 
             {/* Contact Form */}
-            <section id="contact-section" className="relative px-6 py-16 overflow-hidden bg-gradient-to-t from-blue-950/20 to-black border-t border-white/5">
+            <section id="contact-section" className="relative px-6 py-16 sm:py-24 overflow-hidden bg-gradient-to-t from-blue-950/20 to-black border-t border-white/5">
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none"></div>
                 <RevealOnScroll>
-                    <h2 className="text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Ready to Start Your Project?</h2>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 sm:pb-2">Ready to Start Your Project?</h2>
 
                     <div className="max-w-3xl mx-auto space-y-6">
                         <ContactForm />

@@ -108,7 +108,7 @@ export default function LandingHero() {
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
 
                     {/* --- LEFT COLUMN --- */}
-                    <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8">
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8 text-center lg:text-left items-center lg:items-start">
 
                         {/* Badge */}
                         <div className="animate-fade-in delay-100">
@@ -122,7 +122,7 @@ export default function LandingHero() {
 
                         {/* Heading */}
                         <h1
-                            className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[0.9]"
+                            className="animate-fade-in delay-200 text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter leading-[1.1] sm:leading-[0.9]"
                         >
                             Building<br />
                             <span className="bg-gradient-to-br from-white via-white to-[#3b82f6] bg-clip-text text-transparent">
@@ -132,12 +132,12 @@ export default function LandingHero() {
                         </h1>
 
                         {/* Description */}
-                        <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-100 leading-relaxed font-semibold">
+                        <p className="animate-fade-in delay-300 max-w-xl text-base sm:text-lg text-zinc-100 leading-relaxed font-semibold">
                             Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery across residential, commercial, and industrial sectors.
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="animate-fade-in delay-400 flex flex-col sm:flex-row gap-4">
+                        <div className="animate-fade-in delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                             <button
                                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
@@ -239,7 +239,7 @@ export default function LandingHero() {
                                 WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
                             }}
                         >
-                            <div className="animate-marquee flex gap-16 whitespace-nowrap px-4">
+                            <div className="animate-marquee flex gap-8 sm:gap-16 whitespace-nowrap px-4">
                                 {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
                                     <div key={i} className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
                                         style={{ minWidth: 'max-content' }}
@@ -247,7 +247,7 @@ export default function LandingHero() {
                                         <img
                                             src={client.logo}
                                             alt={client.name}
-                                            className="h-12 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                                            className="h-8 sm:h-12 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
                                             onError={(e) => { e.target.style.display = 'none'; }}
                                         />
                                     </div>

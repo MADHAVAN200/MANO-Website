@@ -245,10 +245,10 @@ export default function LandingPage() {
 
 
       {/* Why Choose Section with Gradient */}
-      <section className="relative px-12 py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
+      <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0,rgba(0,0,0,0)_100%)] pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12 relative z-10">
             Why Businesses <span className="text-blue-500">Choose</span> Mano Consultants
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
@@ -341,10 +341,10 @@ export default function LandingPage() {
       </section>
 
       {/* WHY CLIENTS TRUST US STRIP */}
-      <section className="py-24 border-y border-white/5 bg-white/[0.02]">
+      <section className="py-16 sm:py-24 border-y border-white/5 bg-white/[0.02]">
         <RevealOnScroll>
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 text-white leading-tight">
               Why <span className="text-blue-500">Clients Trust</span> Us
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -373,11 +373,11 @@ export default function LandingPage() {
       </RevealOnScroll>
 
       {/* Services Section with Hex/Grid Pattern */}
-      <section id="services" className="relative px-12 py-24 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black to-blue-950/30">
+      <section id="services" className="relative px-6 sm:px-12 py-16 sm:py-24 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black to-blue-950/30">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Services</h2>
           <div className={`max-w-7xl mx-auto ${isPPL ? 'flex justify-center' : 'grid grid-cols-1 md:grid-cols-2'} gap-8`}>
             {
               (isPPL ? [
@@ -489,11 +489,10 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Projects Carousel */}
-      {/* Featured Projects Carousel */}
-      <section className="py-24 overflow-hidden relative">
+      <section className="py-16 sm:py-24 overflow-hidden relative">
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Featured Projects</h2>
-          <div className="relative h-[520px] flex items-center justify-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Featured Projects</h2>
+          <div className="relative h-[400px] sm:h-[520px] flex items-center justify-center">
             <div className="relative w-full max-w-7xl mx-auto flex items-center justify-center">
               {projects.map((project, index) => {
                 // compute positions based on the current (rounded) index
@@ -503,6 +502,13 @@ export default function LandingPage() {
                 const isLeft2 = position === projects.length - 2;
                 const isRight1 = position === 1;
                 const isRight2 = position === 2;
+
+                // Responsive translation values
+                const isMobile = window.innerWidth < 640;
+                const translateX_Left1 = isMobile ? '-100%' : '-110%';
+                const translateX_Left2 = isMobile ? '-150%' : '-170%';
+                const translateX_Right1 = isMobile ? '0%' : '-10%';
+                const translateX_Right2 = isMobile ? '50%' : '60%';
 
                 let transform = 'translateX(-50%) scale(0.6) translateZ(-160px)';
                 let zIndex = 1;
@@ -515,19 +521,19 @@ export default function LandingPage() {
                   opacity = 1;
                   blur = 'blur(0px)';
                 } else if (isLeft1) {
-                  transform = 'translateX(-110%) scale(0.88) translateZ(-60px)';
+                  transform = `translateX(${translateX_Left1}) scale(0.88) translateZ(-60px)`;
                   zIndex = 50;
                   opacity = 0.75;
                 } else if (isLeft2) {
-                  transform = 'translateX(-170%) scale(0.72) translateZ(-120px)';
+                  transform = `translateX(${translateX_Left2}) scale(0.72) translateZ(-120px)`;
                   zIndex = 40;
                   opacity = 0.55;
                 } else if (isRight1) {
-                  transform = 'translateX(-10%) scale(0.88) translateZ(-60px)';
+                  transform = `translateX(${translateX_Right1}) scale(0.88) translateZ(-60px)`;
                   zIndex = 50;
                   opacity = 0.75;
                 } else if (isRight2) {
-                  transform = 'translateX(60%) scale(0.72) translateZ(-120px)';
+                  transform = `translateX(${translateX_Right2}) scale(0.72) translateZ(-120px)`;
                   zIndex = 40;
                   opacity = 0.55;
                 }
@@ -543,25 +549,25 @@ export default function LandingPage() {
                       filter: blur
                     }}
                   >
-                    <div className="w-[560px] h-[520px] relative group">
+                    <div className="w-[85vw] sm:w-[560px] h-[350px] sm:h-[520px] relative group">
                       {/* Liquid glass card */}
-                      <div className="relative h-full rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 shadow-2xl">
+                      <div className="relative h-full rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 shadow-2xl">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 
                         {/* Project title */}
-                        <div className="absolute top-6 left-6 z-20">
-                          <h3 className="text-3xl font-bold text-white">{project.name}</h3>
+                        <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
+                          <h3 className="text-xl sm:text-3xl font-bold text-white">{project.name}</h3>
                         </div>
 
                         {/* Image area with padding and inner frame */}
-                        <div className="absolute left-6 right-6 bottom-6 top-20 z-10 rounded-lg overflow-hidden bg-black">
+                        <div className="absolute left-4 sm:left-6 right-4 sm:right-6 bottom-4 sm:bottom-6 top-16 sm:top-20 z-10 rounded-lg overflow-hidden bg-black">
                           <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.name} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>
 
                       {/* soft outer stroke */}
-                      <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.6) inset' }} />
+                      <div className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.6) inset' }} />
                     </div>
                   </div>
                 );
@@ -572,13 +578,12 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      {/* Testimonials */}
-      <section className="px-4 py-24 overflow-hidden">
+      <section className="px-4 py-16 sm:py-24 overflow-hidden">
         <RevealOnScroll>
           <div className="mx-auto w-full">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Testimonials</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Testimonials</h2>
 
-            <div className="relative flex h-[700px] w-full flex-row items-center justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+            <div className="relative flex h-[500px] sm:h-[700px] w-full flex-row items-center justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
               <TestimonialsColumn testimonials={testimonials} duration={15} />
               <TestimonialsColumn testimonials={[...testimonials].reverse()} duration={19} className="hidden md:block" />
               <TestimonialsColumn testimonials={testimonials} duration={17} className="hidden lg:block" />
@@ -587,13 +592,11 @@ export default function LandingPage() {
         </RevealOnScroll>
       </section>
 
-
-
       {/* FAQs with Light Gradient */}
-      <section className="relative px-12 py-24 border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
+      <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-50"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Frequently Asked Questions (FAQs)</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Frequently Asked Questions (FAQs)</h2>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 items-start">
             {faqs.map((faq, index) => (
               <div
@@ -602,7 +605,7 @@ export default function LandingPage() {
                 className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-fit ${expandedFaq === index ? 'bg-white/10' : ''}`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-lg font-medium">{faq.question}</span>
+                  <span className="text-base sm:text-lg font-medium">{faq.question}</span>
                   <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${expandedFaq === index ? 'rotate-90' : ''}`} />
                 </div>
                 {expandedFaq === index && (
@@ -617,10 +620,10 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Form with Highlight */}
-      <section id="contact-section" className="relative px-12 py-24 overflow-hidden">
+      <section id="contact-section" className="relative px-6 sm:px-12 py-16 sm:py-24 overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 relative z-10">Ready to Start Your Project?</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 relative z-10">Ready to Start Your Project?</h2>
           <ContactForm />
         </RevealOnScroll>
       </section>

@@ -40,13 +40,13 @@ export default function CareersHero() {
                         </div>
 
                         {/* Main Heading */}
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                            Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Future</span>, <br />
-                            Shape Our Skyline
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] sm:leading-tight">
+                            Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Future</span> <br />
+                            With Mano
                         </h1>
 
-                        <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 border-l-0 border-white/10 pl-0">
-                            We are looking for passionate individuals to help us deliver excellence in project management and construction.
+                        <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
+                            Join our team of engineering experts and help us shape the future of technical consulting.
                         </p>
 
                         {/* Scroll Indicator */}

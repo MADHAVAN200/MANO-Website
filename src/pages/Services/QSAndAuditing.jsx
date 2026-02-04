@@ -215,8 +215,8 @@ const QSBillingAudit = () => {
                             WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
                         }}
                     >
-                        <div className="max-w-7xl mx-auto px-12">
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:divide-x divide-white/10">
                                 <div className="p-4">
                                     <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={98} suffix="%" /></h3>
                                     <p className="text-gray-400 text-sm uppercase tracking-wider">Billing Accuracy After Audit</p>
@@ -236,14 +236,13 @@ const QSBillingAudit = () => {
                             </div>
                         </div>
                     </section>
-                    {/* 3. CORE SERVICES - 2x2 Grid */}
-                    <section className="py-24 px-6 relative animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                    <section className="py-16 md:py-24 px-6 md:px-12 relative animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
                                 <div className="text-center mb-16">
                                     <span className="text-blue-500 font-bold tracking-widest uppercase text-sm">Comprehensive Expertise</span>
-                                    <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">Core Quantity Survey & Billing Services</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-4 leading-tight">Core Quantity Survey & Billing Services</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -307,11 +306,11 @@ const QSBillingAudit = () => {
                     </section>
 
                     {/* 5. COMPARISON BAR - Mandatory Dual Bar Layout */}
-                    <section className="py-24 px-6 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
+                    <section className="py-16 md:py-24 px-6 md:px-12 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
                         <div className="max-w-7xl mx-auto">
                             <RevealOnScroll>
-                                <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Why Quantity Survey & Billing Audits Are Essential</h2>
+                                <div className="text-center mb-12 md:mb-16">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 leading-tight">Why Quantity Survey & Billing Audits Are Essential</h2>
                                 </div>
                             </RevealOnScroll>
 
@@ -344,25 +343,25 @@ const QSBillingAudit = () => {
 
                                 {/* RIGHT: BLUE BAR (With QS) */}
                                 <RevealOnScroll>
-                                    <div className="h-full bg-gradient-to-b from-blue-950/30 to-black p-10 rounded-[2.5rem] border border-blue-500/30 text-center relative overflow-hidden group hover:border-blue-400 transition-all duration-500 flex flex-col shadow-[0_0_50px_rgba(37,99,235,0.1)]">
+                                    <div className="h-full bg-gradient-to-b from-blue-950/30 to-black p-8 md:p-10 rounded-[2.5rem] border border-blue-500/30 text-center relative overflow-hidden group hover:border-blue-400 transition-all duration-500 flex flex-col shadow-[0_0_50px_rgba(37,99,235,0.1)]">
                                         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 
                                         <div className="relative z-10 flex flex-col h-full">
-                                            <div className="mb-8 p-4 bg-blue-500/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                            <div className="mb-6 md:mb-8 p-4 bg-blue-500/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                                                 <CheckCircle className="w-10 h-10 text-blue-400" />
                                             </div>
-                                            <h3 className="text-3xl font-bold text-blue-400 mb-8">With Mano QS & Billing Audit Services</h3>
+                                            <h3 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6 md:mb-8">With Mano QS & Billing Audit Services</h3>
 
-                                            <ul className="space-y-5 text-left w-full pl-4 grow">
-                                                <li className="flex items-start text-gray-100 text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Verified quantities</li>
-                                                <li className="flex items-start text-gray-100 text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Transparent payments</li>
-                                                <li className="flex items-start text-gray-100 text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Error-free documentation</li>
-                                                <li className="flex items-start text-gray-100 text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Dispute prevention</li>
-                                                <li className="flex items-start text-gray-100 text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Total financial clarity</li>
+                                            <ul className="space-y-4 md:space-y-5 text-left w-full pl-4 grow">
+                                                <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Verified quantities</li>
+                                                <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Transparent payments</li>
+                                                <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Error-free documentation</li>
+                                                <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Dispute prevention</li>
+                                                <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Total financial clarity</li>
                                             </ul>
 
-                                            <div className="mt-8 pt-8 border-t border-blue-500/30 bg-blue-500/5 -mx-10 -mb-10 p-10">
-                                                <p className="text-blue-300 font-bold text-xl uppercase tracking-wide">Result: Accurate, controlled, transparent project finances.</p>
+                                            <div className="mt-8 pt-8 border-t border-blue-500/30 bg-blue-500/5 -mx-8 md:-mx-10 -mb-8 md:-mb-10 p-8 md:p-10">
+                                                <p className="text-blue-300 font-bold text-lg md:text-xl uppercase tracking-wide">Result: Accurate, controlled, transparent project finances.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -386,13 +385,13 @@ const QSBillingAudit = () => {
                     </RevealOnScroll>
 
                     {/* 6. WHY MANO - Glass Cards */}
-                    <section className="py-24 px-6 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
+                    <section className="py-16 md:py-24 px-6 md:px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <div className="max-w-7xl mx-auto">
                             <RevealOnScroll>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                     <div>
-                                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                            Why Mano for <span className="text-blue-500 block">Quantity Survey & Billing Audit?</span>
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
+                                            Why Mano for <span className="text-blue-500 block sm:inline lg:block">Quantity Survey & Billing Audit?</span>
                                         </h2>
                                         <div className="space-y-8">
                                             {[
@@ -443,15 +442,15 @@ const QSBillingAudit = () => {
                     </section>
 
                     {/* 7. INDUSTRIES SUPPORTED - Icon Grid */}
-                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
                         <div className="max-w-7xl mx-auto">
                             <RevealOnScroll>
-                                <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Industries We Serve</h2>
+                                <div className="text-center mb-12 md:mb-16">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Industries We Serve</h2>
                                 </div>
                             </RevealOnScroll>
 
-                            <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
+                            <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
                                 {[
                                     {
                                         name: "Residential",
@@ -484,7 +483,7 @@ const QSBillingAudit = () => {
                                         image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
                                     }
                                 ].map((ind, index) => (
-                                    <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
+                                    <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
                                         <img
                                             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
                                             src={ind.image}
@@ -504,9 +503,8 @@ const QSBillingAudit = () => {
                     <section className="py-24 px-6 overflow-x-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
                         <div className="max-w-7xl mx-auto">
                             <RevealOnScroll>
-                                <div className="text-center mb-24">
-
-                                    <h2 className="text-4xl md:text-5xl font-bold text-white mt-4">QS & Billing Audit Process Flow</h2>
+                                <div className="text-center mb-16 md:mb-24">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-4 leading-tight">QS & Billing Audit Process Flow</h2>
                                 </div>
                             </RevealOnScroll>
 
@@ -538,24 +536,24 @@ const QSBillingAudit = () => {
                     </section>
 
                     {/* 9. TRUST STATEMENT */}
-                    <section className="py-24 px-6 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
-                        <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
-                            <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
+                    <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
+                        <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
+                            <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
                                 "Top developers and contractors rely on Mano Project Consultants for precise, transparent, and dispute-free quantity and billing verification systems."
                             </p>
                         </div>
                     </section>
 
                     {/* 10. CTA */}
-                    <section className="py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
+                    <section className="py-16 md:py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
                         <div className="absolute inset-0 bg-blue-900/20"></div>
-                        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-blue-100 to-gray-500">Verify Quantities.</span> <br />
                                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-blue-100 to-gray-500">Validate Bills.</span> <br />
                                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-blue-100 to-gray-500">Protect Your Investment.</span>
                             </h2>
-                            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                                 Partner with Mano Project Consultants for transparent, accurate, and reliable QS & Billing Audit services.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -571,7 +569,7 @@ const QSBillingAudit = () => {
 
                 </>
             )}
-        </div>
+        </div >
     );
 };
 

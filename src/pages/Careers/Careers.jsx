@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {
     Users, TrendingUp, ShieldCheck, Award, Briefcase, MapPin,
     Clock, ChevronRight, ArrowRight, BookOpen, UserPlus, FileText,
-    CheckCircle, Target, Zap, Layout, User
+    CheckCircle, Target, Zap, Layout, User, Sparkles
 } from 'lucide-react';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';
@@ -143,22 +143,53 @@ const Careers = () => {
                         </div>
                     </section>
 
-                    {/* 3. OUR WORK CULTURE */}
-                    <section className="py-24 px-6 relative">
+                    {/* 3. OUR VALUES */}
+                    <section className="py-16 sm:py-24 px-6 relative overflow-hidden">
+                        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+                        <div className="max-w-7xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="text-center mb-12 sm:mb-20">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">Why Join <span className="text-blue-500">Mano</span>?</h2>
+                                    <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base px-4">We foster an environment where innovation meets precision, and every team member is empowered to grow.</p>
+                                </div>
+                            </RevealOnScroll>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                                {[
+                                    { title: "Growth Mindset", desc: "Continuous learning and professional development are at our core.", icon: Target },
+                                    { title: "Innovation first", desc: "Using cutting-edge technology and Digital ERPs to simplify construction.", icon: Sparkles },
+                                    { title: "Team Culture", desc: "Collaborate with industry experts and dynamic young engineers.", icon: Users },
+                                ].map((value, idx) => (
+                                    <RevealOnScroll key={idx} className="h-full">
+                                        <div className="p-8 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm hover:border-blue-500/30 transition-all group h-full animated-white-border">
+                                            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all transform group-hover:scale-110">
+                                                <value.icon size={24} />
+                                            </div>
+                                            <h4 className="text-xl font-bold text-white mb-3">{value.title}</h4>
+                                            <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{value.desc}</p>
+                                        </div>
+                                    </RevealOnScroll>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 4. OUR WORK CULTURE */}
+                    <section className="py-16 sm:py-24 px-6 relative">
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full -z-10"></div>
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl font-bold text-center text-white mb-16">Our Work Culture</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-12 sm:mb-16">Our Work Culture</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                                     {culture.map((item, index) => (
                                         <div key={index} className="group p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 relative animated-white-border">
-                                            <div className="flex items-start gap-6">
+                                            <div className="flex flex-col sm:flex-row items-start gap-6">
                                                 <div className="p-4 rounded-xl bg-white/5 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                                     <item.icon size={28} />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
-                                                    <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                                                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">{item.title}</h3>
+                                                    <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{item.desc}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,79 +199,80 @@ const Careers = () => {
                         </RevealOnScroll>
                     </section>
 
-                    {/* 4. OPEN POSITIONS */}
-                    <section id="open-positions" className="py-24 px-6 bg-white/5">
-                        <RevealOnScroll>
-                            <div className="max-w-5xl mx-auto">
-                                <div className="text-center mb-12">
-                                    <h2 className="text-4xl font-bold text-white mb-4">Open Positions</h2>
-                                    <p className="text-gray-400">Join our growing team of experts.</p>
-                                </div>
-
-                                {/* Location Filter */}
-                                <div className="flex flex-wrap justify-center gap-4 mb-12">
-                                    {locations.map((loc) => (
-                                        <button
-                                            key={loc}
-                                            onClick={() => setActiveLocation(loc)}
-                                            className={`px-6 py-2 rounded-full border transition-all duration-300 ${activeLocation === loc
-                                                ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/30'
-                                                : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white'
-                                                }`}
-                                        >
-                                            {loc}
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <div className="space-y-4">
-                                    {filteredPositions.map((job, index) => (
-                                        <div key={index} className="rounded-2xl border border-white/10 bg-black overflow-hidden transition-all duration-300 hover:border-blue-500/30 animated-white-border">
+                    {/* 5. OPEN POSITIONS */}
+                    <section id="positions" className="py-16 sm:py-24 px-6 bg-white/[0.02]">
+                        <div className="max-w-7xl mx-auto">
+                            <RevealOnScroll>
+                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+                                    <div>
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Open Positions</h2>
+                                        <p className="text-gray-400 text-sm sm:text-base">Discover your next career move at Mano.</p>
+                                    </div>
+                                    {/* Filter Chips */}
+                                    <div className="flex flex-wrap gap-2 overflow-x-auto pb-2 no-scrollbar">
+                                        {locations.map(loc => (
                                             <button
-                                                onClick={() => togglePosition(index)}
-                                                className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/5 transition-colors"
+                                                key={loc}
+                                                onClick={() => setActiveLocation(loc)}
+                                                className={`px-5 py-1.5 rounded-full border text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${activeLocation === loc
+                                                    ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20'
+                                                    : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
+                                                    }`}
                                             >
-                                                <div>
-                                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{job.title}</h3>
-                                                    <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                                                        <div className="flex items-center gap-1">
-                                                            <MapPin size={14} className="text-blue-500" />
-                                                            {job.details.Location || "Pan India"}
-                                                        </div>
-                                                        <div className="flex items-center gap-1">
-                                                            <Briefcase size={14} className="text-blue-500" />
-                                                            {job.details["Experience (Yrs)"] || "Experience N/A"}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className={`w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 ${openPosition === index ? 'rotate-90 bg-blue-500 text-white' : 'text-gray-400'}`}>
-                                                    <ChevronRight size={20} />
-                                                </div>
+                                                {loc}
                                             </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </RevealOnScroll>
 
-                                            <div className={`transition-[max-height] duration-500 ease-in-out overflow-hidden ${openPosition === index ? 'max-h-[800px]' : 'max-h-0'}`}>
-                                                <div className="p-8 pt-0 border-t border-white/5">
-                                                    <h4 className="text-blue-400 font-semibold mb-4 mt-6 uppercase tracking-wider text-sm">Job Details</h4>
-
-                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-8">
-                                                        {Object.entries(job.details).map(([key, value], idx) => (
-                                                            <div key={idx} className="flex flex-col">
-                                                                <span className="text-xs text-gray-500 uppercase tracking-wide mb-1">{key}</span>
-                                                                <span className="text-gray-200 font-medium">{value}</span>
-                                                            </div>
-                                                        ))}
+                            <div className="space-y-4 max-w-5xl mx-auto">
+                                {filteredPositions.map((job, index) => (
+                                    <div key={index} className="rounded-2xl border border-white/10 bg-black overflow-hidden transition-all duration-300 hover:border-blue-500/30 animated-white-border">
+                                        <button
+                                            onClick={() => togglePosition(index)}
+                                            className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/5 transition-colors"
+                                        >
+                                            <div>
+                                                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{job.title}</h3>
+                                                <div className="flex flex-wrap gap-4 text-sm text-gray-400">
+                                                    <div className="flex items-center gap-1">
+                                                        <MapPin size={14} className="text-blue-500" />
+                                                        {job.details.Location || "Pan India"}
                                                     </div>
-
-                                                    <button className="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center gap-2">
-                                                        Apply for this Role <ArrowRight size={18} />
-                                                    </button>
+                                                    <div className="flex items-center gap-1">
+                                                        <Briefcase size={14} className="text-blue-500" />
+                                                        {job.details["Experience (Yrs)"] || "Experience N/A"}
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div className={`w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 ${openPosition === index ? 'rotate-90 bg-blue-500 text-white' : 'text-gray-400'}`}>
+                                                <ChevronRight size={20} />
+                                            </div>
+                                        </button>
+
+                                        <div className={`transition-[max-height] duration-500 ease-in-out overflow-hidden ${openPosition === index ? 'max-h-[800px]' : 'max-h-0'}`}>
+                                            <div className="p-6 sm:p-8 pt-0 border-t border-white/5">
+                                                <h4 className="text-blue-400 font-semibold mb-4 mt-6 uppercase tracking-wider text-sm">Job Details</h4>
+
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-8 text-sm sm:text-base">
+                                                    {Object.entries(job.details).map(([key, value], idx) => (
+                                                        <div key={idx} className="flex flex-col">
+                                                            <span className="text-xs text-gray-500 uppercase tracking-wide mb-1">{key}</span>
+                                                            <span className="text-gray-200 font-medium">{value}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                <button className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+                                                    Apply for this Role <ArrowRight size={18} />
+                                                </button>
+                                            </div>
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
                             </div>
-                        </RevealOnScroll>
+                        </div>
                     </section>
 
                     {/* 5. HOW TO APPLY */}
@@ -268,7 +300,7 @@ const Careers = () => {
                     </section>
 
                     {/* 6. LIFE AT MANO (Optional Culture) */}
-                    <section className="py-24 px-6">
+                    <section className="py-16 sm:py-24 px-6">
                         <div className="max-w-7xl mx-auto">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 <div className="relative group overflow-hidden rounded-2xl h-80">
@@ -297,40 +329,40 @@ const Careers = () => {
                     </section>
 
                     {/* 7. EMPLOYEE PERSPECTIVES (CAROUSEL) */}
-                    <section className="py-24 px-6 bg-black text-center">
+                    <section className="py-16 sm:py-24 px-6 bg-black text-center">
                         <div className="max-w-7xl mx-auto">
-                            <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
 
                             {/* Outer Glass Container */}
-                            <div className="relative w-full border border-white/10 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[400px] flex flex-col justify-center px-4 md:px-12 py-12 md:py-16">
+                            <div className="relative w-full border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[350px] sm:min-h-[400px] flex flex-col justify-center px-4 sm:px-12 py-12 sm:py-16">
 
-                                {/* Navigation Buttons (Aligned Inside Outer Container) */}
+                                {/* Navigation Buttons (Aligned Inside Outer Container - Hidden on very small mobile) */}
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                                    className="absolute left-6 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-6 h-6 text-black rotate-180" />
+                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black rotate-180" />
                                 </button>
 
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                                    className="absolute right-6 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-6 h-6 text-black" />
+                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
                                 </button>
 
                                 {/* Inner Content Content */}
-                                <div className="bg-white/5 border border-white/5 rounded-3xl p-8 md:p-16 text-left transition-all duration-500 w-full mx-auto">
-                                    <div className="flex items-center gap-5 mb-6">
-                                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center">
-                                            <User size={32} className="text-gray-400" />
+                                <div className="bg-white/5 border border-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-16 text-left transition-all duration-500 w-full max-w-2xl mx-auto">
+                                    <div className="flex items-center gap-4 sm:gap-5 mb-6">
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center">
+                                            <User size={24} className="text-gray-400" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-xl text-white">{testimonials[currentTestimonial].name}</h4>
+                                            <h4 className="font-bold text-lg sm:text-xl text-white">{testimonials[currentTestimonial].name}</h4>
                                         </div>
                                     </div>
 
-                                    <p className="text-gray-300 leading-relaxed text-base md:text-lg pl-1">
+                                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
                                         {testimonials[currentTestimonial].text}
                                     </p>
 
@@ -353,16 +385,16 @@ const Careers = () => {
                     </section>
 
                     {/* 8. CTA SECTION */}
-                    <section className="py-32 px-6 relative overflow-hidden">
+                    <section className="py-20 sm:py-32 px-6 relative overflow-hidden">
                         <div className="absolute inset-0 bg-blue-900/10"></div>
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,1)_0%,rgba(20,20,50,0.5)_50%,rgba(0,0,0,1)_100%)]"></div>
 
                         <div className="max-w-4xl mx-auto text-center relative z-10">
-                            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                                Take the Next Step in Your <br />
+                            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                                Take the Next Step in Your <br className="hidden sm:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">Professional Journey.</span>
                             </h2>
-                            <p className="text-xl text-gray-400 mb-10">
+                            <p className="text-base sm:text-xl text-gray-400 mb-10 px-4">
                                 Become part of a team that values excellence, innovation, and integrity.
                             </p>
 

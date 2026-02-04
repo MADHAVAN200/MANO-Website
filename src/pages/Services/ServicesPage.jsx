@@ -202,11 +202,11 @@ const ServicesPage = () => {
                     {/* 3. CORE SERVICES */}
                     {isPPL ? (
                         /* PPL SPECIFIC VIEW - ONE MAIN SERVICE */
-                        <section id="core-services" className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                        <section id="core-services" className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                             <RevealOnScroll>
                                 <div className="max-w-7xl mx-auto">
                                     <div className="text-center mb-16">
-                                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Specialized Service</h2>
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Our Specialized Service</h2>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
                                         <Link to={`/${brand.toLowerCase()}/services/epc`} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block animated-white-border">
@@ -234,11 +234,11 @@ const ServicesPage = () => {
                     ) : (
                         /* PCPL DEFAULT VIEW */
                         <>
-                            <section id="core-services" className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                            <section id="core-services" className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                                 <RevealOnScroll>
                                     <div className="max-w-7xl mx-auto">
                                         <div className="text-center mb-16">
-                                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Core Services</h2>
+                                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 leading-tight">Our Core Services</h2>
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -280,10 +280,10 @@ const ServicesPage = () => {
                                 </RevealOnScroll>
                             </section>
 
-                            <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
+                            <section className="py-16 md:py-24 px-6 md:px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
                                 <RevealOnScroll>
                                     <div className="max-w-7xl mx-auto">
-                                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Services</h2>
+                                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 sm:pb-12 mb-8 border-b border-white/10 leading-tight">Specialized Services</h2>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             {specializedServices.map((service, index) => (
@@ -329,13 +329,13 @@ const ServicesPage = () => {
                     )}
 
                     {/* 5. WHY CHOOSE MANO */}
-                    <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
                         <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
                                     <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-4 block">Service Philosophy</span>
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                        Why Choose <span className="text-blue-500 block">Mano Consultants?</span>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 sm:pb-6 mb-8 leading-tight">
+                                        Why Choose <span className="text-blue-500 block sm:inline lg:block">Mano Consultants?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -390,7 +390,7 @@ const ServicesPage = () => {
                             <div className="max-w-7xl mx-auto text-center">
                                 <h2 className="text-3xl font-bold text-white mb-16">Industries We Serve</h2>
 
-                                <div className="flex flex-col md:flex-row items-center gap-2 h-[600px] md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
+                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
                                     {[
                                         {
                                             name: "Residential Developments",
@@ -418,7 +418,7 @@ const ServicesPage = () => {
                                             image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
                                         },
                                     ].map((ind, index) => (
-                                        <div key={index} className="relative group flex-grow transition-all duration-500 w-full md:w-28 hover:w-full md:hover:w-[300%] h-[140px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
+                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
                                             <img
                                                 className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
                                                 src={ind.image}
@@ -436,11 +436,11 @@ const ServicesPage = () => {
                     </section>
 
                     {/* 7. SERVICE DELIVERY MODEL */}
-                    <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
+                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-20">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">Service Delivery Model</h2>
+                                <div className="text-center mb-16 md:mb-20">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">Service Delivery Model</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -462,20 +462,20 @@ const ServicesPage = () => {
                     </section>
 
                     {/* 8. TRUST STATEMENT */}
-                    <section className="py-24 px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
-                        <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
-                            <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
+                    <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
+                        <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
+                            <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
                                 "Trusted by developers, corporations, and institutions across India for delivering reliable, transparent, and results-driven consulting services."
                             </p>
                         </div>
                     </section>
 
                     {/* 9. CTA */}
-                    <section className="py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
+                    <section className="py-16 md:py-24 relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="absolute inset-0 bg-blue-900/20"></div>
-                        <div className="max-w-4xl mx-auto px-12 text-center relative z-10">
-                            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Ready to Elevate Your Project?</h2>
-                            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Ready to Elevate Your Project?</h2>
+                            <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                                 Partner with Mano Project Consultants to plan smarter, execute better, and achieve guaranteed project success.
                             </p>
                             <div className="flex justify-center">
