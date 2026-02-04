@@ -1,92 +1,136 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import RainbowButton from './RainbowButton';
+import { useCompany } from '../context/CompanyContext';
+import ContactModal from './ContactModal';
 
 const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
+    const { brand, isPPL } = useCompany();
+    const brandPath = `/${brand.toLowerCase()}`;
 
     const [activeService, setActiveService] = useState(0);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const [isContactOpen, setIsContactOpen] = useState(false);
+
+    const handleContactClick = (e) => {
+        e.preventDefault();
+        // Check if we are on Landing or About page
+        // currentPath might be "/pcpl", "/pcpl/", "/pcpl/about-us" etc.
+        // brandPath is "/pcpl" or "/ppl"
+        const isLanding = currentPath === brandPath || currentPath === `${brandPath}/` || currentPath === '/';
+        const isAbout = currentPath.includes('/about-us');
+
+        if (isLanding || isAbout) {
+            const section = document.getElementById('contact-section');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            setIsContactOpen(true);
+        }
+    };
+
+    // Initial services list
+    const pcplServices = [
+        { title: "Project Management", desc: "Seamless execution, monitoring, and milestone-driven progress tracking.", path: "/services/project-management" },
+        { title: "Project Execution", desc: "On-ground leadership and coordination for flawless project delivery.", path: "/services/project-execution" },
+        { title: "Project Planning", desc: "Strategic resource planning using CPM & PERT techniques.", path: "/services/project-planning" },
+        { title: "Contract Management", desc: "QS, BOQ, Tender Preparation, and vendor finalization.", path: "/services/contract-management" },
+        { title: "QA/QC and Auditing", desc: "Comprehensive quality assurance, control, and auditing services.", path: "/services/qa-audit" },
+        { title: "Cost Consultancy", desc: "Expert budgeting, cash flows, and cost control measures.", path: "/services/cost-consultancy" },
+        { title: "QS and Auditing", desc: "Detailed quantity surveying and billing verification.", path: "/services/qs-billing-audit" },
+        { title: "EHS Audit", desc: "Environmental, Health, and Safety audits and compliance.", path: "/services/ehs-audit" }
+    ];
+
+    const pplServices = [
+        { title: "EPC Solution", desc: "End-to-end Engineering, Procurement, and Construction services.", path: "/services/epc" }
+    ];
+
+    const services = isPPL ? pplServices : pcplServices;
 
     const isActive = (path) => {
-        if (path === '/' && currentPath === '/') return true;
-        if (path !== '/' && currentPath.startsWith(path)) return true;
+        // Correctly check active state relative to brand connection
+        const fullPath = `${brandPath}${path === '/' ? '' : path}`;
+        if (currentPath === fullPath) return true;
+        if (path !== '/' && currentPath.startsWith(fullPath)) return true;
         return false;
     };
+
+    useEffect(() => {
+        // Helper to match active service in dropdown to current URL if possible
+        const relativePath = currentPath.replace(brandPath, '') || '/';
+        const foundIndex = services.findIndex(s => s.path === relativePath);
+        if (foundIndex !== -1) {
+            setActiveService(foundIndex);
+        } else {
+            setActiveService(0);
+        }
+    }, [currentPath, isServicesOpen, services, brandPath]);
 
     const linkBaseClass = "transition-all duration-300 ease-in-out font-medium drop-shadow-md";
     const activeClass = "text-white font-bold text-[20px]";
     const inactiveClass = "text-gray-400 hover:text-white text-[18px]";
 
-    const services = [
-        { title: "Contract Management", desc: "Structured contracts, compliance control, and risk mitigation.", path: "/services/contract-management" },
-        { title: "Project Planning", desc: "Strategic resource planning and roadmap design for success.", path: "/services/project-planning" },
-        { title: "Project Execution", desc: "On-ground leadership and coordination for flawless project delivery.", path: "/services/project-execution" },
-        { title: "Quality Control", desc: "Structured inspections, matrix control, and compliance systems.", path: "/services/quality-control" },
-        { title: "Project Management", desc: "Seamless execution, monitoring, and milestone-driven progress tracking.", path: "/services/project-management" },
-        { title: "Cost Consultancy", desc: "Expert budgeting, BOQs, and material cost verification services.", path: "/services/cost-consultancy" },
-        { title: "CPM & PERT Technique", desc: "Advanced scheduling and critical path analysis for project timelines.", path: "/services/cpm-pert" },
-        { title: "EHS Audit", desc: "Environmental, Health, and Safety audits to ensure rigorous standards.", path: "/services/ehs-audit" },
-        { title: "QA/QC Audit", desc: "Comprehensive process audits ensuring compliance and excellence.", path: "/services/qa-audit" },
-        { title: "QS & Billing Audit", desc: "Detailed quantity surveying and billing verification for transparency.", path: "/services/qs-billing-audit" }
-    ];
-
-    const [isServicesOpen, setIsServicesOpen] = useState(false);
+    const getLink = (path) => `${brandPath}${path === '/' ? '' : path}`;
 
     return (
         <nav className="absolute top-6 left-0 right-0 z-50 flex items-center justify-center pointer-events-none">
             <div
-                className={`backdrop-blur-md bg-white/5 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden ${isServicesOpen ? 'rounded-[32px]' : 'rounded-full'}`}
+                className={`backdrop-blur-md bg-white/5 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden rounded-[32px]`}
                 style={{ width: '95%', maxWidth: '1400px' }}
                 onMouseLeave={() => setIsServicesOpen(false)}
             >
                 {/* Top Row: Logo, Links, CTA */}
                 <div className="flex items-center justify-between px-8 py-4 w-full">
                     {/* Logo Section */}
-                    <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
+                    <Link to={brandPath} className="flex items-center gap-3 flex-shrink-0 group">
                         <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
-                        <span className="text-2xl font-bold text-white tracking-wide">MANO</span>
+                        <span className="text-2xl font-bold text-white tracking-wide">
+                            MANO
+                        </span>
                     </Link>
 
                     {/* Navigation Links */}
                     <div className="flex items-center gap-14">
-                        <Link to="/" className={`${linkBaseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
+                        <Link to={getLink('/')} className={`${linkBaseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
                             Home
                         </Link>
-                        <Link to="/about-us" className={`${linkBaseClass} ${isActive('/about-us') ? activeClass : inactiveClass}`}>
+                        <Link to={getLink('/about-us')} className={`${linkBaseClass} ${isActive('/about-us') ? activeClass : inactiveClass}`}>
                             About Us
                         </Link>
 
                         {/* Services Link - Trigger */}
                         <div
-                            onMouseEnter={() => setIsServicesOpen(true)}
+                            onMouseEnter={() => !isPPL && setIsServicesOpen(true)}
                             className="relative h-full flex items-center"
                         >
                             <Link
-                                to="/services"
-                                className={`${linkBaseClass} ${isActive('/services') ? activeClass : inactiveClass} flex items-center gap-1 py-2`}
+                                to={isPPL ? getLink('/services/epc') : getLink('/services')}
+                                className={`${linkBaseClass} ${isActive(isPPL ? '/services/epc' : '/services') ? activeClass : inactiveClass} flex items-center gap-1 py-2`}
                             >
-                                Services
+                                {isPPL ? 'Service - EPC' : 'Services'}
                             </Link>
                         </div>
 
-                        <Link to="/projects" className={`${linkBaseClass} ${isActive('/projects') ? activeClass : inactiveClass}`}>
+                        <Link to={getLink('/projects')} className={`${linkBaseClass} ${isActive('/projects') ? activeClass : inactiveClass}`}>
                             Projects
                         </Link>
-                        <Link to="/careers" className={`${linkBaseClass} ${isActive('/careers') ? activeClass : inactiveClass}`}>
+                        <Link to={getLink('/careers')} className={`${linkBaseClass} ${isActive('/careers') ? activeClass : inactiveClass}`}>
                             Careers
                         </Link>
                     </div>
 
                     {/* CTA Button */}
                     <div className="hidden lg:block">
-                        <Link to="#">
-                            <RainbowButton>
+                        <div onClick={handleContactClick} className="cursor-pointer">
+                            <RainbowButton borderRadius="rounded-xl">
                                 Get in Touch
                                 <ChevronRight className="w-4 h-4 ml-2" />
                             </RainbowButton>
-                        </Link>
+                        </div>
                     </div>
                 </div>
 
@@ -99,23 +143,23 @@ const Navbar = () => {
                         <div className="w-1/3 flex flex-col justify-between pt-4">
                             <div>
                                 <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                                    {services[activeService].title}
+                                    {services[activeService]?.title}
                                 </h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    {services[activeService].desc}
+                                    {services[activeService]?.desc}
                                 </p>
                             </div>
-                            <Link to={services[activeService].path} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
+                            <Link to={getLink(services[activeService]?.path || '#')} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
                                 Explore Service <ChevronRight className="w-4 h-4" />
                             </Link>
                         </div>
 
                         {/* Right Side - Services Grid */}
-                        <div className="w-2/3 grid grid-cols-2 gap-x-4 gap-y-2">
+                        <div className={`w-2/3 grid ${isPPL ? 'grid-cols-1' : 'grid-cols-2'} gap-x-4 gap-y-2`}>
                             {services.map((service, index) => (
                                 <Link
                                     key={index}
-                                    to={service.path}
+                                    to={getLink(service.path)}
                                     onMouseEnter={() => setActiveService(index)}
                                     className={`block px-6 py-4 text-lg rounded-xl transition-all duration-300 font-bold text-center flex items-center justify-center whitespace-nowrap ${activeService === index
                                         ? "bg-white/10 text-white scale-105"
@@ -129,7 +173,9 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+        </nav >
     );
 };
 

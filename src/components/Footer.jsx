@@ -3,7 +3,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RainbowButton from './RainbowButton';
 
+import { useCompany } from '../context/CompanyContext';
+
 const Footer = () => {
+    const { isPPL, brand } = useCompany();
+    const brandPath = `/${brand.toLowerCase()}`;
+    const getLink = (path) => `${brandPath}${path === '/' ? '' : path}`;
+
+    const pcplServices = [
+        { title: "Project Management", path: "/services/project-management" },
+        { title: "Project Execution", path: "/services/project-execution" },
+        { title: "Project Planning", path: "/services/project-planning" },
+        { title: "Contract Management", path: "/services/contract-management" },
+        { title: "QA/QC and Auditing", path: "/services/qa-audit" },
+        { title: "Cost Consultancy", path: "/services/cost-consultancy" },
+        { title: "QS and Auditing", path: "/services/qs-billing-audit" },
+        { title: "EHS Audit", path: "/services/ehs-audit" }
+    ];
+
+    const pplServices = [
+        { title: "EPC Solution", path: "/services/epc" }
+    ];
+
+    const services = isPPL ? pplServices : pcplServices;
+
     return (
         <>
             <style>{`
@@ -23,9 +46,9 @@ const Footer = () => {
 
                         {/* Column 1: Logo & Contact */}
                         <div className="space-y-6 max-w-sm">
-                            <Link to="/">
-                                <div className="bg-white/10 p-2 rounded-lg inline-block">
-                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-12" />
+                            <Link to={brandPath}>
+                                <div className="inline-block">
+                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-16" />
                                 </div>
                             </Link>
                             <div className="space-y-4 text-gray-400">
@@ -67,16 +90,15 @@ const Footer = () => {
                         <div className="flex flex-col">
                             <h2 className="font-bold text-white text-lg mb-6">Our Services</h2>
                             <div className="flex flex-col space-y-3 text-sm text-gray-400">
-                                <a className="hover:text-blue-400 transition" href="#">Contract Management</a>
-                                <Link className="hover:text-blue-400 transition" to="/services/project-planning">Project Planning</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/project-execution">Project Execution</Link>
-                                <a className="hover:text-blue-400 transition" href="#">Quality Control</a>
-                                <Link className="hover:text-blue-400 transition" to="/services/project-management">Project Management</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/cost-consultancy">Cost Consultancy</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/cpm-pert">Planning with CPM & PERT Technique</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/ehs-audit">EHS Service and Audits</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/qa-audit">Quality Assurance/Quality Control Service / Audit</Link>
-                                <Link className="hover:text-blue-400 transition" to="/services/qs-billing-audit">Quantity Survey & Billing Service / Audit</Link>
+                                {services.map((service, index) => (
+                                    <Link
+                                        key={index}
+                                        className="hover:text-blue-400 transition"
+                                        to={getLink(service.path)}
+                                    >
+                                        {service.title}
+                                    </Link>
+                                ))}
                             </div>
                         </div>
 
@@ -85,21 +107,14 @@ const Footer = () => {
                             <div className="mb-8">
                                 <h2 className="font-bold text-white text-lg mb-6">Quick Links</h2>
                                 <div className="flex flex-col space-y-3 text-sm text-gray-400">
-                                    <Link className="hover:text-blue-400 transition" to="/">Home</Link>
-                                    <Link className="hover:text-blue-400 transition" to="/about-us">About US</Link>
-                                    <a className="hover:text-blue-400 transition" href="#">Projects</a>
-                                    <a className="hover:text-blue-400 transition" href="#">Contact US</a>
+                                    <Link className="hover:text-blue-400 transition" to={getLink('/')}>Home</Link>
+                                    <Link className="hover:text-blue-400 transition" to={getLink('/about-us')}>About Us</Link>
+                                    <Link className="hover:text-blue-400 transition" to={getLink('/projects')}>Projects</Link>
+                                    <Link className="hover:text-blue-400 transition" to={getLink('/careers')}>Careers</Link>
                                 </div>
                             </div>
 
-                            <div>
-                                <h2 className="font-bold text-white text-lg mb-4">Ready to start your Project?</h2>
-                                <a href="mailto:business@mano.co.in">
-                                    <RainbowButton>
-                                        Send a Mail
-                                    </RainbowButton>
-                                </a>
-                            </div>
+
                         </div>
                     </div>
 

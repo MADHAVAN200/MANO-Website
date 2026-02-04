@@ -1,0 +1,249 @@
+import React from "react";
+import { Link } from 'react-router-dom';
+import {
+    ArrowRight,
+    Play,
+    Target,
+    Users,
+    Award,
+    Briefcase,
+    CheckCircle
+} from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+
+// --- REAL BRANDS ---
+const CLIENTS = [
+    { name: "Tata Trent Ltd.", logo: "/logos/tata-trent.svg" },
+    { name: "Amazon", logo: "/logos/amazon.png" },
+    { name: "Anand Rathi", logo: "/logos/anand-rathi.svg" },
+    { name: "Asian Paints", logo: "/logos/asian-paints.svg" },
+    { name: "Prima Plastics", logo: "/logos/prima-plastics.svg" },
+    { name: "Goyal Group", logo: "/logos/goyal-group.svg" },
+    { name: "Lodha", logo: "/logos/lodha.svg" },
+    { name: "Zudio", logo: "/logos/zudio.svg" },
+    { name: "D-Mart", logo: "/logos/dmart.svg" },
+    { name: "Hexaware", logo: "/logos/hexaware.svg" },
+    { name: "Cipla", logo: "/logos/cipla.svg" },
+    { name: "L&T", logo: "/logos/larsentoubro.svg" },
+];
+
+// --- SUB-COMPONENTS ---
+const StatItem = ({ value, label }) => (
+    <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
+        <span className="text-xl font-bold text-white sm:text-2xl">{value}</span>
+        <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium sm:text-xs">{label}</span>
+    </div>
+);
+
+// --- MAIN COMPONENT ---
+export default function AboutHero() {
+    // Mouse tilt logic for Stats Card
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
+    const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
+
+    function onMouseMove(event) {
+        const { currentTarget, clientX, clientY } = event;
+        const { left, top, width, height } = currentTarget.getBoundingClientRect();
+        x.set(clientX - left - width / 2);
+        y.set(clientY - top - height / 2);
+    }
+
+    const rotateX = useTransform(mouseY, [-300, 300], [5, -5]); // Inverted for natural feel
+    const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]);
+
+    return (
+        <div className="relative w-full text-white overflow-hidden font-sans">
+            {/* Background Image with Gradient Mask */}
+            <div
+                className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+                style={{
+                    backgroundImage: `url(${import.meta.env.BASE_URL}about-hero-bg.png)`,
+                    maskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+                    WebkitMaskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+                }}
+            />
+
+            {/* Dark Gradient Overlay for Text Visibility */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent" />
+
+            <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 pt-24 pb-12 sm:px-8 md:pt-32 md:pb-20 lg:px-12">
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
+
+                    {/* --- LEFT COLUMN --- */}
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8">
+
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                        >
+                            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
+                                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+                                    Dedicated to Excellence
+                                    <Award className="w-3.5 h-3.5 text-yellow-400" />
+                                </span>
+                            </div>
+                        </motion.div>
+
+                        {/* Heading */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight pb-2"
+                        >
+                            Who<br />
+                            <span className="bg-gradient-to-br from-white via-white to-[#3b82f6] bg-clip-text text-transparent">
+                                We Are
+                            </span>
+                        </motion.h1>
+
+                        {/* Description */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="max-w-xl text-lg text-zinc-100 leading-relaxed font-semibold"
+                        >
+                            We are a team of dedicated professionals committed to delivering excellence in every project we undertake. From concept to completion, we ensure quality and precision.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="flex flex-col sm:flex-row gap-4"
+                        >
+                            <Link
+                                to="/contact"
+                                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
+                            >
+                                Start Your Project
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
+
+                            <button
+                                onClick={() => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20"
+                            >
+                                <Users className="w-4 h-4 fill-current" />
+                                Meet the Team
+                            </button>
+                        </motion.div>
+                    </div>
+
+                    {/* --- RIGHT COLUMN --- */}
+                    <div className="lg:col-span-5 space-y-6 lg:mt-12" style={{ perspective: 1000 }} onMouseMove={onMouseMove} onMouseLeave={() => { x.set(0); y.set(0); }}>
+
+                        {/* Stats Card with 3D Tilt */}
+                        <motion.div
+                            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl"
+                        >
+                            {/* Card Glow Effect */}
+                            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+
+                            <div className="relative z-10" style={{ transform: "translateZ(20px)" }}>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
+                                        <Briefcase className="h-6 w-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <div className="text-3xl font-bold tracking-tight text-white">100+</div>
+                                        <div className="text-sm text-zinc-400">Projects Managed</div>
+                                    </div>
+                                </div>
+
+                                {/* Progress Bar Section */}
+                                <div className="space-y-3 mb-8">
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-zinc-400">Timely Completion</span>
+                                        <span className="text-white font-medium">95%</span>
+                                    </div>
+                                    <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
+                                        <div className="h-full w-[95%] rounded-full bg-gradient-to-r from-white to-blue-500" />
+                                    </div>
+                                </div>
+
+                                <div className="h-px w-full bg-white/10 mb-6" />
+
+                                {/* Mini Stats Grid */}
+                                <div className="grid grid-cols-3 gap-4 text-center">
+                                    <StatItem value="12+" label="Years" />
+                                    <div className="w-px h-full bg-white/10 mx-auto" />
+                                    <StatItem value="50+" label="Experts" />
+                                    <div className="w-px h-full bg-white/10 mx-auto" />
+                                    <StatItem value="100%" label="Commitment" />
+                                </div>
+
+                                {/* Tag Pills */}
+                                <div className="mt-8 flex flex-wrap gap-2">
+                                    <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                                        <span className="relative flex h-2 w-2">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </span>
+                                        HIRING
+                                    </div>
+                                    <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                                        <CheckCircle className="w-3 h-3 text-blue-500" />
+                                        QUALIFIED
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Marquee Card */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl"
+                        >
+                            <h3 className="mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
+
+                            <div
+                                className="relative flex overflow-hidden"
+                                style={{
+                                    maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                                    WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
+                                }}
+                            >
+                                <motion.div
+                                    className="flex gap-12 whitespace-nowrap px-4"
+                                    animate={{ x: ["0%", "-50%"] }}
+                                    transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+                                >
+                                    {/* Triple list for seamless loop */}
+                                    {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
+                                        >
+                                            {/* Brand Logo */}
+                                            <img
+                                                src={client.logo}
+                                                alt={client.name}
+                                                className="h-10 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                                                onError={(e) => { e.target.style.display = 'none'; }}
+                                            />
+                                        </div>
+                                    ))}
+                                </motion.div>
+                            </div>
+                        </motion.div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

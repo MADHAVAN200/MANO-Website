@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown } from 'lucide-react';
+import { useCompany } from '../context/CompanyContext';
+
+const ContactModal = ({ isOpen, onClose }) => {
+    const { isPPL } = useCompany();
+    const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
+    const [selectedService, setSelectedService] = useState('');
+
+    if (!isOpen) return null;
+
+    const pcplServices = [
+        "Project Management",
+        "Project Execution",
+        "Project Planning",
+        "Contract Management",
+        "QA/QC and Auditing",
+        "Cost Consultancy",
+        "QS and Auditing",
+        "EHS Audit",
+        "Enquiry"
+    ];
+
+    const pplServices = [
+        "EPC Solution",
+        "Enquiry"
+    ];
+
+    const services = isPPL ? pplServices : pcplServices;
+
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-auto">
+            {/* Backdrop */}
+            <div
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+                onClick={onClose}
+            ></div>
+
+            {/* Modal Content - Glassmorphism */}
+            <div className="relative w-full max-w-2xl rounded-3xl p-1 z-10 animate-in fade-in zoom-in duration-300">
+                {/* Gradient Border Wrapper */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 via-white/5 to-white/10 blur-[1px]"></div>
+
+                <div className="relative bg-black/80 backdrop-blur-2xl rounded-[22px] border border-white/10 p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-600/10 blur-[80px] rounded-full -z-10 pointer-events-none"></div>
+
+                    {/* Close Button */}
+                    <button
+                        onClick={onClose}
+                        className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all duration-300 border border-transparent hover:border-white/20 group z-20"
+                    >
+                        <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+                    </button>
+
+                    <div className="text-center mb-8">
+                        <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">Get in Touch</h2>
+                        <p className="text-gray-400 text-sm">Fill in the details below and we'll get back to you.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {/* Name */}
+                        <div className="relative group">
+                            <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                            <input
+                                type="text"
+                                placeholder="Full Name"
+                                className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
+                            />
+                        </div>
+
+                        {/* Company Name */}
+                        <div className="relative group">
+                            <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                            <input
+                                type="text"
+                                placeholder="Company Name"
+                                className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
+                            />
+                        </div>
+
+                        {/* Contact / WhatsApp */}
+                        <div className="relative group">
+                            <Phone className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                            <input
+                                type="text"
+                                placeholder="Contact / WhatsApp"
+                                className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
+                            />
+                        </div>
+
+                        {/* Email */}
+                        <div className="relative group">
+                            <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                            <input
+                                type="email"
+                                placeholder="Email Address"
+                                className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
+                            />
+                        </div>
+
+                        {/* Service Required (Full Width) */}
+                        <div className="relative group md:col-span-2">
+                            <Briefcase className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors z-10" />
+                            <div className="relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
+                                    className="w-full pl-12 pr-5 py-3.5 text-left rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium flex justify-between items-center"
+                                >
+                                    <span className={selectedService ? "text-white" : "text-gray-500"}>
+                                        {selectedService || "Service Required"}
+                                    </span>
+                                    <ChevronDown size={18} className={`text-gray-500 transition-transform ${serviceDropdownOpen ? 'rotate-180' : ''}`} />
+                                </button>
+
+                                {serviceDropdownOpen && (
+                                    <div className="absolute top-full left-0 right-0 mt-2 bg-[#111] border border-white/10 rounded-xl shadow-xl overflow-hidden z-30 max-h-60 overflow-y-auto">
+                                        {services.map((service, index) => (
+                                            <button
+                                                key={index}
+                                                type="button"
+                                                onClick={() => {
+                                                    setSelectedService(service);
+                                                    setServiceDropdownOpen(false);
+                                                }}
+                                                className="w-full text-left px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-white transition-colors"
+                                            >
+                                                {service}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Project Details (Full Width) */}
+                        <div className="relative group md:col-span-2">
+                            <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                            <textarea
+                                placeholder="Project Details..."
+                                rows={4}
+                                className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all resize-none font-medium"
+                            />
+                        </div>
+                    </div>
+
+                    <button className="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-900/40 hover:shadow-blue-600/30 flex items-center justify-center gap-2 group transform active:scale-[0.98]">
+                        Send Message
+                        <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ContactModal;
