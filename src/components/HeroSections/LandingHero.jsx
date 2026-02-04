@@ -14,21 +14,8 @@ import {
     Gem,
     Cpu
 } from "lucide-react";
+import { CLIENTS } from "../../data/clients";
 
-// --- MOCK BRANDS ---
-const CLIENTS = [
-    { name: "Tata Trent Ltd.", logo: "/logos/tata-trent.svg" },
-    { name: "Amazon", logo: "/logos/amazon.png" },
-    { name: "Anand Rathi", logo: "/logos/anand-rathi.svg" },
-    { name: "Asian Paints", logo: "/logos/asian-paints.svg" },
-    { name: "Prima Plastics", logo: "/logos/prima-plastics.svg" },
-    { name: "Goyal Group", logo: "/logos/goyal-group.svg" },
-    { name: "Lodha", logo: "/logos/lodha.svg" },
-    { name: "Zudio", logo: "/logos/zudio.svg" },
-    { name: "D-Mart", logo: "/logos/dmart.svg" },
-    { name: "Hexaware", logo: "/logos/hexaware.svg" },
-    { name: "Cipla", logo: "/logos/cipla.svg" },
-];
 
 const BACKGROUND_IMAGES = [
     `${import.meta.env.BASE_URL}hero-collage-1.png`,
@@ -229,7 +216,7 @@ export default function LandingHero() {
                 </div>
 
                 {/* Marquee Section - Bottom Full Width */}
-                <div className="mt-20">
+                <div className="mt-8">
                     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-6 backdrop-blur-xl">
                         <h3 className="mb-4 px-8 text-center text-sm font-medium text-zinc-400 uppercase tracking-widest">Trusted by Industry Leaders</h3>
                         <div
@@ -245,9 +232,14 @@ export default function LandingHero() {
                                         style={{ minWidth: 'max-content' }}
                                     >
                                         <img
-                                            src={client.logo}
+                                            src={`${import.meta.env.BASE_URL}${client.logo}`}
                                             alt={client.name}
-                                            className="h-8 sm:h-12 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
+                                            className={`w-auto object-contain transition-all duration-300 
+                                                ${client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12'} 
+                                                ${client.hasBackground
+                                                    ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
+                                                    : 'brightness-0 invert hover:brightness-100 hover:invert-0'
+                                                }`}
                                             onError={(e) => { e.target.style.display = 'none'; }}
                                         />
                                     </div>

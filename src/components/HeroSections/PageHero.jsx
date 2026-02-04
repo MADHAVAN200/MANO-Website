@@ -14,16 +14,8 @@ import {
     Gem,
     Cpu
 } from "lucide-react";
+import { CLIENTS } from "../../data/clients";
 
-// --- MOCK BRANDS ---
-const CLIENTS = [
-    { name: "Skyline Builders", icon: Hexagon },
-    { name: "Urban Infra", icon: Triangle },
-    { name: "Metro Corp", icon: Command },
-    { name: "Apex Const", icon: Ghost },
-    { name: "Vanguard", icon: Gem },
-    { name: "Summit Group", icon: Cpu },
-];
 
 // --- SUB-COMPONENTS ---
 const StatItem = ({ value, label }) => (
@@ -452,7 +444,7 @@ export default function PageHero({
                         </div>
 
                         {/* --- RIGHT COLUMN --- */}
-                        <div className="lg:col-span-4 space-y-6 lg:mt-12">
+                        <div className="lg:col-span-4 space-y-4 lg:mt-6">
                             {showCards && (
                                 <>
                                     {/* Stats Card */}
@@ -527,14 +519,20 @@ export default function PageHero({
                                                 {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
                                                     <div
                                                         key={i}
-                                                        className="flex items-center gap-2 opacity-50 transition-all hover:opacity-100 hover:scale-105 cursor-default grayscale hover:grayscale-0"
+                                                        className="flex items-center gap-2 opacity-70 transition-all hover:opacity-100 hover:scale-105 cursor-default grayscale hover:grayscale-0"
                                                     >
-                                                        {/* Brand Icon */}
-                                                        <client.icon className="h-6 w-6 text-white fill-current" />
-                                                        {/* Brand Name */}
-                                                        <span className="text-lg font-bold text-white tracking-tight">
-                                                            {client.name}
-                                                        </span>
+                                                        {/* Brand Logo */}
+                                                        <img
+                                                            src={`${import.meta.env.BASE_URL}${client.logo}`}
+                                                            alt={client.name}
+                                                            className={`w-auto object-contain transition-all duration-300 
+                                                                ${client.isLarge ? 'h-10' : 'h-8'}
+                                                                ${client.hasBackground
+                                                                    ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
+                                                                    : 'brightness-0 invert hover:brightness-100 hover:invert-0'
+                                                                }`}
+                                                            onError={(e) => { e.target.style.display = 'none'; }}
+                                                        />
                                                     </div>
                                                 ))}
                                             </div>

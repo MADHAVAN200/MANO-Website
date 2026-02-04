@@ -9,23 +9,9 @@ import {
     Briefcase,
     CheckCircle
 } from "lucide-react";
+import { CLIENTS } from "../../data/clients";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-// --- REAL BRANDS ---
-const CLIENTS = [
-    { name: "Tata Trent Ltd.", logo: "/logos/tata-trent.svg" },
-    { name: "Amazon", logo: "/logos/amazon.png" },
-    { name: "Anand Rathi", logo: "/logos/anand-rathi.svg" },
-    { name: "Asian Paints", logo: "/logos/asian-paints.svg" },
-    { name: "Prima Plastics", logo: "/logos/prima-plastics.svg" },
-    { name: "Goyal Group", logo: "/logos/goyal-group.svg" },
-    { name: "Lodha", logo: "/logos/lodha.svg" },
-    { name: "Zudio", logo: "/logos/zudio.svg" },
-    { name: "D-Mart", logo: "/logos/dmart.svg" },
-    { name: "Hexaware", logo: "/logos/hexaware.svg" },
-    { name: "Cipla", logo: "/logos/cipla.svg" },
-    { name: "L&T", logo: "/logos/larsentoubro.svg" },
-];
 
 // --- SUB-COMPONENTS ---
 const StatItem = ({ value, label }) => (
@@ -138,7 +124,7 @@ export default function AboutHero() {
                     </div>
 
                     {/* --- RIGHT COLUMN --- */}
-                    <div className="lg:col-span-5 space-y-6 lg:mt-12" style={{ perspective: 1000 }} onMouseMove={onMouseMove} onMouseLeave={() => { x.set(0); y.set(0); }}>
+                    <div className="lg:col-span-5 space-y-4 lg:mt-6" style={{ perspective: 1000 }} onMouseMove={onMouseMove} onMouseLeave={() => { x.set(0); y.set(0); }}>
 
                         {/* Stats Card with 3D Tilt */}
                         <motion.div
@@ -201,45 +187,6 @@ export default function AboutHero() {
                             </div>
                         </motion.div>
 
-                        {/* Marquee Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-6 sm:py-8 backdrop-blur-xl"
-                        >
-                            <h3 className="mb-4 sm:mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
-
-                            <div
-                                className="relative flex overflow-hidden"
-                                style={{
-                                    maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-                                    WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
-                                }}
-                            >
-                                <motion.div
-                                    className="flex gap-8 sm:gap-12 whitespace-nowrap px-4"
-                                    animate={{ x: ["0%", "-50%"] }}
-                                    transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
-                                >
-                                    {/* Triple list for seamless loop */}
-                                    {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
-                                        >
-                                            {/* Brand Logo */}
-                                            <img
-                                                src={client.logo}
-                                                alt={client.name}
-                                                className="h-8 sm:h-10 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
-                                                onError={(e) => { e.target.style.display = 'none'; }}
-                                            />
-                                        </div>
-                                    ))}
-                                </motion.div>
-                            </div>
-                        </motion.div>
 
                     </div>
                 </div>

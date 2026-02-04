@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
     Building, Briefcase, Factory, Hexagon, GraduationCap,
     MapPin, CheckCircle, ArrowRight, ChevronRight, Layout, Minimize2, Activity,
-    ShieldCheck, DollarSign, FileText, ArrowUpRight
+    ShieldCheck, DollarSign, FileText, ArrowUpRight, Award
 } from 'lucide-react';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';

@@ -1,0 +1,16 @@
+export const CLIENTS = [
+    { name: "Anand Rathi", logo: "logos/Anand_rathi_logo.png" },
+    { name: "Croma", logo: "logos/Croma_logo.png", hasBackground: true },
+    { name: "D-Mart", logo: "logos/Dmart_logo.png" },
+    { name: "Glow Me", logo: "logos/Glow_me_logo.png", hasBackground: true },
+    { name: "Goyal Group", logo: "logos/Goyal.png", hasBackground: true },
+    { name: "Ingrain", logo: "logos/ingrain_logo (1).png" },
+    { name: "Lodha", logo: "logos/Lodha_logo.png", isLarge: true },
+    { name: "Paradigm", logo: "logos/paradigm_logo.png" },
+    { name: "Peninsula", logo: "logos/Peninsula_logo.png" },
+    { name: "Piramal Realty", logo: "logos/Piramal_Realty.svg" },
+    { name: "Prima Plastics", logo: "logos/Prima_logo.png" },
+    { name: "Runwal Group", logo: "logos/runwal group.png" },
+    { name: "Trent", logo: "logos/Trent_logo.png" },
+    { name: "Trivent", logo: "logos/Trivent_logo.png" },
+];

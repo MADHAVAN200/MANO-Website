@@ -7,22 +7,8 @@ import {
     Crown,
     Star
 } from "lucide-react";
+import { CLIENTS } from "../../data/clients";
 
-// --- MOCK BRANDS ---
-const CLIENTS = [
-    { name: "Tata Trent Ltd.", logo: "/logos/tata-trent.svg" },
-    { name: "Amazon", logo: "/logos/amazon.png" },
-    { name: "Anand Rathi", logo: "/logos/anand-rathi.svg" },
-    { name: "Asian Paints", logo: "/logos/asian-paints.svg" },
-    { name: "Prima Plastics", logo: "/logos/prima-plastics.svg" },
-    { name: "Goyal Group", logo: "/logos/goyal-group.svg" },
-    { name: "Lodha", logo: "/logos/lodha.svg" },
-    { name: "Zudio", logo: "/logos/zudio.svg" },
-    { name: "D-Mart", logo: "/logos/dmart.svg" },
-    { name: "Hexaware", logo: "/logos/hexaware.svg" },
-    { name: "Cipla", logo: "/logos/cipla.svg" },
-    { name: "L&T", logo: "/logos/larsentoubro.svg" },
-];
 
 // --- SUB-COMPONENTS ---
 const StatItem = ({ value, label }) => (
@@ -124,7 +110,7 @@ export default function ServiceHero() {
                     </div>
 
                     {/* --- RIGHT COLUMN --- */}
-                    <div className="lg:col-span-5 space-y-6 lg:mt-12">
+                    <div className="lg:col-span-5 space-y-4 lg:mt-6">
 
                         {/* Stats Card */}
                         <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl">
@@ -181,36 +167,6 @@ export default function ServiceHero() {
                             </div>
                         </div>
 
-                        {/* Marquee Card */}
-                        <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl">
-                            <h3 className="mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
-
-                            <div
-                                className="relative flex overflow-hidden"
-                                style={{
-                                    maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-                                    WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
-                                }}
-                            >
-                                <div className="animate-marquee flex gap-12 whitespace-nowrap px-4">
-                                    {/* Triple list for seamless loop */}
-                                    {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
-                                        >
-                                            {/* Brand Logo */}
-                                            <img
-                                                src={client.logo}
-                                                alt={client.name}
-                                                className="h-10 w-auto object-contain brightness-0 invert hover:brightness-100 hover:invert-0 transition-all duration-300"
-                                                onError={(e) => { e.target.style.display = 'none'; }}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>

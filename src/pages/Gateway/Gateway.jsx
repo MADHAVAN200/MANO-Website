@@ -60,7 +60,7 @@ const Gateway = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                        className="text-4xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-2xl"
+                        className="text-4xl md:text-6xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-2xl"
                     >
                         MANO
                     </motion.span>
@@ -96,7 +96,7 @@ const Gateway = () => {
                             <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:border-blue-500 transition-colors duration-300 shadow-xl">
                                 <Building className="w-7 h-7 text-white" />
                             </div>
-                            <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">MANO PCPL</h2>
+                            <h2 className="text-3xl font-bold tracking-wide text-white mb-2 group-hover:text-blue-400 transition-colors">MANO PCPL</h2>
                             <p className="text-gray-300 mb-5 line-clamp-2 text-sm md:text-base group-hover:text-white transition-colors leading-relaxed font-medium text-left">
                                 Project Management Consultants (PMC), Cost Consultancy, and comprehensive auditing services.
                             </p>
@@ -122,7 +122,7 @@ const Gateway = () => {
                             <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:border-emerald-500 transition-colors duration-300 shadow-xl">
                                 <Hammer className="w-7 h-7 text-white" />
                             </div>
-                            <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">MANO PPL</h2>
+                            <h2 className="text-3xl font-bold tracking-wide text-white mb-2 group-hover:text-emerald-400 transition-colors">MANO PPL</h2>
                             <p className="text-gray-300 mb-5 line-clamp-2 text-sm md:text-base group-hover:text-white transition-colors leading-relaxed font-medium text-left">
                                 Specialized Engineering, Procurement, and Construction (EPC) solutions.
                             </p>
