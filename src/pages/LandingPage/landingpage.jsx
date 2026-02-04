@@ -3,39 +3,13 @@ import { ChevronRight, Circle, Briefcase, Calculator, TrendingUp, ShieldCheck, F
 import { Link } from 'react-router-dom';
 import RainbowButton from '../../components/RainbowButton';
 import { motion } from "framer-motion";
-import { InfiniteSlider } from "../../components/ui/InfiniteSlider";
-import { ProgressiveBlur } from "../../components/ui/ProgressiveBlur";
 
-function LogoCloud({ logos }) {
-  return (
-    <div className="relative mx-auto w-full px-4 md:px-6">
-      <div className="relative overflow-hidden w-full">
-        <InfiniteSlider gap={60} speed={30}>
-          {logos.map((logo) => (
-            <div key={`logo-${logo.alt}`} className="flex items-center justify-center h-24 w-40 md:w-52 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className="max-h-16 w-auto object-contain brightness-0 invert"
-              />
-            </div>
-          ))}
-        </InfiniteSlider>
-      </div>
+import LandingHero from '../../components/HeroSections/LandingHero';
+import { useCompany } from '../../context/CompanyContext';
+import ContactForm from '../../components/ContactForm';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
-      <ProgressiveBlur
-        blurIntensity={2}
-        className="pointer-events-none absolute top-0 left-0 h-full w-24 md:w-40 z-10"
-        direction="left"
-      />
-      <ProgressiveBlur
-        blurIntensity={2}
-        className="pointer-events-none absolute top-0 right-0 h-full w-24 md:w-40 z-10"
-        direction="right"
-      />
-    </div>
-  );
-}
+
 
 const TestimonialsColumn = (props) => {
   const { className, testimonials, duration } = props;
@@ -68,7 +42,6 @@ const TestimonialsColumn = (props) => {
                   </div>
                   <div className="flex flex-col">
                     <div className="font-bold text-white tracking-wide">{name}</div>
-                    <div className="text-blue-400 text-sm font-medium">{role}</div>
                   </div>
                 </div>
               </div>
@@ -146,24 +119,28 @@ const CountUp = ({ end, duration = 2000 }) => {
   return <span ref={ref}>{count}</span>;
 };
 
+
+
 export default function LandingPage() {
+  const { brand, isPPL } = useCompany();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
 
   const projects = [
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-    { name: 'Ariana Residency', image: 'image.webp' },
-
+    { name: 'SkyCity Hotel', image: 'projects/skycity_hotel.png' },
+    { name: 'Ariana Residency', image: 'projects/ananda_residency.png' },
+    { name: 'Ananda Residency', image: 'projects/ananda_residency.png' },
+    { name: 'Sati Darshan', image: 'projects/residential_complex.png' },
+    { name: 'PMAY-Charohli', image: 'projects/residential_complex.png' },
+    { name: 'Amara (Lodha)', image: 'projects/residential_complex.png' },
+    { name: 'Legacy Apartment', image: 'projects/ananda_residency.png' },
+    { name: 'Unity Heights', image: 'projects/residential_complex.png' },
+    { name: 'Citrus Hotel', image: 'projects/hotel_interior.png' },
+    { name: 'Anand Rathi', image: 'projects/office_interior.png' },
+    { name: 'Zudio Project', image: 'projects/westside_retail.png' },
+    { name: 'D-Mart Shopping Mall', image: 'projects/westside_retail.png' },
   ];
 
   const handleMouseMove = (e) => {
@@ -190,30 +167,39 @@ export default function LandingPage() {
   const testimonials = [
     {
       name: 'David J. Karem',
-      role: 'Businessmen 1 day ago',
       image: 'image.webp',
       text: 'Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address. Stalkers and disgruntled acquaintances use the Internet to find addresses, phone numbers and other personal details about their targets. Identity thieves use personal information numbers and other personal details.'
     },
     {
       name: 'Sarah Johnson',
-      role: 'CEO 2 days ago',
       image: 'image.webp',
       text: 'Outstanding service and professionalism. The team delivered beyond our expectations and helped us achieve our project goals efficiently.'
     },
     {
       name: 'Michael Chen',
-      role: 'Project Manager 3 days ago',
       image: 'image.webp',
       text: 'Excellent project management and communication throughout. Would highly recommend their services to anyone looking for quality work.'
     }
   ];
 
   const faqs = [
-    { question: 'What services does Mano Consultants provide?', answer: 'We offer comprehensive project management, construction management, quantity surveying, and cost consultancy services tailored to your specific project needs.' },
+    { question: 'What is PMC (Project Management Consultants)?', answer: 'Project Management Consultants (PMC) provide end-to-end professional services that plan, coordinate, and control a project from inception to completion. At Mano, our PMC services ensure your project is delivered on time, within budget, and to the highest quality standards by managing all stakeholders, resources, and risks.' },
+    { question: 'What is (Cost Consultancy)?', answer: 'Cost Consultancy involves managing the financial health of a construction project. We provide accurate cost estimation, budgeting, value engineering, and financial monitoring. Our goal is to maximize your Return on Investment (ROI) while maintaining the design intent and quality of the project.' },
+    { question: 'How do you manage quality if we hire you for only QA QC Service?', answer: 'If hired specifically for QA/QC, we implement a rigorous audit-driven framework including on-site inspections, material testing verification, compliance checks, and detailed non-conformity reporting. We act as an independent third party to ensure strict adherence to project quality standards.' },
+    {
+      question: 'What about PMC Charges?',
+      answer: `Our PMC charges vary by project type and scale:
+      • Residential Tower (> 3 Lakhs Sft, < 36 Months): Per Sft basis
+      • Residential Tower (< 3 Lakhs Sft): Lumpsum basis
+      • Factory, Logistic Park & Infra Projects: % of Construction Cost basis
+      • Interior Fitout (Short-term): Man-Month basis
+      • Part Services (Budget, Audit, etc.): Fixed cost on one-time or monthly basis`
+    },
+    { question: 'What services does Mano Consultants provide?', answer: 'We offer comprehensive project management, construction management, quantity surveying, and Cost Consultancy services tailored to your specific project needs.' },
     { question: 'How do you ensure project quality?', answer: 'Our rigorous quality assurance processes involves regular audits, compliance checks, and adherence to international standards to ensure the highest quality deliverables.' },
     { question: 'Do you handle residential projects?', answer: 'Yes, we handle a wide range of projects including residential complexes, commercial buildings, and industrial facilities with equal expertise.' },
     { question: 'What is your project management methodology?', answer: 'We employ a hybrid approach combining agile flexibility with structured waterfall milestones to ensure timely delivery while adapting to project changes.' },
-    { question: ' How can we get a quote?', answer: 'You can contact us through our form below or email us directly. We will schedule a consultation to understand your requirements and provide a detailed proposal.' },
+    { question: 'How can we get a quote?', answer: 'You can contact us through our form below or email us directly. We will schedule a consultation to understand your requirements and provide a detailed proposal.' },
     { question: 'Do you work internationally?', answer: 'Yes, while we are based locally, we have the capability and experience to manage and consult on projects across various international locations.' }
   ];
 
@@ -251,104 +237,18 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden">
       {/* Hero Section with Navigation */}
       {/* Hero Section with Navigation */}
-      <section className="relative pt-40 pb-16 px-6 overflow-hidden min-h-screen flex flex-col justify-center">
-        {/* Background Glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-          height: '100%',
-          width: '100%',
-          zIndex: 0
-        }}></div>
-
-        {/* SVG Background Pattern */}
-        <svg className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none opacity-[0.15]" width="1440" height="720" viewBox="0 0 1440 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="white" strokeOpacity=".7" d="M-15.227 702.342H1439.7" />
-          <circle cx="711.819" cy="372.562" r="308.334" stroke="white" strokeOpacity=".7" />
-          <circle cx="16.942" cy="20.834" r="308.334" stroke="white" strokeOpacity=".7" />
-          <path stroke="white" strokeOpacity=".7" d="M-15.227 573.66H1439.7M-15.227 164.029H1439.7" />
-          <circle cx="782.595" cy="411.166" r="308.334" stroke="white" strokeOpacity=".7" />
-        </svg>
-
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
+      <LandingHero />
 
 
-          {/* Hero Content (Left) */}
-          <div className="flex flex-col items-center text-center md:items-start md:text-left z-10 flex-1 max-w-2xl">
-            {/* Avatar Pill */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start p-1.5 pl-2 pr-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-gray-400 text-xs mb-8">
-              <div className="flex items-center -space-x-2 mr-3">
-                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50" alt="user1" />
-                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50" alt="user2" />
-                <img className="w-7 h-7 rounded-full border-2 border-black" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50" alt="user3" />
-              </div>
-              <span>Trusted by 500+ Clients</span>
-            </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-white mb-6">
-              Building Excellence Through Precision.
-            </h1>
-
-            <p className="text-sm md:text-base lg:text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
-              Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery.
-            </p>
-
-            <div className="flex items-center gap-4">
-              <button className="bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 rounded-xl px-8 h-12 transition-colors font-medium text-lg">
-                Get started
-              </button>
-              <button className="flex items-center gap-2 border border-white/20 hover:bg-white/10 active:scale-95 transition-all text-gray-300 rounded-xl px-6 h-12 font-medium text-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-play-circle"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
-                <span>Watch demo</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Hero Image (Right) */}
-          <div className="flex-1 w-full flex justify-center md:justify-end z-10">
-            <img
-              src={`${import.meta.env.BASE_URL}image.webp`}
-              alt="Hero Showcase"
-              className="w-full max-w-full rounded-2xl border border-white/10 shadow-2xl"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="px-12 py-24 text-center">
+      {/* Why Choose Section with Gradient */}
+      <section className="relative px-12 py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0,rgba(0,0,0,0)_100%)] pointer-events-none"></div>
         <RevealOnScroll>
-          <div className="max-w-7xl mx-auto space-y-8">
-            <div>
-              <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4">
-                <CountUp end={12} /> Years Experience
-              </h3>
-            </div>
-            <div>
-              <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4">
-                <CountUp end={500} />+ clients
-              </h3>
-            </div>
-            <div>
-              <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4">
-                <CountUp end={100} />+ Projects Completed
-              </h3>
-            </div>
-            <div>
-              <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4">
-                <CountUp end={98} />% Client Satisfaction Rate
-              </h3>
-            </div>
-          </div>
-        </RevealOnScroll>
-      </section>
-
-      {/* Why Choose Section */}
-      <section className="px-12 py-24">
-        <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12 relative z-10">
             Why Businesses <span className="text-blue-500">Choose</span> Mano Consultants
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
@@ -467,32 +367,123 @@ export default function LandingPage() {
         </RevealOnScroll>
       </section>
 
-      {/* Services Section */}
-      <section className="px-12 py-24">
+      {/* Digital ERP Section */}
+      <RevealOnScroll>
+        <DigitalERPSection />
+      </RevealOnScroll>
+
+      {/* Services Section with Hex/Grid Pattern */}
+      <section id="services" className="relative px-12 py-24 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black to-blue-950/30">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Core Services</h2>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { title: "Project Management", desc: "Seamless execution, monitoring, and milestone-driven progress tracking.", path: "/services/project-management", icon: Briefcase },
-              { title: "Cost Consultancy", desc: "Expert budgeting, BOQs, and material cost verification services.", path: "/services/cost-consultancy", icon: Calculator },
-              { title: "CPM & PERT Technique", desc: "Advanced scheduling and critical path analysis for project timelines.", path: "/services/cpm-pert", icon: TrendingUp },
-              { title: "Quality Assurance & Audit", desc: "Comprehensive process audits ensuring compliance and excellence.", path: "/services/qa-audit", icon: ShieldCheck },
-              { title: "QS & Billing Audit", desc: "Detailed quantity surveying and billing verification for transparency.", path: "/services/qs-billing-audit", icon: FileText },
-              { title: "EHS Audit", desc: "Environmental, Health, and Safety audits to ensure rigorous standards.", path: "/services/ehs-audit", icon: Shield },
-              { title: "Project Execution", desc: "On-ground leadership and coordination for flawless project delivery.", path: "/services/project-execution", icon: Hammer },
-              { title: "Project Planning", desc: "Strategic resource planning and roadmap design for success.", path: "/services/project-planning", icon: Map }
-            ].map((service, index) => (
-              <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
-                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                  <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-2xl font-semibold mb-3 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                <p className="text-gray-300 mb-4 leading-relaxed">{service.desc}</p>
-                <Link to={service.path} className="inline-flex items-center text-sm text-blue-400 hover:text-white transition-colors">
-                  Explore More <span className="ml-2"><ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Services</h2>
+          <div className={`max-w-7xl mx-auto ${isPPL ? 'flex justify-center' : 'grid grid-cols-1 md:grid-cols-2'} gap-8`}>
+            {
+              (isPPL ? [
+                {
+                  title: "EPC Solution",
+                  desc: "End-to-end Engineering, Procurement, and Construction services for turnkey delivery.",
+                  path: "/services/epc",
+                  icon: Hammer,
+                  bgImage: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1000"
+                }
+              ] : [
+                {
+                  title: "Project Management",
+                  desc: "Seamless execution, monitoring, and milestone-driven progress tracking.",
+                  path: "/services/project-management",
+                  icon: Briefcase,
+                  bgImage: `${import.meta.env.BASE_URL}project-management-bg.png`
+                },
+                {
+                  title: "Project Planning",
+                  desc: "Strategic resource planning using advanced CPM & PERT techniques for project success.",
+                  path: "/services/project-planning",
+                  icon: Map,
+                  bgImage: `${import.meta.env.BASE_URL}project-planning-bg.png`
+                },
+                {
+                  title: "Project Execution",
+                  desc: "On-ground leadership and structured coordination for flawless project delivery.",
+                  path: "/services/project-execution",
+                  icon: Hammer,
+                  bgImage: `${import.meta.env.BASE_URL}project-execution-bg.png`
+                },
+                {
+                  title: "Cost Consultancy",
+                  desc: "Expert budgeting, value engineering, and financial control to maximize project ROI.",
+                  path: "/services/cost-consultancy",
+                  icon: Calculator,
+                  bgImage: `${import.meta.env.BASE_URL}cost-consultancy-bg.png`
+                },
+                {
+                  title: "Contract Management",
+                  desc: "Protecting project interests through robust contracts and proactive risk mitigation.",
+                  path: "/services/contract-management",
+                  icon: Handshake,
+                  bgImage: `${import.meta.env.BASE_URL}contract-management-bg.png`
+                },
+                {
+                  title: "Quality Assurance & Quality Control Audit",
+                  desc: "Comprehensive quality assurance and process audits ensuring uncompromised excellence.",
+                  path: "/services/qa-audit",
+                  icon: ShieldCheck,
+                  bgImage: `${import.meta.env.BASE_URL}qa-audit-bg.png`
+                },
+                {
+                  title: "Quantity Survey & Billing Service & Auditing",
+                  desc: "Detailed quantity surveying and billing verification for total transparency.",
+                  path: "/services/qs-billing-audit",
+                  icon: FileText,
+                  bgImage: `${import.meta.env.BASE_URL}qs-billing-audit-bg.png`
+                },
+                {
+                  title: "Environment, Health & Safety Audit",
+                  desc: "Health, Safety, and Environmental audits to maintain the highest safety standards.",
+                  path: "/services/ehs-audit",
+                  icon: Shield,
+                  bgImage: `${import.meta.env.BASE_URL}ehs-audit-bg.png`
+                }
+              ]).map((service, index) => (
+                <Link
+                  key={index}
+                  to={`/${brand.toLowerCase()}${service.path}`}
+                  className={`group relative h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isPPL ? 'w-full max-w-4xl' : ''}`}
+                >
+                  {/* Background Image with Filter */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${service.bgImage})` }}
+                  />
+
+                  {/* Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/10 transition-colors duration-500" />
+
+                  {/* Content Overlay (Glassmorphism) */}
+                  <div className="relative z-10 p-6 m-4 rounded-2xl backdrop-blur-md bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500">
+                    <div className="flex items-center gap-4 mb-0 group-hover:mb-3 transition-all duration-500">
+                      <div className="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-400 transition-all duration-300">
+                        <service.icon className="w-6 h-6 text-blue-400 group-hover:text-white transition-colors" />
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                        {service.title}
+                      </h3>
+                    </div>
+
+                    <div className="max-h-0 group-hover:max-h-[120px] overflow-hidden transition-all duration-700 ease-in-out">
+                      <p className="text-gray-300 text-sm leading-relaxed mb-0 group-hover:mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                        {service.desc}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center text-sm font-semibold text-blue-400 group-hover:text-white transition-colors pt-2 border-t border-transparent group-hover:border-white/10">
+                      Explore Service <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
                 </Link>
-              </div>
-            ))}
+              ))}
           </div>
         </RevealOnScroll>
       </section>
@@ -596,42 +587,26 @@ export default function LandingPage() {
         </RevealOnScroll>
       </section>
 
-      {/* Logo Cloud Section */}
-      <section className="py-10 border-y border-white/5 bg-white/[0.02] overflow-hidden">
-        <RevealOnScroll>
-          <div className="text-center mb-8">
-            <span className="text-blue-400 font-medium tracking-wider uppercase text-lg">Trusted Partners</span>
-          </div>
-          <LogoCloud logos={[
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png", alt: "Google" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png", alt: "Amazon" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png", alt: "Netflix" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png", alt: "Microsoft" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/LinkedIn_Logo.svg/2560px-LinkedIn_Logo.svg.png", alt: "LinkedIn" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png", alt: "Samsung" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png", alt: "Apple" },
-            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Y_Combinator_logo.svg/1200px-Y_Combinator_logo.svg.png", alt: "Y Combinator" },
-          ]} />
-        </RevealOnScroll>
-      </section>
 
-      {/* FAQs */}
-      <section className="px-12 py-24">
+
+      {/* FAQs with Light Gradient */}
+      <section className="relative px-12 py-24 border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-50"></div>
         <RevealOnScroll>
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Frequently Asked Questions (FAQs)</h2>
-          <div className="max-w-4xl mx-auto flex flex-col gap-4">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 items-start">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer ${expandedFaq === index ? 'bg-white/10' : ''}`}
+                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-fit ${expandedFaq === index ? 'bg-white/10' : ''}`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-medium">{faq.question}</span>
                   <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${expandedFaq === index ? 'rotate-90' : ''}`} />
                 </div>
                 {expandedFaq === index && (
-                  <div className="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-4">
+                  <div className="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-4 whitespace-pre-line">
                     {faq.answer}
                   </div>
                 )}
@@ -641,30 +616,12 @@ export default function LandingPage() {
         </RevealOnScroll>
       </section>
 
-      {/* Contact Form */}
-      <section className="px-12 py-24">
+      {/* Contact Form with Highlight */}
+      <section id="contact-section" className="relative px-12 py-24 overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Ready to Start Your Project?</h2>
-          <div className="max-w-2xl mx-auto space-y-6">
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
-            />
-            <textarea
-              placeholder="Description"
-              rows={6}
-              className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all resize-none"
-            />
-            <button className="w-full py-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-blue-500/30 transition-all font-medium">
-              Submit
-            </button>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 relative z-10">Ready to Start Your Project?</h2>
+          <ContactForm />
         </RevealOnScroll>
       </section>
 

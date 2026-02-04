@@ -7,31 +7,51 @@ import {
 } from 'lucide-react';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';
+import ProjectsHero from '../../components/HeroSections/ProjectsHero';
 
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState("All");
 
     const featuredProjects = [
         {
-            title: "High-Rise Residential Tower",
-            location: "Mumbai",
-            scope: ["Planning", "PMC", "QA/QC", "Billing Audit"],
-            highlight: "Delivered a 40+ storey premium residential tower with complete planning, quality control, and execution oversight.",
-            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&h=800&auto=format&fit=crop"
+            id: 1,
+            title: "SkyCity Hotel Project – Rappture Projects",
+            location: "Andheri, Mumbai",
+            scope: ["PMC", "Project Management", "Construction"],
+            highlight: "A massive 3,76,000 Sft hospitality development delivered with excellence in Mumbai.",
+            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
         },
         {
-            title: "Corporate Commercial Building",
-            location: "Pune",
-            scope: ["Project Management", "QA/QC", "Cost Consultancy"],
-            highlight: "A Grade-A commercial complex delivered with zero non-conformance and on-schedule handover.",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&h=800&auto=format&fit=crop"
+            id: 2,
+            title: "115 Rooms Hotel – Cube Construction SARL",
+            location: "Kinshasa, Congo",
+            scope: ["Project Management", "QA/QC", "Consultancy"],
+            highlight: "International project management for a premier hotel development in Congo.",
+            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
         },
         {
-            title: "Industrial Manufacturing Facility",
-            location: "Gujarat",
-            scope: ["Planning", "Cost Audit", "EHS Audit", "PMC"],
-            highlight: "End-to-end consultancy enabling a fully compliant, highly efficient industrial facility.",
-            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&h=800&auto=format&fit=crop"
+            id: 3,
+            title: "Ananda Residency - Paradigm Ambit Buildcon",
+            location: "Borivali (West), Mumbai",
+            scope: ["PMC", "Quality Control", "Audit"],
+            highlight: "Massive 3,10,230 sq. ft. residential development completed successfully.",
+            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+        },
+        {
+            id: 4,
+            title: "Westside – Tata Trent Ltd.",
+            location: "Gachibowli, Hyderabad",
+            scope: ["PMC", "Interior Fit-out", "Audit"],
+            highlight: "21,255 sq.ft. retail project delivered for Tata Trent.",
+            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+        },
+        {
+            id: 5,
+            title: "Prima Plastics Limited",
+            location: "Pithampur, Indore",
+            scope: ["PMC", "Safety Audit", "Construction"],
+            highlight: "1,79,533 sq.ft. industrial facility managed from design to execution.",
+            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
         }
     ];
 
@@ -39,99 +59,187 @@ const Projects = () => {
         // Residential
         {
             category: "Residential",
-            title: "Residential Tower Development",
-            scope: ["Planning", "QA/QC", "PMC"],
-            highlight: "High-rise tower delivered with optimum space utilization and premium finish quality.",
-            image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&h=600&auto=format&fit=crop"
+            title: "Sati Darshan - Goyal Group",
+            scope: ["PMC", "QA/QC", "Audit"],
+            highlight: "1,39,749 sq.ft. residential project in Malad, Mumbai.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
         },
         {
             category: "Residential",
-            title: "Premium Housing Township",
-            scope: ["Cost Consultancy", "Contract Management", "Billing Audit"],
-            highlight: "Complete financial control and detailed quantity verification for 20+ buildings.",
-            image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&h=600&auto=format&fit=crop"
-        },
-        // Commercial
-        {
-            category: "Commercial",
-            title: "IT/Corporate Office Building",
-            scope: ["Execution", "QA/QC", "Project Management"],
-            highlight: "Technically complex façade and interior works executed with precision.",
-            image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&h=600&auto=format&fit=crop"
+            title: "G+11 Residential Apartment - Cube Construction",
+            scope: ["PMC", "Monitoring"],
+            highlight: "Large scale residential development in Lubumbashi, Congo.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
         },
         {
-            category: "Commercial",
-            title: "Retail & Shopping Complex",
-            scope: ["Cost Audit", "Variation Validation", "QS"],
-            highlight: "Over 30% savings achieved through cost optimization.",
-            image: "https://images.unsplash.com/photo-1519567241046-7f570eee3d9f?q=80&w=800&h=600&auto=format&fit=crop"
-        },
-        // Industrial
-        {
-            category: "Industrial",
-            title: "Manufacturing Unit Setup",
-            scope: ["EHS", "Planning", "QA", "PMC"],
-            highlight: "Compliant, safe, and efficient industrial setup delivered on time.",
-            image: "https://images.unsplash.com/photo-1565514020176-db79338b0a99?q=80&w=800&h=600&auto=format&fit=crop"
+            category: "Residential",
+            title: "Celestia - Shree Ram Samarth",
+            scope: ["PMC", "Quality Assurance"],
+            highlight: "1,00,000 sq.ft. residential development in Mulund, Mumbai.",
+            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
         },
         {
-            category: "Industrial",
-            title: "Warehouse Facility",
-            scope: ["Billing Audit", "Contract Validation", "QA"],
-            highlight: "Transparent billing and compliant construction documentation.",
-            image: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800&h=600&auto=format&fit=crop"
+            category: "Residential",
+            title: "Shubharambh Residency",
+            scope: ["PMC", "Billing Support"],
+            highlight: "59,000 sq.ft. housing project in Solapur.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+        },
+        {
+            category: "Residential",
+            title: "Ariana Residency",
+            scope: ["PMC", "Project Audit"],
+            highlight: "Quality management and execution oversight for premium residential units.",
+            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+        },
+        {
+            category: "Residential",
+            title: "PMAY-Charohli",
+            scope: ["Audit", "QS"],
+            highlight: "Cost and quality auditing for affordable housing developments.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+        },
+        {
+            category: "Residential",
+            title: "Amara (Lodha)",
+            scope: ["PMC", "Execution"],
+            highlight: "Engagement in large-scale residential township development.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+        },
+        {
+            category: "Residential",
+            title: "Legacy Apartment",
+            scope: ["PMC", "Audit"],
+            highlight: "Comprehensive project management for high-end residential spaces.",
+            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+        },
+        {
+            category: "Residential",
+            title: "Unity Heights / Ocean Park",
+            scope: ["PMC", "QA/QC"],
+            highlight: "Project execution and quality assurance for multi-storey residential projects.",
+            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
         },
         // Hospitality
         {
             category: "Hospitality",
-            title: "Business Hotel",
-            scope: ["QA/QC", "Cost Consultancy"],
-            highlight: "High-end interiors with strict finish quality checks.",
-            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+            title: "30 JUIN HOTEL – Glowmex Group",
+            scope: ["PMC", "Execution"],
+            highlight: "63,122 Sq.ft. luxury hotel project in Lubumbashi, Congo.",
+            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
         },
         {
             category: "Hospitality",
-            title: "Resort Development",
-            scope: ["PMC", "EHS Audit", "QS"],
-            highlight: "Harmonized execution between civil, landscape, and amenities.",
-            image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&h=600&auto=format&fit=crop"
-        },
-        // Institutional
-        {
-            category: "Institutional",
-            title: "Educational Campus",
-            scope: ["Planning", "QA", "Cost Estimation"],
-            highlight: "Delivered multiple buildings with seamless coordination.",
-            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&h=600&auto=format&fit=crop"
+            title: "102 Rooms Hotel - Cube Construction",
+            scope: ["PMC", "Consultancy"],
+            highlight: "International hotel project in Lubumbashi, Congo.",
+            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
         },
         {
-            category: "Institutional",
-            title: "Government Facility",
-            scope: ["Contract Management", "Billing Audit", "QA"],
-            highlight: "Transparent auditing and full compliance with statutory norms.",
-            image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&h=600&auto=format&fit=crop"
+            category: "Hospitality",
+            title: "53 Rooms Hotel - Clowmex Processing",
+            scope: ["PMC", "Audit"],
+            highlight: "63,000 Sft hospital project in Lubumbashi.",
+            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
+        },
+        {
+            category: "Hospitality",
+            title: "Citrus Hotel - Phase I & II",
+            scope: ["PMC", "Interior Audit"],
+            highlight: "Phased development and management for a premium hotel chain.",
+            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
+        },
+        {
+            category: "Hospitality",
+            title: "Premier Inn / Graviss Hotels",
+            scope: ["PMC", "Cost Consultancy"],
+            highlight: "Comprehensive hospitality consultancy for leading brands.",
+            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
+        },
+        {
+            category: "Hospitality",
+            title: "KAPCO Banquets & Catering",
+            scope: ["PMC", "Design Coordination"],
+            highlight: "15,698 sq.ft. hospitality project in New Delhi.",
+            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
+        },
+        // Commercial
+        {
+            category: "Commercial",
+            title: "Office Space – Anand Rathi Wealth Ltd.",
+            scope: ["Execution", "Interior PMC"],
+            highlight: "11,000 Sq.ft. modern office space in Gachibowli & Powai.",
+            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
+        },
+        {
+            category: "Commercial",
+            title: "Asian Paints Experience Centre",
+            scope: ["Interior PMC", "Execution"],
+            highlight: "Specialized retail experience centre in Borivali, Mumbai.",
+            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+        },
+        {
+            category: "Commercial",
+            title: "Zudio / Tata Trent Projects",
+            scope: ["PMC", "Billing Audit"],
+            highlight: "Rollout management for multiple retail outlets across Bengaluru & Baroda.",
+            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+        },
+        {
+            category: "Commercial",
+            title: "NSCI Dome – Worli",
+            scope: ["PMC", "Audit"],
+            highlight: "5,150 sq.ft. institutional-scale project in Mumbai.",
+            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
+        },
+        {
+            category: "Commercial",
+            title: "Hexaware Techno Park / Cipla R&D",
+            scope: ["PMC", "Audit"],
+            highlight: "Technical and administrative project management for complex R&D and IT parks.",
+            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
+        },
+        {
+            category: "Commercial",
+            title: "D'Mart Shopping Malls",
+            scope: ["QS", "Audit"],
+            highlight: "Quantity surveying and billing audits for multiple D'Mart locations.",
+            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+        },
+        // Industrial
+        {
+            category: "Industrial",
+            title: "Prima Plastics Limited - Phase II",
+            scope: ["PMC", "Safety Audit"],
+            highlight: "1,69,000 Sft plastic manufacturing facility in Pithambur.",
+            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+        },
+        {
+            category: "Industrial",
+            title: "Textile Factory - Micro Interlinings",
+            scope: ["PMC", "Audit"],
+            highlight: "52,532 sq.ft. industrial facility in Tarapur.",
+            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+        },
+        {
+            category: "Industrial",
+            title: "JNPC Infra Development",
+            scope: ["Infrastructure Audit"],
+            highlight: "Infrastructure development oversight in Andhra Pradesh.",
+            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
         }
     ];
 
-    const categories = ["All", "Residential", "Commercial", "Industrial", "Hospitality", "Institutional"];
+    const categories = ["All", "Residential", "Commercial", "Industrial", "Hospitality"];
 
     return (
-        <div className="min-h-screen bg-black text-white font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white font-sans selection:bg-blue-500/30">
 
             {/* HERO SECTION */}
-            <section className="relative pt-40 pb-20 px-6 overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,10,30,0.5)_50%,rgba(0,0,0,1)_100%)]"></div>
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+            {/* HERO SECTION */}
+            <ProjectsHero />
 
-                <div className="max-w-7xl mx-auto text-center relative z-10">
-                    <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-gray-500 mb-6">
-                        Our Portfolio
-                    </h1>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Delivering excellence across residential, commercial, and industrial sectors with precision and integrity.
-                    </p>
-                </div>
-            </section>
+            <div id="featured-projects"></div>
 
             {/* 1. FEATURED PROJECTS */}
             <section className="py-24 px-6 relative">
@@ -145,7 +253,7 @@ const Projects = () => {
 
                         <div className="space-y-16">
                             {featuredProjects.map((project, index) => (
-                                <div key={project.id} className="group relative rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 h-full flex flex-col">
+                                <div key={project.id} className="group relative rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 h-full flex flex-col animated-white-border">
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                                         <div className="relative h-[400px] lg:h-auto overflow-hidden">
                                             <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
@@ -217,7 +325,7 @@ const Projects = () => {
                             {categoryProjects
                                 .filter(p => activeCategory === "All" || p.category === activeCategory)
                                 .map((project, index) => (
-                                    <div key={index} className="group p-6 rounded-2xl bg-[#0a0a0a] border border-white/5 hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-1">
+                                    <div key={index} className="group p-6 rounded-2xl bg-[#0a0a0a] border border-white/5 hover:border-blue-500/30 transition-all duration-500 hover:-translate-y-1 animated-white-border">
                                         <div className="relative h-64 rounded-xl overflow-hidden mb-6">
                                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
                                             <img
@@ -254,24 +362,7 @@ const Projects = () => {
             </section>
 
             {/* 4. PROJECTS SUMMARY STRIP */}
-            <section className="py-16 border-y border-white/5 bg-blue-950/20">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-                        <div className="p-4">
-                            <span className="block text-5xl font-bold text-white mb-2">100+</span>
-                            <span className="text-blue-300 font-medium tracking-wide uppercase text-sm">Projects Delivered</span>
-                        </div>
-                        <div className="p-4">
-                            <span className="block text-5xl font-bold text-white mb-2">12+</span>
-                            <span className="text-blue-300 font-medium tracking-wide uppercase text-sm">Years Experience</span>
-                        </div>
-                        <div className="p-4">
-                            <span className="block text-5xl font-bold text-white mb-2">500+</span>
-                            <span className="text-blue-300 font-medium tracking-wide uppercase text-sm">Satisfied Clients</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
 
             {/* 5. CTA SECTION */}
             <section className="py-32 px-6 relative overflow-hidden">

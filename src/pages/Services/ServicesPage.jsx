@@ -8,6 +8,9 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import RainbowButton from '../../components/RainbowButton';
+import ServiceHero from '../../components/HeroSections/ServiceHero';
+import { useCompany } from '../../context/CompanyContext';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -35,50 +38,40 @@ const RevealOnScroll = ({ children }) => {
     );
 };
 
-const CountUp = ({ end, duration = 2000 }) => {
-    const [count, setCount] = useState(0);
-    const ref = useRef(null);
-    const hasAnimated = useRef(false);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting && !hasAnimated.current) {
-                hasAnimated.current = true;
-                let startTime = null;
-                const animate = (currentTime) => {
-                    if (!startTime) startTime = currentTime;
-                    const progress = Math.min((currentTime - startTime) / duration, 1);
-                    const easeOut = 1 - Math.pow(2, -10 * progress);
-                    setCount(Math.floor(easeOut * end));
-
-                    if (progress < 1) {
-                        requestAnimationFrame(animate);
-                    } else {
-                        setCount(end);
-                    }
-                };
-                requestAnimationFrame(animate);
-            }
-        }, { threshold: 0.5 }); // Higher threshold for stats to ensure visibility
-
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-
-        return () => observer.disconnect();
-    }, [end, duration]);
-
-    return <span ref={ref}>{count}</span>;
-};
 
 const ServicesPage = () => {
+    const { brand, isPPL } = useCompany();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        const handleInteraction = () => {
+            setIsLoaded(true);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        // Fallback timer
         const timer = setTimeout(() => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        }, 1500);
+
+        return () => {
+            removeListeners();
+            clearTimeout(timer);
+        };
     }, []);
 
     useEffect(() => {
@@ -88,61 +81,61 @@ const ServicesPage = () => {
     const coreServices = [
         {
             title: "Project Planning",
-            desc: "Strategic planning services that establish a strong foundation for project success.",
+            desc: "Strategic planning and scheduling using CPM & PERT techniques to establish a strong project foundation.",
             icon: Map,
             items: [
                 { text: "Master project scheduling", icon: Calendar },
-                { text: "Resource & manpower planning", icon: Users },
-                { text: "Methodology planning", icon: FileText },
-                { text: "Risk & feasibility analysis", icon: TrendingUp }
+                { text: "Resource & manpower histograms", icon: Users },
+                { text: "MSP & CPM/PERT logic", icon: Layers },
+                { text: "Site logistics & methodology", icon: FileText }
             ],
             link: "/services/project-planning"
         },
         {
             title: "Project Management",
-            desc: "End-to-end project management ensuring alignment between design, cost, quality, and timelines.",
+            desc: "End-to-end management ensuring complete alignment between design, cost, quality, and timelines.",
             icon: Briefcase,
             items: [
                 { text: "Execution monitoring & control", icon: Activity },
-                { text: "Coordination with stakeholders", icon: Users },
-                { text: "Progress tracking & reporting", icon: BarChart },
+                { text: "Stakeholder coordination", icon: Users },
+                { text: "Progress tracking (MIS/KPI)", icon: BarChart },
                 { text: "Change management", icon: GitPullRequest }
             ],
             link: "/services/project-management"
         },
         {
+            title: "Project Execution",
+            desc: "Structured execution leadership that translates complex plans into on-ground action with precision.",
+            icon: Hammer,
+            items: [
+                { text: "On-site execution leadership", icon: HardHat },
+                { text: "Quality & timeline discipline", icon: ShieldCheck },
+                { text: "Interface management", icon: Layers },
+                { text: "Daily progress tracking", icon: Clock }
+            ],
+            link: "/services/project-execution"
+        },
+        {
             title: "Cost Consultancy",
-            desc: "Accurate cost planning and financial control to ensure projects remain within budget.",
+            desc: "Accurate cost planning and financial control to ensure projects deliver maximum value within budget.",
             icon: Calculator,
             items: [
                 { text: "Cost estimation & budgeting", icon: Calculator },
-                { text: "BOQ preparation & verification", icon: ClipboardList },
-                { text: "Cost monitoring & value engineering", icon: LineChart },
-                { text: "Billing certification", icon: CheckSquare }
+                { text: "Value engineering", icon: LineChart },
+                { text: "Rate analysis & material control", icon: ClipboardList },
+                { text: "Cash flow forecasting", icon: CheckSquare }
             ],
             link: "/services/cost-consultancy"
-        },
-        {
-            title: "Project Execution",
-            desc: "Structured execution strategies that translate plans into action with precision.",
-            icon: Hammer,
-            items: [
-                { text: "Execution planning & coordination", icon: Layers },
-                { text: "Schedule adherence monitoring", icon: Clock },
-                { text: "Contractor coordination", icon: HardHat },
-                { text: "Quality & timeline control", icon: ShieldCheck }
-            ],
-            link: "/services/project-execution"
         }
     ];
 
     const specializedServices = [
         {
             title: "Contract Management",
-            desc: "Protecting project interests through structured contracts and risk mitigation.",
+            desc: "Protecting project interests through robust contracts, tender evaluation, and proactive risk mitigation.",
             items: [
-                { text: "Contract strategy", icon: ScrollText },
-                { text: "Tender evaluation", icon: Scale },
+                { text: "Contract strategy & drafting", icon: ScrollText },
+                { text: "Tender & vendor finalization", icon: Scale },
                 { text: "Claims management", icon: AlertTriangle },
                 { text: "Dispute avoidance", icon: ShieldCheck }
             ],
@@ -150,61 +143,37 @@ const ServicesPage = () => {
             link: "/services/contract-management"
         },
         {
-            title: "Quality Control",
-            desc: "Ensuring uncompromised quality through structured inspections and matrix control.",
+            title: "Quality Assurance & Audit",
+            desc: "Ensuring uncompromised excellence through structured quality frameworks and rigorous audits.",
             items: [
-                { text: "Inspection checklists", icon: Microscope },
-                { text: "QA/QC Matrix", icon: Activity },
-                { text: "Snagging lists", icon: ClipboardCheck },
-                { text: "Methodology control", icon: Layers }
-            ],
-            icon: Microscope,
-            link: "/services/quality-control"
-        },
-        {
-            title: "Quantity Survey & Billing Service / Audit",
-            desc: "Ensuring transparency, accuracy, and compliance in all financial aspects.",
-            items: [
-                { text: "Quantity verification", icon: Ruler },
-                { text: "Billing audits", icon: FileText },
-                { text: "Contractual compliance", icon: ShieldCheck },
-                { text: "Cost reconciliation", icon: Calculator }
-            ],
-            icon: FileText,
-            link: "/services/qs-billing-audit"
-        },
-        {
-            title: "Planning with CPM & PERT Technique",
-            desc: "Advanced scheduling methodologies for time-sensitive and complex projects.",
-            items: [
-                { text: "Critical path analysis", icon: TrendingUp },
-                { text: "Delay impact analysis", icon: AlertTriangle },
-                { text: "Schedule optimization", icon: Zap },
-                { text: "Progress forecasting", icon: BarChart }
-            ],
-            icon: TrendingUp,
-            link: "/services/cpm-pert"
-        },
-        {
-            title: "Quality Assurance/Quality Control Service / Audit",
-            desc: "Robust quality frameworks to maintain compliance and consistency.",
-            items: [
-                { text: "QA/QC audits", icon: ClipboardCheck },
-                { text: "Process compliance checks", icon: CheckCircle },
-                { text: "Quality documentation", icon: FileText },
-                { text: "Risk mitigation", icon: Shield }
+                { text: "QA/QC matrix & assurance plans", icon: ClipboardCheck },
+                { text: "Process compliance audits", icon: CheckCircle },
+                { text: "Material quality control", icon: Package },
+                { text: "Snagging & handover closure", icon: Layers }
             ],
             icon: ShieldCheck,
             link: "/services/qa-audit"
         },
         {
-            title: "EHS Service / Audit",
-            desc: "Ensuring environmental, health, and safety compliance for secure environments.",
+            title: "Quantity Survey & Billing Service & Auditing",
+            desc: "Ensuring financial transparency and accuracy through detailed quantity verification and billing audits.",
             items: [
-                { text: "Safety audits & assessments", icon: HardHat },
+                { text: "Quantity verification (JMRS)", icon: Ruler },
+                { text: "Billing audits & certification", icon: FileText },
+                { text: "No overbilling assurance", icon: ShieldCheck },
+                { text: "Financial reconciliation", icon: Calculator }
+            ],
+            icon: FileText,
+            link: "/services/qs-billing-audit"
+        },
+        {
+            title: "Environment, Health & Safety Service & Audit",
+            desc: "Maintaining zero-incident sites through rigorous EHS compliance, training, and safety management systems.",
+            items: [
+                { text: "Safety audits & risk assessment", icon: HardHat },
                 { text: "Regulatory compliance", icon: FileText },
-                { text: "Risk assessment", icon: AlertTriangle },
-                { text: "Safety management systems", icon: Shield }
+                { text: "Zero-accident culture", icon: Activity },
+                { text: "Safety management training", icon: Shield }
             ],
             icon: Shield,
             link: "/services/ehs-audit"
@@ -221,143 +190,143 @@ const ServicesPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-12 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
-
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <div>
-                            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                                Comprehensive Project <br /> Consulting Solutions
-                            </h1>
-                        </div>
-                        <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto font-light">
-                            At Mano Project Consultants Pvt. Ltd., we provide end-to-end project consulting services <br className="hidden md:block" /> that help organizations plan smarter, execute faster, control costs, and maintain uncompromising quality.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 2. STATS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={12} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Years Experience</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={500} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Clients Served</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={100} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Projects Delivered</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={98} />%</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Client Satisfaction</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ServiceHero />
 
             {isLoaded && (
                 <>
+
+
+
                     {/* 3. CORE SERVICES */}
-                    <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <div className="text-center mb-16">
-
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Core Services</h2>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {coreServices.map((service, index) => (
-                                        <Link to={service.link} key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block">
-                                            {/* Large Background Icon */}
+                    {isPPL ? (
+                        /* PPL SPECIFIC VIEW - ONE MAIN SERVICE */
+                        <section id="core-services" className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                            <RevealOnScroll>
+                                <div className="max-w-7xl mx-auto">
+                                    <div className="text-center mb-16">
+                                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Specialized Service</h2>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
+                                        <Link to={`/${brand.toLowerCase()}/services/epc`} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block animated-white-border">
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
+                                                <Hammer size={180} />
                                             </div>
-
-                                            <div className="relative z-10">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                            <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+                                                <div className="w-24 h-24 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                                                    <Hammer className="w-12 h-12 text-blue-400 group-hover:text-white transition-colors" />
                                                 </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 mb-8 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
-                                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-
-                                                <div className="inline-flex items-center text-blue-400 hover:text-white font-medium transition-colors group/link">
-                                                    Explore Solution
-                                                    <ChevronRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
+                                                <div className="text-center md:text-left">
+                                                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">EPC Solutions</h3>
+                                                    <p className="text-gray-400 mb-6 leading-relaxed text-lg">Comprehensive Engineering, Procurement, and Construction services delivering turnkey infrastructure solutions.</p>
+                                                    <div className="inline-flex items-center text-blue-400 hover:text-white font-bold text-lg transition-colors group/link">
+                                                        Explore Solution
+                                                        <ChevronRight className="w-5 h-5 ml-2 group-hover/link:translate-x-1 transition-transform" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </Link>
-                                    ))}
+                                    </div>
                                 </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
+                            </RevealOnScroll>
+                        </section>
+                    ) : (
+                        /* PCPL DEFAULT VIEW */
+                        <>
+                            <section id="core-services" className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
+                                <RevealOnScroll>
+                                    <div className="max-w-7xl mx-auto">
+                                        <div className="text-center mb-16">
+                                            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Core Services</h2>
+                                        </div>
 
-                    {/* 4. SPECIALIZED SERVICES */}
-                    <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            {coreServices.map((service, index) => (
+                                                <Link to={`/${brand.toLowerCase()}${service.link}`} key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block animated-white-border">
+                                                    <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
+                                                        <service.icon size={180} />
+                                                    </div>
+
+                                                    <div className="relative z-10">
+                                                        <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                                                            <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                                        </div>
+
+                                                        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                                        <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
+
+                                                        <div className="bg-black/20 rounded-xl p-6 mb-8 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                            <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
+                                                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                                {service.items.map((item, idx) => (
+                                                                    <li key={idx} className="flex items-center text-sm text-gray-400">
+                                                                        <item.icon className="w-4 h-4 mr-2 text-blue-500" />
+                                                                        {item.text}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+
+                                                        <div className="inline-flex items-center text-blue-400 hover:text-white font-medium transition-colors group/link">
+                                                            Explore Solution
+                                                            <ChevronRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </RevealOnScroll>
+                            </section>
+
+                            <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
+                                <RevealOnScroll>
+                                    <div className="max-w-7xl mx-auto">
+                                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Services</h2>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {specializedServices.map((service, index) => (
+                                                <Link to={`/${brand.toLowerCase()}${service.link}`} key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block animated-white-border">
+                                                    <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
+                                                        <service.icon size={180} />
+                                                    </div>
+
+                                                    <div className="relative z-10">
+                                                        <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                                                            <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
+                                                        </div>
+
+                                                        <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                                                        <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
+
+                                                        <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                            <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
+                                                            <ul className="grid grid-cols-1 gap-3">
+                                                                {service.items.map((item, idx) => (
+                                                                    <li key={idx} className="flex items-center text-sm text-gray-400">
+                                                                        <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
+                                                                        {item.text}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </RevealOnScroll>
+                            </section>
+                        </>
+                    )}
+
+                    {/* 4. DIGITAL ERP SECTION (PCPL ONLY) */}
+                    {!isPPL && (
                         <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Services</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {specializedServices.map((service, index) => (
-                                        <Link to={service.link} key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden block">
-                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
-                                            </div>
-
-                                            <div className="relative z-10">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                                </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
-                                                    <ul className="grid grid-cols-1 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
+                            <DigitalERPSection />
                         </RevealOnScroll>
-                    </section>
+                    )}
 
                     {/* 5. WHY CHOOSE MANO */}
                     <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
@@ -476,7 +445,7 @@ const ServicesPage = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {deliveryModel.map((step, index) => (
-                                        <div key={index} className="group relative p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+                                        <div key={index} className="group relative p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
                                             <div className="absolute top-6 right-6 text-6xl font-bold text-white/5 group-hover:text-blue-500/10 transition-colors pointer-events-none">
                                                 {step.step}
                                             </div>
