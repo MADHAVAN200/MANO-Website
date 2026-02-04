@@ -2,12 +2,10 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import {
     ArrowRight,
-    Play,
     Target,
     Crown,
     Star
 } from "lucide-react";
-import { CLIENTS } from "../../data/clients";
 
 
 // --- SUB-COMPONENTS ---
@@ -102,10 +100,6 @@ export default function ServiceHero() {
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </button>
 
-                            <Link to="/contact" className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
-                                <Play className="w-4 h-4 fill-current" />
-                                Get in Touch
-                            </Link>
                         </div>
                     </div>
 

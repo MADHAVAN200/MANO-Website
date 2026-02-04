@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import {
     ArrowRight,
@@ -9,8 +9,8 @@ import {
     Briefcase,
     CheckCircle
 } from "lucide-react";
-import { CLIENTS } from "../../data/clients";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import ContactModal from "../ContactModal";
 
 
 // --- SUB-COMPONENTS ---
@@ -23,6 +23,7 @@ const StatItem = ({ value, label }) => (
 
 // --- MAIN COMPONENT ---
 export default function AboutHero() {
+    const [isContactOpen, setIsContactOpen] = useState(false);
     // Mouse tilt logic for Stats Card
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -105,13 +106,13 @@ export default function AboutHero() {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
                         >
-                            <Link
-                                to="/contact"
-                                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
+                            <div
+                                onClick={() => setIsContactOpen(true)}
+                                className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
                             >
                                 Start Your Project
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                            </Link>
+                            </div>
 
                             <button
                                 onClick={() => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' })}
@@ -191,6 +192,8 @@ export default function AboutHero() {
                     </div>
                 </div>
             </div>
+            {/* Contact Modal */}
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </div>
     );
 }

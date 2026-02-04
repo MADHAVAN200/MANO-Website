@@ -14,7 +14,6 @@ import {
     Gem,
     Cpu
 } from "lucide-react";
-import { CLIENTS } from "../../data/clients";
 
 
 // --- SUB-COMPONENTS ---
@@ -446,99 +445,60 @@ export default function PageHero({
                         {/* --- RIGHT COLUMN --- */}
                         <div className="lg:col-span-4 space-y-4 lg:mt-6">
                             {showCards && (
-                                <>
-                                    {/* Stats Card */}
-                                    <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl">
-                                        {/* Card Glow Effect */}
-                                        <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+                                <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl">
+                                    {/* Card Glow Effect */}
+                                    <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
 
-                                        <div className="relative z-10">
-                                            <div className="flex items-center gap-4 mb-8">
-                                                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
-                                                    <Target className="h-6 w-6 text-white" />
-                                                </div>
-                                                <div>
-                                                    <div className="text-3xl font-bold tracking-tight text-white">{stats.mainValue}</div>
-                                                    <div className="text-sm text-zinc-400">{stats.mainLabel}</div>
-                                                </div>
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
+                                                <Target className="h-6 w-6 text-white" />
                                             </div>
-
-                                            {/* Progress Bar Section */}
-                                            <div className="space-y-3 mb-8">
-                                                <div className="flex justify-between text-sm">
-                                                    <span className="text-zinc-400">Client Satisfaction</span>
-                                                    <span className="text-white font-medium">{stats.satisfaction}</span>
-                                                </div>
-                                                <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
-                                                    <div className="h-full w-[95%] rounded-full bg-gradient-to-r from-white to-blue-500" />
-                                                </div>
+                                            <div>
+                                                <div className="text-3xl font-bold tracking-tight text-white">{stats.mainValue}</div>
+                                                <div className="text-sm text-zinc-400">{stats.mainLabel}</div>
                                             </div>
+                                        </div>
 
-                                            <div className="h-px w-full bg-white/10 mb-6" />
-
-                                            {/* Mini Stats Grid */}
-                                            <div className="grid grid-cols-3 gap-4 text-center">
-                                                {stats.grid.map((stat, idx) => (
-                                                    <React.Fragment key={idx}>
-                                                        <StatItem value={stat.value} label={stat.label} />
-                                                        {idx < 2 && <div className="w-px h-full bg-white/10 mx-auto" />}
-                                                    </React.Fragment>
-                                                ))}
+                                        {/* Progress Bar Section */}
+                                        <div className="space-y-3 mb-8">
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-zinc-400">Client Satisfaction</span>
+                                                <span className="text-white font-medium">{stats.satisfaction}</span>
                                             </div>
+                                            <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
+                                                <div className="h-full w-[95%] rounded-full bg-gradient-to-r from-white to-blue-500" />
+                                            </div>
+                                        </div>
 
-                                            {/* Tag Pills */}
-                                            <div className="mt-8 flex flex-wrap gap-2">
-                                                <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
-                                                    <span className="relative flex h-2 w-2">
-                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                                    </span>
-                                                    ACTIVE
-                                                </div>
-                                                <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
-                                                    <Crown className="w-3 h-3 text-yellow-500" />
-                                                    PREMIUM
-                                                </div>
+                                        <div className="h-px w-full bg-white/10 mb-6" />
+
+                                        {/* Mini Stats Grid */}
+                                        <div className="grid grid-cols-3 gap-4 text-center">
+                                            {stats.grid.map((stat, idx) => (
+                                                <React.Fragment key={idx}>
+                                                    <StatItem value={stat.value} label={stat.label} />
+                                                    {idx < 2 && <div className="w-px h-full bg-white/10 mx-auto" />}
+                                                </React.Fragment>
+                                            ))}
+                                        </div>
+
+                                        {/* Tag Pills */}
+                                        <div className="mt-8 flex flex-wrap gap-2">
+                                            <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                                                <span className="relative flex h-2 w-2">
+                                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                                </span>
+                                                ACTIVE
+                                            </div>
+                                            <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                                                <Crown className="w-3 h-3 text-yellow-500" />
+                                                PREMIUM
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Marquee Card */}
-                                    <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl">
-                                        <h3 className="mb-6 px-8 text-sm font-medium text-zinc-400">Trusted by Industry Leaders</h3>
-
-                                        <div
-                                            className="relative flex overflow-hidden"
-                                            style={{
-                                                maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
-                                                WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
-                                            }}
-                                        >
-                                            <div className="animate-marquee flex gap-12 whitespace-nowrap px-4">
-                                                {/* Triple list for seamless loop */}
-                                                {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className="flex items-center gap-2 opacity-70 transition-all hover:opacity-100 hover:scale-105 cursor-default grayscale hover:grayscale-0"
-                                                    >
-                                                        {/* Brand Logo */}
-                                                        <img
-                                                            src={`${import.meta.env.BASE_URL}${client.logo}`}
-                                                            alt={client.name}
-                                                            className={`w-auto object-contain transition-all duration-300 
-                                                                ${client.isLarge ? 'h-10' : 'h-8'}
-                                                                ${client.hasBackground
-                                                                    ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
-                                                                    : 'brightness-0 invert hover:brightness-100 hover:invert-0'
-                                                                }`}
-                                                            onError={(e) => { e.target.style.display = 'none'; }}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </>
+                                </div>
                             )}
                         </div>
                     </div>

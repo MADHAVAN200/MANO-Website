@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import {
     Building, Briefcase, Factory, Hexagon, GraduationCap,
     MapPin, CheckCircle, ArrowRight, ChevronRight, Layout, Minimize2, Activity,
-    ShieldCheck, DollarSign, FileText, ArrowUpRight, Award
+    ShieldCheck, DollarSign, FileText, Award
 } from 'lucide-react';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';
 import ProjectsHero from '../../components/HeroSections/ProjectsHero';
+import ContactModal from '../../components/ContactModal';
 
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState("All");
+    const [isContactOpen, setIsContactOpen] = useState(false);
 
     const featuredProjects = [
         {
@@ -283,13 +285,6 @@ const Projects = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="pt-6 border-t border-white/5">
-                                            <RainbowButton>
-                                                <span className="flex items-center px-6 font-semibold">
-                                                    View Details <ArrowUpRight className="ml-2 w-4 h-4" />
-                                                </span>
-                                            </RainbowButton>
-                                        </div>
                                     </div>
                                 </div>
                             </RevealOnScroll>
@@ -379,11 +374,13 @@ const Projects = () => {
                     </h2>
 
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <RainbowButton>
-                            <span className="flex items-center text-lg font-semibold px-6">
-                                Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
-                            </span>
-                        </RainbowButton>
+                        <div onClick={() => setIsContactOpen(true)}>
+                            <RainbowButton>
+                                <span className="flex items-center text-lg font-semibold px-6">
+                                    Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
+                                </span>
+                            </RainbowButton>
+                        </div>
                         <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm">
                             View More Services <ArrowRight className="ml-2 w-5 h-5" />
                         </button>
@@ -391,6 +388,7 @@ const Projects = () => {
                 </div>
             </section>
 
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </div >
     );
 };

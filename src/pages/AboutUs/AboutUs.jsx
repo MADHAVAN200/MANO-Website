@@ -293,7 +293,7 @@ const AboutUs = () => {
             </section>
 
             {/* Team Section */}
-            <section className="relative py-16 px-6 overflow-hidden border-t border-white/5">
+            <section id="team" className="relative py-16 px-6 overflow-hidden border-t border-white/5">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
                 <RevealOnScroll>
                     <div className="max-w-7xl mx-auto text-left">

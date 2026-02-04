@@ -15,6 +15,7 @@ import {
     Cpu
 } from "lucide-react";
 import { CLIENTS } from "../../data/clients";
+import ContactModal from "../ContactModal";
 
 
 const BACKGROUND_IMAGES = [
@@ -34,6 +35,7 @@ const StatItem = ({ value, label }) => (
 // --- MAIN COMPONENT ---
 export default function LandingHero() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isContactOpen, setIsContactOpen] = useState(false);
 
     // Rotate images every 1.2 seconds for fast dynamic feel
     useEffect(() => {
@@ -133,10 +135,13 @@ export default function LandingHero() {
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </button>
 
-                            <Link to="/contact" className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
+                            <div
+                                onClick={() => setIsContactOpen(true)}
+                                className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20"
+                            >
                                 <Play className="w-4 h-4 fill-current" />
-                                Watch Demo
-                            </Link>
+                                Start Your Project
+                            </div>
                         </div>
                     </div>
 
@@ -235,7 +240,7 @@ export default function LandingHero() {
                                             src={`${import.meta.env.BASE_URL}${client.logo}`}
                                             alt={client.name}
                                             className={`w-auto object-contain transition-all duration-300 
-                                                ${client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12'} 
+                                                ${client.isExtraLarge ? 'h-14 sm:h-24' : (client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12')} 
                                                 ${client.hasBackground
                                                     ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
                                                     : 'brightness-0 invert hover:brightness-100 hover:invert-0'
@@ -250,6 +255,7 @@ export default function LandingHero() {
                 </div>
 
             </div>
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </div>
     );
 }
