@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import {
     ChevronRight, Calendar, Users, FileText, AlertTriangle, TrendingUp, Calculator,
     Shield, Briefcase, BarChart, Search, CheckCircle, Flag, Building, Factory, Hotel,
-    Layers, Zap, Ruler
+    Layers, Zap, Activity, BarChart3, Clock
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
+import PageHero from '../../components/HeroSections/PageHero';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -76,10 +78,26 @@ const ProjectPlanning = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const handleInteraction = () => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            removeListeners();
+        };
     }, []);
 
     useEffect(() => {
@@ -179,69 +197,116 @@ const ProjectPlanning = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-12 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
+            <PageHero
+                title="Project"
+                subtitle="Planning"
+                description="Prepare, Monitor and Control of Macro Planning in Microsoft Project with Program Evaluation Review Technique, Prepare, Monitor and Control of Site Logistics, Material Histogram, Manpower Histogram"
+                images={[
+                    `${import.meta.env.BASE_URL}project-planning-hero-1.png`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-2.png`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-3.png`
+                ]}
+                layout="split"
+                bgImage={`${import.meta.env.BASE_URL}project-planning-hero.png`}
+                badgeText="CPM & PERT Planning"
+                scrollTargetId="content"
+                showContactButton={false}
+                stats={{
+                    mainValue: "500+",
+                    mainLabel: "Projects Planned",
+                    satisfaction: "95%",
+                    grid: [
+                        { value: "12+", label: "Years Exp" },
+                        { value: "100%", label: "Success" },
+                        { value: "24/7", label: "Support" }
+                    ]
+                }}
+            />
 
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <div>
-                            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                                Project Planning
-                            </h1>
-                        </div>
-                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
-                            Building a strong project foundation through strategic planning, structured scheduling, and risk-focused execution frameworks.
-                        </h2>
-                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our Project Planning services transform concepts into actionable execution roadmaps. Through detailed planning, resource optimization, and risk anticipation, we help clients achieve predictable timelines, controlled costs, and seamless project delivery.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 2. STATS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={12} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Years of Planning Expertise</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={500} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Project Plans Delivered</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={100} />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Projects Successfully Planned</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} />%</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Schedule Adherence Rate</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="content"></div>
 
             {isLoaded && (
                 <>
+                    {/* 2. STATS STRIP */}
+                    <section className="relative z-20 -mt-32 pb-16 pt-32 border-b border-white/5 bg-gradient-to-b from-transparent via-black/80 to-black backdrop-blur-sm animate-in fade-in duration-1000"
+                        style={{
+                            maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+                            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
+                        }}
+                    >
+                        <div className="max-w-7xl mx-auto px-12">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={12} />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Years of Planning Expertise</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={500} />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Project Plans Delivered</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={100} />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Projects Successfully Planned</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} />%</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Schedule Adherence Rate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     {/* 3. CORE SERVICES */}
                     <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
                                 <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Project Planning Services</h2>
+                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Planning Services</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {coreServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                    {[
+                                        {
+                                            title: "Strategic Planning",
+                                            desc: "Macro planning and schedule alignment using MSP & PERT.",
+                                            items: [
+                                                "Prepare Macro planning as per management requirement in MSP with PERT technique.",
+                                                "Co-relating programme schedule prepared by contractors with Project schedule."
+                                            ],
+                                            icon: Calendar
+                                        },
+                                        {
+                                            title: "Resource & Logistics",
+                                            desc: "Optimizing manpower, materials, and site logistics.",
+                                            items: [
+                                                "Train, review, Monitor & tracking of Manpower Histogram & Material Histogram.",
+                                                "Train, review, Monitor & tracking of Logistic Plan."
+                                            ],
+                                            icon: Users
+                                        },
+                                        {
+                                            title: "Procurement & Systems",
+                                            desc: "Managing long-lead items and commissioning schedules.",
+                                            items: [
+                                                "Check and track all long leads items for procurement of material & equipment.",
+                                                "Prepare testing and commissioning schedule for capital Equipment & engineering systems."
+                                            ],
+                                            icon: Zap
+                                        },
+                                        {
+                                            title: "Progress Monitoring",
+                                            desc: "Continuous tracking, review, and reporting of project progress.",
+                                            items: [
+                                                "Review fortnightly progress of the contractor, compare with planned programme.",
+                                                "Conduct fortnightly site meetings to monitor work & co-ordinate agencies.",
+                                                "Monitor progress against timelines and advise on deviations/delays.",
+                                                "Maintaining Hindrance Report to update regarding Project delaying."
+                                            ],
+                                            icon: CheckCircle
+                                        }
+                                    ].map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden animated-white-border">
                                             {/* Large Background Icon */}
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
@@ -256,52 +321,12 @@ const ProjectPlanning = () => {
                                                 <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
 
                                                 <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
-                                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
-
-                    {/* 4. SPECIALIZED SERVICES */}
-                    <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Project Planning Services</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {specializedServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
-                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
-                                            </div>
-
-                                            <div className="relative z-10">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                                </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
+                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Activities:</h4>
                                                     <ul className="grid grid-cols-1 gap-3">
                                                         {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
+                                                            <li key={idx} className="flex items-start text-sm text-gray-400">
+                                                                <CheckCircle className="w-4 h-4 mr-2 text-blue-500 mt-1 shrink-0" />
+                                                                <span>{item}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -313,6 +338,20 @@ const ProjectPlanning = () => {
                             </div>
                         </RevealOnScroll>
                     </section>
+
+                    {/* DIGITAL ERP SECTION */}
+                    <RevealOnScroll>
+                        <DigitalERPSection
+                            title={`Specialized <span class="text-blue-500">Planning ERP</span> <br /> Control Systems`}
+                            description="We use advanced ERP integration to track schedule adherence, resource histograms, and critical path performance, ensuring your project timeline is predictable and resilient."
+                            features={[
+                                { title: "Schedule Adherence Dashboards", icon: BarChart2 },
+                                { title: "Resource Histogram Tracking", icon: Users },
+                                { title: "CPM/PERT Analytics", icon: TrendingUp },
+                                { title: "Timeline Prediction Models", icon: Clock },
+                            ]}
+                        />
+                    </RevealOnScroll>
 
                     {/* 5. WHY MANO */}
                     <section className="py-24 px-12 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-300">
@@ -331,7 +370,7 @@ const ProjectPlanning = () => {
                                     { title: "Data-Driven Decisions", text: "Planning backed by analytics, benchmarks, and industry best practices.", icon: BarChart },
                                 ].map((item, index) => (
                                     <RevealOnScroll key={index}>
-                                        <div className="p-8 h-full rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-md hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-300 flex flex-col items-start gap-6 group">
+                                        <div className="p-8 h-full rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-md hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-300 flex flex-col items-start gap-6 group animated-white-border">
                                             <div className="p-4 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
                                                 <item.icon size={32} />
                                             </div>
@@ -487,6 +526,60 @@ const ProjectPlanning = () => {
                             </div>
                         </RevealOnScroll>
                     </section>
+                    {/* 6. WHY MANO */}
+                    <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
+                        <RevealOnScroll>
+                            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                                <div>
+                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
+                                        Why Mano for <span className="text-blue-500 block">Project Planning?</span>
+                                    </h2>
+                                    <div className="space-y-8">
+                                        {[
+                                            { title: "Micro-Level Detail", text: "Our plans go beyond surface level to identify every critical interface.", icon: Search },
+                                            { title: "Resource Optimization", text: "Aligning equipment and labor with the project's most critical tasks.", icon: Layers },
+                                            { title: "Critical Path Focus", text: "Identifying and protecting the activities that drive your completion date.", icon: TrendingUp },
+                                            { title: "Data-Driven Decisions", text: "Transforming raw site data into actionable planning insights.", icon: Activity },
+                                        ].map((item, index) => (
+                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10 animated-white-border">
+                                                <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
+                                                    <item.icon className="w-6 h-6" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                                                    <p className="text-gray-400">{item.text}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>
+                                    <div className="relative z-10 grid grid-cols-2 gap-4">
+                                        <div className="space-y-4 mt-8">
+                                            <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
+                                                <span className="text-4xl font-bold text-white mb-2">20%</span>
+                                                <span className="text-sm text-gray-400">Faster Delivery</span>
+                                            </div>
+                                            <div className="h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex flex-col justify-center">
+                                                <span className="text-white text-lg font-bold">Resource<br />Balanced</span>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <div className="h-40 rounded-2xl bg-[#111] border border-white/10 p-6 flex flex-col justify-center">
+                                                <Calendar className="w-10 h-10 text-blue-500 mb-4" />
+                                                <span className="text-gray-300 font-medium">100% Reliable</span>
+                                            </div>
+                                            <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
+                                                <span className="text-4xl font-bold text-white mb-2">Total</span>
+                                                <span className="text-sm text-gray-400">Logistical Harmony</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </RevealOnScroll>
+                    </section>
 
                     {/* 8. TRUST STATEMENT */}
                     <section className="py-24 px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
@@ -511,9 +604,6 @@ const ProjectPlanning = () => {
                                         Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
                                     </span>
                                 </RainbowButton>
-                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium text-sm md:text-base flex items-center justify-center">
-                                    Consult Our Planning Experts <ChevronRight className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>

@@ -4,10 +4,12 @@ import {
     ChevronRight, Shield, ShieldCheck, AlertTriangle, HardHat,
     CheckCircle, BarChart2, FileText, Search, Users, Activity,
     Target, Siren, BookOpen, ClipboardList, Zap, HeartPulse,
-    Factory, Building
+    Factory, Building, BarChart3, Clock, Layout
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
+import PageHero from '../../components/HeroSections/PageHero';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -171,75 +173,133 @@ const EHSAudit = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const handleInteraction = () => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            removeListeners();
+        };
     }, []);
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
+            <PageHero
+                title="Environment, Health & Safety"
+                subtitle="Service & Audit"
+                description="Prepare, Monitor and Control of Environment, Health & Safety Plan, Matrix and Report"
+                images={[
+                    `${import.meta.env.BASE_URL}quality-control-hero.png`,
+                    `${import.meta.env.BASE_URL}qa-audit-hero.png`,
+                    `${import.meta.env.BASE_URL}ehs-audit-hero.png`
+                ]}
+                bgImage={`${import.meta.env.BASE_URL}ehs-audit-hero.png`}
+                badgeText="Environment, Health & Safety Service & Audit"
+                scrollTargetId="content"
+                layout="masonry-reverse-3"
+                showContactButton={false}
+                stats={{
+                    mainValue: "Zero",
+                    mainLabel: "Major Incidents",
+                    satisfaction: "100%",
+                    grid: [
+                        { value: "95%", label: "Compliance Ratio" },
+                        { value: "300+", label: "Audits Done" },
+                        { value: "100%", label: "Risk Free" }
+                    ]
+                }}
+            />
 
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-
-                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                            EHS Audit
-                        </h1>
-                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
-                            Ensuring environment, health, and safety compliance across every stage of your project with expert audits and preventive risk management.
-                        </h2>
-                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our EHS Audit services ensure that all activities meet essential Environmental, Health, and Safety standards. We help organizations reduce risks, achieve regulatory compliance, and create safer workplaces through structured audits, hazard assessments, and proactive safety planning.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 2. VALUE METRICS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={70} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Risks</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Compliance Rate</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={300} suffix="+" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Audits Conducted</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Zero</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Major Incidents</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="content"></div>
 
             {isLoaded && (
                 <>
+                    {/* 2. VALUE METRICS STRIP */}
+                    <section className="relative z-20 -mt-32 pb-16 pt-32 border-b border-white/5 bg-gradient-to-b from-transparent via-black/80 to-black backdrop-blur-sm animate-in fade-in duration-1000"
+                        style={{
+                            maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+                            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
+                        }}
+                    >
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={70} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Risks</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Compliance Rate</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={300} suffix="+" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Audits Conducted</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Zero</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Major Incidents</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     {/* 3. CORE SERVICES */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto">
                                 <div className="text-center mb-16">
-                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core EHS Audit Services</h2>
+                                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Core Environment, Health & Safety Services</h2>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {coreServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                    {[
+                                        {
+                                            title: "Safety Standards",
+                                            desc: "Site-wide safety standard maintenance.",
+                                            items: [
+                                                "Ensuring that all safety standards are maintained on site."
+                                            ],
+                                            icon: ShieldCheck
+                                        },
+                                        {
+                                            title: "EHS Training",
+                                            desc: "Regular safety talks and awareness sessions.",
+                                            items: [
+                                                "Conducting Tool Box talk."
+                                            ],
+                                            icon: Users
+                                        },
+                                        {
+                                            title: "Inspections & Reporting",
+                                            desc: "EHS walks and detailed reporting.",
+                                            items: [
+                                                "Conducting EHS Walk and submitting reports."
+                                            ],
+                                            icon: ClipboardList
+                                        },
+                                        {
+                                            title: "Statutory Compliance",
+                                            desc: "Ensuring contractor legal compliance.",
+                                            items: [
+                                                "Monitoring if all necessary statutory requirements are being met by the contractors."
+                                            ],
+                                            icon: BookOpen
+                                        }
+                                    ].map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden animated-white-border">
                                             {/* Large Background Icon */}
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
@@ -255,51 +315,11 @@ const EHSAudit = () => {
 
                                                 <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
                                                     <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
-                                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
-
-                    {/* 4. SPECIALIZED SUPPORT */}
-                    <section className="py-24 px-6 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized EHS Support Services</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {specializedSupport.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden h-full flex flex-col">
-                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
-                                            </div>
-
-                                            <div className="relative z-10 flex flex-col h-full">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                                </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors mt-auto">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Focus Areas:</h4>
                                                     <ul className="grid grid-cols-1 gap-3">
                                                         {service.items.map((item, idx) => (
                                                             <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
+                                                                <CheckCircle className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
+                                                                {item}
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -381,22 +401,36 @@ const EHSAudit = () => {
                         </RevealOnScroll>
                     </section>
 
+                    {/* DIGITAL ERP SECTION */}
+                    <RevealOnScroll>
+                        <DigitalERPSection
+                            title={`Specialized <span class="text-blue-500">Safety ERP</span> <br /> Monitoring Systems`}
+                            description="We utilize a comprehensive EHS ERP to track site safety performance, hazard identification, and incident reporting, fostering a zero-accident project culture."
+                            features={[
+                                { title: "Safety Incident Dashboards", icon: BarChart3 },
+                                { title: "Compliance Ratio Analytics", icon: ShieldCheck },
+                                { title: "Hazard Mitigation Trackers", icon: AlertTriangle },
+                                { title: "Site Inspection Reports", icon: Layout },
+                            ]}
+                        />
+                    </RevealOnScroll>
+
                     {/* 6. WHY MANO */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <RevealOnScroll>
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                                 <div>
                                     <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8">
-                                        Why Mano for <span className="text-blue-500 block">EHS Audit?</span>
+                                        Why Mano for <span className="text-blue-500 block">Environment, Health & Safety Service & Audit?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
-                                            { title: "Safety-First Mindset", text: "We ensure safety is embedded at every level of project operations.", icon: Shield },
-                                            { title: "Certified EHS Specialists", text: "Experienced professionals with deep regulatory knowledge.", icon: HardHat },
-                                            { title: "Strong Documentation Discipline", text: "Complete and audit-ready EHS records for legal and compliance assurance.", icon: ClipboardList },
-                                            { title: "End-to-End Support", text: "From hazard assessment to implementation and training.", icon: HeartPulse },
+                                            { title: "Zero Incident Culture", text: "Proactive safety management that makes site safety a core project value.", icon: ShieldCheck },
+                                            { title: "Regulatory Compliance", text: "Ensuring all statutory and legal EHS requirements are met and documented.", icon: ClipboardList },
+                                            { title: "Constant Awareness", text: "Regular training and inspections that maintain a vigilant safety mindset.", icon: HardHat },
+                                            { title: "Risk Elimination", text: "Systematic hazard identification and mitigation to prevent site accidents.", icon: ShieldCheck },
                                         ].map((item, index) => (
-                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10">
+                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10 animated-white-border">
                                                 <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
                                                     <item.icon className="w-6 h-6" />
                                                 </div>
@@ -413,21 +447,21 @@ const EHSAudit = () => {
                                     <div className="relative z-10 grid grid-cols-2 gap-4">
                                         <div className="space-y-4 mt-8">
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                                <span className="text-4xl font-bold text-white mb-2">95%</span>
-                                                <span className="text-sm text-gray-400">Compliance Rate</span>
+                                                <span className="text-4xl font-bold text-white mb-2">Zero</span>
+                                                <span className="text-sm text-gray-400">Accidents</span>
                                             </div>
                                             <div className="h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex flex-col justify-center">
-                                                <span className="text-white text-lg font-bold">Total<br />Compliance</span>
+                                                <span className="text-white text-lg font-bold">Safety<br />Compliant</span>
                                             </div>
                                         </div>
                                         <div className="space-y-4">
                                             <div className="h-40 rounded-2xl bg-[#111] border border-white/10 p-6 flex flex-col justify-center">
                                                 <ShieldCheck className="w-10 h-10 text-blue-500 mb-4" />
-                                                <span className="text-gray-300 font-medium">Risk Free</span>
+                                                <span className="text-gray-300 font-medium">Hazard Clean</span>
                                             </div>
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                                <span className="text-4xl font-bold text-white mb-2">Zero</span>
-                                                <span className="text-sm text-gray-400">Major Incidents</span>
+                                                <span className="text-4xl font-bold text-white mb-2">100%</span>
+                                                <span className="text-sm text-gray-400">Secure Environment</span>
                                             </div>
                                         </div>
                                     </div>
@@ -533,12 +567,9 @@ const EHSAudit = () => {
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>
                                     <span className="flex items-center text-lg font-semibold px-4">
-                                        Book an EHS Audit <ChevronRight className="ml-2 w-5 h-5" />
+                                        Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
                                     </span>
                                 </RainbowButton>
-                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium text-sm md:text-base flex items-center justify-center">
-                                    Speak to Our EHS Experts <ChevronRight className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>

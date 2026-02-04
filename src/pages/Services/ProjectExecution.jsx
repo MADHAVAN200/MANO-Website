@@ -6,10 +6,12 @@ import {
     Flag, Truck, ShieldCheck, Zap, CheckCircle, Smartphone, Building,
     Factory, HardHat, FileText, ListOrdered, Link as LinkIcon, Target, BarChart2,
     Gauge, Wrench, MessageSquare, AlertCircle, Award, DollarSign,
-    Shield, RefreshCw
+    Shield, RefreshCw, BarChart3
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
+import PageHero from '../../components/HeroSections/PageHero';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -79,10 +81,26 @@ const ProjectExecution = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const handleInteraction = () => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            removeListeners();
+        };
     }, []);
 
     useEffect(() => {
@@ -182,56 +200,66 @@ const ProjectExecution = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
+            <PageHero
+                title="Project"
+                subtitle="Execution"
+                description="Project Execution as per Drawing, Schedule of Planning and Methods"
+                images={[
+                    `${import.meta.env.BASE_URL}project-execution-1.png`,
+                    `${import.meta.env.BASE_URL}project-execution-2.png`,
+                    `${import.meta.env.BASE_URL}project-execution-3.png`
+                ]}
+                bgImage={`${import.meta.env.BASE_URL}project-execution-hero.png`}
+                badgeText="Execution Excellence"
+                scrollTargetId="content"
+                layout="split-reverse"
+                showContactButton={false}
+                stats={{
+                    mainValue: "100%",
+                    mainLabel: "Quality",
+                    satisfaction: "95%",
+                    grid: [
+                        { value: "30%", label: "Faster" },
+                        { value: "0", label: "Failures" },
+                        { value: "100%", label: "Safe" }
+                    ]
+                }}
+            />
 
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                            Project Execution
-                        </h1>
-                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
-                            Delivering projects with precision, control, and accountability — from plan to completion.
-                        </h2>
-                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our Project Execution services ensure that approved plans are translated into on-ground results with accuracy and discipline. Through structured coordination, real-time monitoring, and proactive issue resolution, we help projects achieve timely delivery, cost control, and quality compliance.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 2. VALUE METRICS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">On-Time Project Delivery Rate</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={90} suffix="%" />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Schedule Adherence Across Projects</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={30} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Execution Delays</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Zero</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Critical Execution Failures</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="content"></div>
 
             {isLoaded && (
                 <>
+                    {/* 2. VALUE METRICS STRIP */}
+                    <section className="relative z-20 -mt-32 pb-16 pt-32 border-b border-white/5 bg-gradient-to-b from-transparent via-black/80 to-black backdrop-blur-sm animate-in fade-in duration-1000"
+                        style={{
+                            maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+                            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
+                        }}
+                    >
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">On-Time Project Delivery Rate</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={90} suffix="%" />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Schedule Adherence Across Projects</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={30} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Execution Delays</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Zero</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Critical Execution Failures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     {/* 3. CORE SERVICES */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
@@ -241,8 +269,44 @@ const ProjectExecution = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {coreServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                    {[
+                                        {
+                                            title: "Site Mobilization & Supervision",
+                                            desc: "Deployment of supervision teams and management of site activities.",
+                                            items: [
+                                                "Deployment of construction supervision team on site.",
+                                                "Management, Coordination and checking of all construction activities on site."
+                                            ],
+                                            icon: HardHat
+                                        },
+                                        {
+                                            title: "Planning & Interface",
+                                            desc: "On-site planning and managing contractor interfaces.",
+                                            items: [
+                                                "Project planning and construction monitoring on site.",
+                                                "Planning and managing of Contractor interfaces."
+                                            ],
+                                            icon: Layers
+                                        },
+                                        {
+                                            title: "Quality & Material Control",
+                                            desc: "Supervising quality of works and coordinating material supply.",
+                                            items: [
+                                                "Supervise Quality of works being executed on site.",
+                                                "Co-ordinate with Store and purchase department for Supply of material as required."
+                                            ],
+                                            icon: ShieldCheck
+                                        },
+                                        {
+                                            title: "Progress Reporting",
+                                            desc: "Maintaining daily progress records and reporting mechanisms.",
+                                            items: [
+                                                "Maintain Daily Progress and Reporting mechanism on site."
+                                            ],
+                                            icon: ClipboardList
+                                        }
+                                    ].map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden animated-white-border">
                                             {/* Large Background Icon */}
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
@@ -260,49 +324,9 @@ const ProjectExecution = () => {
                                                     <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
                                                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                         {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
-
-                    {/* 4. SPECIALIZED SERVICES */}
-                    <section className="py-24 px-6 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Execution Support Services</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {specializedServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
-                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
-                                            </div>
-
-                                            <div className="relative z-10">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                                </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
-                                                    <ul className="grid grid-cols-1 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
+                                                            <li key={idx} className="flex items-start text-sm text-gray-400">
+                                                                <CheckCircle className="w-4 h-4 mr-2 text-blue-500 mt-1 shrink-0" />
+                                                                <span>{item}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -384,6 +408,20 @@ const ProjectExecution = () => {
                         </RevealOnScroll>
                     </section>
 
+                    {/* DIGITAL ERP SECTION */}
+                    <RevealOnScroll>
+                        <DigitalERPSection
+                            title={`Specialized <span class="text-blue-500">Execution ERP</span> <br /> Monitoring Systems`}
+                            description="Our specialized ERP tracks daily site activities, resource utilization, and work-flow performance to ensure seamless on-ground execution and zero delays."
+                            features={[
+                                { title: "Daily Progress Monitoring", icon: Activity },
+                                { title: "Workflow Performance Analytics", icon: BarChart2 },
+                                { title: "Resource Utilization Trackers", icon: Users },
+                                { title: "Site Activity Dashboards", icon: Layout },
+                            ]}
+                        />
+                    </RevealOnScroll>
+
                     {/* 6. WHY MANO */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <RevealOnScroll>
@@ -394,12 +432,12 @@ const ProjectExecution = () => {
                                     </h2>
                                     <div className="space-y-8">
                                         {[
-                                            { title: "Execution-First Mindset", text: "Focused on real-world site performance, not just documentation.", icon: HardHat },
-                                            { title: "Proactive Issue Resolution", text: "Problems identified early and resolved before escalation.", icon: ShieldCheck },
-                                            { title: "Integrated Expertise", text: "Execution aligned with planning, contract, cost, and quality teams.", icon: Layers },
-                                            { title: "Transparent Progress Reporting", text: "Clear, data-driven reporting for informed decision-making.", icon: Activity },
+                                            { title: "On-Site Leadership", text: "Expert supervision that drives project discipline and contractor accountability.", icon: HardHat },
+                                            { title: "Quality Discipline", text: "Strict adherence to methodology and material standards on the ground.", icon: ShieldCheck },
+                                            { title: "Interface Management", text: "Seamlessly coordinating design, procurement, and site activities.", icon: Layers },
+                                            { title: "Daily Progress Tracking", text: "Real-time visibility into site performance against planned timelines.", icon: Activity },
                                         ].map((item, index) => (
-                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10">
+                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10 animated-white-border">
                                                 <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
                                                     <item.icon className="w-6 h-6" />
                                                 </div>
@@ -416,21 +454,21 @@ const ProjectExecution = () => {
                                     <div className="relative z-10 grid grid-cols-2 gap-4">
                                         <div className="space-y-4 mt-8">
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                                <span className="text-4xl font-bold text-white mb-2">30%</span>
-                                                <span className="text-sm text-gray-400">Faster Delivery</span>
+                                                <span className="text-4xl font-bold text-white mb-2">Zero</span>
+                                                <span className="text-sm text-gray-400">Critical Failures</span>
                                             </div>
                                             <div className="h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex flex-col justify-center">
-                                                <span className="text-white text-lg font-bold">Zero<br />Critical Failures</span>
+                                                <span className="text-white text-lg font-bold">Quality<br />Assured</span>
                                             </div>
                                         </div>
                                         <div className="space-y-4">
                                             <div className="h-40 rounded-2xl bg-[#111] border border-white/10 p-6 flex flex-col justify-center">
                                                 <Activity className="w-10 h-10 text-blue-500 mb-4" />
-                                                <span className="text-gray-300 font-medium">Real-time Control</span>
+                                                <span className="text-gray-300 font-medium">Safety First</span>
                                             </div>
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
                                                 <span className="text-4xl font-bold text-white mb-2">100%</span>
-                                                <span className="text-sm text-gray-400">Process Adherence</span>
+                                                <span className="text-sm text-gray-400">Timely Milestones</span>
                                             </div>
                                         </div>
                                     </div>
@@ -560,9 +598,6 @@ const ProjectExecution = () => {
                                         Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
                                     </span>
                                 </RainbowButton>
-                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium text-sm md:text-base flex items-center justify-center">
-                                    Consult Our Execution Experts <ChevronRight className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>

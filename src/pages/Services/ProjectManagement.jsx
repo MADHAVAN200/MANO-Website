@@ -4,10 +4,12 @@ import {
     ChevronRight, ClipboardCheck, Calculator, Package, Lightbulb, Hammer, Flag,
     Users, Activity, TrendingUp, Handshake, PenTool, ShieldAlert, FileText,
     CheckCircle, ListChecks, Target, BarChart2, Briefcase, Building, Factory,
-    Hotel, Layout, CheckSquare, Clock
+    Hotel, Layout, CheckSquare, Clock, ShieldCheck, Layers, BarChart3
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
+import PageHero from '../../components/HeroSections/PageHero';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -87,16 +89,34 @@ const ProjectManagement = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const handleInteraction = () => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            removeListeners();
+        };
     }, []);
 
     const [chartVisible, setChartVisible] = useState(false);
     const chartRef = useRef(null);
 
     useEffect(() => {
+        if (!isLoaded) return;
+
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 setChartVisible(true);
@@ -106,7 +126,7 @@ const ProjectManagement = () => {
 
         if (chartRef.current) observer.observe(chartRef.current);
         return () => observer.disconnect();
-    }, []);
+    }, [isLoaded]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -131,7 +151,7 @@ const ProjectManagement = () => {
                 { text: "Performance dashboards", icon: BarChart2 },
                 { text: "Delay identification", icon: Clock },
                 { text: "Progress verification", icon: CheckCircle },
-                { text: "KPI-driven reporting", icon: TrendingUp }
+                { text: "Key Performance Indicator-driven reporting", icon: TrendingUp }
             ],
             icon: Activity
         },
@@ -187,7 +207,7 @@ const ProjectManagement = () => {
             desc: "Clear, structured, data-backed reporting for transparency and decision support.",
             items: [
                 { text: "Daily/weekly reports", icon: FileText },
-                { text: "MIS dashboards", icon: BarChart2 },
+                { text: "Management Information System dashboards", icon: BarChart2 },
                 { text: "Client review decks", icon: CheckSquare },
                 { text: "Project close-out documentation", icon: Package }
             ],
@@ -205,57 +225,70 @@ const ProjectManagement = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
+            <PageHero
+                title="Project"
+                subtitle="Management"
+                description="Driving coordinated, efficient, and predictable project delivery through strategic leadership and disciplined oversight."
+                images={[
+                    `${import.meta.env.BASE_URL}project-management-hero.png`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-1.png`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-2.png`,
+                    `${import.meta.env.BASE_URL}project-execution-hero.png`,
+                    `${import.meta.env.BASE_URL}contract-management-hero.png`
+                ]}
+                bgImage={`${import.meta.env.BASE_URL}project-management-hero.png`}
+                badgeText="Project Leadership"
+                scrollTargetId="content"
+                layout="mosaic-5"
+                showContactButton={false}
+                stats={{
+                    mainValue: "35%",
+                    mainLabel: "Higher Efficiency",
+                    satisfaction: "100%",
+                    grid: [
+                        { value: "100%", label: "Clarity" },
+                        { value: "Real-time", label: "Data" },
+                        { value: "Total", label: "Control" }
+                    ]
+                }}
+            />
 
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                            Project Management
-                        </h1>
-                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
-                            Driving coordinated, efficient, and predictable project delivery through strategic leadership and disciplined oversight.
-                        </h2>
-                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our Project Management services ensure seamless coordination across planning, design, execution, cost, quality, and contract domains. With structured processes and data-backed decisions, we guide every stakeholder toward timely, cost-efficient, and risk-free project outcomes.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
+            <div id="content"></div>
 
-
-            {/* 2. VALUE METRICS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={40} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Faster Decision Cycles</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={85} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Coordination Delays</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Milestone Achievement Accuracy</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={90} suffix="%" />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Multi-Stakeholder Alignment Score</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {isLoaded && (
                 <>
+
+                    {/* 2. VALUE METRICS STRIP */}
+                    <section className="relative z-20 -mt-32 pb-16 pt-32 border-b border-white/5 bg-gradient-to-b from-transparent via-black/80 to-black backdrop-blur-sm animate-in fade-in duration-1000"
+                        style={{
+                            maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+                            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
+                        }}
+                    >
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={40} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Faster Decision Cycles</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={85} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Reduction in Coordination Delays</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Milestone Achievement Accuracy</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={90} suffix="%" />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Multi-Stakeholder Alignment Score</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     {/* 3. CORE SERVICES */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
@@ -267,7 +300,7 @@ const ProjectManagement = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     {coreServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden animated-white-border">
                                             {/* Large Background Icon */}
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
@@ -308,7 +341,7 @@ const ProjectManagement = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     {specializedServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden">
+                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden animated-white-border">
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
                                             </div>
@@ -357,35 +390,27 @@ const ProjectManagement = () => {
 
                                     <h3 className="text-3xl md:text-4xl font-bold mb-10 pb-2 relative z-10 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white text-left">Project Efficiency Comparison</h3>
 
-                                    <div ref={chartRef} className="space-y-6 relative z-10">
+                                    <div className="space-y-6 relative z-10">
                                         {/* Red Bar */}
                                         <div className="flex flex-col md:flex-row items-center gap-6">
-                                            <AnimatedBar
-                                                isVisible={chartVisible}
-                                                widthClass="w-[55%]"
-                                                className="p-4 rounded-xl bg-gradient-to-r from-red-500/30 to-red-900/10 border border-red-500/20 text-center md:text-left shadow-[0_0_15px_rgba(239,68,68,0.1)] backdrop-blur-md flex items-center overflow-hidden h-16"
-                                            >
-                                                <span className="text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-red-500 to-red-200 whitespace-nowrap truncate px-2">
+                                            <div className="w-[60%] h-16 rounded-xl p-4 bg-red-900/20 border border-red-500/30 text-center md:text-left shadow-[0_0_15px_rgba(239,68,68,0.05)] backdrop-blur-md flex items-center overflow-hidden">
+                                                <span className="text-lg md:text-xl font-bold text-gray-200 whitespace-nowrap truncate px-2">
                                                     Without Professional Management
                                                 </span>
-                                            </AnimatedBar>
-                                            <div className="font-bold whitespace-nowrap text-2xl bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-gray-200">
+                                            </div>
+                                            <div className="font-bold whitespace-nowrap text-2xl text-gray-400">
                                                 60 days
                                             </div>
                                         </div>
 
                                         {/* Blue Bar */}
                                         <div className="flex flex-col md:flex-row items-center gap-6">
-                                            <AnimatedBar
-                                                isVisible={chartVisible}
-                                                widthClass="w-[85%]"
-                                                className="p-4 rounded-xl bg-gradient-to-r from-blue-500/30 to-blue-900/10 border border-blue-500/30 text-center md:text-left shadow-[0_0_15px_rgba(37,99,235,0.2)] backdrop-blur-md flex items-center overflow-hidden h-20"
-                                            >
-                                                <span className="text-xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-200 to-white whitespace-nowrap truncate px-2">
+                                            <div className="w-[90%] h-20 rounded-xl p-4 bg-blue-600/20 border border-blue-500/50 text-center md:text-left shadow-[0_0_20px_rgba(37,99,235,0.3)] backdrop-blur-md flex items-center overflow-hidden">
+                                                <span className="text-xl md:text-3xl font-bold text-white whitespace-nowrap truncate px-2">
                                                     With Mano Consultants
                                                 </span>
-                                            </AnimatedBar>
-                                            <div className="font-bold whitespace-nowrap text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-t from-gray-400 to-white pb-2">
+                                            </div>
+                                            <div className="font-bold whitespace-nowrap text-4xl md:text-5xl text-white pb-2">
                                                 30 days
                                             </div>
                                         </div>
@@ -394,6 +419,20 @@ const ProjectManagement = () => {
                             </RevealOnScroll>
                         </div>
                     </section>
+
+                    {/* DIGITAL ERP SECTION */}
+                    <RevealOnScroll>
+                        <DigitalERPSection
+                            title={`Specialized <span class="text-blue-500">Project ERP</span> <br /> Management Systems`}
+                            description="We leverage a specialized ERP for real-time project management tracking, ensuring every milestone, budget, and stakeholder interaction is documented and optimized for efficiency."
+                            features={[
+                                { title: "Milestone Progress Dashboards", icon: BarChart2 },
+                                { title: "Stakeholder Communication Logs", icon: Users },
+                                { title: "KPI & Performance Trackers", icon: TrendingUp },
+                                { title: "Resource Allocation Analytics", icon: Layers },
+                            ]}
+                        />
+                    </RevealOnScroll>
 
                     {/* 6. WHY MANO */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
@@ -405,12 +444,12 @@ const ProjectManagement = () => {
                                     </h2>
                                     <div className="space-y-8">
                                         {[
-                                            { title: "Integrated Domain Expertise", text: "Management that unites planning, cost, quality, contracts, and execution.", icon: Users },
-                                            { title: "Real-Time Performance Oversight", text: "Continuous monitoring ensures no surprises.", icon: Activity },
-                                            { title: "Faster Problem Resolution", text: "Issues are resolved before they become delays.", icon: CheckCircle },
-                                            { title: "Absolute Transparency", text: "Clear reporting, clear expectations, clear communication.", icon: FileText },
+                                            { title: "Strategic Oversight", text: "Big-picture management that ensures all project components move in harmony.", icon: Target },
+                                            { title: "Resource Optimization", text: "Expert allocation of manpower and materials to maximize productivity.", icon: Users },
+                                            { title: "Risk Mitigation", text: "Proactive identification and neutralisation of potential project bottlenecks.", icon: ShieldCheck },
+                                            { title: "Seamless Integration", text: "Bridging the gap between design, procurement, and execution teams.", icon: Layers },
                                         ].map((item, index) => (
-                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10">
+                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10 animated-white-border">
                                                 <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
                                                     <item.icon className="w-6 h-6" />
                                                 </div>
@@ -427,21 +466,21 @@ const ProjectManagement = () => {
                                     <div className="relative z-10 grid grid-cols-2 gap-4">
                                         <div className="space-y-4 mt-8">
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                                <span className="text-4xl font-bold text-white mb-2">35%</span>
-                                                <span className="text-sm text-gray-400">Higher Efficiency</span>
+                                                <span className="text-4xl font-bold text-white mb-2">100%</span>
+                                                <span className="text-sm text-gray-400">Reliability</span>
                                             </div>
                                             <div className="h-40 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex flex-col justify-center">
-                                                <span className="text-white text-lg font-bold">Total<br />Control</span>
+                                                <span className="text-white text-lg font-bold">Zero<br />Delays</span>
                                             </div>
                                         </div>
                                         <div className="space-y-4">
                                             <div className="h-40 rounded-2xl bg-[#111] border border-white/10 p-6 flex flex-col justify-center">
                                                 <Activity className="w-10 h-10 text-blue-500 mb-4" />
-                                                <span className="text-gray-300 font-medium">Real-time Data</span>
+                                                <span className="text-gray-300 font-medium">Quality Guaranteed</span>
                                             </div>
                                             <div className="h-64 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl p-6 flex flex-col justify-end">
-                                                <span className="text-4xl font-bold text-white mb-2">100%</span>
-                                                <span className="text-sm text-gray-400">Clarity</span>
+                                                <span className="text-4xl font-bold text-white mb-2">Total</span>
+                                                <span className="text-sm text-gray-400">Handover Ready</span>
                                             </div>
                                         </div>
                                     </div>
@@ -560,9 +599,6 @@ const ProjectManagement = () => {
                                         Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
                                     </span>
                                 </RainbowButton>
-                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium text-sm md:text-base flex items-center justify-center">
-                                    Talk to Our Project Managers <ChevronRight className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>

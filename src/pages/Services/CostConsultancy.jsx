@@ -5,10 +5,13 @@ import {
     BarChart2, Coins, FileText, CheckCircle, PieChart,
     Banknote, Percent, LineChart, FileSpreadsheet, Scale,
     Briefcase, Building, Factory, Hotel, Layout, CheckSquare,
-    Search, Users, Activity, Target, AlertTriangle, ListChecks, Package, Lightbulb
+    Search, Users, Activity, Target, AlertTriangle, ListChecks, Package, Lightbulb,
+    Layers, BarChart3, Clock
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
+import PageHero from '../../components/HeroSections/PageHero';
+import DigitalERPSection from '../../components/DigitalERPSection';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -100,10 +103,26 @@ const CostConsultancy = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const handleInteraction = () => {
             setIsLoaded(true);
-        }, 500);
-        return () => clearTimeout(timer);
+            removeListeners();
+        };
+
+        const removeListeners = () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('wheel', handleInteraction);
+            window.removeEventListener('touchmove', handleInteraction);
+            window.removeEventListener('keydown', handleInteraction);
+        };
+
+        window.addEventListener('scroll', handleInteraction);
+        window.addEventListener('wheel', handleInteraction);
+        window.addEventListener('touchmove', handleInteraction);
+        window.addEventListener('keydown', handleInteraction);
+
+        return () => {
+            removeListeners();
+        };
     }, []);
 
     useEffect(() => {
@@ -181,12 +200,12 @@ const CostConsultancy = () => {
             icon: ShieldAlert
         },
         {
-            title: "Financial Reporting & MIS Dashboards",
+            title: "Financial Reporting & Management Information System Dashboards",
             desc: "Real-time financial visibility for stakeholders.",
             items: [
                 { text: "Cost performance dashboards", icon: BarChart2 },
                 { text: "Forecasting reports", icon: LineChart },
-                { text: "Periodic MIS summaries", icon: FileText },
+                { text: "Periodic Management Information System summaries", icon: FileText },
                 { text: "Budget vs. actual tracking", icon: PieChart }
             ],
             icon: BarChart2
@@ -203,56 +222,66 @@ const CostConsultancy = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
+        <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden min-h-[80vh] flex flex-col justify-center items-center">
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: 'linear-gradient(180deg, rgba(10, 20, 100, 0.9) 0%, rgba(10, 20, 80, 0.6) 30%, rgba(0, 0, 0, 0) 100%)',
-                    height: '100%',
-                    width: '100%'
-                }}></div>
+            <PageHero
+                title="Cost"
+                subtitle="Consultancy"
+                description="Prepare, Monitor and Control of Bill of Quantities & Budget, Rate Analysis"
+                images={[
+                    `${import.meta.env.BASE_URL}cost-consultancy-hero.png`,
+                    `${import.meta.env.BASE_URL}qs-billing-hero.png`,
+                    `${import.meta.env.BASE_URL}contract-management-hero.png`
+                ]}
+                bgImage={`${import.meta.env.BASE_URL}cost-consultancy-hero.png`}
+                badgeText="Cost Consultancy"
+                scrollTargetId="content"
+                layout="triptych-3"
+                showContactButton={false}
+                stats={{
+                    mainValue: "15%",
+                    mainLabel: "Cost Saving",
+                    satisfaction: "100%",
+                    grid: [
+                        { value: "0", label: "Overrun" },
+                        { value: "100%", label: "Accuracy" },
+                        { value: "ROI", label: "Return on Investment Focused" }
+                    ]
+                }}
+            />
 
-                <RevealOnScroll>
-                    <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400 drop-shadow-xl tracking-tight leading-tight">
-                            Cost Consultancy
-                        </h1>
-                        <h2 className="text-2xl md:text-3xl text-blue-200 font-light max-w-4xl mx-auto leading-relaxed">
-                            Delivering accurate estimations, cost control, and financial transparency across every stage of your project.
-                        </h2>
-                        <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                            At Mano Project Consultants Pvt. Ltd., our Cost Consultancy services empower clients with precise budgeting, transparent cost evaluations, and expert financial insights. From estimation to value engineering and billing audits, we ensure financial discipline and cost efficiency throughout the project lifecycle.
-                        </p>
-                    </div>
-                </RevealOnScroll>
-            </section>
-
-            {/* 2. VALUE METRICS STRIP */}
-            <section className="py-24 border-y border-white/5 bg-white/5 backdrop-blur-sm animate-in fade-in duration-1000">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" />+</h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Cost Accuracy</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={45} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Cost Reduction</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={500} suffix="+" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">BOQs Delivered</p>
-                        </div>
-                        <div className="p-4">
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={99} suffix="%" /></h3>
-                            <p className="text-gray-400 text-sm uppercase tracking-wider">Error-Free Billing</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="content"></div>
 
             {isLoaded && (
                 <>
+                    {/* 2. VALUE METRICS STRIP */}
+                    <section className="relative z-20 -mt-32 pb-16 pt-32 border-b border-white/5 bg-gradient-to-b from-transparent via-black/80 to-black backdrop-blur-sm animate-in fade-in duration-1000"
+                        style={{
+                            maskImage: "linear-gradient(to bottom, transparent, black 20%)",
+                            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%)"
+                        }}
+                    >
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={95} suffix="%" />+</h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Cost Accuracy</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={45} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Cost Reduction</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={500} suffix="+" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Bill of Quantities Delivered</p>
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white mb-2"><CountUp end={99} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider">Error-Free Billing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     {/* 3. CORE SERVICES */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                         <RevealOnScroll>
@@ -262,8 +291,41 @@ const CostConsultancy = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {coreServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10">
+                                    {[
+                                        {
+                                            title: "Budget Verification",
+                                            desc: "Initial verification and certification of project budgets.",
+                                            items: [
+                                                "Verify and Certify the initial Bill of Quantities and Budget."
+                                            ],
+                                            icon: Calculator
+                                        },
+                                        {
+                                            title: "Detailed Estimation",
+                                            desc: "Comprehensive Bill of Quantities preparation based on drawings.",
+                                            items: [
+                                                "Prepare a detailed Bill of Quantities based on Good for Construction (GFC) drawings."
+                                            ],
+                                            icon: FileText
+                                        },
+                                        {
+                                            title: "Rate Analysis",
+                                            desc: "Detailed rate analysis for extra items.",
+                                            items: [
+                                                "Rate Analysis with backup for new items of work/extra items for the project."
+                                            ],
+                                            icon: LineChart
+                                        },
+                                        {
+                                            title: "Material Reconciliation",
+                                            desc: "Tracking and reconciliation of all major materials.",
+                                            items: [
+                                                "Material reconciliation for all major building materials."
+                                            ],
+                                            icon: CheckSquare
+                                        }
+                                    ].map((service, index) => (
+                                        <div key={index} className="group relative p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
                                             {/* Large Background Icon */}
                                             <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
                                                 <service.icon size={180} />
@@ -278,52 +340,12 @@ const CostConsultancy = () => {
                                                 <p className="text-gray-400 mb-8 leading-relaxed h-14">{service.desc}</p>
 
                                                 <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Includes:</h4>
-                                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                        {service.items.map((item, idx) => (
-                                                            <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
-
-                    {/* 4. SPECIALIZED SERVICES */}
-                    <section className="py-24 px-6 bg-white/[0.02] animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-200">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto">
-                                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-12 mb-8 border-b border-white/10">Specialized Cost Services</h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {specializedServices.map((service, index) => (
-                                        <div key={index} className="group relative p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden h-full flex flex-col">
-                                            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none transform rotate-12">
-                                                <service.icon size={180} />
-                                            </div>
-
-                                            <div className="relative z-10 flex flex-col h-full">
-                                                <div className="w-14 h-14 rounded-xl mb-6 bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                                                    <service.icon className="w-7 h-7 text-blue-400 group-hover:text-white transition-colors" />
-                                                </div>
-
-                                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-                                                <p className="text-gray-400 mb-8 leading-relaxed">{service.desc}</p>
-
-                                                <div className="bg-black/20 rounded-xl p-6 border border-white/5 group-hover:border-white/10 transition-colors mt-auto">
-                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Focus Areas:</h4>
+                                                    <h4 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Key Service:</h4>
                                                     <ul className="grid grid-cols-1 gap-3">
                                                         {service.items.map((item, idx) => (
                                                             <li key={idx} className="flex items-center text-sm text-gray-400">
-                                                                <item.icon className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
-                                                                {item.text}
+                                                                <CheckCircle className="w-4 h-4 mr-2 text-blue-500 shrink-0" />
+                                                                {item}
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -414,6 +436,20 @@ const CostConsultancy = () => {
                         </RevealOnScroll>
                     </section>
 
+                    {/* DIGITAL ERP SECTION */}
+                    <RevealOnScroll>
+                        <DigitalERPSection
+                            title={`Specialized <span class="text-blue-500">Cost ERP</span> <br /> Analytics Systems`}
+                            description="We leverage specialized cost ERP modules to track budget vs. actuals, predict cash flow requirements, and optimize resource spending across the project lifecycle."
+                            features={[
+                                { title: "Financial Performance Dashboards", icon: BarChart3 },
+                                { title: "Cash-Flow Prediction Models", icon: TrendingUp },
+                                { title: "Budget Variance Analytics", icon: PieChart },
+                                { title: "Cost-Saving Trackers", icon: Coins },
+                            ]}
+                        />
+                    </RevealOnScroll>
+
                     {/* 6. WHY MANO */}
                     <section className="py-24 px-6 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-400">
                         <RevealOnScroll>
@@ -424,12 +460,12 @@ const CostConsultancy = () => {
                                     </h2>
                                     <div className="space-y-8">
                                         {[
-                                            { title: "Transparent Financial Systems", text: "Every cost is justified, traceable, and backed by documentation.", icon: FileText },
-                                            { title: "High Accuracy Estimations", text: "Powered by real-time market analysis and engineering expertise.", icon: Target },
-                                            { title: "Strong Billing Validation", text: "Contractors are paid accurately—no more, no less.", icon: CheckCircle },
-                                            { title: "Integrated Planning", text: "Seamless cross-linking with schedules, resources, and contract frameworks.", icon: Layout },
+                                            { title: "Financial Precision", text: "Drilling down into every line item to ensure absolute budget accuracy.", icon: Calculator },
+                                            { title: "Value Engineering", text: "Identifying cost-saving opportunities without compromising on quality.", icon: TrendingUp },
+                                            { title: "Material Control", text: "Strict monitoring of material consumption against planned benchmarks.", icon: Layers },
+                                            { title: "Rate Analysis Experts", text: "Deep market knowledge that secures the best value for your investments.", icon: Search },
                                         ].map((item, index) => (
-                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10">
+                                            <div key={index} className="flex gap-4 group rounded-xl p-4 transition-all hover:bg-white/5 border border-transparent hover:border-white/10 animated-white-border">
                                                 <div className="w-12 h-12 rounded-full border border-blue-500/30 bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
                                                     <item.icon className="w-6 h-6" />
                                                 </div>
@@ -571,7 +607,7 @@ const CostConsultancy = () => {
                     <section className="py-24 px-6 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Companies trust Mano Project Consultants for delivering precise, transparent, and accountable cost consultancy that protects their financial interests throughout the project lifecycle."
+                                "Companies trust Mano Project Consultants for delivering precise, transparent, and accountable Cost Consultancy that protects their financial interests throughout the project lifecycle."
                             </p>
                         </div>
                     </section>
@@ -587,12 +623,9 @@ const CostConsultancy = () => {
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>
                                     <span className="flex items-center text-lg font-semibold px-4">
-                                        Request a Cost Audit <ChevronRight className="ml-2 w-5 h-5" />
+                                        Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
                                     </span>
                                 </RainbowButton>
-                                <button className="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-medium text-sm md:text-base flex items-center justify-center">
-                                    Talk to Our Cost Experts <ChevronRight className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>
