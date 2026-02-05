@@ -1,11 +1,68 @@
 import React, { useState } from 'react';
-import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown } from 'lucide-react';
+import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown, Loader2 } from 'lucide-react';
 import { useCompany } from '../context/CompanyContext';
 
 const ContactModal = ({ isOpen, onClose }) => {
     const { isPPL } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
     const [selectedService, setSelectedService] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        company_name: '',
+        contact_whatsapp: '',
+        email: '',
+        project_details: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async () => {
+        if (!formData.name || !formData.email || !selectedService) {
+            alert("Please fill in all required fields (Name, Email, Service).");
+            return;
+        }
+
+        setLoading(true);
+        const API_URL = import.meta.env.VITE_API_URL;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    service_required: selectedService
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert("Enquiry submitted successfully!");
+                setFormData({
+                    name: '',
+                    company_name: '',
+                    contact_whatsapp: '',
+                    email: '',
+                    project_details: ''
+                });
+                setSelectedService('');
+                onClose();
+            } else {
+                alert("Failed to submit enquiry: " + result.message);
+            }
+        } catch (error) {
+            console.error("Network Error:", error);
+            alert("Network error. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -65,7 +122,10 @@ const ContactModal = ({ isOpen, onClose }) => {
                             <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                             <input
                                 type="text"
-                                placeholder="Full Name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Full Name *"
                                 className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
                             />
                         </div>
@@ -75,6 +135,9 @@ const ContactModal = ({ isOpen, onClose }) => {
                             <Building2 className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                             <input
                                 type="text"
+                                name="company_name"
+                                value={formData.company_name}
+                                onChange={handleChange}
                                 placeholder="Company Name"
                                 className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
                             />
@@ -85,6 +148,9 @@ const ContactModal = ({ isOpen, onClose }) => {
                             <Phone className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                             <input
                                 type="text"
+                                name="contact_whatsapp"
+                                value={formData.contact_whatsapp}
+                                onChange={handleChange}
                                 placeholder="Contact / WhatsApp"
                                 className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
                             />
@@ -95,7 +161,10 @@ const ContactModal = ({ isOpen, onClose }) => {
                             <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                             <input
                                 type="email"
-                                placeholder="Email Address"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address *"
                                 className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
                             />
                         </div>
@@ -139,6 +208,9 @@ const ContactModal = ({ isOpen, onClose }) => {
                         <div className="relative group md:col-span-2">
                             <MessageSquare className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                             <textarea
+                                name="project_details"
+                                value={formData.project_details}
+                                onChange={handleChange}
                                 placeholder="Project Details..."
                                 rows={4}
                                 className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all resize-none font-medium"
@@ -146,9 +218,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                         </div>
                     </div>
 
-                    <button className="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-900/40 hover:shadow-blue-600/30 flex items-center justify-center gap-2 group transform active:scale-[0.98]">
-                        Send Message
-                        <Send size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <button
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        className="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-900/40 hover:shadow-blue-600/30 flex items-center justify-center gap-2 group transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                        {loading ? 'Sending...' : 'Send Message'}
+                        {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} className="group-hover:translate-x-1 transition-transform" />}
                     </button>
                 </div>
             </div>
