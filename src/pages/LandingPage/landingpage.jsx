@@ -42,6 +42,7 @@ const TestimonialsColumn = (props) => {
                   </div>
                   <div className="flex flex-col">
                     <div className="font-bold text-white tracking-wide">{name}</div>
+                    {role && <div className="text-sm text-blue-400 font-medium">{role}</div>}
                   </div>
                 </div>
               </div>
@@ -166,19 +167,34 @@ export default function LandingPage() {
 
   const testimonials = [
     {
-      name: 'David J. Karem',
+      name: 'Mr. Ketan Musale',
+      role: 'Dotom Realty',
       image: 'image.webp',
-      text: 'Forget about spam, advertising mailings, hacking and attacking robots. Keep your real mailbox clean and secure. Temp Mail provides temporary, secure, anonymous, free, disposable email address. Stalkers and disgruntled acquaintances use the Internet to find addresses, phone numbers and other personal details about their targets. Identity thieves use personal information numbers and other personal details.'
+      text: 'Mr. Mugilan is working with our organization on several construction projects in the Borivali area. He is associated with projects such as Ananda Residency and Ariana Residency. His working pattern and management skills are excellent. He puts in complete effort along with his team, and his setup has been a great support to our firm.'
     },
     {
-      name: 'Sarah Johnson',
+      name: 'Mr. Chetan Parmar',
+      role: 'Parmar Group',
       image: 'image.webp',
-      text: 'Outstanding service and professionalism. The team delivered beyond our expectations and helped us achieve our project goals efficiently.'
+      text: 'I have known Mr. Mugilan for the past 15 years. He is highly passionate about his work and always strives to complete every task in a perfect manner.'
     },
     {
-      name: 'Michael Chen',
+      name: 'Mr. Ashok Jain',
+      role: 'Adity Group of Company',
       image: 'image.webp',
-      text: 'Excellent project management and communication throughout. Would highly recommend their services to anyone looking for quality work.'
+      text: 'He has handled our Palava Project and Oberoi Goregaon Project for the last three years, and we have found his services to be excellent. We never had to worry about billing or QS matters, as we have complete trust in him and found everything to be perfectly managed.'
+    },
+    {
+      name: 'Manisha Satra',
+      role: 'Leading Tiles Distributor Lee Tiles',
+      image: 'image.webp',
+      text: 'I am working with Mr. Mugilan, and I appreciate his work. He acts as a mediator in amendment situations, always caring for vendors, and he is excellent in maintaining quality and timely delivery.'
+    },
+    {
+      name: 'Mr. Pratik Gada',
+      role: 'National Ply Laminate',
+      image: 'image.webp',
+      text: 'With regard to Mr. Mugilan’s services, his attitude toward work is excellent, and he is a very disciplined professional. His level of expertise is extremely high, which helps him manage projects effectively under strict time constraints.'
     }
   ];
 
@@ -597,12 +613,12 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-50"></div>
         <RevealOnScroll>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Frequently Asked Questions (FAQs)</h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 items-start">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-fit ${expandedFaq === index ? 'bg-white/10' : ''}`}
+                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-full ${expandedFaq === index ? 'bg-white/10' : ''}`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-base sm:text-lg font-medium">{faq.question}</span>
