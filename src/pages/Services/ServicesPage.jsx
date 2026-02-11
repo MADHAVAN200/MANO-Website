@@ -78,6 +78,8 @@ const ServicesPage = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const { isPMC, isEPC } = useCompany();
+
     const coreServices = [
         {
             title: "Project Planning",
@@ -200,8 +202,8 @@ const ServicesPage = () => {
 
 
                     {/* 3. CORE SERVICES */}
-                    {isPPL ? (
-                        /* PPL SPECIFIC VIEW - ONE MAIN SERVICE */
+                    {isEPC ? (
+                        /* EPC SPECIFIC VIEW - ONE MAIN SERVICE */
                         <section id="core-services" className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                             <RevealOnScroll>
                                 <div className="max-w-7xl mx-auto">
@@ -232,7 +234,7 @@ const ServicesPage = () => {
                             </RevealOnScroll>
                         </section>
                     ) : (
-                        /* PCPL DEFAULT VIEW */
+                        /* PMC DEFAULT VIEW */
                         <>
                             <section id="core-services" className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-100">
                                 <RevealOnScroll>
@@ -321,8 +323,8 @@ const ServicesPage = () => {
                         </>
                     )}
 
-                    {/* 4. DIGITAL ERP SECTION (PCPL ONLY) */}
-                    {!isPPL && (
+                    {/* 4. DIGITAL ERP SECTION (PMC ONLY) */}
+                    {!isEPC && (
                         <RevealOnScroll>
                             <DigitalERPSection />
                         </RevealOnScroll>

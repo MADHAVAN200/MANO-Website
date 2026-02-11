@@ -14,17 +14,17 @@ export const CompanyProvider = ({ children }) => {
     useEffect(() => {
         if (brand) {
             const normalizedBrand = brand.toUpperCase();
-            if (normalizedBrand === 'PCPL' || normalizedBrand === 'PPL') {
+            if (normalizedBrand === 'PMC' || normalizedBrand === 'EPC') {
                 setCurrentBrand(normalizedBrand);
             } else {
                 // Invalid brand, redirect to gateway
-                navigate('/', { replace: true });
+                // navigate('/', { replace: true });
             }
         }
     }, [brand, navigate, location.pathname]);
 
     return (
-        <CompanyContext.Provider value={{ brand: currentBrand, isPPL: currentBrand === 'PPL', isPCPL: currentBrand === 'PCPL' }}>
+        <CompanyContext.Provider value={{ brand: currentBrand, isEPC: currentBrand === 'EPC', isPMC: currentBrand === 'PMC' }}>
             {children}
         </CompanyContext.Provider>
     );

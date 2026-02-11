@@ -123,25 +123,26 @@ const CountUp = ({ end, duration = 2000 }) => {
 
 
 export default function LandingPage() {
-  const { brand, isPPL } = useCompany();
+  const { brand, isEPC } = useCompany();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
 
   const projects = [
-    { name: 'SkyCity Hotel', image: 'projects/skycity_hotel.png' },
-    { name: 'Ariana Residency', image: 'projects/ananda_residency.png' },
-    { name: 'Ananda Residency', image: 'projects/ananda_residency.png' },
-    { name: 'Sati Darshan', image: 'projects/residential_complex.png' },
-    { name: 'PMAY-Charohli', image: 'projects/residential_complex.png' },
-    { name: 'Amara (Lodha)', image: 'projects/residential_complex.png' },
-    { name: 'Legacy Apartment', image: 'projects/ananda_residency.png' },
-    { name: 'Unity Heights', image: 'projects/residential_complex.png' },
-    { name: 'Citrus Hotel', image: 'projects/hotel_interior.png' },
-    { name: 'Anand Rathi', image: 'projects/office_interior.png' },
-    { name: 'Zudio Project', image: 'projects/westside_retail.png' },
-    { name: 'D-Mart Shopping Mall', image: 'projects/westside_retail.png' },
+    { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`] },
+    { name: 'Triveni Crown', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`] },
+    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`] },
+    { name: '30 Juin', images: [`${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`] },
+    { name: 'Sati Darshan', images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..png`] },
+    { name: 'Westside', images: [`${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`] },
+    { name: 'Zudio', images: [`${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).png`] },
+    { name: 'Prima Plastics', images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..png`] },
+    { name: 'Celestia', images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..png`] },
+    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..png`] },
+    { name: 'More Hyper Mart', images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..png`] },
+    { name: 'KAPCO Banquets', images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..png`] },
+    { name: 'Amazon Warehouse', images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..png`] },
   ];
 
   const handleMouseMove = (e) => {
@@ -394,9 +395,9 @@ export default function LandingPage() {
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Services</h2>
-          <div className={`max-w-7xl mx-auto ${isPPL ? 'flex justify-center' : 'grid grid-cols-1 md:grid-cols-2'} gap-8`}>
+          <div className={`max-w-7xl mx-auto ${isEPC ? 'flex justify-center' : 'grid grid-cols-1 md:grid-cols-2'} gap-8`}>
             {
-              (isPPL ? [
+              (isEPC ? [
                 {
                   title: "EPC Solution",
                   desc: "End-to-end Engineering, Procurement, and Construction services for turnkey delivery.",
@@ -465,7 +466,7 @@ export default function LandingPage() {
                 <Link
                   key={index}
                   to={`/${brand.toLowerCase()}${service.path}`}
-                  className={`group relative h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isPPL ? 'w-full max-w-4xl' : ''}`}
+                  className={`group relative h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isEPC ? 'w-full max-w-4xl' : ''}`}
                 >
                   {/* Background Image with Filter */}
                   <div
@@ -577,7 +578,7 @@ export default function LandingPage() {
 
                         {/* Image area with padding and inner frame */}
                         <div className="absolute left-4 sm:left-6 right-4 sm:right-6 bottom-4 sm:bottom-6 top-16 sm:top-20 z-10 rounded-lg overflow-hidden bg-black">
-                          <img src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.name} className="w-full h-full object-cover" />
+                          <img src={project.images[0]} alt={project.name} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>

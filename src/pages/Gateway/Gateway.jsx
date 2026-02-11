@@ -80,55 +80,75 @@ const Gateway = () => {
                 </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl px-8 z-10 items-stretch">
-                {/* MANO PCPL Option */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-[75%] xl:max-w-[1500px] px-4 md:px-10 z-10 items-stretch">
+                {/* MANO PMC Option */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                    className="w-full"
+                    className="w-full relative group h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_rgba(59,130,246,0.3)]"
                 >
-                    <Link to="/pcpl" className="group relative h-[400px] rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-transparent hover:border-blue-500/50 transition-all duration-500 overflow-hidden flex flex-col justify-end p-10 shadow-2xl hover:shadow-[0_0_50px_rgba(37,99,235,0.25)] ring-1 ring-white/5 hover:ring-blue-500/40">
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 scale-100 group-hover:scale-110 transition-all duration-700"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent/20 opacity-90 group-hover:opacity-80 transition-opacity duration-500"></div>
+                    <Link to="/pcpl" className="block w-full h-full relative">
+                        {/* Background Image */}
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop')` }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                        </div>
 
-                        <div className="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500 flex flex-col items-start">
-                            <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:border-blue-500 transition-colors duration-300 shadow-xl">
-                                <Building className="w-7 h-7 text-white" />
+                        {/* Glass Content Box */}
+                        <div className="absolute bottom-3 left-3 right-3 p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
+                            <div className="flex items-start gap-5">
+                                <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center shrink-0 shadow-lg group-hover:bg-blue-500 transition-colors duration-300">
+                                    <Building className="w-7 h-7 text-white" />
+                                </div>
+                                <div className="flex-1">
+                                    <h2 className="text-3xl font-bold text-white mb-2 leading-tight">MANO PMC</h2>
+                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6 opacity-90">
+                                        Project Management Consultants (PMC), Cost Consultancy, and comprehensive auditing services.
+                                    </p>
+                                    <div className="flex items-center text-white font-semibold group-hover:text-blue-200 transition-colors">
+                                        Explore Service <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </div>
                             </div>
-                            <h2 className="text-3xl font-bold tracking-wide text-white mb-2 group-hover:text-blue-400 transition-colors">MANO PCPL</h2>
-                            <p className="text-gray-300 mb-5 line-clamp-2 text-sm md:text-base group-hover:text-white transition-colors leading-relaxed font-medium text-left">
-                                Project Management Consultants (PMC), Cost Consultancy, and comprehensive auditing services.
-                            </p>
-                            <span className="inline-flex items-center text-blue-400 text-base font-bold group-hover:text-white transition-colors border-b-2 border-blue-400/30 pb-0.5 group-hover:border-white">
-                                Enter Website <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </span>
                         </div>
                     </Link>
                 </motion.div>
 
-                {/* MANO PPL Option */}
+                {/* MANO EPC Option */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                    className="w-full"
+                    className="w-full relative group h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.3)]"
                 >
-                    <Link to="/ppl" className="group relative h-[400px] rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/10 to-transparent hover:border-emerald-500/50 transition-all duration-500 overflow-hidden flex flex-col justify-end p-10 shadow-2xl hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ring-1 ring-white/5 hover:ring-emerald-500/40">
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 scale-100 group-hover:scale-110 transition-all duration-700"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent/20 opacity-90 group-hover:opacity-80 transition-opacity duration-500"></div>
+                    <Link to="/ppl" className="block w-full h-full relative">
+                        {/* Background Image */}
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2670&auto=format&fit=crop')` }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                        </div>
 
-                        <div className="relative z-10 transform group-hover:-translate-y-2 transition-transform duration-500 flex flex-col items-start">
-                            <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:border-emerald-500 transition-colors duration-300 shadow-xl">
-                                <Hammer className="w-7 h-7 text-white" />
+                        {/* Glass Content Box */}
+                        <div className="absolute bottom-3 left-3 right-3 p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
+                            <div className="flex items-start gap-5">
+                                <div className="w-14 h-14 rounded-2xl bg-emerald-600 flex items-center justify-center shrink-0 shadow-lg group-hover:bg-emerald-500 transition-colors duration-300">
+                                    <Hammer className="w-7 h-7 text-white" />
+                                </div>
+                                <div className="flex-1">
+                                    <h2 className="text-3xl font-bold text-white mb-2 leading-tight">MANO EPC</h2>
+                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6 opacity-90">
+                                        Specialized Engineering, Procurement, and Construction (EPC) solutions.
+                                    </p>
+                                    <div className="flex items-center text-white font-semibold group-hover:text-emerald-200 transition-colors">
+                                        Explore Service <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </div>
                             </div>
-                            <h2 className="text-3xl font-bold tracking-wide text-white mb-2 group-hover:text-emerald-400 transition-colors">MANO PPL</h2>
-                            <p className="text-gray-300 mb-5 line-clamp-2 text-sm md:text-base group-hover:text-white transition-colors leading-relaxed font-medium text-left">
-                                Specialized Engineering, Procurement, and Construction (EPC) solutions.
-                            </p>
-                            <span className="inline-flex items-center text-emerald-400 text-base font-bold group-hover:text-white transition-colors border-b-2 border-emerald-400/30 pb-0.5 group-hover:border-white">
-                                Enter Website <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </span>
                         </div>
                     </Link>
                 </motion.div>

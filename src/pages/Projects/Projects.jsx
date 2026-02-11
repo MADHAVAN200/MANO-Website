@@ -10,6 +10,75 @@ import RainbowButton from '../../components/RainbowButton';
 import ProjectsHero from '../../components/HeroSections/ProjectsHero';
 import ContactModal from '../../components/ContactModal';
 
+const ImageSlider = ({ images, title }) => {
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+
+    // Auto-slide effect
+    React.useEffect(() => {
+        if (!images || images.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(interval);
+    }, [images]);
+
+    const nextSlide = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+
+    const prevSlide = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    if (!images || images.length === 0) return null;
+
+    return (
+        <div className="relative w-full h-full group">
+            <img
+                src={images[currentIndex]}
+                alt={`${title} - View ${currentIndex + 1}`}
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+
+            {images.length > 1 && (
+                <>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-300" />
+
+                    {/* Navigation Arrows */}
+                    <button
+                        onClick={prevSlide}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                        aria-label="Previous image"
+                    >
+                        <ChevronRight className="w-6 h-6 rotate-180" />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                        aria-label="Next image"
+                    >
+                        <ChevronRight className="w-6 h-6" />
+                    </button>
+
+                    {/* Dots */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        {images.map((_, idx) => (
+                            <div
+                                key={idx}
+                                className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-blue-500 w-4' : 'bg-white/50'}`}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
+
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState("All");
     const [isContactOpen, setIsContactOpen] = useState(false);
@@ -17,43 +86,65 @@ const Projects = () => {
     const featuredProjects = [
         {
             id: 1,
-            title: "SkyCity Hotel Project – Rappture Projects",
-            location: "Andheri, Mumbai",
-            scope: ["PMC", "Project Management", "Construction"],
-            highlight: "A massive 3,76,000 Sft hospitality development delivered with excellence in Mumbai.",
-            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
+            title: "Hotel Moon Palace - Kinshasa",
+            location: "Kinshasa, Congo",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Luxury hospitality development with premium amenities.",
+            images: [
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).png`
+            ]
         },
         {
             id: 2,
-            title: "115 Rooms Hotel – Cube Construction SARL",
-            location: "Kinshasa, Congo",
-            scope: ["Project Management", "QA/QC", "Consultancy"],
-            highlight: "International project management for a premier hotel development in Congo.",
-            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
+            title: "Triveni Crown",
+            location: "Kalyan",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Landmark residential project with grand entrance gate.",
+            images: [
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.jpg`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.jpg`
+            ]
         },
         {
             id: 3,
             title: "Ananda Residency - Paradigm Ambit Buildcon",
             location: "Borivali (West), Mumbai",
-            scope: ["PMC", "Quality Control", "Audit"],
+            scope: ["PMC - Project Management Consultants"],
             highlight: "Massive 3,10,230 sq. ft. residential development completed successfully.",
-            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`,
+                `${import.meta.env.BASE_URL}Ananda residency/Aerial.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/podium.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/pool.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.jpg`
+            ]
         },
         {
             id: 4,
             title: "Westside – Tata Trent Ltd.",
             location: "Gachibowli, Hyderabad",
-            scope: ["PMC", "Interior Fit-out", "Audit"],
+            scope: ["PMC - Project Management Consultants"],
             highlight: "21,255 sq.ft. retail project delivered for Tata Trent.",
-            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`,
+                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..png`
+            ]
         },
         {
             id: 5,
-            title: "Prima Plastics Limited",
-            location: "Pithampur, Indore",
-            scope: ["PMC", "Safety Audit", "Construction"],
-            highlight: "1,79,533 sq.ft. industrial facility managed from design to execution.",
-            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+            title: "30 Juin",
+            location: "Congo",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Premium residential and commercial development.",
+            images: [
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.jpg`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.jpg`
+            ]
         }
     ];
 
@@ -61,174 +152,205 @@ const Projects = () => {
         // Residential
         {
             category: "Residential",
-            title: "Sati Darshan - Goyal Group",
-            scope: ["PMC", "QA/QC", "Audit"],
-            highlight: "1,39,749 sq.ft. residential project in Malad, Mumbai.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+            title: "Triveni Crown",
+            location: "Kalyan",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Landmark residential project with grand entrance gate.",
+            images: [
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.jpg`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.jpg`
+            ]
         },
         {
             category: "Residential",
-            title: "G+11 Residential Apartment - Cube Construction",
-            scope: ["PMC", "Monitoring"],
-            highlight: "Large scale residential development in Lubumbashi, Congo.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+            title: "Ananda Residency - Paradigm Ambit Buildcon",
+            location: "Borivali (West), Mumbai",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Massive 3,10,230 sq. ft. residential development completed successfully.",
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`,
+                `${import.meta.env.BASE_URL}Ananda residency/Aerial.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/podium.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/pool.jpg`,
+                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.jpg`
+            ]
+        },
+        {
+            category: "Residential",
+            title: "Sati Darshan - Goyal Group",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "1,39,749 sq.ft. residential project in Malad, Mumbai.",
+            images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..png`]
         },
         {
             category: "Residential",
             title: "Celestia - Shree Ram Samarth",
-            scope: ["PMC", "Quality Assurance"],
+            scope: ["PMC - Project Management Consultants"],
             highlight: "1,00,000 sq.ft. residential development in Mulund, Mumbai.",
-            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+            images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..png`]
         },
         {
             category: "Residential",
             title: "Shubharambh Residency",
-            scope: ["PMC", "Billing Support"],
+            scope: ["PMC - Project Management Consultants"],
             highlight: "59,000 sq.ft. housing project in Solapur.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+            images: [`${import.meta.env.BASE_URL}projects_img/Shubharambh Residency - Veer Housing Projects LLP..png`]
         },
         {
             category: "Residential",
-            title: "Ariana Residency",
-            scope: ["PMC", "Project Audit"],
-            highlight: "Quality management and execution oversight for premium residential units.",
-            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
+            title: "Golf Apartment",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Luxury apartments with golf course views.",
+            images: [
+                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 1 .jpg.jpeg`,
+                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 2 .jpg.jpeg`
+            ]
         },
         {
             category: "Residential",
-            title: "PMAY-Charohli",
-            scope: ["Audit", "QS"],
-            highlight: "Cost and quality auditing for affordable housing developments.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
+            title: "Triveni Classics",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Classic residential architecture in Kalyan.",
+            images: [
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (NEW view) in progress.jpg`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (Old view).jpg`
+            ]
         },
-        {
-            category: "Residential",
-            title: "Amara (Lodha)",
-            scope: ["PMC", "Execution"],
-            highlight: "Engagement in large-scale residential township development.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
-        },
-        {
-            category: "Residential",
-            title: "Legacy Apartment",
-            scope: ["PMC", "Audit"],
-            highlight: "Comprehensive project management for high-end residential spaces.",
-            image: `${import.meta.env.BASE_URL}projects/ananda_residency.png`
-        },
-        {
-            category: "Residential",
-            title: "Unity Heights / Ocean Park",
-            scope: ["PMC", "QA/QC"],
-            highlight: "Project execution and quality assurance for multi-storey residential projects.",
-            image: `${import.meta.env.BASE_URL}projects/residential_complex.png`
-        },
-        // Hospitality
-        {
-            category: "Hospitality",
-            title: "30 JUIN HOTEL – Glowmex Group",
-            scope: ["PMC", "Execution"],
-            highlight: "63,122 Sq.ft. luxury hotel project in Lubumbashi, Congo.",
-            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
-        },
-        {
-            category: "Hospitality",
-            title: "102 Rooms Hotel - Cube Construction",
-            scope: ["PMC", "Consultancy"],
-            highlight: "International hotel project in Lubumbashi, Congo.",
-            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
-        },
-        {
-            category: "Hospitality",
-            title: "53 Rooms Hotel - Clowmex Processing",
-            scope: ["PMC", "Audit"],
-            highlight: "63,000 Sft hospital project in Lubumbashi.",
-            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
-        },
-        {
-            category: "Hospitality",
-            title: "Citrus Hotel - Phase I & II",
-            scope: ["PMC", "Interior Audit"],
-            highlight: "Phased development and management for a premium hotel chain.",
-            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
-        },
-        {
-            category: "Hospitality",
-            title: "Premier Inn / Graviss Hotels",
-            scope: ["PMC", "Cost Consultancy"],
-            highlight: "Comprehensive hospitality consultancy for leading brands.",
-            image: `${import.meta.env.BASE_URL}projects/skycity_hotel.png`
-        },
-        {
-            category: "Hospitality",
-            title: "KAPCO Banquets & Catering",
-            scope: ["PMC", "Design Coordination"],
-            highlight: "15,698 sq.ft. hospitality project in New Delhi.",
-            image: `${import.meta.env.BASE_URL}projects/hotel_interior.png`
-        },
+
         // Commercial
         {
             category: "Commercial",
-            title: "Office Space – Anand Rathi Wealth Ltd.",
-            scope: ["Execution", "Interior PMC"],
-            highlight: "11,000 Sq.ft. modern office space in Gachibowli & Powai.",
-            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
-        },
-        {
-            category: "Commercial",
-            title: "Asian Paints Experience Centre",
-            scope: ["Interior PMC", "Execution"],
-            highlight: "Specialized retail experience centre in Borivali, Mumbai.",
-            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+            title: "Westside – Tata Trent Ltd.",
+            location: "Gachibowli, Hyderabad",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "21,255 sq.ft. retail project delivered for Tata Trent.",
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`,
+                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..png`
+            ]
         },
         {
             category: "Commercial",
             title: "Zudio / Tata Trent Projects",
-            scope: ["PMC", "Billing Audit"],
-            highlight: "Rollout management for multiple retail outlets across Bengaluru & Baroda.",
-            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Rollout management for multiple retail outlets.",
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).png`,
+                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(4).png`
+            ]
+        },
+        {
+            category: "Commercial",
+            title: "NIDIMO - Kamala Mill",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Commercial interior works at Kamala Mills.",
+            images: [
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123025 1.jpg`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123201 2.jpg`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123143 3.jpg`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123244 4.jpg`
+            ]
         },
         {
             category: "Commercial",
             title: "NSCI Dome – Worli",
-            scope: ["PMC", "Audit"],
+            scope: ["PMC - Project Management Consultants"],
             highlight: "5,150 sq.ft. institutional-scale project in Mumbai.",
-            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..png`,
+                `${import.meta.env.BASE_URL}NSCI/16.jpg`,
+                `${import.meta.env.BASE_URL}NSCI/21.jpg`,
+                `${import.meta.env.BASE_URL}NSCI/25.jpg`
+            ]
         },
         {
             category: "Commercial",
-            title: "Hexaware Techno Park / Cipla R&D",
-            scope: ["PMC", "Audit"],
-            highlight: "Technical and administrative project management for complex R&D and IT parks.",
-            image: `${import.meta.env.BASE_URL}projects/office_interior.png`
+            title: "More Hyper Mart",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Retail construction in Nashik, Maharashtra.",
+            images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..png`]
         },
         {
             category: "Commercial",
-            title: "D'Mart Shopping Malls",
-            scope: ["QS", "Audit"],
-            highlight: "Quantity surveying and billing audits for multiple D'Mart locations.",
-            image: `${import.meta.env.BASE_URL}projects/westside_retail.png`
+            title: "Expeditors – Studio DNA",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Corporate office interior project.",
+            images: [
+                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA .png`,
+                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA.png`
+            ]
         },
+        {
+            category: "Commercial",
+            title: "Maharail – Studio DNA",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Office space development.",
+            images: [`${import.meta.env.BASE_URL}projects_img/Maharail – Studio DNA.png`]
+        },
+
         // Industrial
         {
             category: "Industrial",
-            title: "Prima Plastics Limited - Phase II",
-            scope: ["PMC", "Safety Audit"],
-            highlight: "1,69,000 Sft plastic manufacturing facility in Pithambur.",
-            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+            title: "Prima Plastics Limited",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "1,69,000 Sft plastic manufacturing facility.",
+            images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..png`]
         },
         {
             category: "Industrial",
-            title: "Textile Factory - Micro Interlinings",
-            scope: ["PMC", "Audit"],
+            title: "Textile Factory",
+            scope: ["PMC - Project Management Consultants"],
             highlight: "52,532 sq.ft. industrial facility in Tarapur.",
-            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+            images: [`${import.meta.env.BASE_URL}projects_img/Textile Factory - Micro Interlinings Pvt. Ltd..png`]
+        },
+        {
+            category: "Industrial",
+            title: "Gaiwadi Industrial Estate",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Amazon Warehouse project management.",
+            images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..png`]
         },
         {
             category: "Industrial",
             title: "JNPC Infra Development",
-            scope: ["Infrastructure Audit"],
-            highlight: "Infrastructure development oversight in Andhra Pradesh.",
-            image: `${import.meta.env.BASE_URL}projects/prima_plastics.png`
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Infrastructure development oversight.",
+            images: [`${import.meta.env.BASE_URL}projects_img/JNPC Infra Development– TUV Rheinland (India) Pvt Ltd..png`]
+        },
+
+        // Hospitality
+        {
+            category: "Hospitality",
+            title: "Hotel Moon Palace - Kinshasa",
+            location: "Kinshasa, Congo",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Luxury hospitality development with premium amenities.",
+            images: [
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).png`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).png`
+            ]
+        },
+        {
+            category: "Hospitality",
+            title: "30 Juin",
+            location: "Congo",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "Premium residential and commercial development.",
+            images: [
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.jpg`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.jpg`
+            ]
+        },
+        {
+            category: "Hospitality",
+            title: "KAPCO Banquets & Catering",
+            scope: ["PMC - Project Management Consultants"],
+            highlight: "15,698 sq.ft. hospitality project in New Delhi.",
+            images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..png`]
         }
     ];
 
@@ -260,8 +382,8 @@ const Projects = () => {
                                 <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 sm:gap-16 items-center`}>
                                     <div className="w-full lg:w-1/2 group">
                                         <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl animated-white-border">
-                                            <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                            <ImageSlider images={project.images} title={project.title} />
+                                            {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div> */}
                                         </div>
                                     </div>
                                     <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8">
@@ -328,7 +450,7 @@ const Projects = () => {
                                     <div className="relative h-64 rounded-xl overflow-hidden mb-6">
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
                                         <img
-                                            src={project.image}
+                                            src={project.images[0]}
                                             alt={project.title}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
