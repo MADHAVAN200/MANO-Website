@@ -284,7 +284,7 @@ const Careers = () => {
                                 ))}
                             </div>
                         </div>
-                    </section>                    
+                    </section>
 
                     {/* 6. LIFE AT MANO (Optional Culture) */}
                     <section className="py-16 sm:py-24 px-6">
@@ -316,56 +316,70 @@ const Careers = () => {
                     </section>
 
                     {/* 7. EMPLOYEE PERSPECTIVES (CAROUSEL) */}
-                    <section className="py-16 sm:py-24 px-6 bg-black text-center">
+                    <section className="py-24 px-6 bg-black text-center">
                         <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
 
                             {/* Outer Glass Container */}
-                            <div className="relative w-full border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[350px] sm:min-h-[400px] flex flex-col justify-center px-4 sm:px-12 py-12 sm:py-16">
+                            <div className="relative w-full border border-white/10 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[400px] flex flex-col justify-center px-4 md:px-12 py-12 md:py-16">
 
-                                {/* Navigation Buttons (Aligned Inside Outer Container - Hidden on very small mobile) */}
+                                {/* Navigation Buttons (Aligned Inside Outer Container) */}
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                                    className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute left-6 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black rotate-180" />
+                                    <ChevronRight className="w-6 h-6 text-black rotate-180" />
                                 </button>
 
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                                    className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute right-6 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                                    <ChevronRight className="w-6 h-6 text-black" />
                                 </button>
 
-                                {/* Inner Content Content */}
-                                <div className="bg-white/5 border border-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-16 text-left transition-all duration-500 w-full max-w-2xl mx-auto">
-                                    <div className="flex items-center gap-4 sm:gap-5 mb-6">
-                                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center">
-                                            <User size={24} className="text-gray-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-lg sm:text-xl text-white">{testimonials[currentTestimonial].name}</h4>
-                                        </div>
-                                    </div>
+                                {/* Inner Content - Grid Stack for Static Height */}
+                                <div className="grid grid-cols-1 w-full mx-auto">
+                                    {testimonials.map((testimonial, index) => (
+                                        <div
+                                            key={index}
+                                            className={`
+                                                bg-white/5 border border-white/5 rounded-3xl p-8 md:p-16 text-left
+                                                col-start-1 row-start-1 w-full h-full flex flex-col justify-between
+                                                transition-opacity duration-500 ease-in-out
+                                                ${index === currentTestimonial ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}
+                                            `}
+                                        >
+                                            <div>
+                                                <div className="flex items-center gap-5 mb-6">
+                                                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center shrink-0">
+                                                        <User size={32} className="text-gray-400" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-xl text-white">{testimonial.name}</h4>
+                                                    </div>
+                                                </div>
 
-                                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
-                                        {testimonials[currentTestimonial].text}
-                                    </p>
+                                                <p className="text-gray-300 leading-relaxed text-base md:text-lg pl-1">
+                                                    {testimonial.text}
+                                                </p>
+                                            </div>
 
-                                    {/* Dots */}
-                                    <div className="flex justify-center gap-3 mt-10">
-                                        {testimonials.map((_, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => setCurrentTestimonial(index)}
-                                                className={`transition-all duration-300 rounded-full border border-white/10 ${index === currentTestimonial
-                                                    ? 'w-3 h-3 bg-white/30 scale-125'
-                                                    : 'w-2 h-2 bg-white/10 hover:bg-white/20'
-                                                    }`}
-                                            />
-                                        ))}
-                                    </div>
+                                            {/* Dots */}
+                                            <div className="flex justify-center gap-3 mt-10">
+                                                {testimonials.map((_, dotIndex) => (
+                                                    <button
+                                                        key={dotIndex}
+                                                        onClick={() => setCurrentTestimonial(dotIndex)}
+                                                        className={`transition-all duration-300 rounded-full border border-white/10 ${dotIndex === currentTestimonial
+                                                            ? 'w-3 h-3 bg-white/30 scale-125'
+                                                            : 'w-2 h-2 bg-white/10 hover:bg-white/20'
+                                                            }`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
