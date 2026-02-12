@@ -3,7 +3,7 @@ import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, Chevro
 import { useCompany } from '../context/CompanyContext';
 
 const ContactModal = ({ isOpen, onClose }) => {
-    const { isPPL } = useCompany();
+    const { isEPC } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
     const [selectedService, setSelectedService] = useState('');
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         }
 
         setLoading(true);
-        const API_URL = import.meta.env.VITE_API_URL;
+        const API_URL = "https://erp.mano.co.in/api/enquiry_api/enquiry";
 
         try {
             const response = await fetch(API_URL, {
@@ -83,7 +83,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         "Enquiry"
     ];
 
-    const services = isPPL ? pplServices : pcplServices;
+    const services = isEPC ? pplServices : pcplServices;
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-auto">

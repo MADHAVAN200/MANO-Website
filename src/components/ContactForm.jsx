@@ -3,7 +3,7 @@ import { useCompany } from '../context/CompanyContext';
 import { Send, ChevronDown, Loader2 } from 'lucide-react';
 
 const ContactForm = () => {
-    const { isPPL } = useCompany();
+    const { isEPC } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
     const [selectedService, setSelectedService] = useState('');
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const ContactForm = () => {
         }
 
         setLoading(true);
-        const API_URL = import.meta.env.VITE_API_URL;
+        const API_URL = "https://erp.mano.co.in/api/enquiry_api/enquiry";
 
         try {
             const response = await fetch(API_URL, {
@@ -69,7 +69,7 @@ const ContactForm = () => {
         "QS and Auditing", "EHS Audit", "Enquiry"
     ];
     const pplServices = ["EPC Solution", "Enquiry"];
-    const services = isPPL ? pplServices : pcplServices;
+    const services = isEPC ? pplServices : pcplServices;
 
     return (
         <div className="max-w-2xl mx-auto">
