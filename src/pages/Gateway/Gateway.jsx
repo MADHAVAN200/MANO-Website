@@ -88,7 +88,7 @@ const Gateway = () => {
                     transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                     className="w-full relative group h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_rgba(59,130,246,0.3)]"
                 >
-                    <Link to="/pcpl" className="block w-full h-full relative">
+                    <Link to="/pmc" className="block w-full h-full relative">
                         {/* Background Image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -98,7 +98,7 @@ const Gateway = () => {
                         </div>
 
                         {/* Glass Content Box */}
-                        <div className="absolute bottom-3 left-3 right-3 p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
+                        <div className="absolute bottom-3 left-3 right-3 p-6 h-[260px] flex flex-col justify-center rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
                             <div className="flex items-start gap-5">
                                 <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center shrink-0 shadow-lg group-hover:bg-blue-500 transition-colors duration-300">
                                     <Building className="w-7 h-7 text-white" />
@@ -124,7 +124,7 @@ const Gateway = () => {
                     transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                     className="w-full relative group h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.3)]"
                 >
-                    <Link to="/ppl" className="block w-full h-full relative">
+                    <Link to="/epc" className="block w-full h-full relative">
                         {/* Background Image */}
                         <div
                             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -134,7 +134,7 @@ const Gateway = () => {
                         </div>
 
                         {/* Glass Content Box */}
-                        <div className="absolute bottom-3 left-3 right-3 p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
+                        <div className="absolute bottom-3 left-3 right-3 p-6 h-[260px] flex flex-col justify-center rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg transition-all duration-500 group-hover:bg-white/15 group-hover:border-white/30">
                             <div className="flex items-start gap-5">
                                 <div className="w-14 h-14 rounded-2xl bg-emerald-600 flex items-center justify-center shrink-0 shadow-lg group-hover:bg-emerald-500 transition-colors duration-300">
                                     <Hammer className="w-7 h-7 text-white" />
