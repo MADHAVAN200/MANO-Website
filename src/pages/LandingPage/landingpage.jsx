@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, Circle, Briefcase, Calculator, TrendingUp, ShieldCheck, FileText, Shield, Hammer, Map, Clock, Handshake } from 'lucide-react';
+import React,{ useState, useEffect, useRef } from 'react';
+import { ChevronRight, Briefcase, Calculator, ShieldCheck, FileText, Shield, Hammer, Map, Clock, Handshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import RainbowButton from '../../components/RainbowButton';
 import { motion } from "framer-motion";
 
 import LandingHero from '../../components/HeroSections/LandingHero';
 import { useCompany } from '../../context/CompanyContext';
 import ContactForm from '../../components/ContactForm';
 import DigitalERPSection from '../../components/DigitalERPSection';
-
 
 
 const TestimonialsColumn = (props) => {
@@ -81,8 +79,6 @@ const RevealOnScroll = ({ children }) => {
 };
 
 
-
-
 const CountUp = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -124,7 +120,6 @@ const CountUp = ({ end, duration = 2000 }) => {
 
 export default function LandingPage() {
   const { brand, isEPC } = useCompany();
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
@@ -256,10 +251,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden">
       {/* Hero Section with Navigation */}
-      {/* Hero Section with Navigation */}
       <LandingHero />
-
-
 
       {/* Why Choose Section with Gradient */}
       <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
