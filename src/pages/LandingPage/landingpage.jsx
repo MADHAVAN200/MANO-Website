@@ -35,6 +35,7 @@ const TestimonialsColumn = (props) => {
                     <img
                       src={`${import.meta.env.BASE_URL}${image}`}
                       alt={name}
+                      loading="lazy"
                       className="w-full h-full rounded-full object-cover border border-black/50"
                     />
                   </div>
@@ -570,7 +571,7 @@ export default function LandingPage() {
 
                         {/* Image area with padding and inner frame */}
                         <div className="absolute left-4 sm:left-6 right-4 sm:right-6 bottom-4 sm:bottom-6 top-16 sm:top-20 z-10 rounded-lg overflow-hidden bg-black">
-                          <img src={project.images[0]} alt={project.name} className="w-full h-full object-cover" />
+                          <img src={project.images[0]} alt={project.name} loading="lazy" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>

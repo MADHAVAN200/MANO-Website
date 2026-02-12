@@ -44,7 +44,7 @@ const Footer = () => {
                         <div className="space-y-6 max-w-sm">
                             <Link to={brandPath}>
                                 <div className="inline-block">
-                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-12 md:h-16" />
+                                    <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" loading="lazy" className="h-12 md:h-16" />
                                 </div>
                             </Link>
                             <div className="space-y-4 text-gray-400">

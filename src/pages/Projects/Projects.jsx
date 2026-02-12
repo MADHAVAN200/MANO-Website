@@ -74,6 +74,7 @@ const ImageSlider = ({ images, title, autoScrollTrigger }) => {
                         scale: { duration: 5 } // Slow zoom effect
                     }}
                     className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
                 />
             </AnimatePresence>
 
@@ -494,6 +495,7 @@ const Projects = () => {
                                         <img
                                             src={project.images[0]}
                                             alt={project.title}
+                                            loading="lazy"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <span className="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/10">
