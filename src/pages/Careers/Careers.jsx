@@ -284,33 +284,7 @@ const Careers = () => {
                                 ))}
                             </div>
                         </div>
-                    </section>
-
-                    {/* 5. HOW TO APPLY */}
-                    <section className="py-24 px-6 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
-                        <div className="max-w-4xl mx-auto text-center relative z-10">
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Build Your Career With Us?</h2>
-                            <p className="text-xl text-gray-300 mb-12">
-                                We’re always excited to meet skilled professionals who can bring value to our team.
-                            </p>
-
-
-
-                            <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <div onClick={() => handleApplyClick("General Application")}>
-                                    <RainbowButton>
-                                        <span className="flex items-center text-lg font-semibold px-6">
-                                            Apply Now <ChevronRight className="ml-2 w-5 h-5" />
-                                        </span>
-                                    </RainbowButton>
-                                </div>
-                                <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center">
-                                    Send Resume <FileText className="ml-2 w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
-                    </section>
+                    </section>                    
 
                     {/* 6. LIFE AT MANO (Optional Culture) */}
                     <section className="py-16 sm:py-24 px-6">
