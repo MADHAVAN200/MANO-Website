@@ -379,7 +379,7 @@ const ProjectExecution = () => {
                                     {/* WITH MANO (BLUE) */}
                                     <div className="space-y-6 text-left lg:pl-12 relative group">
                                         <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
-                                        <h3 className="text-2xl font-bold text-blue-500 mb-6">With Mano Execution Services</h3>
+                                        <h3 className="text-2xl font-bold text-blue-500 mb-6">With MANO Execution Services</h3>
 
                                         <div className="space-y-6">
                                             {[
@@ -426,7 +426,7 @@ const ProjectExecution = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Project Execution?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Project Execution?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -558,7 +558,7 @@ const ProjectExecution = () => {
                     <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Mano Project Consultants is trusted for delivering disciplined, execution-focused project management that ensures predictability, accountability, and successful outcomes on site."
+                                "MANO Project Consultants is trusted for delivering disciplined, execution-focused project management that ensures predictability, accountability, and successful outcomes on site."
                             </p>
                         </div>
                     </section>
@@ -569,7 +569,7 @@ const ProjectExecution = () => {
                         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Execute with Precision. <br /> Deliver with Confidence.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants to ensure flawless execution and timely project delivery.
+                                Partner with MANO Project Consultants to ensure flawless execution and timely project delivery.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>

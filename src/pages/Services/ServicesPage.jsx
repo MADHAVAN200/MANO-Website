@@ -339,7 +339,7 @@ const ServicesPage = () => {
                                 <div>
                                     <span className="text-blue-500 font-semibold tracking-wider text-sm uppercase mb-4 block">Service Philosophy</span>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 sm:pb-6 mb-8 leading-tight">
-                                        Why Choose <span className="text-blue-500 block sm:inline lg:block">Mano Consultants?</span>
+                                        Why Choose <span className="text-blue-500 block sm:inline lg:block">MANO Consultants?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -461,7 +461,7 @@ const ServicesPage = () => {
                         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Ready to Elevate Your Project?</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants to plan smarter, execute better, and achieve guaranteed project success.
+                                Partner with MANO Project Consultants to plan smarter, execute better, and achieve guaranteed project success.
                             </p>
                             <div className="flex justify-center">
                                 <RainbowButton>

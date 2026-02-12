@@ -408,7 +408,7 @@ const ProjectManagement = () => {
                                         <div className="flex flex-col md:flex-row items-center gap-6">
                                             <div className="w-[90%] h-20 rounded-xl p-4 bg-blue-600/20 border border-blue-500/50 text-center md:text-left shadow-[0_0_20px_rgba(37,99,235,0.3)] backdrop-blur-md flex items-center overflow-hidden">
                                                 <span className="text-xl md:text-3xl font-bold text-white whitespace-nowrap truncate px-2">
-                                                    With Mano Consultants
+                                                    With MANO Consultants
                                                 </span>
                                             </div>
                                             <div className="font-bold whitespace-nowrap text-4xl md:text-5xl text-white pb-2">
@@ -441,7 +441,7 @@ const ProjectManagement = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Project Management?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Project Management?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -572,7 +572,7 @@ const ProjectManagement = () => {
                         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Lead Your Project Toward Certainty.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Consultants to manage your project with precision and confidence.
+                                Partner with MANO Consultants to manage your project with precision and confidence.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>

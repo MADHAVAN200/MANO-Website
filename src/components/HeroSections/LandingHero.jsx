@@ -114,7 +114,7 @@ export default function LandingHero() {
 
                         {/* Description */}
                         <p className="animate-fade-in delay-300 max-w-xl text-base sm:text-lg text-zinc-100 leading-relaxed font-semibold">
-                            Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery across residential, commercial, and industrial sectors.
+                            MANO Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery across residential, commercial, and industrial sectors.
                         </p>
 
                         {/* CTA Buttons */}

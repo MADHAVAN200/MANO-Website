@@ -85,7 +85,7 @@ export default function ServiceHero() {
                         </h1>
 
                         <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-100 leading-relaxed font-semibold">
-                            At Mano Project Consultants, we provide end-to-end consulting solutions that help organizations plan smarter, execute faster, and maintain uncompromising quality.
+                            At MANO Project Consultants, we provide end-to-end consulting solutions that help organizations plan smarter, execute faster, and maintain uncompromising quality.
                         </p>
 
                         {/* CTA Buttons */}

@@ -41,7 +41,7 @@ export default function CareersHero() {
                         {/* Main Heading */}
                         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] sm:leading-tight">
                             Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Future</span> <br />
-                            With Mano
+                            With MANO
                         </h1>
 
                         <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">

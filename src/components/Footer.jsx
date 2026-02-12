@@ -49,7 +49,7 @@ const Footer = () => {
                             </Link>
                             <div className="space-y-4 text-gray-400">
                                 <div>
-                                    <h3 className="font-bold text-white text-lg lg:text-xl">Mano Project Consultants Pvt. Ltd.</h3>
+                                    <h3 className="font-bold text-white text-lg lg:text-xl">MANO Project Consultants Pvt. Ltd.</h3>
                                     <p className="italic text-blue-400 text-xs">A Complete Construction Engineering Solution</p>
                                 </div>
 
@@ -111,7 +111,7 @@ const Footer = () => {
                     </div>
 
                     <div className="border-t border-gray-800 mt-12 pt-8 text-center text-xs text-gray-500">
-                        <p>Copyright 2025 © <span className="font-semibold text-gray-400">Mano Project Consultants Pvt. Ltd.</span> All Rights Reserved.</p>
+                        <p>Copyright 2025 © <span className="font-semibold text-gray-400">MANO Project Consultants Pvt. Ltd.</span> All Rights Reserved.</p>
                     </div>
                 </footer>
             </div>

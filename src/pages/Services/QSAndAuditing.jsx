@@ -352,7 +352,7 @@ const QSBillingAudit = () => {
                                             <div className="mb-6 md:mb-8 p-4 bg-blue-500/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                                                 <CheckCircle className="w-10 h-10 text-blue-400" />
                                             </div>
-                                            <h3 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6 md:mb-8">With Mano QS & Billing Audit Services</h3>
+                                            <h3 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6 md:mb-8">With MANO QS & Billing Audit Services</h3>
 
                                             <ul className="space-y-4 md:space-y-5 text-left w-full pl-4 grow">
                                                 <li className="flex items-start text-gray-100 text-base md:text-lg"><BadgeCheck className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Verified quantities</li>
@@ -393,7 +393,7 @@ const QSBillingAudit = () => {
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                     <div>
                                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                            Why Mano for <span className="text-blue-500 block sm:inline lg:block">Quantity Survey & Billing Audit?</span>
+                                            Why MANO for <span className="text-blue-500 block sm:inline lg:block">Quantity Survey & Billing Audit?</span>
                                         </h2>
                                         <div className="space-y-8">
                                             {[
@@ -520,7 +520,7 @@ const QSBillingAudit = () => {
                     <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Top developers and contractors rely on Mano Project Consultants for precise, transparent, and dispute-free quantity and billing verification systems."
+                                "Top developers and contractors rely on MANO Project Consultants for precise, transparent, and dispute-free quantity and billing verification systems."
                             </p>
                         </div>
                     </section>
@@ -535,7 +535,7 @@ const QSBillingAudit = () => {
                                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-blue-100 to-gray-500">Protect Your Investment.</span>
                             </h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants for transparent, accurate, and reliable QS & Billing Audit services.
+                                Partner with MANO Project Consultants for transparent, accurate, and reliable QS & Billing Audit services.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>
