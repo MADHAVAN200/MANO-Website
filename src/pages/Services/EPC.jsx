@@ -7,6 +7,7 @@ import {
 import RainbowButton from '../../components/RainbowButton';
 import ContactModal from '../../components/ContactModal';
 import PageHero from '../../components/HeroSections/PageHero';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -250,11 +251,11 @@ const EPC = () => {
                 stats={{
                     mainValue: "100+",
                     mainLabel: "EPC Projects",
-                    satisfaction: "100%",
+                    satisfaction: "95%",
                     grid: [
-                        { value: "30%", label: "Faster Delivery" },
-                        { value: "95%", label: "Cost Opt." },
-                        { value: "Zero", label: "Disruptions" }
+                        { value: "25", label: "Clients" },
+                        { value: "90%", label: "On-Time" },
+                        { value: "Zero", label: "Accidents" }
                     ]
                 }}
             />
@@ -277,20 +278,20 @@ const EPC = () => {
                                     <p className="text-gray-400 text-xs uppercase tracking-wider">EPC Projects Supported</p>
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={30} suffix="%" /></h3>
-                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Faster Delivery</p>
+                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={25} suffix="" /></h3>
+                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Happy Clients</p>
                                 </div>
                                 <div className="p-4">
                                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={95} suffix="%" /></h3>
                                     <p className="text-gray-400 text-xs uppercase tracking-wider">Procurement Savings</p>
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={92} suffix="%" /></h3>
-                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Vendor Efficiency</p>
+                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={90} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Project Success Rate</p>
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={40} suffix="%" /></h3>
-                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Less Delays</p>
+                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2"><CountUp end={100} suffix="%" /></h3>
+                                    <p className="text-gray-400 text-xs uppercase tracking-wider">Safety Compliance</p>
                                 </div>
                             </div>
                         </div>
@@ -623,57 +624,36 @@ const EPC = () => {
                     </section>
 
                     {/* 10. PROJECT TYPES */}
-                    <section className="py-16 md:py-24 px-6 md:px-12 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-800">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto text-center">
-                                <div className="text-center mb-12 md:mb-16">
-                                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">Industries We Support</h3>
-                                </div>
-
-                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                    {[
-                                        {
-                                            name: "Residential Mega Developments",
-                                            desc: "High-rise townships & communities.",
-                                            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Commercial IT Parks",
-                                            desc: "Grade-A office spaces & tech parks.",
-                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Industrial Plants",
-                                            desc: "Manufacturing & production units.",
-                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Logistics & Warehousing",
-                                            desc: "Supply chain infrastructure.",
-                                            image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Hospitality & Mixed-Use",
-                                            desc: "Luxury hotels & lifestyle centers.",
-                                            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                    ].map((ind, index) => (
-                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                            <img
-                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                                src={ind.image}
-                                                alt={ind.name}
-                                            />
-                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
+                    <ProjectTypes
+                        title="Industries We Support"
+                        items={[
+                            {
+                                name: "Residential Mega Developments",
+                                desc: "High-rise townships & communities.",
+                                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Commercial IT Parks",
+                                desc: "Grade-A office spaces & tech parks.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial Plants",
+                                desc: "Manufacturing & production units.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Logistics & Warehousing",
+                                desc: "Supply chain infrastructure.",
+                                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Hospitality & Mixed-Use",
+                                desc: "Luxury hotels & lifestyle centers.",
+                                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 11. PROCESS FLOW */}
                     <section className="py-16 md:py-24 px-6 md:px-12 bg-black relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-900">

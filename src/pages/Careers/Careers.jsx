@@ -10,11 +10,19 @@ import RainbowButton from '../../components/RainbowButton';
 import CareersHero from '../../components/HeroSections/CareersHero';
 
 import jobData from '../../data/jobs.json';
+import ResumeModal from '../../components/ResumeModal';
 
 const Careers = () => {
     const [openPosition, setOpenPosition] = useState(null);
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+    const [selectedJob, setSelectedJob] = useState("");
+
+    const handleApplyClick = (jobTitle = "") => {
+        setSelectedJob(jobTitle);
+        setIsResumeModalOpen(true);
+    };
 
     // Filter out header rows (where title is "Position")
     const allPositions = jobData.filter(job => job.title !== "Position" && job.title);
@@ -264,7 +272,10 @@ const Careers = () => {
                                                     ))}
                                                 </div>
 
-                                                <button className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+                                                <button
+                                                    onClick={() => handleApplyClick(job.title)}
+                                                    className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2"
+                                                >
                                                     Apply for this Role <ArrowRight size={18} />
                                                 </button>
                                             </div>
@@ -287,11 +298,13 @@ const Careers = () => {
 
 
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-6">
-                                        Apply Now <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
+                                <div onClick={() => handleApplyClick("General Application")}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-6">
+                                            Apply Now <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
                                 <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center">
                                     Send Resume <FileText className="ml-2 w-5 h-5" />
                                 </button>
@@ -399,12 +412,17 @@ const Careers = () => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-6">
-                                        Apply Today <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
-                                <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm">
+                                <div onClick={() => handleApplyClick("General Application")}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-6">
+                                            Apply Today <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
+                                <button
+                                    onClick={() => document.getElementById('positions')?.scrollIntoView({ behavior: 'smooth' })}
+                                    className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm"
+                                >
                                     View Open Positions <ArrowRight className="ml-2 w-5 h-5" />
                                 </button>
                             </div>
@@ -413,6 +431,11 @@ const Careers = () => {
                 </>
             )}
 
+            <ResumeModal
+                isOpen={isResumeModalOpen}
+                onClose={() => setIsResumeModalOpen(false)}
+                jobRole={selectedJob}
+            />
         </div>
     );
 };

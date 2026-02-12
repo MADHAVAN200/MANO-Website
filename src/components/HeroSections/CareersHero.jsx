@@ -50,7 +50,7 @@ export default function CareersHero() {
 
                         {/* Scroll Indicator */}
                         <motion.button
-                            onClick={() => document.getElementById('open-positions')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('positions')?.scrollIntoView({ behavior: 'smooth' })}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="group flex items-center gap-3 text-white font-medium border border-white/20 px-6 py-3 rounded-full bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all mx-auto"

@@ -4,23 +4,32 @@ import { ChevronRight, Menu, X } from 'lucide-react';
 import RainbowButton from './RainbowButton';
 import { useCompany } from '../context/CompanyContext';
 import ContactModal from './ContactModal';
+import ResumeModal from './ResumeModal';
 
 const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
-    const { brand, isPPL } = useCompany();
+    const { brand, isEPC } = useCompany();
     const brandPath = `/${brand.toLowerCase()}`;
 
     const [activeService, setActiveService] = useState(0);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isContactOpen, setIsContactOpen] = useState(false);
+    const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+    const isCareersPage = currentPath === `${brandPath}/careers` || currentPath === `${brandPath}/careers/`;
 
     const handleContactClick = (e) => {
         e.preventDefault();
         setIsMobileMenuOpen(false);
         const isLanding = currentPath === brandPath || currentPath === `${brandPath}/` || currentPath === '/';
         const isAbout = currentPath.includes('/about-us');
+
+        if (isCareersPage) {
+            setIsResumeOpen(true);
+            return;
+        }
 
         if (isLanding || isAbout) {
             const section = document.getElementById('contact-section');
@@ -45,10 +54,11 @@ const Navbar = () => {
     ];
 
     const pplServices = [
-        { title: "EPC Solution", desc: "End-to-end Engineering, Procurement, and Construction services.", path: "/services/epc" }
+        { title: "EPC Solution", desc: "End-to-end Engineering, Procurement, and Construction services.", path: "/epc/services/epc" } // Absolute path to force switch
     ];
 
-    const services = isPPL ? pplServices : pcplServices;
+
+    const services = isEPC ? pplServices : pcplServices;
 
     const isActive = (path) => {
         const fullPath = `${brandPath}${path === '/' ? '' : path}`;
@@ -75,7 +85,10 @@ const Navbar = () => {
     const activeClass = "text-white font-bold text-[20px] lg:text-[20px]";
     const inactiveClass = "text-gray-400 hover:text-white text-[18px] lg:text-[18px]";
 
-    const getLink = (path) => `${brandPath}${path === '/' ? '' : path}`;
+    const getLink = (path) => {
+        if (path.startsWith('/epc') || path.startsWith('/pmc')) return path; // Return absolute brand paths as is
+        return `${brandPath}${path === '/' ? '' : path}`;
+    };
 
     return (
         <nav className="absolute top-4 lg:top-6 left-0 right-0 z-50 flex items-center justify-center pointer-events-none">
@@ -104,14 +117,14 @@ const Navbar = () => {
 
                         {/* Services Link - Trigger */}
                         <div
-                            onMouseEnter={() => !isPPL && setIsServicesOpen(true)}
+                            onMouseEnter={() => !isEPC && setIsServicesOpen(true)}
                             className="relative h-full flex items-center"
                         >
                             <Link
-                                to={isPPL ? getLink('/services/epc') : getLink('/services')}
-                                className={`${linkBaseClass} ${isActive(isPPL ? '/services/epc' : '/services') ? activeClass : inactiveClass} flex items-center gap-1 py-2`}
+                                to={isEPC ? getLink('/services/epc') : getLink('/services')}
+                                className={`${linkBaseClass} ${isActive(isEPC ? '/services/epc' : '/services') ? activeClass : inactiveClass} flex items-center gap-1 py-2`}
                             >
-                                {isPPL ? 'Service - EPC' : 'Services'}
+                                {isEPC ? 'Service' : 'Services'}
                             </Link>
                         </div>
 
@@ -128,7 +141,7 @@ const Navbar = () => {
                         <div className="hidden lg:block">
                             <div onClick={handleContactClick} className="cursor-pointer">
                                 <RainbowButton borderRadius="rounded-xl">
-                                    Get in Touch
+                                    {isCareersPage ? 'Apply' : 'Get in Touch'}
                                     <ChevronRight className="w-4 h-4 ml-2" />
                                 </RainbowButton>
                             </div>
@@ -155,8 +168,8 @@ const Navbar = () => {
                         <Link to={getLink('/about-us')} className={`${linkBaseClass} ${isActive('/about-us') ? activeClass : inactiveClass}`}>
                             About Us
                         </Link>
-                        <Link to={isPPL ? getLink('/services/epc') : getLink('/services')} className={`${linkBaseClass} ${isActive(isPPL ? '/services/epc' : '/services') ? activeClass : inactiveClass}`}>
-                            {isPPL ? 'Service - EPC' : 'Services'}
+                        <Link to={isEPC ? getLink('/services/epc') : getLink('/services')} className={`${linkBaseClass} ${isActive(isEPC ? '/services/epc' : '/services') ? activeClass : inactiveClass}`}>
+                            {isEPC ? 'Service' : 'Services'}
                         </Link>
                         <Link to={getLink('/projects')} className={`${linkBaseClass} ${isActive('/projects') ? activeClass : inactiveClass}`}>
                             Projects
@@ -166,7 +179,7 @@ const Navbar = () => {
                         </Link>
                         <div className="pt-4" onClick={handleContactClick}>
                             <RainbowButton borderRadius="rounded-xl w-full">
-                                Get in Touch
+                                {isCareersPage ? 'Apply' : 'Get in Touch'}
                                 <ChevronRight className="w-4 h-4 ml-2" />
                             </RainbowButton>
                         </div>
@@ -192,7 +205,7 @@ const Navbar = () => {
                             </Link>
                         </div>
 
-                        <div className={`w-2/3 grid ${isPPL ? 'grid-cols-1' : 'grid-cols-2'} gap-x-4 gap-y-2`}>
+                        <div className={`w-2/3 grid ${isEPC ? 'grid-cols-1' : 'grid-cols-2'} gap-x-4 gap-y-2`}>
                             {services.map((service, index) => (
                                 <Link
                                     key={index}
@@ -212,6 +225,7 @@ const Navbar = () => {
             </div>
 
             <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+            <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} jobRole="General Application" />
         </nav >
     );
 };

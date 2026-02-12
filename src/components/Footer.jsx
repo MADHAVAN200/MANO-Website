@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useCompany } from '../context/CompanyContext';
 
 const Footer = () => {
-    const { isPPL, brand } = useCompany();
+    const { isEPC, brand } = useCompany();
     const brandPath = `/${brand.toLowerCase()}`;
     const getLink = (path) => `${brandPath}${path === '/' ? '' : path}`;
 
@@ -21,7 +21,7 @@ const Footer = () => {
         { title: "EPC Solution", path: "/services/epc" }
     ];
 
-    const services = isPPL ? pplServices : pcplServices;
+    const services = isEPC ? pplServices : pcplServices;
 
     return (
         <>

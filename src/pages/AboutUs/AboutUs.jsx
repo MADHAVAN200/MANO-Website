@@ -80,6 +80,16 @@ const AboutUs = () => {
     return (
         <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
 
+            <style>{`
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .animate-marquee {
+                    animation: marquee 30s linear infinite;
+                }
+            `}</style>
+
             {/* Navbar (Duplicated for consistency, ideally should be a reuseable component) */}
             {/* Navbar (Duplicated for consistency, ideally should be a reuseable component) */}
             {/* Moved to Global Navbar component */}
@@ -318,7 +328,7 @@ const AboutUs = () => {
                                 {
                                     name: "Mr. N Subramanian",
                                     role: "Project Director",
-                                    expertise: ["Large Scale Projects", "Housing & Commercial", "Infrastructure"],
+                                    expertise: ["Large Scale Projects", "Hospitality & Commercial", "Infrastructure"],
                                     bio: "Holds a strong experience of more than 25+ years into management of large scale construction projects. He has worked at various top-level management positions in highly esteemed companies. He has completed more than 80 Lakh sq. ft of construction at various sites across India.",
                                     ps: "Expert in Residential, Retail, and Hospitality typologies."
                                 }

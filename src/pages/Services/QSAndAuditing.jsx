@@ -10,6 +10,7 @@ import {
 import RainbowButton from '../../components/RainbowButton';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 
 const RevealOnScroll = ({ children }) => {
@@ -442,63 +443,42 @@ const QSBillingAudit = () => {
                         </div>
                     </section>
 
-                    {/* 7. INDUSTRIES SUPPORTED - Icon Grid */}
-                    <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
-                        <div className="max-w-7xl mx-auto">
-                            <RevealOnScroll>
-                                <div className="text-center mb-12 md:mb-16">
-                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Industries We Serve</h2>
-                                </div>
-                            </RevealOnScroll>
-
-                            <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                {[
-                                    {
-                                        name: "Residential",
-                                        desc: "High-end apartments & townships.",
-                                        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
-                                    },
-                                    {
-                                        name: "Commercial",
-                                        desc: "Offices, malls & business parks.",
-                                        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&h=600&auto=format&fit=crop"
-                                    },
-                                    {
-                                        name: "IT Parks",
-                                        desc: "Tech campuses & data centers.",
-                                        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                    },
-                                    {
-                                        name: "Industrial",
-                                        desc: "Factories & warehouses.",
-                                        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                    },
-                                    {
-                                        name: "Hospitality",
-                                        desc: "Hotels & resorts.",
-                                        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                    },
-                                    {
-                                        name: "Infrastructure",
-                                        desc: "Roads & heavy infra.",
-                                        image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
-                                    }
-                                ].map((ind, index) => (
-                                    <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                        <img
-                                            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                            src={ind.image}
-                                            alt={ind.name}
-                                        />
-                                        <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                            <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                            <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
+                    {/* 7. INDUSTRIES SUPPORTED */}
+                    <ProjectTypes
+                        title="Industries We Serve"
+                        items={[
+                            {
+                                name: "Residential",
+                                desc: "High-end apartments & townships.",
+                                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Commercial",
+                                desc: "Offices, malls & business parks.",
+                                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "IT Parks",
+                                desc: "Tech campuses & data centers.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial",
+                                desc: "Factories & warehouses.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Hospitality",
+                                desc: "Hotels & resorts.",
+                                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Infrastructure",
+                                desc: "Roads & heavy infra.",
+                                image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 8. PROCESS FLOW - Horizontal Glowing Timeline */}
                     <section className="py-24 px-6 overflow-x-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
