@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
-    ChevronRight, Calculator, TrendingUp, Handshake, ShieldAlert,
-    BarChart2, Coins, FileText, CheckCircle, PieChart,
-    Banknote, Percent, LineChart, FileSpreadsheet, Scale,
-    Briefcase, Building, Factory, Hotel, Layout, CheckSquare,
-    Search, Users, Activity, Target, AlertTriangle, ListChecks, Package, Lightbulb,
-    Layers, Truck, Anchor, HardHat, Settings, Database, Globe, Zap, ArrowRight
+    ChevronRight, Handshake, ShieldAlert, Coins, FileText, CheckCircle, Banknote,
+    Search, Activity, Target, Package,
+    Layers, Truck, HardHat, Settings, Database, Globe, Zap,
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactModal from '../../components/ContactModal';

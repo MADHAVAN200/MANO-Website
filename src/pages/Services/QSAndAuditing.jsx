@@ -1,10 +1,11 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 import {
     Calculator, FileCheck, CreditCard, TrendingUp,
     CheckCircle, AlertTriangle, FileText, Layers, ShieldCheck, Users,
     ClipboardCheck, BadgeCheck, Scale, Landmark, Target,
-    ChevronRight, BarChart3, Clock, Layout
+    ChevronRight, BarChart3, Layout, Activity
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import PageHero from '../../components/HeroSections/PageHero';

@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
-    ChevronRight, Hammer, Calendar, Clock, ClipboardList, Layers,
+    ChevronRight, Calendar, Clock, ClipboardList, Layers,
     Activity, Users, TrendingUp, FastForward, ShieldAlert, Ruler,
-    Flag, Truck, ShieldCheck, Zap, CheckCircle, Smartphone, Building,
-    Factory, HardHat, FileText, ListOrdered, Link as LinkIcon, Target, BarChart2,
+    Flag, Truck, ShieldCheck, Zap, CheckCircle,
+    HardHat, FileText, ListOrdered, Link as LinkIcon, Target, BarChart2,
     Gauge, Wrench, MessageSquare, AlertCircle, Award, DollarSign,
-    Shield, RefreshCw, BarChart3
+    Shield, RefreshCw, Layout
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
 

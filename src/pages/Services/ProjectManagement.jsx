@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, ClipboardCheck, Calculator, Package, Lightbulb, Hammer, Flag,
     Users, Activity, TrendingUp, Handshake, PenTool, ShieldAlert, FileText,
-    CheckCircle, ListChecks, Target, BarChart2, Briefcase, Building, Factory,
-    Hotel, Layout, CheckSquare, Clock, ShieldCheck, Layers, BarChart3
+    CheckCircle, ListChecks, Target, BarChart2,
+    Layout, CheckSquare, Clock, ShieldCheck, Layers,
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';

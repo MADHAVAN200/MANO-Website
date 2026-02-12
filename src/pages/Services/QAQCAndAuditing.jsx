@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, Shield, BookOpen, ClipboardCheck, Factory,
     BarChart2, ShieldCheck, Users, Activity, Target, Search,
     FileText, Layers, CheckCircle, AlertTriangle, Layout, BarChart3, Clock
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
 

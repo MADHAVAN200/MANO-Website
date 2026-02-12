@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, Calendar, Users, FileText, AlertTriangle, TrendingUp, Calculator,
     Shield, Briefcase, BarChart, Search, CheckCircle, Flag, Building, Factory, Hotel,
-    Layers, Zap, Activity, BarChart3, Clock
+    Layers, Zap, Activity, BarChart2, Clock
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
 
