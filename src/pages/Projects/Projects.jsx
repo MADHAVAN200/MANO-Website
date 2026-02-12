@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
     Building, Briefcase, Factory, Hexagon, GraduationCap,
     MapPin, CheckCircle, ArrowRight, ChevronRight, Layout, Minimize2, Activity,
@@ -10,66 +11,98 @@ import RainbowButton from '../../components/RainbowButton';
 import ProjectsHero from '../../components/HeroSections/ProjectsHero';
 import ContactModal from '../../components/ContactModal';
 
-const ImageSlider = ({ images, title }) => {
+const ImageSlider = ({ images, title, autoScrollTrigger }) => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [direction, setDirection] = React.useState(0); // -1 for left, 1 for right
 
-    // Auto-slide effect
+    // Auto-slide effect based on parent trigger
     React.useEffect(() => {
         if (!images || images.length <= 1) return;
-
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % images.length);
-        }, 3000); // Change image every 3 seconds
-
-        return () => clearInterval(interval);
-    }, [images]);
+        setDirection(1);
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, [autoScrollTrigger, images]);
 
     const nextSlide = (e) => {
         e.stopPropagation();
+        setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % images.length);
     };
 
     const prevSlide = (e) => {
         e.stopPropagation();
+        setDirection(-1);
         setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
     if (!images || images.length === 0) return null;
 
+    const variants = {
+        enter: (direction) => ({
+            x: direction > 0 ? 1000 : -1000,
+            opacity: 0,
+            scale: 1.2
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1,
+            scale: 1
+        },
+        exit: (direction) => ({
+            zIndex: 0,
+            x: direction < 0 ? 1000 : -1000,
+            opacity: 0,
+            scale: 1.2
+        })
+    };
+
     return (
-        <div className="relative w-full h-full group">
-            <img
-                src={images[currentIndex]}
-                alt={`${title} - View ${currentIndex + 1}`}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-            />
+        <div className="relative w-full h-full group overflow-hidden bg-black">
+            <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                <motion.img
+                    key={currentIndex}
+                    src={images[currentIndex]}
+                    alt={`${title} - View ${currentIndex + 1}`}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                        x: { type: "tween", duration: 0.8, ease: "easeInOut" },
+                        opacity: { duration: 0.5 },
+                        scale: { duration: 5 } // Slow zoom effect
+                    }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+            </AnimatePresence>
 
             {images.length > 1 && (
                 <>
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-300" />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-300 z-10" />
 
                     {/* Navigation Arrows */}
                     <button
                         onClick={prevSlide}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70 z-20"
                         aria-label="Previous image"
                     >
                         <ChevronRight className="w-6 h-6 rotate-180" />
                     </button>
                     <button
                         onClick={nextSlide}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70 z-20"
                         aria-label="Next image"
                     >
                         <ChevronRight className="w-6 h-6" />
                     </button>
 
                     {/* Dots */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                         {images.map((_, idx) => (
                             <div
                                 key={idx}
-                                className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? 'bg-blue-500 w-4' : 'bg-white/50'}`}
+                                className={`w-2 h-2 rounded-full transition-all border border-white/30 ${idx === currentIndex ? 'bg-blue-500 w-6' : 'bg-white/50'}`}
                             />
                         ))}
                     </div>
@@ -82,6 +115,15 @@ const ImageSlider = ({ images, title }) => {
 const Projects = () => {
     const [activeCategory, setActiveCategory] = useState("All");
     const [isContactOpen, setIsContactOpen] = useState(false);
+    const [autoScrollTrigger, setAutoScrollTrigger] = useState(0);
+
+    // Global timer for synchronized carousel
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setAutoScrollTrigger(prev => prev + 1);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     const featuredProjects = [
         {
@@ -382,7 +424,7 @@ const Projects = () => {
                                 <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 sm:gap-16 items-center`}>
                                     <div className="w-full lg:w-1/2 group">
                                         <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl animated-white-border">
-                                            <ImageSlider images={project.images} title={project.title} />
+                                            <ImageSlider images={project.images} title={project.title} autoScrollTrigger={autoScrollTrigger} />
                                             {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div> */}
                                         </div>
                                     </div>

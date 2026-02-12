@@ -10,11 +10,19 @@ import RainbowButton from '../../components/RainbowButton';
 import CareersHero from '../../components/HeroSections/CareersHero';
 
 import jobData from '../../data/jobs.json';
+import ResumeModal from '../../components/ResumeModal';
 
 const Careers = () => {
     const [openPosition, setOpenPosition] = useState(null);
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+    const [selectedJob, setSelectedJob] = useState("");
+
+    const handleApplyClick = (jobTitle = "") => {
+        setSelectedJob(jobTitle);
+        setIsResumeModalOpen(true);
+    };
 
     // Filter out header rows (where title is "Position")
     const allPositions = jobData.filter(job => job.title !== "Position" && job.title);
@@ -264,37 +272,16 @@ const Careers = () => {
                                                     ))}
                                                 </div>
 
-                                                <button className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+                                                <button
+                                                    onClick={() => handleApplyClick(job.title)}
+                                                    className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2"
+                                                >
                                                     Apply for this Role <ArrowRight size={18} />
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* 5. HOW TO APPLY */}
-                    <section className="py-24 px-6 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
-                        <div className="max-w-4xl mx-auto text-center relative z-10">
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Build Your Career With Us?</h2>
-                            <p className="text-xl text-gray-300 mb-12">
-                                We’re always excited to meet skilled professionals who can bring value to our team.
-                            </p>
-
-
-
-                            <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-6">
-                                        Apply Now <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
-                                <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center">
-                                    Send Resume <FileText className="ml-2 w-5 h-5" />
-                                </button>
                             </div>
                         </div>
                     </section>
@@ -329,56 +316,70 @@ const Careers = () => {
                     </section>
 
                     {/* 7. EMPLOYEE PERSPECTIVES (CAROUSEL) */}
-                    <section className="py-16 sm:py-24 px-6 bg-black text-center">
+                    <section className="py-24 px-6 bg-black text-center">
                         <div className="max-w-7xl mx-auto">
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
+                            <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Employee Perspectives</h2>
 
                             {/* Outer Glass Container */}
-                            <div className="relative w-full border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[350px] sm:min-h-[400px] flex flex-col justify-center px-4 sm:px-12 py-12 sm:py-16">
+                            <div className="relative w-full border border-white/10 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-sm min-h-[400px] flex flex-col justify-center px-4 md:px-12 py-12 md:py-16">
 
-                                {/* Navigation Buttons (Aligned Inside Outer Container - Hidden on very small mobile) */}
+                                {/* Navigation Buttons (Aligned Inside Outer Container) */}
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                                    className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute left-6 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black rotate-180" />
+                                    <ChevronRight className="w-6 h-6 text-black rotate-180" />
                                 </button>
 
                                 <button
                                     onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                                    className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                    className="absolute right-6 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
                                 >
-                                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                                    <ChevronRight className="w-6 h-6 text-black" />
                                 </button>
 
-                                {/* Inner Content Content */}
-                                <div className="bg-white/5 border border-white/5 rounded-2xl sm:rounded-3xl p-6 sm:p-16 text-left transition-all duration-500 w-full max-w-2xl mx-auto">
-                                    <div className="flex items-center gap-4 sm:gap-5 mb-6">
-                                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center">
-                                            <User size={24} className="text-gray-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-lg sm:text-xl text-white">{testimonials[currentTestimonial].name}</h4>
-                                        </div>
-                                    </div>
+                                {/* Inner Content - Grid Stack for Static Height */}
+                                <div className="grid grid-cols-1 w-full mx-auto">
+                                    {testimonials.map((testimonial, index) => (
+                                        <div
+                                            key={index}
+                                            className={`
+                                                bg-white/5 border border-white/5 rounded-3xl p-8 md:p-16 text-left
+                                                col-start-1 row-start-1 w-full h-full flex flex-col justify-between
+                                                transition-opacity duration-500 ease-in-out
+                                                ${index === currentTestimonial ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}
+                                            `}
+                                        >
+                                            <div>
+                                                <div className="flex items-center gap-5 mb-6">
+                                                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center shrink-0">
+                                                        <User size={32} className="text-gray-400" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-xl text-white">{testimonial.name}</h4>
+                                                    </div>
+                                                </div>
 
-                                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
-                                        {testimonials[currentTestimonial].text}
-                                    </p>
+                                                <p className="text-gray-300 leading-relaxed text-base md:text-lg pl-1">
+                                                    {testimonial.text}
+                                                </p>
+                                            </div>
 
-                                    {/* Dots */}
-                                    <div className="flex justify-center gap-3 mt-10">
-                                        {testimonials.map((_, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => setCurrentTestimonial(index)}
-                                                className={`transition-all duration-300 rounded-full border border-white/10 ${index === currentTestimonial
-                                                    ? 'w-3 h-3 bg-white/30 scale-125'
-                                                    : 'w-2 h-2 bg-white/10 hover:bg-white/20'
-                                                    }`}
-                                            />
-                                        ))}
-                                    </div>
+                                            {/* Dots */}
+                                            <div className="flex justify-center gap-3 mt-10">
+                                                {testimonials.map((_, dotIndex) => (
+                                                    <button
+                                                        key={dotIndex}
+                                                        onClick={() => setCurrentTestimonial(dotIndex)}
+                                                        className={`transition-all duration-300 rounded-full border border-white/10 ${dotIndex === currentTestimonial
+                                                            ? 'w-3 h-3 bg-white/30 scale-125'
+                                                            : 'w-2 h-2 bg-white/10 hover:bg-white/20'
+                                                            }`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -399,12 +400,17 @@ const Careers = () => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-6">
-                                        Apply Today <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
-                                <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm">
+                                <div onClick={() => handleApplyClick("General Application")}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-6">
+                                            Apply Today <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
+                                <button
+                                    onClick={() => document.getElementById('positions')?.scrollIntoView({ behavior: 'smooth' })}
+                                    className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm"
+                                >
                                     View Open Positions <ArrowRight className="ml-2 w-5 h-5" />
                                 </button>
                             </div>
@@ -413,6 +419,11 @@ const Careers = () => {
                 </>
             )}
 
+            <ResumeModal
+                isOpen={isResumeModalOpen}
+                onClose={() => setIsResumeModalOpen(false)}
+                jobRole={selectedJob}
+            />
         </div>
     );
 };

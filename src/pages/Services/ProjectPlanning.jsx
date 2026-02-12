@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, Calendar, Users, FileText, AlertTriangle, TrendingUp, Calculator,
     Shield, Briefcase, BarChart, Search, CheckCircle, Flag, Building, Factory, Hotel,
-    Layers, Zap, Activity, BarChart3, Clock
+    Layers, Zap, Activity, BarChart2, Clock
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -357,7 +356,7 @@ const ProjectPlanning = () => {
                         <div className="max-w-7xl mx-auto">
                             <RevealOnScroll>
                                 <div className="mb-12 md:mb-16">
-                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">Why Mano for <span className="text-blue-500">Project Planning?</span></h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">Why MANO for <span className="text-blue-500">Project Planning?</span></h2>
                                 </div>
                             </RevealOnScroll>
 
@@ -422,7 +421,7 @@ const ProjectPlanning = () => {
                                     </div>
                                 </RevealOnScroll>
 
-                                {/* RIGHT: BLUE BAR (With Mano) */}
+                                {/* RIGHT: BLUE BAR (With MANO) */}
                                 <RevealOnScroll>
                                     <div className="h-full bg-gradient-to-b from-blue-950/30 to-black p-10 rounded-[2.5rem] border border-blue-500/30 text-center relative overflow-hidden group hover:border-blue-400 transition-all duration-500 flex flex-col shadow-[0_0_50px_rgba(37,99,235,0.1)]">
                                         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
@@ -431,7 +430,7 @@ const ProjectPlanning = () => {
                                             <div className="mb-8 p-4 bg-blue-500/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                                                 <CheckCircle className="w-10 h-10 text-blue-400" />
                                             </div>
-                                            <h3 className="text-3xl font-bold text-blue-400 mb-8">With Mano Planning Services</h3>
+                                            <h3 className="text-3xl font-bold text-blue-400 mb-8">With MANO Planning Services</h3>
 
                                             <ul className="space-y-5 text-left w-full pl-4 grow">
                                                 <li className="flex items-start text-gray-100 text-lg"><CheckCircle className="w-6 h-6 text-blue-400 mr-3 shrink-0" /> Realistic & achievable project schedules</li>
@@ -449,56 +448,39 @@ const ProjectPlanning = () => {
                                 </RevealOnScroll>
                             </div>
                         </div>
-                    </section>
-                    <section className="py-24 px-12 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto text-center">
-                                <h2 className="text-3xl font-bold text-white mb-16">Project Types We Plan For</h2>
 
-                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                    {[
-                                        {
-                                            name: "Residential & Mixed-Use",
-                                            desc: "High-rise apartments, townships, and integrated developments.",
-                                            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Commercial & Corporate",
-                                            desc: "Office parks, IT campuses, and retail complexes.",
-                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Industrial Facilities",
-                                            desc: "Factories, warehouses, and logistic hubs.",
-                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Hospitality Projects",
-                                            desc: "Hotels, resorts, and leisure destinations.",
-                                            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Infrastructure & Institutional",
-                                            desc: "Roads, bridges, public infrastructure, and institutions.",
-                                            image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                    ].map((ind, index) => (
-                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                            <img
-                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                                src={ind.image}
-                                                alt={ind.name}
-                                            />
-                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
                     </section>
+                    {/* 7. PROJECT TYPES */}
+                    <ProjectTypes
+                        title="Project Types We Plan For"
+                        items={[
+                            {
+                                name: "Residential & Mixed-Use",
+                                desc: "High-rise apartments, townships, and integrated developments.",
+                                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Commercial & Corporate",
+                                desc: "Office parks, IT campuses, and retail complexes.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial Facilities",
+                                desc: "Factories, warehouses, and logistic hubs.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Hospitality Projects",
+                                desc: "Hotels, resorts, and leisure destinations.",
+                                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Infrastructure & Institutional",
+                                desc: "Roads, bridges, public infrastructure, and institutions.",
+                                image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 7. PROCESS FLOW */}
                     <section className="py-24 px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
@@ -531,7 +513,7 @@ const ProjectPlanning = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Project Planning?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Project Planning?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -584,7 +566,7 @@ const ProjectPlanning = () => {
                     <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Mano Project Consultants is trusted for delivering realistic, reliable, and execution-focused project planning solutions that enable successful project outcomes."
+                                "MANO Project Consultants is trusted for delivering realistic, reliable, and execution-focused project planning solutions that enable successful project outcomes."
                             </p>
                         </div>
                     </section>
@@ -595,7 +577,7 @@ const ProjectPlanning = () => {
                         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Plan Smart. Execute with Confidence.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants to build a strong planning foundation for your project.
+                                Partner with MANO Project Consultants to build a strong planning foundation for your project.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>
@@ -608,8 +590,8 @@ const ProjectPlanning = () => {
                     </section>
                 </>
             )}
-        </div >
-    );
-};
+        </div>
+    )
+}
 
 export default ProjectPlanning;

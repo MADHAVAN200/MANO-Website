@@ -80,6 +80,16 @@ const AboutUs = () => {
     return (
         <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden font-sans selection:bg-blue-500/30">
 
+            <style>{`
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .animate-marquee {
+                    animation: marquee 30s linear infinite;
+                }
+            `}</style>
+
             {/* Navbar (Duplicated for consistency, ideally should be a reuseable component) */}
             {/* Navbar (Duplicated for consistency, ideally should be a reuseable component) */}
             {/* Moved to Global Navbar component */}
@@ -98,7 +108,7 @@ const AboutUs = () => {
 
                         <div className="space-y-6">
                             {[
-                                "Mano Projects Pvt. Ltd. is a multi disciplinary Construction & Management firm established in September 2010 by Mr. Mugilan Muthaiah and Mrs. Amirthavalli Mugilan, having its head office in Mumbai.",
+                                "MANO Projects Pvt. Ltd. is a multi disciplinary Construction & Management firm established in September 2010 by Mr. Mugilan Muthaiah and Mrs. Amirthavalli Mugilan, having its head office in Mumbai.",
                                 "Our firm consists of young, qualified, committed, disciplined and dynamic professionals offering innovative management ideas and wide range of Project Management Consultancy, Planning, Budgeting and Quality control services & Contracting.",
                                 "With over 25+ reputed clients and 90+ projects, we have successfully established ourselves in Maharashtra, Gujarat, Goa, Kerala, Karnataka, Andhra Pradesh, Madhya Pradesh & Telangana."
                             ].map((text, index) => (
@@ -123,12 +133,12 @@ const AboutUs = () => {
                 </RevealOnScroll>
             </section>
 
-            {/* Why Mano Project Consultants? */}
+            {/* Why MANO Project Consultants? */}
             <section className="relative py-16 px-6 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
                 <RevealOnScroll>
                     <div className="max-w-6xl mx-auto relative z-10">
-                        <h2 className="text-5xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Why Mano Project Consultants Private Limited?</h2>
+                        <h2 className="text-5xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Why MANO Project Consultants Private Limited?</h2>
 
                         <div className="grid md:grid-cols-1 gap-6">
                             {[
@@ -318,7 +328,7 @@ const AboutUs = () => {
                                 {
                                     name: "Mr. N Subramanian",
                                     role: "Project Director",
-                                    expertise: ["Large Scale Projects", "Housing & Commercial", "Infrastructure"],
+                                    expertise: ["Large Scale Projects", "Hospitality & Commercial", "Infrastructure"],
                                     bio: "Holds a strong experience of more than 25+ years into management of large scale construction projects. He has worked at various top-level management positions in highly esteemed companies. He has completed more than 80 Lakh sq. ft of construction at various sites across India.",
                                     ps: "Expert in Residential, Retail, and Hospitality typologies."
                                 }

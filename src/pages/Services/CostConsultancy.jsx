@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, Calculator, TrendingUp, Handshake, ShieldAlert,
     BarChart2, Coins, FileText, CheckCircle, PieChart,
-    Banknote, Percent, LineChart, FileSpreadsheet, Scale,
-    Briefcase, Building, Factory, Hotel, Layout, CheckSquare,
-    Search, Users, Activity, Target, AlertTriangle, ListChecks, Package, Lightbulb,
-    Layers, BarChart3, Clock
+    Banknote, Percent, LineChart, FileSpreadsheet, Scale, CheckSquare,
+    Search, Activity, Target, AlertTriangle, ListChecks, Package, Lightbulb,
+    Layers, BarChart3,
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -402,7 +400,7 @@ const CostConsultancy = () => {
                                     <div className="space-y-8 relative">
                                         <div className="absolute inset-0 bg-blue-500/5 blur-3xl -z-10 rounded-full"></div>
                                         <div className="text-center mb-8">
-                                            <h3 className="text-2xl font-bold text-blue-400 mb-2">With Mano Cost Consultancy Services</h3>
+                                            <h3 className="text-2xl font-bold text-blue-400 mb-2">With MANO Cost Consultancy Services</h3>
                                             <p className="text-gray-400 text-sm">Cost-Efficient & Financially Secured</p>
                                         </div>
                                         <div className="space-y-6">
@@ -455,7 +453,7 @@ const CostConsultancy = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Cost Consultancy?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Cost Consultancy?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -505,55 +503,36 @@ const CostConsultancy = () => {
                     </section>
 
                     {/* 7. PROJECT TYPES */}
-                    <section className="py-24 px-6 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto text-center">
-                                <h3 className="text-3xl font-bold text-white mb-16">Project Types We Support</h3>
-
-                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                    {[
-                                        {
-                                            name: "Residential & Commercial",
-                                            desc: "High-rise apartments to retail complexes.",
-                                            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Industrial & Manufacturing",
-                                            desc: "Factories and production facilities.",
-                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Corporate & Office Spaces",
-                                            desc: "Modern workspaces and IT parks.",
-                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Hospitality Projects",
-                                            desc: "Hotels, resorts, and leisure centers.",
-                                            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Institutional & Infrastructure",
-                                            desc: "Educational campuses and public works.",
-                                            image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                    ].map((ind, index) => (
-                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                            <img
-                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                                src={ind.image}
-                                                alt={ind.name}
-                                            />
-                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
+                    <ProjectTypes
+                        title="Project Types We Support"
+                        items={[
+                            {
+                                name: "Residential & Commercial",
+                                desc: "High-rise apartments to retail complexes.",
+                                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial & Manufacturing",
+                                desc: "Factories and production facilities.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Corporate & Office Spaces",
+                                desc: "Modern workspaces and IT parks.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Hospitality Projects",
+                                desc: "Hotels, resorts, and leisure centers.",
+                                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Institutional & Infrastructure",
+                                desc: "Educational campuses and public works.",
+                                image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 8. PROCESS FLOW */}
                     <section className="py-24 px-6 bg-black relative overflow-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
@@ -606,7 +585,7 @@ const CostConsultancy = () => {
                     <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Companies trust Mano Project Consultants for delivering precise, transparent, and accountable Cost Consultancy that protects their financial interests throughout the project lifecycle."
+                                "Companies trust MANO Project Consultants for delivering precise, transparent, and accountable Cost Consultancy that protects their financial interests throughout the project lifecycle."
                             </p>
                         </div>
                     </section>
@@ -617,7 +596,7 @@ const CostConsultancy = () => {
                         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Control Costs. Improve Value.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants for accurate, transparent, and optimized project costing.
+                                Partner with MANO Project Consultants for accurate, transparent, and optimized project costing.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>

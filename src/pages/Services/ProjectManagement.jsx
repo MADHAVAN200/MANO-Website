@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, ClipboardCheck, Calculator, Package, Lightbulb, Hammer, Flag,
     Users, Activity, TrendingUp, Handshake, PenTool, ShieldAlert, FileText,
-    CheckCircle, ListChecks, Target, BarChart2, Briefcase, Building, Factory,
-    Hotel, Layout, CheckSquare, Clock, ShieldCheck, Layers, BarChart3
+    CheckCircle, ListChecks, Target, BarChart2,
+    Layout, CheckSquare, Clock, ShieldCheck, Layers,
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
 import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -408,7 +408,7 @@ const ProjectManagement = () => {
                                         <div className="flex flex-col md:flex-row items-center gap-6">
                                             <div className="w-[90%] h-20 rounded-xl p-4 bg-blue-600/20 border border-blue-500/50 text-center md:text-left shadow-[0_0_20px_rgba(37,99,235,0.3)] backdrop-blur-md flex items-center overflow-hidden">
                                                 <span className="text-xl md:text-3xl font-bold text-white whitespace-nowrap truncate px-2">
-                                                    With Mano Consultants
+                                                    With MANO Consultants
                                                 </span>
                                             </div>
                                             <div className="font-bold whitespace-nowrap text-4xl md:text-5xl text-white pb-2">
@@ -441,7 +441,7 @@ const ProjectManagement = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Project Management?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Project Management?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -491,55 +491,36 @@ const ProjectManagement = () => {
                     </section>
 
                     {/* 7. PROJECT TYPES */}
-                    <section className="py-24 px-6 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto text-center">
-                                <h2 className="text-3xl font-bold text-white mb-16">Project Types We Manage</h2>
-
-                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                    {[
-                                        {
-                                            name: "Residential High-Rise & Luxury",
-                                            desc: "Complex housing societies and premium developments.",
-                                            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Commercial & Corporate",
-                                            desc: "Office buildings, IT parks, and retail spaces.",
-                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Industrial & Manufacturing",
-                                            desc: "Factories, plants, and large-scale industrial units.",
-                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Hospitality Projects",
-                                            desc: "Luxury hotels, resorts, and guest houses.",
-                                            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Institutional & Infrastructure",
-                                            desc: "Campuses, public infrastructure, and roads.",
-                                            image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                    ].map((ind, index) => (
-                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                            <img
-                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                                src={ind.image}
-                                                alt={ind.name}
-                                            />
-                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
+                    <ProjectTypes
+                        title="Project Types We Manage"
+                        items={[
+                            {
+                                name: "Residential High-Rise & Luxury",
+                                desc: "Complex housing societies and premium developments.",
+                                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Commercial & Corporate",
+                                desc: "Office buildings, IT parks, and retail spaces.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial & Manufacturing",
+                                desc: "Factories, plants, and large-scale industrial units.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Hospitality Projects",
+                                desc: "Luxury hotels, resorts, and guest houses.",
+                                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Institutional & Infrastructure",
+                                desc: "Campuses, public infrastructure, and roads.",
+                                image: "https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 8. PROCESS FLOW - Horizontal Glowing Timeline */}
                     <section className="py-24 px-6 overflow-x-hidden animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
@@ -591,7 +572,7 @@ const ProjectManagement = () => {
                         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Lead Your Project Toward Certainty.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Consultants to manage your project with precision and confidence.
+                                Partner with MANO Consultants to manage your project with precision and confidence.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>

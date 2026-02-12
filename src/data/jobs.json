@@ -10,7 +10,7 @@
       "Experience (Yrs)": "1-4 years",
       "Age": "25 years",
       "Specialization": "Sales",
-      "Location": "HO",
+      "Location": "HO (Dadar)",
       "Gender": "Female",
       "Notice Period": "Immediate Joining",
       "Drawn / Exp. Salary": "25-40k"
@@ -23,10 +23,49 @@
       "Experience (Yrs)": "3-6 years",
       "Age": "Above 25",
       "Specialization": "QS, Billing",
-      "Location": "HO",
+      "Location": "HO (Dadar)",
       "Gender": "Male",
       "Notice Period": "Immediate Joining",
       "Drawn / Exp. Salary": "50-70K"
+    }
+  },
+  {
+    "title": "QA/QC Engineer",
+    "details": {
+      "Qualification": "BE/B.Tech",
+      "Experience (Yrs)": "1-3 experience",
+      "Age": "Above 21",
+      "Specialization": "Engineer",
+      "Location": "HO (Dadar)",
+      "Gender": "Male",
+      "Notice Period": "15 Days",
+      "Drawn / Exp. Salary": "25000+"
+    }
+  },
+  {
+    "title": "Project Cordinator",
+    "details": {
+      "Qualification": "BE/B.Tech",
+      "Experience (Yrs)": "1-3 experience",
+      "Age": "Above 21",
+      "Specialization": "Engineer",
+      "Location": "HO (Dadar)",
+      "Gender": "Male",
+      "Notice Period": "15 Days",
+      "Drawn / Exp. Salary": "15000-20000"
+    }
+  },
+  {
+    "title": "Sr.Engineer",
+    "details": {
+      "Qualification": "BE/B.Tech",
+      "Experience (Yrs)": "4-5 experience",
+      "Age": "Above 21",
+      "Specialization": "Engineer",
+      "Location": "Indore",
+      "Gender": "Male",
+      "Notice Period": "15 Days",
+      "Drawn / Exp. Salary": "30000+"
     }
   },
   {
@@ -43,34 +82,17 @@
     }
   },
   {
-    "title": "QA/QC Engineer",
-    "details": {
-      "Qualification": "BE/B.Tech",
-      "Experience (Yrs)": "1-3 experience",
-      "Age": "Above 21",
-      "Specialization": "Engineer",
-      "Location": "Dadar",
-      "Gender": "Male",
-      "Notice Period": "15 Days",
-      "Drawn / Exp. Salary": "25000+"
-    }
-  },
-  {
     "title": "JR.Engineer",
     "details": {
       "Qualification": "DEE/BE/B.tech",
       "Experience (Yrs)": "1-3 experience",
       "Age": "Above 21",
       "Specialization": "Civil Engineer",
-      "Location": "Glow max",
+      "Location": "Glowmax, Central Africa",
       "Gender": "Male",
       "Notice Period": "15 Days",
       "Drawn / Exp. Salary": "40000-50000+"
     }
-  },
-  {
-    "title": "Position",
-    "details": {}
   },
   {
     "title": "Interior Project manager",
@@ -96,32 +118,6 @@
       "Gender": "Male",
       "Notice Period": "15 Days",
       "Drawn / Exp. Salary": "40000-80000+"
-    }
-  },
-  {
-    "title": "Project Cordinator",
-    "details": {
-      "Qualification": "BE/B.Tech",
-      "Experience (Yrs)": "1-3 experience",
-      "Age": "Above 21",
-      "Specialization": "Engineer",
-      "Location": "Dadar",
-      "Gender": "Male",
-      "Notice Period": "15 Days",
-      "Drawn / Exp. Salary": "15000-20000"
-    }
-  },
-  {
-    "title": "Sr.Engineer",
-    "details": {
-      "Qualification": "BE/B.Tech",
-      "Experience (Yrs)": "4-5 experience",
-      "Age": "Above 21",
-      "Specialization": "Engineer",
-      "Location": "Indore",
-      "Gender": "Male",
-      "Notice Period": "15 Days",
-      "Drawn / Exp. Salary": "30000+"
     }
   },
   {

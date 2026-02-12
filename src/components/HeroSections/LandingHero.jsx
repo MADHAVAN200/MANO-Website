@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowRight,
     Play,
     Users,
     Trophy,
-    // Brand Icons
-    Hexagon,
-    Triangle,
-    Command,
-    Ghost,
-    Gem,
-    Cpu
 } from "lucide-react";
 import { CLIENTS } from "../../data/clients";
 import ContactModal from "../ContactModal";
@@ -103,7 +95,7 @@ export default function LandingHero() {
                         <div className="animate-fade-in delay-100">
                             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
                                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-                                    Trusted by 500+ Clients
+                                    Trusted by 25+ Clients
                                     <Users className="w-3.5 h-3.5 text-blue-400" />
                                 </span>
                             </div>
@@ -122,7 +114,7 @@ export default function LandingHero() {
 
                         {/* Description */}
                         <p className="animate-fade-in delay-300 max-w-xl text-base sm:text-lg text-zinc-100 leading-relaxed font-semibold">
-                            Mano Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery across residential, commercial, and industrial sectors.
+                            MANO Project Consultants delivers end-to-end consulting solutions for reliable, high-performance project delivery across residential, commercial, and industrial sectors.
                         </p>
 
                         {/* CTA Buttons */}
@@ -195,12 +187,12 @@ export default function LandingHero() {
                                     <div className="space-y-3 mb-6">
                                         <div className="flex justify-between text-sm">
                                             <span className="text-zinc-400">Client Satisfaction</span>
-                                            <span className="text-white font-medium">98%</span>
+                                            <span className="text-white font-medium">95%</span>
                                         </div>
                                         <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
                                             <motion.div
                                                 initial={{ width: 0 }}
-                                                animate={{ width: "98%" }}
+                                                animate={{ width: "95%" }}
                                                 transition={{ duration: 1.5, delay: 1 }}
                                                 className="h-full rounded-full bg-gradient-to-r from-white to-blue-500"
                                             />
@@ -210,9 +202,9 @@ export default function LandingHero() {
                                     <div className="h-px w-full bg-white/10 mb-4" />
 
                                     <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                                        <div><span className="block font-bold text-white text-lg">500+</span><span className="text-zinc-500">Clients</span></div>
+                                        <div><span className="block font-bold text-white text-lg">25+</span><span className="text-zinc-500">Clients</span></div>
                                         <div><span className="block font-bold text-white text-lg">100+</span><span className="text-zinc-500">Projects</span></div>
-                                        <div><span className="block font-bold text-white text-lg">100%</span><span className="text-zinc-500">Success</span></div>
+                                        <div><span className="block font-bold text-white text-lg">90%</span><span className="text-zinc-500">Success</span></div>
                                     </div>
                                 </div>
                             </motion.div>

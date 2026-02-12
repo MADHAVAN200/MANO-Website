@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function ProgressiveBlur({
     direction = 'left',
     className = "",

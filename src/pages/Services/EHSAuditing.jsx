@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChevronRight, Shield, ShieldCheck, AlertTriangle, HardHat,
     CheckCircle, BarChart2, FileText, Search, Users, Activity,
     Target, Siren, BookOpen, ClipboardList, Zap, HeartPulse,
-    Factory, Building, BarChart3, Clock, Layout
+    Factory, BarChart3, Layout
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
-import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import ProjectTypes from '../../components/Services/ProjectTypes';
 
 const RevealOnScroll = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -373,7 +372,7 @@ const EHSAudit = () => {
                                     {/* WITH MANO (BLUE) */}
                                     <div className="space-y-6 text-left lg:pl-12 relative group">
                                         <div className="absolute inset-0 bg-blue-500/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
-                                        <h3 className="text-2xl font-bold text-blue-500 mb-6">With Mano EHS Services</h3>
+                                        <h3 className="text-2xl font-bold text-blue-500 mb-6">With MANO EHS Services</h3>
 
                                         <div className="space-y-6">
                                             {[
@@ -420,7 +419,7 @@ const EHSAudit = () => {
                             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                                 <div>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 mb-8 leading-tight">
-                                        Why Mano for <span className="text-blue-500 block sm:inline lg:block">Environment, Health & Safety Service & Audit?</span>
+                                        Why MANO for <span className="text-blue-500 block sm:inline lg:block">Environment, Health & Safety Service & Audit?</span>
                                     </h2>
                                     <div className="space-y-8">
                                         {[
@@ -470,57 +469,36 @@ const EHSAudit = () => {
                     </section>
 
                     {/* 7. INDUSTRIES */}
-                    <section className="py-16 md:py-24 px-6 md:px-12 border-y border-white/5 bg-black/50 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-500">
-                        <RevealOnScroll>
-                            <div className="max-w-7xl mx-auto text-center">
-                                <div className="text-center mb-12 md:mb-16">
-                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Industries We Support</h2>
-                                </div>
-
-                                <div className="flex flex-col md:flex-row items-stretch gap-2 h-auto md:h-[400px] w-full max-w-7xl mx-auto group/accordion">
-                                    {[
-                                        {
-                                            name: "Construction & Infrastructure",
-                                            desc: "Ensuring safety in high-risk zones.",
-                                            image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Industrial & Manufacturing",
-                                            desc: "Factory safety and hazard controls.",
-                                            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Commercial Complexes",
-                                            desc: "Occupant safety and fire readiness.",
-                                            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Logistics & Warehousing",
-                                            desc: "Safe material handling and operations.",
-                                            image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                        {
-                                            name: "Institutional & Healthcare",
-                                            desc: "Strict hygiene and safety protocols.",
-                                            image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&h=600&auto=format&fit=crop"
-                                        },
-                                    ].map((ind, index) => (
-                                        <div key={index} className="relative group transition-all duration-500 w-full md:w-28 hover:h-[300px] md:hover:h-full md:hover:w-full md:hover:w-[300%] h-[120px] md:h-[400px] overflow-hidden rounded-lg border border-white/10">
-                                            <img
-                                                className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                                                src={ind.image}
-                                                alt={ind.name}
-                                            />
-                                            <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
-                                                <h3 className="text-xl md:text-2xl font-bold leading-tight">{ind.name}</h3>
-                                                <p className="text-xs md:text-sm text-gray-200 mt-2 h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-300 line-clamp-2 overflow-hidden">{ind.desc}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </RevealOnScroll>
-                    </section>
+                    <ProjectTypes
+                        title="Industries We Support"
+                        items={[
+                            {
+                                name: "Construction & Infrastructure",
+                                desc: "Ensuring safety in high-risk zones.",
+                                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Industrial & Manufacturing",
+                                desc: "Factory safety and hazard controls.",
+                                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Commercial Complexes",
+                                desc: "Occupant safety and fire readiness.",
+                                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Logistics & Warehousing",
+                                desc: "Safe material handling and operations.",
+                                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&h=600&auto=format&fit=crop"
+                            },
+                            {
+                                name: "Institutional & Healthcare",
+                                desc: "Strict hygiene and safety protocols.",
+                                image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&h=600&auto=format&fit=crop"
+                            }
+                        ]}
+                    />
 
                     {/* 8. PROCESS FLOW */}
                     <section className="py-16 md:py-24 px-6 md:px-12 animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-600">
@@ -552,7 +530,7 @@ const EHSAudit = () => {
                     <section className="py-16 md:py-24 px-6 md:px-12 text-center animate-in fade-in duration-1000 slide-in-from-bottom-10 delay-700">
                         <div className="max-w-4xl mx-auto p-8 md:p-12 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:to-blue-600/10 hover:border-blue-500/30 transition-all duration-500 backdrop-blur-md group">
                             <p className="text-xl md:text-3xl font-medium text-white leading-relaxed group-hover:text-blue-100 transition-colors">
-                                "Organizations trust Mano Project Consultants for ensuring safe, compliant, and risk-free working environments through professional EHS audits and safety management systems."
+                                "Organizations trust MANO Project Consultants for ensuring safe, compliant, and risk-free working environments through professional EHS audits and safety management systems."
                             </p>
                         </div>
                     </section>
@@ -563,7 +541,7 @@ const EHSAudit = () => {
                         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center relative z-10">
                             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Safety First. Compliance Always.</h2>
                             <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                                Partner with Mano Project Consultants to build safer, compliant, and incident-free project environments.
+                                Partner with MANO Project Consultants to build safer, compliant, and incident-free project environments.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
                                 <RainbowButton>

@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
@@ -42,7 +41,7 @@ export default function CareersHero() {
                         {/* Main Heading */}
                         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] sm:leading-tight">
                             Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Future</span> <br />
-                            With Mano
+                            With MANO
                         </h1>
 
                         <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10">
@@ -51,7 +50,7 @@ export default function CareersHero() {
 
                         {/* Scroll Indicator */}
                         <motion.button
-                            onClick={() => document.getElementById('open-positions')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('positions')?.scrollIntoView({ behavior: 'smooth' })}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="group flex items-center gap-3 text-white font-medium border border-white/20 px-6 py-3 rounded-full bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all mx-auto"

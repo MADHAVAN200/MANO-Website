@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, Circle, Briefcase, Calculator, TrendingUp, ShieldCheck, FileText, Shield, Hammer, Map, Clock, Handshake } from 'lucide-react';
+import React,{ useState, useEffect, useRef } from 'react';
+import { ChevronRight, Briefcase, Calculator, ShieldCheck, FileText, Shield, Hammer, Map, Clock, Handshake } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import RainbowButton from '../../components/RainbowButton';
 import { motion } from "framer-motion";
 
 import LandingHero from '../../components/HeroSections/LandingHero';
 import { useCompany } from '../../context/CompanyContext';
 import ContactForm from '../../components/ContactForm';
 import DigitalERPSection from '../../components/DigitalERPSection';
-
 
 
 const TestimonialsColumn = (props) => {
@@ -81,8 +79,6 @@ const RevealOnScroll = ({ children }) => {
 };
 
 
-
-
 const CountUp = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -124,7 +120,6 @@ const CountUp = ({ end, duration = 2000 }) => {
 
 export default function LandingPage() {
   const { brand, isEPC } = useCompany();
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
@@ -200,7 +195,7 @@ export default function LandingPage() {
   ];
 
   const faqs = [
-    { question: 'What is PMC (Project Management Consultants)?', answer: 'Project Management Consultants (PMC) provide end-to-end professional services that plan, coordinate, and control a project from inception to completion. At Mano, our PMC services ensure your project is delivered on time, within budget, and to the highest quality standards by managing all stakeholders, resources, and risks.' },
+    { question: 'What is PMC (Project Management Consultants)?', answer: 'Project Management Consultants (PMC) provide end-to-end professional services that plan, coordinate, and control a project from inception to completion. At MANO, our PMC services ensure your project is delivered on time, within budget, and to the highest quality standards by managing all stakeholders, resources, and risks.' },
     { question: 'What is (Cost Consultancy)?', answer: 'Cost Consultancy involves managing the financial health of a construction project. We provide accurate cost estimation, budgeting, value engineering, and financial monitoring. Our goal is to maximize your Return on Investment (ROI) while maintaining the design intent and quality of the project.' },
     { question: 'How do you manage quality if we hire you for only QA QC Service?', answer: 'If hired specifically for QA/QC, we implement a rigorous audit-driven framework including on-site inspections, material testing verification, compliance checks, and detailed non-conformity reporting. We act as an independent third party to ensure strict adherence to project quality standards.' },
     {
@@ -212,7 +207,7 @@ export default function LandingPage() {
       • Interior Fitout (Short-term): Man-Month basis
       • Part Services (Budget, Audit, etc.): Fixed cost on one-time or monthly basis`
     },
-    { question: 'What services does Mano Consultants provide?', answer: 'We offer comprehensive project management, construction management, quantity surveying, and Cost Consultancy services tailored to your specific project needs.' },
+    { question: 'What services does MANO Consultants provide?', answer: 'We offer comprehensive project management, construction management, quantity surveying, and Cost Consultancy services tailored to your specific project needs.' },
     { question: 'How do you ensure project quality?', answer: 'Our rigorous quality assurance processes involves regular audits, compliance checks, and adherence to international standards to ensure the highest quality deliverables.' },
     { question: 'Do you handle residential projects?', answer: 'Yes, we handle a wide range of projects including residential complexes, commercial buildings, and industrial facilities with equal expertise.' },
     { question: 'What is your project management methodology?', answer: 'We employ a hybrid approach combining agile flexibility with structured waterfall milestones to ensure timely delivery while adapting to project changes.' },
@@ -256,17 +251,14 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-blue-pattern text-white overflow-x-hidden">
       {/* Hero Section with Navigation */}
-      {/* Hero Section with Navigation */}
       <LandingHero />
-
-
 
       {/* Why Choose Section with Gradient */}
       <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0,rgba(0,0,0,0)_100%)] pointer-events-none"></div>
         <RevealOnScroll>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12 relative z-10">
-            Why Businesses <span className="text-blue-500">Choose</span> Mano Consultants
+            Why Businesses <span className="text-blue-500">Choose</span> MANO Consultants
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
             With 12 years of excellence, we blend deep industry knowledge with client-centric<br />
