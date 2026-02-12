@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown, Loader2 } from 'lucide-react';
 import { useCompany } from '../context/CompanyContext';
 

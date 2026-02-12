@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ArrowRight,
     Play,
     Users,
     Trophy,
-    // Brand Icons
-    Hexagon,
-    Triangle,
-    Command,
-    Ghost,
-    Gem,
-    Cpu
 } from "lucide-react";
 import { CLIENTS } from "../../data/clients";
 import ContactModal from "../ContactModal";

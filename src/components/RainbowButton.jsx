@@ -1,5 +1,3 @@
-import React from 'react';
-
 const RainbowButton = ({ children, onClick, className = "", borderRadius = "rounded-full" }) => {
     return (
         <div className={`relative group inline-block ${className}`}>

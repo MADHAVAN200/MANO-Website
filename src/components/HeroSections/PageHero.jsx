@@ -6,13 +6,6 @@ import {
     Target,
     Crown,
     Star,
-    // Brand Icons
-    Hexagon,
-    Triangle,
-    Command,
-    Ghost,
-    Gem,
-    Cpu
 } from "lucide-react";
 
 

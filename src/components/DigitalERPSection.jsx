@@ -1,4 +1,3 @@
-import React from 'react';
 import { Zap, BarChart3, Activity, Clock, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 

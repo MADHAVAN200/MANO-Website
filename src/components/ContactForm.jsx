@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCompany } from '../context/CompanyContext';
-import { Send, Briefcase, MessageSquare, ChevronDown, Loader2 } from 'lucide-react';
+import { Send, ChevronDown, Loader2 } from 'lucide-react';
 
 const ContactForm = () => {
     const { isPPL } = useCompany();
