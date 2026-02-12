@@ -231,6 +231,7 @@ export default function LandingHero() {
                                         <img
                                             src={`${import.meta.env.BASE_URL}${client.logo}`}
                                             alt={client.name}
+                                            loading="lazy"
                                             className={`w-auto object-contain transition-all duration-300 
                                                 ${client.isExtraLarge ? 'h-14 sm:h-24' : (client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12')} 
                                                 ${client.hasBackground
