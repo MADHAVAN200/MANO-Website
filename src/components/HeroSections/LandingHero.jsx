@@ -55,9 +55,7 @@ export default function LandingHero() {
           animation: fadeSlideIn 0.8s ease-out forwards;
           opacity: 0;
         }
-        .animate-marquee {
-          animation: marquee 40s linear infinite; /* Slower for readability */
-        }
+
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
@@ -223,24 +221,40 @@ export default function LandingHero() {
                                 WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
                             }}
                         >
-                            <div className="animate-marquee flex gap-8 sm:gap-16 whitespace-nowrap px-4">
-                                {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
-                                    <div key={i} className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
-                                        style={{ minWidth: 'max-content' }}
+                            <div
+                                className="flex w-full overflow-hidden select-none"
+                                style={{
+                                    maskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                                    WebkitMaskImage: "linear-gradient(to right, transparent, black 20%, black 80%, transparent)"
+                                }}
+                            >
+                                {[0, 1].map((_, setIndex) => (
+                                    <motion.div
+                                        key={setIndex}
+                                        initial={{ x: 0 }}
+                                        animate={{ x: "-100%" }}
+                                        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                                        className="flex shrink-0 gap-8 sm:gap-16 pr-8 sm:pr-16 min-w-full"
                                     >
-                                        <img
-                                            src={`${import.meta.env.BASE_URL}${client.logo}`}
-                                            alt={client.name}
-                                            loading="lazy"
-                                            className={`w-auto object-contain transition-all duration-300 
+                                        {[...CLIENTS, ...CLIENTS].map((client, i) => (
+                                            <div key={i} className="flex items-center justify-center grayscale hover:grayscale-0 transition-grayscale duration-300 opacity-70 hover:opacity-100"
+                                                style={{ minWidth: 'max-content' }}
+                                            >
+                                                <img
+                                                    src={`${import.meta.env.BASE_URL}${client.logo}`}
+                                                    alt={client.name}
+                                                    loading="lazy"
+                                                    className={`w-auto object-contain transition-all duration-300 
                                                 ${client.isExtraLarge ? 'h-14 sm:h-24' : (client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12')} 
                                                 ${client.hasBackground
-                                                    ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
-                                                    : 'brightness-0 invert hover:brightness-100 hover:invert-0'
-                                                }`}
-                                            onError={(e) => { e.target.style.display = 'none'; }}
-                                        />
-                                    </div>
+                                                            ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
+                                                            : 'brightness-0 invert hover:brightness-100 hover:invert-0'
+                                                        }`}
+                                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                                />
+                                            </div>
+                                        ))}
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
