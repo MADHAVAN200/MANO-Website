@@ -223,12 +223,12 @@ const QualityAssuranceAudit = () => {
                 subtitle="Quality Control & Auditing"
                 description="Prepare, Monitor and Control of Methodology, Quality Assurance & Quality Control Matrix, Assurance Plan, Check List and Snagging"
                 images={[
-                    `${import.meta.env.BASE_URL}qa-audit-hero.png`,
-                    `${import.meta.env.BASE_URL}quality-control-hero.png`,
-                    `${import.meta.env.BASE_URL}ehs-audit-hero.png`,
-                    `${import.meta.env.BASE_URL}project-execution-hero.png`
+                    `${import.meta.env.BASE_URL}qa-audit-hero.webp`,
+                    `${import.meta.env.BASE_URL}quality-control-hero.webp`,
+                    `${import.meta.env.BASE_URL}ehs-audit-hero.webp`,
+                    `${import.meta.env.BASE_URL}project-execution-hero.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}qa-audit-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}qa-audit-hero.webp`}
                 badgeText="Quality Assurance & Quality Control & Audit"
                 scrollTargetId="content"
                 layout="quad-grid"

@@ -14,7 +14,7 @@ export default function CareersHero() {
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                        backgroundImage: `url(${import.meta.env.BASE_URL}careers-hero.png)`,
+                        backgroundImage: `url(${import.meta.env.BASE_URL}careers-hero.webp)`,
                     }}
                 />
                 {/* Overlay Gradient */}

@@ -227,11 +227,11 @@ const CostConsultancy = () => {
                 subtitle="Consultancy"
                 description="Prepare, Monitor and Control of Bill of Quantities & Budget, Rate Analysis"
                 images={[
-                    `${import.meta.env.BASE_URL}cost-consultancy-hero.png`,
-                    `${import.meta.env.BASE_URL}qs-billing-hero.png`,
-                    `${import.meta.env.BASE_URL}contract-management-hero.png`
+                    `${import.meta.env.BASE_URL}cost-consultancy-hero.webp`,
+                    `${import.meta.env.BASE_URL}qs-billing-hero.webp`,
+                    `${import.meta.env.BASE_URL}contract-management-hero.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}cost-consultancy-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}cost-consultancy-hero.webp`}
                 badgeText="Cost Consultancy"
                 scrollTargetId="content"
                 layout="triptych-3"
@@ -614,3 +614,4 @@ const CostConsultancy = () => {
 };
 
 export default CostConsultancy;
+

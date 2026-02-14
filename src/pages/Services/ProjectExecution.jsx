@@ -206,11 +206,11 @@ const ProjectExecution = () => {
                 subtitle="Execution"
                 description="Project Execution as per Drawing, Schedule of Planning and Methods"
                 images={[
-                    `${import.meta.env.BASE_URL}project-execution-1.png`,
-                    `${import.meta.env.BASE_URL}project-execution-2.png`,
-                    `${import.meta.env.BASE_URL}project-execution-3.png`
+                    `${import.meta.env.BASE_URL}project-execution-1.webp`,
+                    `${import.meta.env.BASE_URL}project-execution-2.webp`,
+                    `${import.meta.env.BASE_URL}project-execution-3.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}project-execution-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}project-execution-hero.webp`}
                 badgeText="Execution Excellence"
                 scrollTargetId="content"
                 layout="split-reverse"
@@ -587,3 +587,4 @@ const ProjectExecution = () => {
 };
 
 export default ProjectExecution;
+

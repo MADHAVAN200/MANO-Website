@@ -14,7 +14,7 @@ export default function ProjectsHero() {
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                        backgroundImage: `url(${import.meta.env.BASE_URL}projects-hero.png)`,
+                        backgroundImage: `url(${import.meta.env.BASE_URL}projects-hero.webp)`,
                     }}
                 />
                 {/* Overlay Gradient */}

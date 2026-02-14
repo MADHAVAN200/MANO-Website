@@ -202,11 +202,11 @@ const EHSAudit = () => {
                 subtitle="Service & Audit"
                 description="Prepare, Monitor and Control of Environment, Health & Safety Plan, Matrix and Report"
                 images={[
-                    `${import.meta.env.BASE_URL}quality-control-hero.png`,
-                    `${import.meta.env.BASE_URL}qa-audit-hero.png`,
-                    `${import.meta.env.BASE_URL}ehs-audit-hero.png`
+                    `${import.meta.env.BASE_URL}quality-control-hero.webp`,
+                    `${import.meta.env.BASE_URL}qa-audit-hero.webp`,
+                    `${import.meta.env.BASE_URL}ehs-audit-hero.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}ehs-audit-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}ehs-audit-hero.webp`}
                 badgeText="Environment, Health & Safety Service & Audit"
                 scrollTargetId="content"
                 layout="masonry-reverse-3"

@@ -203,12 +203,12 @@ const ProjectPlanning = () => {
                 subtitle="Planning"
                 description="Prepare, Monitor and Control of Macro Planning in Microsoft Project with Program Evaluation Review Technique, Prepare, Monitor and Control of Site Logistics, Material Histogram, Manpower Histogram"
                 images={[
-                    `${import.meta.env.BASE_URL}project-planning-hero-1.png`,
-                    `${import.meta.env.BASE_URL}project-planning-hero-2.png`,
-                    `${import.meta.env.BASE_URL}project-planning-hero-3.png`
+                    `${import.meta.env.BASE_URL}project-planning-hero-1.webp`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-2.webp`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-3.webp`
                 ]}
                 layout="split"
-                bgImage={`${import.meta.env.BASE_URL}project-planning-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}project-planning-hero.webp`}
                 badgeText="CPM & PERT Planning"
                 scrollTargetId="content"
                 showContactButton={false}
@@ -595,3 +595,4 @@ const ProjectPlanning = () => {
 }
 
 export default ProjectPlanning;
+
