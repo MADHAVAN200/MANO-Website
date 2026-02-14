@@ -11,9 +11,9 @@ import ContactModal from "../ContactModal";
 
 
 const BACKGROUND_IMAGES = [
-    `${import.meta.env.BASE_URL}hero-collage-1.png`,
-    `${import.meta.env.BASE_URL}hero-collage-2.png`,
-    `${import.meta.env.BASE_URL}hero-collage-3.png`
+    `${import.meta.env.BASE_URL}hero-collage-1.webp`,
+    `${import.meta.env.BASE_URL}hero-collage-2.webp`,
+    `${import.meta.env.BASE_URL}hero-collage-3.webp`
 ];
 
 // --- SUB-COMPONENTS ---

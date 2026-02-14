@@ -45,7 +45,7 @@ export default function AboutHero() {
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
                 style={{
-                    backgroundImage: `url(${import.meta.env.BASE_URL}about-hero-bg.png)`,
+                    backgroundImage: `url(${import.meta.env.BASE_URL}about-hero-bg.webp)`,
                     maskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
                     WebkitMaskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
                 }}

@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Building, Hammer } from 'lucide-react';
 
 const BACKGROUND_IMAGES = [
-    `${import.meta.env.BASE_URL}landing-hero-new-1.png`,
-    `${import.meta.env.BASE_URL}landing-hero-new-2.png`,
-    `${import.meta.env.BASE_URL}landing-hero-new-3.png`,
-    `${import.meta.env.BASE_URL}landing-hero-new-4.png`,
-    `${import.meta.env.BASE_URL}landing-hero-new-5.png`,
-    `${import.meta.env.BASE_URL}landing-hero-new-6.png`
+    `${import.meta.env.BASE_URL}landing-hero-new-1.webp`,
+    `${import.meta.env.BASE_URL}landing-hero-new-2.webp`,
+    `${import.meta.env.BASE_URL}landing-hero-new-3.webp`,
+    `${import.meta.env.BASE_URL}landing-hero-new-4.webp`,
+    `${import.meta.env.BASE_URL}landing-hero-new-5.webp`,
+    `${import.meta.env.BASE_URL}landing-hero-new-6.webp`
 ];
 
 const Gateway = () => {

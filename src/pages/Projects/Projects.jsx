@@ -134,10 +134,10 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Luxury hospitality development with premium amenities.",
             images: [
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).png`
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).webp`
             ]
         },
         {
@@ -147,9 +147,9 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Landmark residential project with grand entrance gate.",
             images: [
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`,
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.jpg`,
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.jpg`
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.webp`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.webp`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.webp`
             ]
         },
         {
@@ -159,11 +159,11 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Massive 3,10,230 sq. ft. residential development completed successfully.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`,
-                `${import.meta.env.BASE_URL}Ananda residency/Aerial.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/podium.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/pool.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.jpg`
+                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/Aerial.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/podium.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/pool.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.webp`
             ]
         },
         {
@@ -173,8 +173,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "21,255 sq.ft. retail project delivered for Tata Trent.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`,
-                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..png`
+                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).webp`,
+                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..webp`
             ]
         },
         {
@@ -184,9 +184,9 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Premium residential and commercial development.",
             images: [
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`,
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.jpg`,
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.jpg`
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.webp`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.webp`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.webp`
             ]
         }
     ];
@@ -200,9 +200,9 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Landmark residential project with grand entrance gate.",
             images: [
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`,
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.jpg`,
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.jpg`
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.webp`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/5.option 02-crown gate 03.webp`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/6.option 02-crown gate 04.webp`
             ]
         },
         {
@@ -212,11 +212,11 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Massive 3,10,230 sq. ft. residential development completed successfully.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`,
-                `${import.meta.env.BASE_URL}Ananda residency/Aerial.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/podium.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/pool.jpg`,
-                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.jpg`
+                `${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/Aerial.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/podium.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/pool.webp`,
+                `${import.meta.env.BASE_URL}Ananda residency/terrace 2.webp`
             ]
         },
         {
@@ -224,21 +224,21 @@ const Projects = () => {
             title: "Sati Darshan - Goyal Group",
             scope: ["PMC - Project Management Consultants"],
             highlight: "1,39,749 sq.ft. residential project in Malad, Mumbai.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..webp`]
         },
         {
             category: "Residential",
             title: "Celestia - Shree Ram Samarth",
             scope: ["PMC - Project Management Consultants"],
             highlight: "1,00,000 sq.ft. residential development in Mulund, Mumbai.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..webp`]
         },
         {
             category: "Residential",
             title: "Shubharambh Residency",
             scope: ["PMC - Project Management Consultants"],
             highlight: "59,000 sq.ft. housing project in Solapur.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Shubharambh Residency - Veer Housing Projects LLP..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Shubharambh Residency - Veer Housing Projects LLP..webp`]
         },
         {
             category: "Residential",
@@ -246,8 +246,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Luxury apartments with golf course views.",
             images: [
-                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 1 .jpg.jpeg`,
-                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 2 .jpg.jpeg`
+                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 1 .webp.webp`,
+                `${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 2 .webp.webp`
             ]
         },
         {
@@ -256,8 +256,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Classic residential architecture in Kalyan.",
             images: [
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (NEW view) in progress.jpg`,
-                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (Old view).jpg`
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (NEW view) in progress.webp`,
+                `${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (Old view).webp`
             ]
         },
 
@@ -269,8 +269,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "21,255 sq.ft. retail project delivered for Tata Trent.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`,
-                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..png`
+                `${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).webp`,
+                `${import.meta.env.BASE_URL}projects_img/Westside– Tata Trent Ltd..webp`
             ]
         },
         {
@@ -279,8 +279,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Rollout management for multiple retail outlets.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).png`,
-                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(4).png`
+                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).webp`,
+                `${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(4).webp`
             ]
         },
         {
@@ -289,10 +289,10 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Commercial interior works at Kamala Mills.",
             images: [
-                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123025 1.jpg`,
-                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123201 2.jpg`,
-                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123143 3.jpg`,
-                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123244 4.jpg`
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123025 1.webp`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123201 2.webp`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123143 3.webp`,
+                `${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123244 4.webp`
             ]
         },
         {
@@ -301,10 +301,10 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "5,150 sq.ft. institutional-scale project in Mumbai.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..png`,
-                `${import.meta.env.BASE_URL}NSCI/16.jpg`,
-                `${import.meta.env.BASE_URL}NSCI/21.jpg`,
-                `${import.meta.env.BASE_URL}NSCI/25.jpg`
+                `${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..webp`,
+                `${import.meta.env.BASE_URL}NSCI/16.webp`,
+                `${import.meta.env.BASE_URL}NSCI/21.webp`,
+                `${import.meta.env.BASE_URL}NSCI/25.webp`
             ]
         },
         {
@@ -312,7 +312,7 @@ const Projects = () => {
             title: "More Hyper Mart",
             scope: ["PMC - Project Management Consultants"],
             highlight: "Retail construction in Nashik, Maharashtra.",
-            images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..webp`]
         },
         {
             category: "Commercial",
@@ -320,8 +320,8 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Corporate office interior project.",
             images: [
-                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA .png`,
-                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA.png`
+                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA .webp`,
+                `${import.meta.env.BASE_URL}projects_img/Expeditors – Studio DNA.webp`
             ]
         },
         {
@@ -329,7 +329,7 @@ const Projects = () => {
             title: "Maharail – Studio DNA",
             scope: ["PMC - Project Management Consultants"],
             highlight: "Office space development.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Maharail – Studio DNA.png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Maharail – Studio DNA.webp`]
         },
 
         // Industrial
@@ -338,28 +338,28 @@ const Projects = () => {
             title: "Prima Plastics Limited",
             scope: ["PMC - Project Management Consultants"],
             highlight: "1,69,000 Sft plastic manufacturing facility.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..webp`]
         },
         {
             category: "Industrial",
             title: "Textile Factory",
             scope: ["PMC - Project Management Consultants"],
             highlight: "52,532 sq.ft. industrial facility in Tarapur.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Textile Factory - Micro Interlinings Pvt. Ltd..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Textile Factory - Micro Interlinings Pvt. Ltd..webp`]
         },
         {
             category: "Industrial",
             title: "Gaiwadi Industrial Estate",
             scope: ["PMC - Project Management Consultants"],
             highlight: "Amazon Warehouse project management.",
-            images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..webp`]
         },
         {
             category: "Industrial",
             title: "JNPC Infra Development",
             scope: ["PMC - Project Management Consultants"],
             highlight: "Infrastructure development oversight.",
-            images: [`${import.meta.env.BASE_URL}projects_img/JNPC Infra Development– TUV Rheinland (India) Pvt Ltd..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/JNPC Infra Development– TUV Rheinland (India) Pvt Ltd..webp`]
         },
 
         // Hospitality
@@ -370,10 +370,10 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Luxury hospitality development with premium amenities.",
             images: [
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).png`,
-                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).png`
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/002 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/003 (3).webp`,
+                `${import.meta.env.BASE_URL}Hotel Moon Kinshasa/006 (2).webp`
             ]
         },
         {
@@ -383,9 +383,9 @@ const Projects = () => {
             scope: ["PMC - Project Management Consultants"],
             highlight: "Premium residential and commercial development.",
             images: [
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`,
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.jpg`,
-                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.jpg`
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.webp`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 04.webp`,
+                `${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 06.webp`
             ]
         },
         {
@@ -393,7 +393,7 @@ const Projects = () => {
             title: "KAPCO Banquets & Catering",
             scope: ["PMC - Project Management Consultants"],
             highlight: "15,698 sq.ft. hospitality project in New Delhi.",
-            images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..png`]
+            images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..webp`]
         }
     ];
 

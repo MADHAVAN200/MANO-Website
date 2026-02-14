@@ -48,7 +48,7 @@ export default function ServiceHero() {
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center opacity-35 blur-[2px] scale-110"
                 style={{
-                    backgroundImage: `url(${import.meta.env.BASE_URL}services-hero.png)`,
+                    backgroundImage: `url(${import.meta.env.BASE_URL}services-hero.webp)`,
                     maskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
                     WebkitMaskImage: "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
                 }}

@@ -185,11 +185,11 @@ const QSBillingAudit = () => {
                 subtitle="Billing Service & Auditing"
                 description="Prepare, Monitor and Control of Joint Measurements, Verification of Bill"
                 images={[
-                    `${import.meta.env.BASE_URL}qs-billing-hero.png`,
-                    `${import.meta.env.BASE_URL}qs-detail-3.png`,
-                    `${import.meta.env.BASE_URL}qs-detail-4.png`
+                    `${import.meta.env.BASE_URL}qs-billing-hero.webp`,
+                    `${import.meta.env.BASE_URL}qs-detail-3.webp`,
+                    `${import.meta.env.BASE_URL}qs-detail-4.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}qs-billing-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}qs-billing-hero.webp`}
                 badgeText="Quantity Survey & Billing Service & Auditing"
                 scrollTargetId="content"
                 layout="split"
@@ -555,3 +555,4 @@ const QSBillingAudit = () => {
 };
 
 export default QSBillingAudit;
+

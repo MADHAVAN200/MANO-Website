@@ -237,13 +237,13 @@ const EPC = () => {
                 subtitle="Procurement Construction (EPC)"
                 description="Delivering fully integrated engineering, procurement, and construction solutions through structured execution and performance-driven delivery systems."
                 images={[
-                    `${import.meta.env.BASE_URL}epc-hero-background.png`,
-                    `${import.meta.env.BASE_URL}epc-engineering-design.png`,
-                    `${import.meta.env.BASE_URL}epc-procurement-logistics.png`,
-                    `${import.meta.env.BASE_URL}epc-construction-site.png`,
-                    `${import.meta.env.BASE_URL}epc-industrial-plant.png`
+                    `${import.meta.env.BASE_URL}epc-hero-background.webp`,
+                    `${import.meta.env.BASE_URL}epc-engineering-design.webp`,
+                    `${import.meta.env.BASE_URL}epc-procurement-logistics.webp`,
+                    `${import.meta.env.BASE_URL}epc-construction-site.webp`,
+                    `${import.meta.env.BASE_URL}epc-industrial-plant.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}epc-hero-background.png`}
+                bgImage={`${import.meta.env.BASE_URL}epc-hero-background.webp`}
                 badgeText="EPC Solutions"
                 scrollTargetId="content"
                 layout="mosaic-5"
@@ -739,3 +739,4 @@ const EPC = () => {
 };
 
 export default EPC;
+

@@ -232,13 +232,13 @@ const ProjectManagement = () => {
                 subtitle="Management"
                 description="Driving coordinated, efficient, and predictable project delivery through strategic leadership and disciplined oversight."
                 images={[
-                    `${import.meta.env.BASE_URL}project-management-hero.png`,
-                    `${import.meta.env.BASE_URL}project-planning-hero-1.png`,
-                    `${import.meta.env.BASE_URL}project-planning-hero-2.png`,
-                    `${import.meta.env.BASE_URL}project-execution-hero.png`,
-                    `${import.meta.env.BASE_URL}contract-management-hero.png`
+                    `${import.meta.env.BASE_URL}project-management-hero.webp`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-1.webp`,
+                    `${import.meta.env.BASE_URL}project-planning-hero-2.webp`,
+                    `${import.meta.env.BASE_URL}project-execution-hero.webp`,
+                    `${import.meta.env.BASE_URL}contract-management-hero.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}project-management-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}project-management-hero.webp`}
                 badgeText="Project Leadership"
                 scrollTargetId="content"
                 layout="mosaic-5"
@@ -590,3 +590,4 @@ const ProjectManagement = () => {
 };
 
 export default ProjectManagement;
+

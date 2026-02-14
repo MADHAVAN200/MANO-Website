@@ -126,19 +126,19 @@ export default function LandingPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
 
   const projects = [
-    { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).png`] },
-    { name: 'Triveni Crown', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.jpg`] },
-    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..png`] },
-    { name: '30 Juin', images: [`${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.jpg`] },
-    { name: 'Sati Darshan', images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..png`] },
-    { name: 'Westside', images: [`${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).png`] },
-    { name: 'Zudio', images: [`${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).png`] },
-    { name: 'Prima Plastics', images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..png`] },
-    { name: 'Celestia', images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..png`] },
-    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..png`] },
-    { name: 'More Hyper Mart', images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..png`] },
-    { name: 'KAPCO Banquets', images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..png`] },
-    { name: 'Amazon Warehouse', images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..png`] },
+    { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`] },
+    { name: 'Triveni Crown', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.webp`] },
+    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..webp`] },
+    { name: '30 Juin', images: [`${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.webp`] },
+    { name: 'Sati Darshan', images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..webp`] },
+    { name: 'Westside', images: [`${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).webp`] },
+    { name: 'Zudio', images: [`${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).webp`] },
+    { name: 'Prima Plastics', images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..webp`] },
+    { name: 'Celestia', images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..webp`] },
+    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..webp`] },
+    { name: 'More Hyper Mart', images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..webp`] },
+    { name: 'KAPCO Banquets', images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..webp`] },
+    { name: 'Amazon Warehouse', images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..webp`] },
   ];
 
   const handleMouseMove = (e) => {
@@ -404,56 +404,56 @@ export default function LandingPage() {
                   desc: "Seamless execution, monitoring, and milestone-driven progress tracking.",
                   path: "/services/project-management",
                   icon: Briefcase,
-                  bgImage: `${import.meta.env.BASE_URL}project-management-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}project-management-bg.webp`
                 },
                 {
                   title: "Project Planning",
                   desc: "Strategic resource planning using advanced CPM & PERT techniques for project success.",
                   path: "/services/project-planning",
                   icon: Map,
-                  bgImage: `${import.meta.env.BASE_URL}project-planning-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}project-planning-bg.webp`
                 },
                 {
                   title: "Project Execution",
                   desc: "On-ground leadership and structured coordination for flawless project delivery.",
                   path: "/services/project-execution",
                   icon: Hammer,
-                  bgImage: `${import.meta.env.BASE_URL}project-execution-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}project-execution-bg.webp`
                 },
                 {
                   title: "Cost Consultancy",
                   desc: "Expert budgeting, value engineering, and financial control to maximize project ROI.",
                   path: "/services/cost-consultancy",
                   icon: Calculator,
-                  bgImage: `${import.meta.env.BASE_URL}cost-consultancy-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}cost-consultancy-bg.webp`
                 },
                 {
                   title: "Contract Management",
                   desc: "Protecting project interests through robust contracts and proactive risk mitigation.",
                   path: "/services/contract-management",
                   icon: Handshake,
-                  bgImage: `${import.meta.env.BASE_URL}contract-management-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}contract-management-bg.webp`
                 },
                 {
                   title: "Quality Assurance & Quality Control Audit",
                   desc: "Comprehensive quality assurance and process audits ensuring uncompromised excellence.",
                   path: "/services/qa-audit",
                   icon: ShieldCheck,
-                  bgImage: `${import.meta.env.BASE_URL}qa-audit-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}qa-audit-bg.webp`
                 },
                 {
                   title: "Quantity Survey & Billing Service & Auditing",
                   desc: "Detailed quantity surveying and billing verification for total transparency.",
                   path: "/services/qs-billing-audit",
                   icon: FileText,
-                  bgImage: `${import.meta.env.BASE_URL}qs-billing-audit-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}qs-billing-audit-bg.webp`
                 },
                 {
                   title: "Environment, Health & Safety Audit",
                   desc: "Health, Safety, and Environmental audits to maintain the highest safety standards.",
                   path: "/services/ehs-audit",
                   icon: Shield,
-                  bgImage: `${import.meta.env.BASE_URL}ehs-audit-bg.png`
+                  bgImage: `${import.meta.env.BASE_URL}ehs-audit-bg.webp`
                 }
               ]).map((service, index) => (
                 <Link

@@ -226,11 +226,11 @@ const ContractManagement = () => {
                 subtitle="Management"
                 description="Quantity Surveying, Bill of Quantities, Tender Preparation, Tender Floating, Comparisons, Negotiations & Finalisation of Vendors"
                 images={[
-                    `${import.meta.env.BASE_URL}contract-hero-1.png`,
-                    `${import.meta.env.BASE_URL}contract-hero-2.png`,
-                    `${import.meta.env.BASE_URL}contract-hero-3.png`
+                    `${import.meta.env.BASE_URL}contract-hero-1.webp`,
+                    `${import.meta.env.BASE_URL}contract-hero-2.webp`,
+                    `${import.meta.env.BASE_URL}contract-hero-3.webp`
                 ]}
-                bgImage={`${import.meta.env.BASE_URL}contract-management-hero.png`}
+                bgImage={`${import.meta.env.BASE_URL}contract-management-hero.webp`}
                 badgeText="Contract Management"
                 scrollTargetId="content"
                 layout="split"
