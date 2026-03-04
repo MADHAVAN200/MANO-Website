@@ -731,7 +731,11 @@ const EPC = () => {
                             </div>
                         </div>
                     </section>
-                    <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                    <ContactModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        initialService="EPC Solutions"
+                    />
                 </>
             )}
         </div>

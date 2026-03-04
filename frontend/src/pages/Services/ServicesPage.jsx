@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import RainbowButton from '../../components/RainbowButton';
+import ContactModal from '../../components/ContactModal';
 import ServiceHero from '../../components/HeroSections/ServiceHero';
 import { useCompany } from '../../context/CompanyContext';
 import DigitalERPSection from '../../components/DigitalERPSection';
@@ -45,6 +46,7 @@ const RevealOnScroll = ({ children }) => {
 const ServicesPage = () => {
     const { brand, isEPC } = useCompany();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isContactOpen, setIsContactOpen] = useState(false);
 
     useEffect(() => {
         const handleInteraction = () => {
@@ -464,16 +466,24 @@ const ServicesPage = () => {
                                 Partner with MANO Project Consultants to plan smarter, execute better, and achieve guaranteed project success.
                             </p>
                             <div className="flex justify-center">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-4">
-                                        Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
+                                <div onClick={() => setIsContactOpen(true)}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-4">
+                                            Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
                             </div>
                         </div>
                     </section>
                 </>
             )}
+
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+                initialService="General Inquiry"
+            />
         </div>
     );
 };

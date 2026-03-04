@@ -6,6 +6,7 @@ import {
     Handshake, Shield, BarChart2,
 } from 'lucide-react';
 import RainbowButton from '../../components/RainbowButton';
+import ContactModal from '../../components/ContactModal';
 import PageHero from '../../components/HeroSections/PageHero';
 import DigitalERPSection from '../../components/DigitalERPSection';
 import ProjectTypes from '../../components/Services/ProjectTypes';
@@ -194,6 +195,7 @@ const ContractManagement = () => {
     ];
 
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isContactOpen, setIsContactOpen] = useState(false);
 
     useEffect(() => {
         const handleInteraction = () => {
@@ -582,17 +584,24 @@ const ContractManagement = () => {
                                 Partner with MANO Project Consultants for structured, transparent, and risk-controlled contract management.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-4">
-                                        Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
+                                <div onClick={() => setIsContactOpen(true)}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-4">
+                                            Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
                             </div>
                         </div>
                     </section>
                 </>
             )}
 
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+                initialService="Contract Management"
+            />
         </div >
     );
 };

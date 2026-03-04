@@ -12,7 +12,7 @@ const Navbar = () => {
     const { brand, isEPC } = useCompany();
     const brandPath = `/${brand.toLowerCase()}`;
 
-    const [activeService, setActiveService] = useState(0);
+    const [activeService, setActiveService] = useState(null);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isContactOpen, setIsContactOpen] = useState(false);
@@ -73,7 +73,7 @@ const Navbar = () => {
         if (foundIndex !== -1) {
             setActiveService(foundIndex);
         } else {
-            setActiveService(0);
+            setActiveService(null);
         }
     }, [currentPath, isServicesOpen, services, brandPath]);
 
@@ -194,14 +194,14 @@ const Navbar = () => {
                         <div className="w-1/3 flex flex-col justify-between pt-4">
                             <div>
                                 <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                                    {services[activeService]?.title}
+                                    {activeService !== null ? services[activeService]?.title : "Our Services"}
                                 </h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    {services[activeService]?.desc}
+                                    {activeService !== null ? services[activeService]?.desc : "Explore our comprehensive range of services tailored to meet your project needs."}
                                 </p>
                             </div>
-                            <Link to={getLink(services[activeService]?.path || '#')} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
-                                Explore Service <ChevronRight className="w-4 h-4" />
+                            <Link to={activeService !== null ? getLink(services[activeService]?.path || '#') : (isEPC ? getLink('/services/epc') : getLink('/services'))} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
+                                Explore {activeService !== null ? 'Service' : 'Services'} <ChevronRight className="w-4 h-4" />
                             </Link>
                         </div>
 
@@ -224,7 +224,17 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+                initialService={
+                    (() => {
+                        const relativePath = currentPath.replace(brandPath, '') || '/';
+                        const foundService = services.find(s => s.path === relativePath);
+                        return foundService ? foundService.title : '';
+                    })()
+                }
+            />
             <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} jobRole="General Application" />
         </nav >
     );

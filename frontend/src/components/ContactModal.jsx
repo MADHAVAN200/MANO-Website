@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown, Loader2 } from 'lucide-react';
 import { useCompany } from '../context/CompanyContext';
 
-const ContactModal = ({ isOpen, onClose }) => {
+const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
     const { isEPC } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
-    const [selectedService, setSelectedService] = useState('');
+    const [selectedService, setSelectedService] = useState(initialService);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -14,6 +14,15 @@ const ContactModal = ({ isOpen, onClose }) => {
         email: '',
         project_details: ''
     });
+
+    // Sync initialService when the modal opens or prop changes
+    useEffect(() => {
+        if (isOpen && initialService) {
+            setSelectedService(initialService);
+        } else if (isOpen && !initialService) {
+            setSelectedService(''); // reset if opened without specific service
+        }
+    }, [isOpen, initialService]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
