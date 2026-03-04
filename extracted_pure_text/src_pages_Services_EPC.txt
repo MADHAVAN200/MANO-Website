@@ -1,0 +1,272 @@
+--- Website Text Extract for: EPC.jsx ---
+
+observer.disconnect();
+    }, []);
+
+    return (
+
+observer.disconnect();
+    }, [end, duration]);
+
+    return
+
+observer.disconnect();
+    }, [delay]);
+
+    return (
+
+EPC Projects Supported
+
+Happy Clients
+
+Procurement Savings
+
+Project Success Rate
+
+Safety Compliance
+
+Single-Point Execution Accountability
+
+Our EPC framework centralizes responsibility, ensuring seamless coordination between engineering consultants, procurement teams, contractors, and vendors.
+
+Integrated Cost & Timeline Control
+
+Engineering feasibility, procurement cost strategy, and execution planning are synchronized to eliminate delays and cost escalations.
+
+Core EPC Services
+
+Capabilities:
+
+Supply Chain Excellence
+
+End-to-End
+
+Supply Chain Visibility
+
+We ensure materials, equipment, and services are procured and delivered with optimal cost and timeline efficiency through data-driven logistics and sourcing strategies.
+
+Global Sourcing
+
+International vendor network access.
+
+Vendor Performance Efficiency
+
+Logistics
+
+Optimized delivery routes & timing.
+
+Benchmarking
+
+Real-time cost data analysis.
+
+Specialized Capabilities
+
+Going beyond standard execution.
+
+Delivery Model Comparison
+
+Without Integrated EPC Management
+
+Fragmented Execution & High Risk
+
+Inefficient
+
+"Result: Unpredictable timelines and financial instability."
+
+With MANO EPC Services
+
+Unified, Accelerated & Optimized
+
+Optimized
+
+"Result: Accelerated delivery, optimized costs, and controlled execution."
+
+Digital EPC Management Systems
+
+Technology-Driven Execution Monitoring. We leverage modern digital tools to track engineering approvals, procurement logistics, and site progress in real time.
+
+Why MANO for EPC Services?
+
+EPC Delivery
+
+Process Flow
+
+"Developers and infrastructure leaders trust MANO Project Consultants for delivering integrated EPC consultancy solutions that ensure speed, cost control, and execution reliability."
+
+Integrate Engineering, Procurement & Execution Seamlessly.
+
+Partner with MANO Project Consultants for structured EPC delivery with measurable performance outcomes.
+
+setIsModalOpen(true)}>
+
+Start Your EPC Project
+
+setIsModalOpen(false)} />
+
+Engineering Coordination & Design Management
+
+Constructability reviews, design validation, technical feasibility analysis, and change impact evaluation.
+
+Constructability reviews
+
+Design validation
+
+Technical feasibility analysis
+
+Change impact evaluation
+
+Interdisciplinary drawing coordination
+
+Procurement Strategy & Vendor Management
+
+Strategic sourcing, vendor prequalification, logistics planning, and procurement risk mitigation.
+
+Vendor prequalification
+
+Technical & commercial bid evaluation
+
+Strategic sourcing
+
+Logistics planning
+
+Procurement risk mitigation
+
+Construction Execution Oversight
+
+Site monitoring, contractor coordination, productivity tracking, and milestone reviews.
+
+Site execution monitoring
+
+Contractor coordination
+
+Productivity tracking
+
+Milestone reviews
+
+Field reporting systems
+
+Integrated EPC Project Controls
+
+Performance dashboards, cost analysis, site alignment reports, and stakeholder frameworks.
+
+Performance dashboards
+
+Cost vs. procurement analytics
+
+Stakeholder review frameworks
+
+Turnkey Project Delivery
+
+Complete lifecycle support from feasibility to commissioning.
+
+Feasibility studies
+
+Commissioning support
+
+Lifecycle management
+
+Procurement Cost Optimization
+
+Bulk procurement models and strategic vendor alliances.
+
+Bulk procurement models
+
+Strategic vendor alliances
+
+Price lock mechanisms
+
+EPC Risk Management
+
+Supply chain mapping and contractor risk profiling.
+
+Supply chain risk mapping
+
+Contractor risk profiling
+
+Engineering risk audits
+
+Engineering Feasibility & Design Review
+
+Procurement Strategy & Vendor Onboarding
+
+Material Planning & Logistics Coordination
+
+Construction Execution Monitoring
+
+Commissioning & Handover Compliance
+
+Procurement Construction (EPC)
+
+EPC Solutions
+
+EPC Projects
+
+Vendor benchmarking databases
+
+Lead-time optimization
+
+Import vs. local sourcing analysis
+
+Inventory buffer planning
+
+Supply risk forecasting
+
+Design & Execution
+
+Vendor Coordination
+
+Procurement Speed
+
+Cost Control
+
+Site Mobilization
+
+Result: Unpredictable timelines and financial instability.
+
+Unified Ecosystem
+
+Optimized Performance
+
+Timely Procurement
+
+Design-Site Sync
+
+Execution Governance
+
+Result: Accelerated delivery, optimized costs, and controlled execution.
+
+EPC dashboards
+
+Procurement trackers
+
+Vendor performance analytics
+
+Delay forecasting models
+
+Integrated Expertise
+
+Seamless engineering & execution.
+
+Cost Intelligence
+
+Data-driven procurement savings.
+
+Vendor Ecosystem
+
+Strong global supplier network.
+
+Transparent reporting frameworks.
+
+Industries We Support
+
+Residential Mega Developments
+
+High-rise townships & communities.
+
+Industrial Plants
+
+Manufacturing & production units.
+
+Hospitality & Mixed-Use
+
+Luxury hotels & lifestyle centers.

@@ -1,0 +1,118 @@
+--- Website Text Extract for: Careers.jsx ---
+
+Why Join
+
+Mano
+
+We foster an environment where innovation meets precision, and every team member is empowered to grow.
+
+Our Work Culture
+
+Open Positions
+
+Discover your next career move at Mano.
+
+togglePosition(index)}
+                                            className="w-full flex items-center justify-between p-6 md:p-8 text-left hover:bg-white/5 transition-colors"
+                                        >
+
+Job Details
+
+handleApplyClick(job.title)}
+                                                    className="w-full sm:w-auto px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors flex items-center justify-center gap-2"
+                                                >
+                                                    Apply for this Role
+
+Team Collaboration
+
+Cross-functional teamwork drives our success.
+
+Growth Opportunities
+
+Continuous skill development and project exposure.
+
+Recognition & Rewards
+
+We celebrate achievements and innovation.
+
+Employee Perspectives
+
+setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                                    className="absolute left-6 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                >
+
+setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                                    className="absolute right-6 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-all z-20 shadow-lg shadow-white/5"
+                                >
+
+Take the Next Step in Your
+
+Professional Journey.
+
+Become part of a team that values excellence, innovation, and integrity.
+
+handleApplyClick("General Application")}>
+
+Apply Today
+
+View Open Positions
+
+Pan India
+
+Priskilla Samuel
+
+It's been a great experience working here with a supportive team and positive work culture that encourages growth and quality delivery.
+
+Surya Senthilkumar
+
+Working at MANO Projects has been a genuinely rewarding experience. The management team is supportive and approachable, encouraging open communication and teamwork at every level.
+
+Chhatrapal Yadav
+
+Working here has been an incredible experience. The environment is highly supportive, and there is a genuine focus on professional growth and innovation.
+
+Riya Jadhav
+
+The organization offers a professional work environment with valuable learning and development opportunities. Team collaboration is encouraged, and management supports employee growth.
+
+Priyal Singh
+
+Working here has been a good experience. The team is supportive, and the work environment is comfortable.
+
+12+ Years
+
+Industry Leadership
+
+Learning & Innovation
+
+Cross-Domain Opportunities
+
+Top Developers & Corporates
+
+Integrity & Responsibility
+
+We maintain transparency, honesty, and professionalism in everything we do.
+
+Continuous Learning
+
+Collaborative Environment
+
+Work with diverse teams across planning, QA/QC, execution, cost, contracts, and safety.
+
+Performance-Driven Growth
+
+We reward excellence, leadership, and consistent contributions.
+
+Growth Mindset
+
+Continuous learning and professional development are at our core.
+
+Innovation first
+
+Team Culture
+
+Collaborate with industry experts and dynamic young engineers.
+
+Experience (Yrs)
+
+Experience N/A

@@ -1,0 +1,26 @@
+--- Website Text Extract for: Gateway.jsx ---
+
+(prev + 1) % BACKGROUND_IMAGES.length);
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+
+MANO
+
+Select Your Division
+
+Choose the specific vertical to explore our specialized services.
+
+MANO PMC
+
+Project Management Consultants (PMC), Cost Consultancy, and comprehensive auditing services.
+
+Explore Service
+
+MANO EPC
+
+Specialized Engineering, Procurement, and Construction (EPC) solutions.
+
+Mano Consultants

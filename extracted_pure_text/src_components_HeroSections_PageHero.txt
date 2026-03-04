@@ -1,0 +1,42 @@
+--- Website Text Extract for: PageHero.jsx ---
+
+) : layout === 'horizontal-split' ? (
+
+) : layout === 'quad-grid' ? (
+
+) : layout === 'masonry-3' ? (
+
+) : layout === 'masonry-reverse-3' ? (
+
+) : layout === 'mosaic-5' ? (
+
+) : layout === 'diagonal-4' ? (
+
+) : layout === 'mosaic-6' ? (
+
+) : layout === 'split-reverse' ? (
+
+) : layout === 'bento-5' ? (
+
+) : layout === 'dense-collage' ? (
+
+) : layout === 'collage-4' ? (
+
+0 ? images[0] : bgImage})`
+                        }}
+                    />
+                )}
+
+Learn More
+
+Get in Touch
+
+Client Satisfaction
+
+ACTIVE
+
+PREMIUM
+
+Clients Served
+
+Premium Construction Services

@@ -1,0 +1,26 @@
+--- Website Text Extract for: AboutHero.jsx ---
+
+Dedicated to Excellence
+
+Who
+
+We Are
+
+We are a team of dedicated professionals committed to delivering excellence in every project we undertake. From concept to completion, we ensure quality and precision.
+
+setIsContactOpen(true)}
+                                className="group cursor-pointer inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
+                            >
+                                Start Your Project
+
+Meet the Team
+
+Projects Managed
+
+Timely Completion
+
+HIRING
+
+QUALIFIED
+
+setIsContactOpen(false)} />

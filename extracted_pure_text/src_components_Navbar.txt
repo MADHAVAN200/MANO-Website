@@ -1,0 +1,59 @@
+--- Website Text Extract for: Navbar.jsx ---
+
+MANO
+
+Home
+
+About Us
+
+!isEPC && setIsServicesOpen(true)}
+                            className="relative h-full flex items-center"
+                        >
+
+Projects
+
+Careers
+
+Explore Service
+
+setIsContactOpen(false)} />
+
+setIsResumeOpen(false)} jobRole="General Application" />
+
+Project Management
+
+Project Execution
+
+On-ground leadership and coordination for flawless project delivery.
+
+Project Planning
+
+Strategic resource planning using CPM & PERT techniques.
+
+Contract Management
+
+QS, BOQ, Tender Preparation, and vendor finalization.
+
+QA/QC and Auditing
+
+Comprehensive quality assurance, control, and auditing services.
+
+Cost Consultancy
+
+Expert budgeting, cash flows, and cost control measures.
+
+QS and Auditing
+
+Detailed quantity surveying and billing verification.
+
+EHS Audit
+
+Environmental, Health, and Safety audits and compliance.
+
+EPC Solution
+
+Mano Logo
+
+Get in Touch
+
+General Application
