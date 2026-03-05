@@ -134,7 +134,7 @@ export default function ChatbotWidget() {
     return (
         <div className="fixed bottom-6 right-6 z-[120]">
             {isOpen && (
-                <div className="mb-4 w-[92vw] max-w-sm rounded-2xl border border-white/15 bg-black/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+                <div className="absolute bottom-0 right-[calc(100%+12px)] w-[92vw] max-w-sm rounded-2xl border border-white/15 bg-black/80 backdrop-blur-xl shadow-2xl overflow-hidden">
                     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
                         <div className="flex items-center gap-2 text-white">
                             <Bot size={18} className="text-blue-400" />
