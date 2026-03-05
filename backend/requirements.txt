@@ -1,7 +1,7 @@
-fastapi==0.111.0
-uvicorn[standard]==0.30.1
-chromadb==0.5.3
-sentence-transformers==3.0.1
-openai==1.35.0
-python-dotenv==1.0.1
-pydantic==2.7.1
+# Python dependencies for offline data pipeline scripts only
+# (chunk_data.ipynb and index_knowledge.py)
+# The live server now runs in Node.js — see package.json
+
+chromadb>=1.4.0
+sentence-transformers>=3.0.0
+python-dotenv>=1.0.0

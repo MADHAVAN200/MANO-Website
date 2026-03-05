@@ -24,6 +24,7 @@ import EPC from './pages/Services/EPC';
 
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import ChatbotWidget from "./components/ChatbotWidget";
 import { CompanyProvider } from "./context/CompanyContext";
 
 // Wrapper for Brand Routes
@@ -67,6 +68,7 @@ function App() {
         {/* Catch-all redirect to Gateway */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <ChatbotWidget />
     </>
   )
 }
