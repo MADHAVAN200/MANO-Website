@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChevronRight, Menu, X } from 'lucide-react';
 import RainbowButton from './RainbowButton';
 import { useCompany } from '../context/CompanyContext';
 import ContactModal from './ContactModal';
 import ResumeModal from './ResumeModal';
+import MobileNavbar from './MobileNavbar';
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const currentPath = location.pathname;
     const { brand, isEPC } = useCompany();
     const brandPath = `/${brand.toLowerCase()}`;
@@ -19,6 +21,13 @@ const Navbar = () => {
     const [isResumeOpen, setIsResumeOpen] = useState(false);
 
     const isCareersPage = currentPath === `${brandPath}/careers` || currentPath === `${brandPath}/careers/`;
+
+    const handleLogoClick = (e) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        setIsServicesOpen(false);
+        navigate('/');
+    };
 
     const handleContactClick = (e) => {
         e.preventDefault();
@@ -99,7 +108,7 @@ const Navbar = () => {
                 {/* Top Row: Logo, Links (Desktop), Hamburger, CTA */}
                 <div className="flex items-center justify-between px-4 sm:px-8 py-3 lg:py-4 w-full">
                     {/* Logo Section */}
-                    <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group">
+                    <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group">
                         <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-8 sm:h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
                         <span className="text-xl sm:text-2xl font-bold text-white tracking-wide">
                             MANO
@@ -147,44 +156,27 @@ const Navbar = () => {
                             </div>
                         </div>
 
-                        {/* Mobile Menu Toggle Button */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                            className="lg:hidden p-2.5 text-white hover:bg-white/10 rounded-lg transition-colors"
+                            aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+                            aria-expanded={isMobileMenuOpen}
                         >
-                            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                            {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
                         </button>
                     </div>
                 </div>
 
-                {/* Mobile Menu Dropdown */}
-                <div
-                    className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-[80vh] opacity-100 border-t border-white/10' : 'max-h-0 opacity-0'}`}
-                >
-                    <div className="flex flex-col p-6 gap-2">
-                        <Link to={getLink('/')} className={`${linkBaseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
-                            Home
-                        </Link>
-                        <Link to={getLink('/about-us')} className={`${linkBaseClass} ${isActive('/about-us') ? activeClass : inactiveClass}`}>
-                            About Us
-                        </Link>
-                        <Link to={isEPC ? getLink('/services/epc') : getLink('/services')} className={`${linkBaseClass} ${isActive(isEPC ? '/services/epc' : '/services') ? activeClass : inactiveClass}`}>
-                            {isEPC ? 'Service' : 'Services'}
-                        </Link>
-                        <Link to={getLink('/projects')} className={`${linkBaseClass} ${isActive('/projects') ? activeClass : inactiveClass}`}>
-                            Projects
-                        </Link>
-                        <Link to={getLink('/careers')} className={`${linkBaseClass} ${isActive('/careers') ? activeClass : inactiveClass}`}>
-                            Careers
-                        </Link>
-                        <div className="pt-4" onClick={handleContactClick}>
-                            <RainbowButton borderRadius="rounded-xl w-full">
-                                {isCareersPage ? 'Apply' : 'Get in Touch'}
-                                <ChevronRight className="w-4 h-4 ml-2" />
-                            </RainbowButton>
-                        </div>
-                    </div>
-                </div>
+                <MobileNavbar
+                    isOpen={isMobileMenuOpen}
+                    onClose={() => setIsMobileMenuOpen(false)}
+                    isActive={isActive}
+                    getLink={getLink}
+                    isEPC={isEPC}
+                    isCareersPage={isCareersPage}
+                    handleContactClick={handleContactClick}
+                    services={services}
+                />
 
                 {/* Desktop Expanding Mega Menu Section (Existing) */}
                 <div

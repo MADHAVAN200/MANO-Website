@@ -1,4 +1,4 @@
-const RainbowButton = ({ children, onClick, className = "", borderRadius = "rounded-full" }) => {
+const RainbowButton = ({ children, onClick, className = "", borderRadius = "rounded-full", buttonClassName = "" }) => {
     return (
         <div className={`relative group inline-block ${className}`}>
             <style>{`
@@ -28,7 +28,7 @@ const RainbowButton = ({ children, onClick, className = "", borderRadius = "roun
             <div className={`rainbow relative z-0 bg-white/10 overflow-hidden p-[2px] flex items-center justify-center ${borderRadius} hover:scale-105 transition duration-300 active:scale-100`}>
                 <button
                     onClick={onClick}
-                    className={`px-8 py-4 text-sm md:text-lg text-white ${borderRadius} font-medium bg-black/80 backdrop-blur w-full h-full flex items-center justify-center gap-2`}
+                    className={`px-8 py-4 text-sm md:text-lg text-white ${borderRadius} font-medium bg-black/80 backdrop-blur w-full h-full flex items-center justify-center gap-2 ${buttonClassName}`}
                 >
                     {children}
                 </button>

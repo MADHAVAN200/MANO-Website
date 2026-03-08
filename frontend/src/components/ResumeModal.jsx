@@ -96,7 +96,7 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pointer-events-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 pointer-events-auto">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
@@ -105,53 +105,53 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
 
             {/* Modal Content */}
             <div className="relative w-full max-w-xl rounded-2xl p-px z-10 animate-in fade-in zoom-in duration-300 bg-gradient-to-br from-white/20 via-white/5 to-white/10">
-                <div className="relative bg-black/90 backdrop-blur-2xl rounded-[15px] p-8 shadow-2xl overflow-hidden">
+                <div className="relative bg-black/90 backdrop-blur-2xl rounded-[15px] p-4 sm:p-8 shadow-2xl overflow-hidden max-h-[88dvh] sm:max-h-[90vh] overflow-y-auto custom-scrollbar">
                     {/* Background decoration */}
                     <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/20 blur-[80px] rounded-full -z-10 pointer-events-none"></div>
 
                     {/* Close Button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all group z-20"
+                        className="absolute top-3 right-3 sm:top-4 sm:right-4 p-1.5 sm:p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all group z-20"
                     >
-                        <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
+                        <X size={18} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>
 
                     {submitted ? (
-                        <div className="text-center py-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-6 border border-green-500/30">
-                                <CheckCircle2 size={40} />
+                        <div className="text-center py-8 sm:py-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-4 sm:mb-6 border border-green-500/30">
+                                <CheckCircle2 size={32} className="sm:w-10 sm:h-10" />
                             </div>
-                            <h2 className="text-3xl font-bold text-white mb-2">Application Sent!</h2>
-                            <p className="text-gray-400">Thank you for applying. We'll review your resume and get back to you soon.</p>
+                            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Application Sent!</h2>
+                            <p className="text-sm sm:text-base text-gray-400">Thank you for applying. We'll review your resume and get back to you soon.</p>
                         </div>
                     ) : (
                         <>
-                            <div className="text-center mb-8">
-                                <h2 className="text-2xl font-bold text-white mb-2">Apply for {jobRole || "Open Positions"}</h2>
-                                <p className="text-gray-400 text-sm">Upload your resume and we'll be in touch.</p>
+                            <div className="text-center mb-5 sm:mb-8 pr-8 sm:pr-0">
+                                <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Apply for {jobRole || "Open Positions"}</h2>
+                                <p className="text-gray-400 text-xs sm:text-sm">Upload your resume and we'll be in touch.</p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="space-y-5">
+                            <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-5">
                                 <div className="relative group">
-                                    <User className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                    <User className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                                     <input
                                         type="text"
                                         required
                                         placeholder="Full Name *"
-                                        className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
+                                        className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
                                 </div>
 
                                 <div className="relative group">
-                                    <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                    <Mail className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
                                     <input
                                         type="email"
                                         required
                                         placeholder="Email Address *"
-                                        className="w-full pl-12 pr-5 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
+                                        className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     />
@@ -159,7 +159,7 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
 
                                 {/* File Upload Zone */}
                                 <div
-                                    className={`relative group border-2 border-dashed rounded-xl p-8 transition-all flex flex-col items-center justify-center text-center cursor-pointer ${dragActive ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 bg-white/5 hover:border-white/20'}`}
+                                    className={`relative group border-2 border-dashed rounded-xl p-4 sm:p-8 transition-all flex flex-col items-center justify-center text-center cursor-pointer ${dragActive ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 bg-white/5 hover:border-white/20'}`}
                                     onDragEnter={handleDrag}
                                     onDragLeave={handleDrag}
                                     onDragOver={handleDrag}
@@ -176,10 +176,10 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
 
                                     {formData.file ? (
                                         <div className="flex flex-col items-center animate-in fade-in duration-300">
-                                            <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-3 shadow-lg shadow-blue-900/40">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-600 flex items-center justify-center text-white mb-3 shadow-lg shadow-blue-900/40">
                                                 <FileText size={24} />
                                             </div>
-                                            <p className="text-white font-medium mb-1 truncate max-w-[200px]">{formData.file.name}</p>
+                                            <p className="text-sm sm:text-base text-white font-medium mb-1 truncate max-w-[220px]">{formData.file.name}</p>
                                             <p className="text-gray-500 text-xs">{(formData.file.size / (1024 * 1024)).toFixed(2)} MB</p>
                                             <button
                                                 type="button"
@@ -191,10 +191,10 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
                                         </div>
                                     ) : (
                                         <>
-                                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 mb-3 sm:mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                                                 <Upload size={24} />
                                             </div>
-                                            <h4 className="text-white font-medium mb-1">Upload Your Resume</h4>
+                                            <h4 className="text-sm sm:text-base text-white font-medium mb-1">Upload Your Resume</h4>
                                             <p className="text-gray-500 text-xs">Drag & drop or <span className="text-blue-400">browse files</span></p>
                                             <p className="text-gray-600 text-[10px] mt-4 uppercase tracking-widest">PDF, DOC, DOCX up to 50MB</p>
                                         </>
@@ -204,7 +204,7 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-900/40 flex items-center justify-center gap-2 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full py-3.5 sm:py-4 text-sm sm:text-base rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-900/40 flex items-center justify-center gap-2 transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {loading ? 'Processing...' : 'Submit Application'}
                                     {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}

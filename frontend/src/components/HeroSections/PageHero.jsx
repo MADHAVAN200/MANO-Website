@@ -38,7 +38,8 @@ export default function PageHero({
     },
     badgeText = "Premium Construction Services",
     showCards = false,
-    showContactButton = true
+    showContactButton = true,
+    headingClassName = ""
 }) {
     return (
         <div className="relative w-full min-h-screen flex flex-col justify-center text-white overflow-hidden font-sans">
@@ -396,7 +397,7 @@ export default function PageHero({
 
                             {/* Heading */}
                             <h1
-                                className="animate-fade-in delay-200 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4"
+                                className={`animate-fade-in delay-200 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4 ${headingClassName}`}
                             >
                                 <span className="bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
                                     {title}
