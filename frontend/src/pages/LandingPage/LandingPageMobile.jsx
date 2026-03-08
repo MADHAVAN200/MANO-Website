@@ -28,10 +28,10 @@ const TestimonialsColumn = (props) => {
         {[...new Array(2)].fill(0).map((_, index) => (
           <React.Fragment key={index}>
             {testimonials.map(({ text, image, name, role }, i) => (
-              <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 w-full max-w-sm md:max-w-md animated-white-border" key={i}>
-                <div className="text-gray-300 leading-relaxed mb-6">{text}</div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-br from-blue-500/50 to-transparent">
+              <div className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 w-full max-w-[18rem] animated-white-border" key={i}>
+                <div className="text-gray-300 text-sm leading-relaxed mb-4">{text}</div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-br from-blue-500/50 to-transparent">
                     <img
                       src={`${import.meta.env.BASE_URL}${image}`}
                       alt={name}
@@ -40,8 +40,8 @@ const TestimonialsColumn = (props) => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <div className="font-bold text-white tracking-wide">{name}</div>
-                    {role && <div className="text-sm text-blue-400 font-medium">{role}</div>}
+                    <div className="font-bold text-sm text-white tracking-wide">{name}</div>
+                    {role && <div className="text-xs text-blue-400 font-medium">{role}</div>}
                   </div>
                 </div>
               </div>
@@ -119,11 +119,12 @@ const CountUp = ({ end, duration = 2000 }) => {
 
 
 
-export default function LandingPage() {
+export default function LandingPageMobile() {
   const { brand, isEPC } = useCompany();
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
+  const isMobile = true;
 
   const projects = [
     { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`] },
@@ -255,93 +256,93 @@ export default function LandingPage() {
       <LandingHero />
 
       {/* Why Choose Section with Gradient */}
-      <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
+      <section className="relative px-5 py-8 border-t border-white/5 bg-gradient-to-b from-black to-blue-950/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0,rgba(0,0,0,0)_100%)] pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 text-center mb-12 relative z-10">
+          <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 text-center mb-6 relative z-10 leading-tight">
             Why Businesses <span className="text-blue-500">Choose</span> MANO Consultants
           </h2>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-            With 12 years of excellence, we blend deep industry knowledge with client-centric<br />
+          <p className="text-gray-400 text-sm text-center mb-6 max-w-2xl mx-auto">
+            With 12 years of excellence, we blend deep industry knowledge with client-centric<br className="hidden sm:block" />
             approach to deliver measurable results in every project.
           </p>
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl mx-auto space-y-3">
             {/* Card 1 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
-              <div className="flex items-start gap-6">
+            <div className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
+              <div className="flex items-start gap-4">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
                       <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-10 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-4 text-white">End-to-End Project Expertise</h3>
+                  <h3 className="text-lg font-bold mb-2 text-white">End-to-End Project Expertise</h3>
                   <div className="flex items-start gap-3 text-gray-300">
                     <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
-                    <p className="text-gray-300 leading-relaxed">From feasibility to final handover — complete lifecycle management under one roof.</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">From feasibility to final handover — complete lifecycle management under one roof.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
-              <div className="flex items-start gap-6">
+            <div className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
+              <div className="flex items-start gap-4">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
                       <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-10 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-4 text-white">Cost Efficiency & Transparency</h3>
+                  <h3 className="text-lg font-bold mb-2 text-white">Cost Efficiency & Transparency</h3>
                   <div className="flex items-start gap-3 text-gray-300">
                     <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
-                    <p className="text-gray-300 leading-relaxed">Accurate estimations, budgeting, and specialist cost control ensure optimal financial performance.</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">Accurate estimations, budgeting, and specialist cost control ensure optimal financial performance.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Card 3 */}
-            <div className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
-              <div className="flex items-start gap-6">
+            <div className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
+              <div className="flex items-start gap-4">
                 <div className="flex flex-col items-center -ml-2">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C13.1046 2 14 2.89543 14 4V10C14 11.1046 13.1046 12 12 12C10.8954 12 10 11.1046 10 10V4C10 2.89543 10.8954 2 12 2Z" fill="white" opacity="0.95" />
                       <path d="M6 8C7.10457 8 8 8.89543 8 10V16C8 17.1046 7.10457 18 6 18C4.89543 18 4 17.1046 4 16V10C4 8.89543 4.89543 8 6 8Z" fill="#60A5FA" opacity="0.95" />
                     </svg>
                   </div>
-                  <div className="w-px h-16 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
+                  <div className="w-px h-10 bg-gradient-to-b from-blue-500/50 to-transparent mt-2 rounded"></div>
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-4 text-white">Quality-Focused Delivery</h3>
+                  <h3 className="text-lg font-bold mb-2 text-white">Quality-Focused Delivery</h3>
                   <div className="flex items-start gap-3 text-gray-300">
                     <span className="mt-1 w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-500/30">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 6L9 17L4 12" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
-                    <p className="text-gray-300 leading-relaxed">Strict QA/QC processes, audits, and compliance frameworks for flawless execution.</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">Strict QA/QC processes, audits, and compliance frameworks for flawless execution.</p>
                   </div>
                 </div>
               </div>
@@ -351,25 +352,25 @@ export default function LandingPage() {
       </section>
 
       {/* WHY CLIENTS TRUST US STRIP */}
-      <section className="py-16 sm:py-24 border-y border-white/5 bg-white/[0.02]">
+      <section className="py-8 border-y border-white/5 bg-white/[0.02]">
         <RevealOnScroll>
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 text-white leading-tight">
+          <div className="max-w-7xl mx-auto px-5">
+            <h2 className="text-2xl font-bold text-center mb-6 text-white leading-tight">
               Why <span className="text-blue-500">Clients Trust</span> Us
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 gap-3">
               {[
                 { title: "Predictable Delivery", text: "Timely execution backed by strong planning and monitoring.", icon: Clock },
                 { title: "Transparent Processes", text: "Fully documented, audit-ready systems at every step.", icon: FileText },
                 { title: "Cost & Risk Control", text: "Data-driven decisions ensure optimized cost and minimized risk.", icon: ShieldCheck },
                 { title: "End-to-End Support", text: "From drawings to handover — we manage everything.", icon: Handshake },
               ].map((item, index) => (
-                <div key={index} className="group relative p-8 rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 flex flex-col items-start h-full animated-white-border">
-                  <div className="w-14 h-14 rounded-xl bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
-                    <item.icon size={28} />
+                <div key={index} className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 flex flex-col items-start h-full animated-white-border">
+                  <div className="w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.1)]">
+                    <item.icon size={20} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{item.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.text}</p>
+                  <h3 className="text-base font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">{item.title}</h3>
+                  <p className="text-gray-400 text-xs leading-relaxed">{item.text}</p>
                 </div>
               ))}
             </div>
@@ -383,12 +384,12 @@ export default function LandingPage() {
       </RevealOnScroll>
 
       {/* Services Section with Hex/Grid Pattern */}
-      <section id="services" className="relative px-6 sm:px-12 py-16 sm:py-24 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black to-blue-950/30">
+      <section id="services" className="relative px-5 py-8 overflow-hidden border-t border-white/5 bg-gradient-to-b from-black to-blue-950/30">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Our Services</h2>
-          <div className={`max-w-7xl mx-auto ${isEPC ? 'flex justify-center' : 'grid grid-cols-1 md:grid-cols-2'} gap-8`}>
+          <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Our Services</h2>
+          <div className={`max-w-7xl mx-auto ${isEPC ? 'flex justify-center' : 'grid grid-cols-1'} gap-3`}>
             {
               (isEPC ? [
                 {
@@ -459,7 +460,7 @@ export default function LandingPage() {
                 <Link
                   key={index}
                   to={`/${brand.toLowerCase()}${service.path}`}
-                  className={`group relative h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isEPC ? 'w-full max-w-4xl' : ''}`}
+                  className={`group relative h-[320px] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isEPC ? 'w-full max-w-4xl' : ''}`}
                 >
                   {/* Background Image with Filter */}
                   <div
@@ -472,23 +473,23 @@ export default function LandingPage() {
                   <div className="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/10 transition-colors duration-500" />
 
                   {/* Content Overlay (Glassmorphism) */}
-                  <div className="relative z-10 p-6 m-4 rounded-2xl backdrop-blur-md bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500">
-                    <div className="flex items-center gap-4 mb-0 group-hover:mb-3 transition-all duration-500">
-                      <div className="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-400 transition-all duration-300">
-                        <service.icon className="w-6 h-6 text-blue-400 group-hover:text-white transition-colors" />
+                  <div className="relative z-10 p-4 m-3 rounded-xl backdrop-blur-md bg-white/5 border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500">
+                    <div className="flex items-center gap-3 mb-0 group-hover:mb-2 transition-all duration-500">
+                      <div className="w-9 h-9 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-400 transition-all duration-300">
+                        <service.icon className="w-5 h-5 text-blue-400 group-hover:text-white transition-colors" />
                       </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                      <h3 className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
                         {service.title}
                       </h3>
                     </div>
 
-                    <div className="max-h-0 group-hover:max-h-[120px] overflow-hidden transition-all duration-700 ease-in-out">
-                      <p className="text-gray-300 text-sm leading-relaxed mb-0 group-hover:mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                    <div className="max-h-[110px] overflow-hidden transition-all duration-700 ease-in-out">
+                      <p className="text-gray-300 text-xs leading-relaxed mb-3 opacity-100 transition-all duration-500 delay-100">
                         {service.desc}
                       </p>
                     </div>
 
-                    <div className="flex items-center text-sm font-semibold text-blue-400 group-hover:text-white transition-colors pt-2 border-t border-transparent group-hover:border-white/10">
+                    <div className="flex items-center text-xs font-semibold text-blue-400 group-hover:text-white transition-colors pt-2 border-t border-transparent group-hover:border-white/10">
                       Explore Service <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -499,10 +500,10 @@ export default function LandingPage() {
       </section>
 
       {/* Featured Projects Carousel */}
-      <section className="py-16 sm:py-24 overflow-hidden relative">
+      <section className="py-8 overflow-hidden relative">
         <RevealOnScroll>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Featured Projects</h2>
-          <div className="relative h-[400px] sm:h-[520px] flex items-center justify-center">
+          <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Featured Projects</h2>
+          <div className="relative h-[300px] flex items-center justify-center">
             <div className="relative w-full max-w-7xl mx-auto flex items-center justify-center">
               {projects.map((project, index) => {
                 // compute positions based on the current (rounded) index
@@ -514,11 +515,11 @@ export default function LandingPage() {
                 const isRight2 = position === 2;
 
                 // Responsive translation values
-                const isMobile = window.innerWidth < 640;
-                const translateX_Left1 = isMobile ? '-100%' : '-110%';
-                const translateX_Left2 = isMobile ? '-150%' : '-170%';
-                const translateX_Right1 = isMobile ? '0%' : '-10%';
-                const translateX_Right2 = isMobile ? '50%' : '60%';
+                const translateX_Left1 = isMobile ? '-125%' : '-110%';
+                const translateX_Left2 = isMobile ? '-175%' : '-170%';
+                const translateX_Right1 = isMobile ? '25%' : '-10%';
+                const translateX_Right2 = isMobile ? '75%' : '60%';
+                const showOnMobile = isCenter || isLeft1 || isRight1;
 
                 let transform = 'translateX(-50%) scale(0.6) translateZ(-160px)';
                 let zIndex = 1;
@@ -533,7 +534,7 @@ export default function LandingPage() {
                 } else if (isLeft1) {
                   transform = `translateX(${translateX_Left1}) scale(0.88) translateZ(-60px)`;
                   zIndex = 50;
-                  opacity = 0.75;
+                  opacity = isMobile ? 0.5 : 0.75;
                 } else if (isLeft2) {
                   transform = `translateX(${translateX_Left2}) scale(0.72) translateZ(-120px)`;
                   zIndex = 40;
@@ -541,11 +542,16 @@ export default function LandingPage() {
                 } else if (isRight1) {
                   transform = `translateX(${translateX_Right1}) scale(0.88) translateZ(-60px)`;
                   zIndex = 50;
-                  opacity = 0.75;
+                  opacity = isMobile ? 0.5 : 0.75;
                 } else if (isRight2) {
                   transform = `translateX(${translateX_Right2}) scale(0.72) translateZ(-120px)`;
                   zIndex = 40;
                   opacity = 0.55;
+                }
+
+                if (isMobile && !showOnMobile) {
+                  opacity = 0;
+                  zIndex = 1;
                 }
 
                 return (
@@ -559,25 +565,25 @@ export default function LandingPage() {
                       filter: blur
                     }}
                   >
-                    <div className="w-[85vw] sm:w-[560px] h-[350px] sm:h-[520px] relative group">
+                    <div className="w-[76vw] max-w-[280px] h-[240px] relative group">
                       {/* Liquid glass card */}
-                      <div className="relative h-full rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 shadow-2xl">
+                      <div className="relative h-full rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 shadow-2xl">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
 
                         {/* Project title */}
-                        <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
-                          <h3 className="text-xl sm:text-3xl font-bold text-white">{project.name}</h3>
+                        <div className="absolute top-3 left-3 z-20">
+                          <h3 className="text-base font-bold text-white">{project.name}</h3>
                         </div>
 
                         {/* Image area with padding and inner frame */}
-                        <div className="absolute left-4 sm:left-6 right-4 sm:right-6 bottom-4 sm:bottom-6 top-16 sm:top-20 z-10 rounded-lg overflow-hidden bg-black">
+                        <div className="absolute left-3 right-3 bottom-3 top-12 z-10 rounded-lg overflow-hidden bg-black">
                           <img src={project.images[0]} alt={project.name} loading="lazy" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>
 
                       {/* soft outer stroke */}
-                      <div className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.6) inset' }} />
+                      <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.6) inset' }} />
                     </div>
                   </div>
                 );
@@ -588,12 +594,12 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="px-4 py-16 sm:py-24 overflow-hidden">
+      <section className="px-4 py-8 overflow-hidden">
         <RevealOnScroll>
           <div className="mx-auto w-full">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Testimonials</h2>
+            <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Testimonials</h2>
 
-            <div className="relative flex h-[500px] sm:h-[700px] w-full flex-row items-center justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+            <div className="relative flex h-[390px] w-full flex-row items-center justify-center gap-3 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
               <TestimonialsColumn testimonials={testimonials} duration={15} />
               <TestimonialsColumn testimonials={[...testimonials].reverse()} duration={19} className="hidden md:block" />
               <TestimonialsColumn testimonials={testimonials} duration={17} className="hidden lg:block" />
@@ -603,23 +609,23 @@ export default function LandingPage() {
       </section>
 
       {/* FAQs with Light Gradient */}
-      <section className="relative px-6 sm:px-12 py-16 sm:py-24 border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
+      <section className="relative px-5 py-8 border-t border-white/5 bg-gradient-to-b from-black via-blue-950/10 to-black">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-50"></div>
         <RevealOnScroll>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Frequently Asked Questions (FAQs)</h2>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+          <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Frequently Asked Questions (FAQs)</h2>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 gap-y-3">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-full ${expandedFaq === index ? 'bg-white/10' : ''}`}
+                className={`bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-4 hover:border-blue-500/30 hover:bg-white/10 transition-all cursor-pointer h-full ${expandedFaq === index ? 'bg-white/10' : ''}`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-base sm:text-lg font-medium">{faq.question}</span>
+                  <span className="text-sm font-medium pr-3">{faq.question}</span>
                   <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${expandedFaq === index ? 'rotate-90' : ''}`} />
                 </div>
                 {expandedFaq === index && (
-                  <div className="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-4 whitespace-pre-line">
+                  <div className="mt-3 text-gray-400 text-xs leading-relaxed border-t border-white/10 pt-3 whitespace-pre-line">
                     {faq.answer}
                   </div>
                 )}
@@ -630,10 +636,10 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Form with Highlight */}
-      <section id="contact-section" className="relative px-6 sm:px-12 py-16 sm:py-24 overflow-hidden">
+      <section id="contact-section" className="relative px-5 py-8 overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
         <RevealOnScroll>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6 relative z-10">Ready to Start Your Project?</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2 relative z-10">Ready to Start Your Project?</h2>
           <ContactForm />
         </RevealOnScroll>
       </section>

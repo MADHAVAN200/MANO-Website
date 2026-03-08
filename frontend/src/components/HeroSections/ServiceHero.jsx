@@ -15,7 +15,7 @@ const StatItem = ({ value, label }) => (
 );
 
 // --- MAIN COMPONENT ---
-export default function ServiceHero() {
+export default function ServiceHero({ compactMobile = false }) {
     return (
         <div className="relative w-full text-white overflow-hidden font-sans">
             {/* 
@@ -75,7 +75,7 @@ export default function ServiceHero() {
 
                         {/* Heading */}
                         <h1
-                            className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-tight pb-2"
+                            className={`animate-fade-in delay-200 font-bold tracking-tight leading-tight pb-2 ${compactMobile ? 'text-3xl sm:text-6xl lg:text-7xl xl:text-8xl' : 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl'}`}
                         >
                             Building<br />
                             <span className="bg-gradient-to-br from-white via-white to-[#3b82f6] bg-clip-text text-transparent">
@@ -84,7 +84,7 @@ export default function ServiceHero() {
                             Through Precision
                         </h1>
 
-                        <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-100 leading-relaxed font-semibold">
+                        <p className={`animate-fade-in delay-300 max-w-xl text-zinc-100 leading-relaxed font-semibold ${compactMobile ? 'text-sm sm:text-lg' : 'text-lg'}`}>
                             At MANO Project Consultants, we provide end-to-end consulting solutions that help organizations plan smarter, execute faster, and maintain uncompromising quality.
                         </p>
 
@@ -92,37 +92,37 @@ export default function ServiceHero() {
                         <div className="animate-fade-in delay-400 flex flex-col sm:flex-row gap-4">
                             <button
                                 onClick={() => document.getElementById('core-services')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]"
+                                className={`group inline-flex items-center justify-center gap-2 rounded-full bg-white font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98] ${compactMobile ? 'px-5 py-2.5 text-xs sm:text-sm' : 'px-8 py-4 text-sm'}`}
                             >
                                 Explore Services
-                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                <ArrowRight className={`transition-transform group-hover:translate-x-1 ${compactMobile ? 'w-3.5 h-3.5 sm:w-4 sm:h-4' : 'w-4 h-4'}`} />
                             </button>
 
                         </div>
                     </div>
 
                     {/* --- RIGHT COLUMN --- */}
-                    <div className="lg:col-span-5 space-y-4 lg:mt-6">
+                    <div className={`lg:col-span-5 lg:mt-6 ${compactMobile ? 'space-y-3 max-w-sm mx-auto w-full' : 'space-y-4'}`}>
 
                         {/* Stats Card */}
-                        <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl">
+                        <div className={`animate-fade-in delay-500 relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl ${compactMobile ? 'rounded-2xl p-5' : 'rounded-3xl p-8'}`}>
                             {/* Card Glow Effect */}
-                            <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+                            <div className={`absolute top-0 right-0 rounded-full bg-white/5 blur-3xl pointer-events-none ${compactMobile ? '-mr-12 -mt-12 h-44 w-44' : '-mr-16 -mt-16 h-64 w-64'}`} />
 
                             <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
-                                        <Target className="h-6 w-6 text-white" />
+                                <div className={`flex items-center ${compactMobile ? 'gap-3 mb-5' : 'gap-4 mb-8'}`}>
+                                    <div className={`flex items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 ${compactMobile ? 'h-10 w-10' : 'h-12 w-12'}`}>
+                                        <Target className={`text-white ${compactMobile ? 'h-5 w-5' : 'h-6 w-6'}`} />
                                     </div>
                                     <div>
-                                        <div className="text-3xl font-bold tracking-tight text-white">500+</div>
-                                        <div className="text-sm text-zinc-400">Clients Served</div>
+                                        <div className={`font-bold tracking-tight text-white ${compactMobile ? 'text-2xl' : 'text-3xl'}`}>500+</div>
+                                        <div className={`text-zinc-400 ${compactMobile ? 'text-xs' : 'text-sm'}`}>Clients Served</div>
                                     </div>
                                 </div>
 
                                 {/* Progress Bar Section */}
-                                <div className="space-y-3 mb-8">
-                                    <div className="flex justify-between text-sm">
+                                <div className={`space-y-3 ${compactMobile ? 'mb-5' : 'mb-8'}`}>
+                                    <div className={`flex justify-between ${compactMobile ? 'text-xs' : 'text-sm'}`}>
                                         <span className="text-zinc-400">Client Satisfaction</span>
                                         <span className="text-white font-medium">98%</span>
                                     </div>
@@ -131,10 +131,10 @@ export default function ServiceHero() {
                                     </div>
                                 </div>
 
-                                <div className="h-px w-full bg-white/10 mb-6" />
+                                <div className={`h-px w-full bg-white/10 ${compactMobile ? 'mb-4' : 'mb-6'}`} />
 
                                 {/* Mini Stats Grid */}
-                                <div className="grid grid-cols-3 gap-4 text-center">
+                                <div className={`grid grid-cols-3 text-center ${compactMobile ? 'gap-3' : 'gap-4'}`}>
                                     <StatItem value="12+" label="Years" />
                                     <div className="w-px h-full bg-white/10 mx-auto" />
                                     <StatItem value="24/7" label="Support" />
@@ -143,16 +143,16 @@ export default function ServiceHero() {
                                 </div>
 
                                 {/* Tag Pills */}
-                                <div className="mt-8 flex flex-wrap gap-2">
-                                    <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                                <div className={`flex flex-wrap gap-2 ${compactMobile ? 'mt-5' : 'mt-8'}`}>
+                                    <div className={`inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 font-medium tracking-wide text-zinc-300 ${compactMobile ? 'px-2.5 py-1 text-[9px]' : 'px-3 py-1 text-[10px]'}`}>
                                         <span className="relative flex h-2 w-2">
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                                         </span>
                                         ACTIVE
                                     </div>
-                                    <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
-                                        <Crown className="w-3 h-3 text-yellow-500" />
+                                    <div className={`inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 font-medium tracking-wide text-zinc-300 ${compactMobile ? 'px-2.5 py-1 text-[9px]' : 'px-3 py-1 text-[10px]'}`}>
+                                        <Crown className={`${compactMobile ? 'w-2.5 h-2.5' : 'w-3 h-3'} text-yellow-500`} />
                                         PREMIUM
                                     </div>
                                 </div>
