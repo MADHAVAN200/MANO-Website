@@ -1,6 +1,21 @@
 @import "tailwindcss";
 /*Global CSS idhar likhhhhhh, bg, font, etc.. jo globally har page me use hoga, so that changing here will reflect on the entire web*/
 
+html,
+body,
+#root {
+    min-height: 100dvh;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: #000;
+}
+
 @theme {
     --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
 
@@ -74,6 +89,15 @@
         radial-gradient(circle at 15% 50%, rgba(30, 41, 59, 0.4) 0%, transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(30, 58, 138, 0.2) 0%, transparent 25%);
     background-attachment: fixed;
+}
+
+/* iOS/mobile landscape rendering fix: avoid fixed-background side bands */
+@media (max-width: 1024px) {
+    .bg-blue-pattern {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center;
+    }
 }
 
 /* Custom Scrollbar */

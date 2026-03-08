@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
-import Gateway from "./pages/Gateway/Gateway";
-import LandingPage from "./pages/LandingPage/landingpage"
-import AboutUs from "./pages/AboutUs/AboutUs"
+import Gateway from "./pages/Gateway";
+import LandingPage from "./pages/LandingPage"
+import AboutUs from "./pages/AboutUs"
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,9 +16,9 @@ import QSAndAuditing from "./pages/Services/QSAndAuditing"
 import EHSAuditing from "./pages/Services/EHSAuditing"
 import ProjectExecution from "./pages/Services/ProjectExecution"
 import ProjectPlanning from "./pages/Services/ProjectPlanning"
-import ServicesPage from "./pages/Services/ServicesPage"
-import Projects from "./pages/Projects/Projects"
-import Careers from "./pages/Careers/Careers"
+import ServicesPage from "./pages/Services"
+import Projects from "./pages/Projects"
+import Careers from "./pages/Careers"
 import ContractManagement from './pages/Services/ContractManagement';
 import EPC from './pages/Services/EPC';
 
