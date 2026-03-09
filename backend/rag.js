@@ -4,6 +4,7 @@ import Groq from "groq-sdk";
 import { pipeline } from "@xenova/transformers";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs/promises";
 import dotenv from "dotenv";
 
 // Load .env explicitly from this file's directory (fixes ES module import order issue)
@@ -13,6 +14,7 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const CHROMA_PATH = process.env.CHROMA_PATH || path.join(__dirname, "chroma_data");
+const CHUNKS_FILE = process.env.KNOWLEDGE_CHUNKS_PATH || path.join(__dirname, "..", "knowledge_base", "chunks.json");
 const COLLECTION = "mano_kb";
 const EMBED_MODEL = "Xenova/all-MiniLM-L6-v2"; // same model used during indexing
 
@@ -35,6 +37,9 @@ const LOCATION_DISTANCE_THRESHOLD = clamp(readEnvNumber("RAG_LOCATION_DISTANCE_T
 const GENERAL_DISTANCE_THRESHOLD = clamp(readEnvNumber("RAG_GENERAL_DISTANCE_THRESHOLD", 1.9), 0.1, 5);
 const LOCATION_RESULT_LIMIT = Math.round(clamp(readEnvNumber("RAG_LOCATION_RESULT_LIMIT", 8), 1, 30));
 const LOCATION_HINT_RETRIEVAL_K = Math.round(clamp(readEnvNumber("RAG_LOCATION_HINT_RETRIEVAL_K", 25), 1, 100));
+const RAG_DEBUG = String(process.env.RAG_DEBUG || "false").toLowerCase() === "true";
+const MAX_LLM_CONTEXT_CHARS = Math.round(clamp(readEnvNumber("RAG_MAX_LLM_CONTEXT_CHARS", 7000), 1500, 20000));
+const MAX_LLM_OUTPUT_TOKENS = Math.round(clamp(readEnvNumber("RAG_MAX_LLM_OUTPUT_TOKENS", 450), 100, 1500));
 const HYBRID_MIN_SEMANTIC_SCORE = clamp(readEnvNumber("RAG_HYBRID_MIN_SEMANTIC_SCORE", 0.28), 0, 1);
 const HYBRID_MIN_KEYWORD_SCORE = clamp(readEnvNumber("RAG_HYBRID_MIN_KEYWORD_SCORE", 0.12), 0, 1);
 
@@ -54,6 +59,7 @@ const STOPWORDS = new Set([
 let _embedder = null;
 let _collection = null;
 let _groq = null;
+let _localChunkStore = null;
 
 async function getEmbedder() {
     if (!_embedder) {
@@ -90,6 +96,96 @@ function getGroq() {
     return _groq;
 }
 
+async function getLocalChunkStore() {
+    if (_localChunkStore) return _localChunkStore;
+
+    try {
+        const raw = await fs.readFile(CHUNKS_FILE, "utf-8");
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) {
+            _localChunkStore = { chunks: [], embeddings: [], loaded: false };
+            return _localChunkStore;
+        }
+
+        const chunks = parsed
+            .filter((item) => item && typeof item.content === "string" && item.content.trim())
+            .map((item, idx) => ({
+                id: item.id || `local_chunk_${idx}`,
+                content: item.content,
+                page: item.page_name || "Unknown",
+                url: item.url || "",
+                source_file: item.source_file || "",
+                section: item.section_num ?? idx,
+            }));
+
+        _localChunkStore = { chunks, embeddings: [], loaded: true };
+        console.log(`[RAG] Local KB loaded from chunks.json: ${chunks.length} chunks`);
+        return _localChunkStore;
+    } catch (err) {
+        console.warn(`[RAG] Local chunks fallback unavailable at ${CHUNKS_FILE}: ${err.message}`);
+        _localChunkStore = { chunks: [], embeddings: [], loaded: false };
+        return _localChunkStore;
+    }
+}
+
+function cosineSimilarity(a = [], b = []) {
+    if (!a.length || !b.length || a.length !== b.length) return 0;
+
+    let dot = 0;
+    let normA = 0;
+    let normB = 0;
+    for (let i = 0; i < a.length; i += 1) {
+        dot += a[i] * b[i];
+        normA += a[i] * a[i];
+        normB += b[i] * b[i];
+    }
+
+    if (normA === 0 || normB === 0) return 0;
+    return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+async function ensureLocalEmbeddings(store) {
+    if (!store.loaded || !store.chunks.length) return;
+    if (store.embeddings.length === store.chunks.length) return;
+
+    console.log("[RAG] Building local fallback embeddings from chunks.json...");
+    const embeddings = [];
+    for (const chunk of store.chunks) {
+        const emb = await embedText(chunk.content);
+        embeddings.push(emb);
+    }
+
+    store.embeddings = embeddings;
+    console.log(`[RAG] Local fallback embeddings ready: ${store.embeddings.length}`);
+}
+
+async function queryLocalChunks(question, nResults) {
+    const store = await getLocalChunkStore();
+    if (!store.loaded || !store.chunks.length) return [];
+
+    await ensureLocalEmbeddings(store);
+    const qEmb = await embedText(question);
+
+    const ranked = store.chunks
+        .map((chunk, idx) => {
+            const sim = cosineSimilarity(qEmb, store.embeddings[idx] || []);
+            return {
+                doc: chunk.content,
+                meta: {
+                    page: chunk.page,
+                    url: chunk.url,
+                    section: chunk.section,
+                    source_file: chunk.source_file,
+                },
+                dist: Math.max(0, 1 - sim),
+            };
+        })
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, Math.max(1, nResults));
+
+    return ranked;
+}
+
 // ─── Embed a text string → float array ───────────────────────────────────────
 async function embedText(text) {
     const embedder = await getEmbedder();
@@ -119,9 +215,20 @@ RULES:
 - Never discuss competitors or topics unrelated to MANO Projects.`;
 
 const LOCATION_QUERY_REGEX = /\b(where|location|located|address|head office|office address|contact\s+address)\b/i;
+const MISSION_VISION_QUERY_REGEX = /\b(mission|vision|vission)\b/i;
+const ESTABLISHED_QUERY_REGEX = /\b(when.*establish|when.*founded|when.*started|established|founded|started)\b/i;
+const MISSION_VISION_HINT_RETRIEVAL_K = Math.round(clamp(readEnvNumber("RAG_MISSION_VISION_HINT_RETRIEVAL_K", 20), 5, 80));
 
 function isLocationQuestion(question) {
     return LOCATION_QUERY_REGEX.test(question || "");
+}
+
+function isMissionVisionQuestion(question) {
+    return MISSION_VISION_QUERY_REGEX.test(question || "");
+}
+
+function isEstablishedQuestion(question) {
+    return ESTABLISHED_QUERY_REGEX.test((question || "").toLowerCase());
 }
 
 function addressSignalScore(doc = "", meta = {}) {
@@ -136,6 +243,62 @@ function addressSignalScore(doc = "", meta = {}) {
     if (text.includes("mumbai - 400014") || text.includes("400014")) score += 4;
 
     return score;
+}
+
+function missionVisionSignalScore(doc = "", meta = {}) {
+    const text = `${doc}\n${meta?.page || ""}\n${meta?.source_file || ""}`.toLowerCase();
+    let score = 0;
+
+    if (text.includes("vision")) score += 4;
+    if (text.includes("mission")) score += 4;
+    if (text.includes("about us") || text.includes("about_the_company") || text.includes("about the company")) score += 3;
+    if ((meta?.source_file || "").toLowerCase().includes("about_us")) score += 4;
+    if (text.includes("values") || text.includes("ethics") || text.includes("stakeholder")) score += 2;
+
+    return score;
+}
+
+function extractMissionVision(documents = []) {
+    for (const doc of documents) {
+        const lines = (doc || "")
+            .replace(/\r/g, "")
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        if (!lines.length) continue;
+
+        const visionIdx = lines.findIndex((line) => /^vision$/i.test(line));
+        const missionIdx = lines.findIndex((line) => /^mission$/i.test(line));
+
+        if (visionIdx === -1 && missionIdx === -1) continue;
+
+        let visionLines = [];
+        let missionLines = [];
+
+        if (visionIdx !== -1) {
+            const visionEnd = missionIdx !== -1 && missionIdx > visionIdx ? missionIdx : Math.min(visionIdx + 7, lines.length);
+            visionLines = lines
+                .slice(visionIdx + 1, visionEnd)
+                .filter((line) => !/^about the team$/i.test(line));
+        }
+
+        if (missionIdx !== -1) {
+            missionLines = lines
+                .slice(missionIdx + 1)
+                .filter((line) => !/^about the team$/i.test(line) && !/^contact information$/i.test(line))
+                .slice(0, 8);
+        }
+
+        if (visionLines.length || missionLines.length) {
+            return {
+                vision: visionLines,
+                mission: missionLines,
+            };
+        }
+    }
+
+    return null;
 }
 
 function extractExactAddress(documents = []) {
@@ -197,6 +360,82 @@ function dedupeAnswerLines(text = "") {
     return out.join("\n").trim();
 }
 
+function buildTrimmedContext(relevant = []) {
+    let used = 0;
+    const chunks = [];
+
+    for (const item of relevant) {
+        const doc = (item?.doc || "").trim();
+        if (!doc) continue;
+        if (used >= MAX_LLM_CONTEXT_CHARS) break;
+
+        const remaining = MAX_LLM_CONTEXT_CHARS - used;
+        const clipped = doc.length > remaining ? doc.slice(0, remaining) : doc;
+        chunks.push(clipped);
+        used += clipped.length;
+    }
+
+    return chunks.join("\n\n---\n\n");
+}
+
+function buildExtractiveFallbackAnswer(question, relevant = [], retryAfterSeconds = null) {
+    const qTokens = tokenize(question);
+    const candidates = [];
+
+    for (const item of relevant) {
+        const lines = (item?.doc || "")
+            .replace(/\r/g, "")
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .filter((line) => line.length >= 20);
+
+        for (const line of lines) {
+            candidates.push({
+                line,
+                score: keywordOverlapScore(qTokens, line),
+                dist: item?.dist ?? 2,
+            });
+        }
+    }
+
+    candidates.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.dist - b.dist;
+    });
+
+    const picked = [];
+    const seen = new Set();
+    for (const c of candidates) {
+        const key = c.line.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        picked.push(c.line);
+        if (picked.length >= 4) break;
+    }
+
+    if (!picked.length) {
+        return "I don't have that specific information. Please contact us directly at our office.";
+    }
+
+    const prefix = retryAfterSeconds
+        ? `The AI model is currently rate-limited. Please retry in about ${Math.ceil(retryAfterSeconds / 60)} minute(s). Meanwhile, based on our knowledge base:`
+        : "Based on our knowledge base:";
+
+    return `${prefix}\n${picked.map((line) => `- ${line}`).join("\n")}`;
+}
+
+function extractEstablishedYearFromDocs(documents = []) {
+    for (const doc of documents) {
+        const text = (doc || "").replace(/\r/g, " ");
+        const match = text.match(/established\s+in\s+([A-Za-z]+\s+)?(\d{4})/i);
+        if (match?.[2]) {
+            return match[2];
+        }
+    }
+    return null;
+}
+
 function tokenize(text = "") {
     return (text || "")
         .toLowerCase()
@@ -246,40 +485,66 @@ function hybridRankCandidates(candidates, question, limit) {
 
 // ─── Main RAG: embed question → retrieve chunks → Gemini answer ───────────────
 export async function answerQuestion(question, topK = DEFAULT_TOP_K) {
-    const collection = await getCollection();
-    const count = await collection.count();
+    let collection = null;
+    let useLocalFallback = false;
 
-    if (count === 0) {
-        return {
-            answer: "The knowledge base is empty. Please run the indexing step first.",
-            sources: [],
-        };
+    try {
+        collection = await getCollection();
+        const count = await collection.count();
+        if (count === 0) {
+            console.warn("[RAG] Chroma collection is empty; switching to local chunks.json fallback.");
+            useLocalFallback = true;
+        }
+    } catch (err) {
+        console.warn(`[RAG] Chroma unavailable (${err.message}); switching to local chunks.json fallback.`);
+        useLocalFallback = true;
     }
 
     // 1. Embed the question
     const queryEmbedding = await embedText(question);
 
     const locationQuestion = isLocationQuestion(question);
+    const missionVisionQuestion = isMissionVisionQuestion(question);
     const retrievalK = locationQuestion
         ? Math.min(Math.max(topK, MIN_LOCATION_RETRIEVAL_K), MAX_RETRIEVAL_K)
         : Math.min(Math.max(topK, MIN_GENERAL_RETRIEVAL_K), MAX_RETRIEVAL_K);
 
-    // 2. Retrieve top-K relevant chunks
-    const results = await collection.query({
-        queryEmbeddings: [queryEmbedding],
-        nResults: retrievalK,
-        include: ["documents", "metadatas", "distances"],
-    });
+    let docs = [];
+    let metas = [];
+    let distances = [];
 
-    const docs = results.documents[0];
-    const metas = results.metadatas[0];
-    const distances = results.distances[0];
+    // 2. Retrieve top-K relevant chunks
+    if (useLocalFallback) {
+        const localResults = await queryLocalChunks(question, retrievalK);
+        docs = localResults.map((r) => r.doc);
+        metas = localResults.map((r) => r.meta);
+        distances = localResults.map((r) => r.dist);
+    } else {
+        const results = await collection.query({
+            queryEmbeddings: [queryEmbedding],
+            nResults: retrievalK,
+            include: ["documents", "metadatas", "distances"],
+        });
+
+        docs = results.documents[0] || [];
+        metas = results.metadatas[0] || [];
+        distances = results.distances[0] || [];
+    }
+
+    if (!docs.length) {
+        return {
+            answer: "The knowledge base is empty. Please run the indexing step first.",
+            sources: [],
+        };
+    }
 
     // 3. Filter low-relevance results (distance > 1.5 = very dissimilar)
-    console.log(`\n[DEBUG] Question: ${question}`);
-    docs.forEach((d, i) => {
-        console.log(`[DEBUG] Dist: ${distances[i].toFixed(2)} | Source: ${metas[i].source_file} | Preview: ${d.substring(0, 50).replace(/\n/g, " ")}`);
-    });
+    if (RAG_DEBUG) {
+        console.log(`\n[DEBUG] Question: ${question}`);
+        docs.forEach((d, i) => {
+            console.log(`[DEBUG] Dist: ${distances[i].toFixed(2)} | Source: ${metas[i].source_file} | Preview: ${d.substring(0, 50).replace(/\n/g, " ")}`);
+        });
+    }
 
     const candidates = docs
         .map((doc, i) => ({ doc, meta: metas[i], dist: distances[i] }))
@@ -313,6 +578,16 @@ export async function answerQuestion(question, topK = DEFAULT_TOP_K) {
     const context = relevant.map(({ doc }) => doc).join("\n\n---\n\n");
     const sources = [...new Set(relevant.map(({ meta }) => meta.page))];
 
+    if (isEstablishedQuestion(question)) {
+        const year = extractEstablishedYearFromDocs(relevant.map(({ doc }) => doc));
+        if (year) {
+            return {
+                answer: `MANO Projects Pvt. Ltd. was established in ${year}.`,
+                sources,
+            };
+        }
+    }
+
     if (locationQuestion) {
         const exactAddress = extractExactAddress(relevant.map(({ doc }) => doc));
         if (exactAddress) {
@@ -323,21 +598,116 @@ export async function answerQuestion(question, topK = DEFAULT_TOP_K) {
         }
 
         const locationHint = `${question} head office address contact information dadar l.n road mumbai 400014`;
-        const hintedEmbedding = await embedText(locationHint);
-        const hintedResults = await collection.query({
-            queryEmbeddings: [hintedEmbedding],
-            nResults: LOCATION_HINT_RETRIEVAL_K,
-            include: ["documents", "metadatas", "distances"],
-        });
+        let hintedDocs = [];
+        let hintedMetas = [];
 
-        const hintedDocs = hintedResults.documents?.[0] || [];
-        const hintedMetas = hintedResults.metadatas?.[0] || [];
+        if (useLocalFallback || !collection) {
+            const hintedLocalResults = await queryLocalChunks(locationHint, LOCATION_HINT_RETRIEVAL_K);
+            hintedDocs = hintedLocalResults.map((item) => item.doc);
+            hintedMetas = hintedLocalResults.map((item) => item.meta);
+        } else {
+            const hintedEmbedding = await embedText(locationHint);
+            const hintedResults = await collection.query({
+                queryEmbeddings: [hintedEmbedding],
+                nResults: LOCATION_HINT_RETRIEVAL_K,
+                include: ["documents", "metadatas", "distances"],
+            });
+
+            hintedDocs = hintedResults.documents?.[0] || [];
+            hintedMetas = hintedResults.metadatas?.[0] || [];
+        }
+
         const hintedAddress = extractExactAddress(hintedDocs);
         if (hintedAddress) {
             const hintedSources = [...new Set(hintedMetas.map((meta) => meta?.page).filter(Boolean))];
             return {
                 answer: `MANO Projects Pvt. Ltd. Head Office Address: ${hintedAddress}`,
                 sources: hintedSources.length ? hintedSources : sources,
+            };
+        }
+    }
+
+    if (missionVisionQuestion) {
+        const localStore = await getLocalChunkStore();
+        const directMissionDocs = (localStore?.chunks || [])
+            .filter((chunk) => /mission|vision|vission/i.test(chunk.content || ""))
+            .sort((a, b) => {
+                const aAbout = /about_us/i.test(a.source_file || "") ? 1 : 0;
+                const bAbout = /about_us/i.test(b.source_file || "") ? 1 : 0;
+                return bAbout - aAbout;
+            });
+
+        const directMissionExtract = extractMissionVision(directMissionDocs.map((item) => item.content));
+        if (directMissionExtract) {
+            const lines = [];
+            if (directMissionExtract.vision.length) {
+                lines.push("MANO Vision:");
+                for (const line of directMissionExtract.vision) lines.push(`- ${line}`);
+            }
+            if (directMissionExtract.mission.length) {
+                if (lines.length) lines.push("");
+                lines.push("MANO Mission:");
+                for (const line of directMissionExtract.mission) lines.push(`- ${line}`);
+            }
+
+            return {
+                answer: lines.join("\n"),
+                sources: ["ABOUT US"],
+            };
+        }
+
+        const missionVisionHint = `${question} about us mission vision values ethics stakeholder value`;
+        let hintedDocs = [];
+        let hintedMetas = [];
+        let hintedDistances = [];
+
+        if (useLocalFallback || !collection) {
+            const hintedLocalResults = await queryLocalChunks(missionVisionHint, MISSION_VISION_HINT_RETRIEVAL_K);
+            hintedDocs = hintedLocalResults.map((item) => item.doc);
+            hintedMetas = hintedLocalResults.map((item) => item.meta);
+            hintedDistances = hintedLocalResults.map((item) => item.dist);
+        } else {
+            const hintedEmbedding = await embedText(missionVisionHint);
+            const hintedResults = await collection.query({
+                queryEmbeddings: [hintedEmbedding],
+                nResults: MISSION_VISION_HINT_RETRIEVAL_K,
+                include: ["documents", "metadatas", "distances"],
+            });
+
+            hintedDocs = hintedResults.documents?.[0] || [];
+            hintedMetas = hintedResults.metadatas?.[0] || [];
+            hintedDistances = hintedResults.distances?.[0] || [];
+        }
+
+        const missionCandidates = hintedDocs
+            .map((doc, i) => ({ doc, meta: hintedMetas[i], dist: hintedDistances[i] ?? 1.5 }))
+            .filter(({ doc }) => Boolean(doc))
+            .map((item) => ({ ...item, signal: missionVisionSignalScore(item.doc, item.meta) }))
+            .sort((a, b) => {
+                if (b.signal !== a.signal) return b.signal - a.signal;
+                return a.dist - b.dist;
+            });
+
+        const missionExtract = extractMissionVision(missionCandidates.map((item) => item.doc));
+        if (missionExtract) {
+            const sourceSet = missionCandidates
+                .map((item) => item.meta?.page)
+                .filter(Boolean);
+
+            const lines = [];
+            if (missionExtract.vision.length) {
+                lines.push("MANO Vision:");
+                for (const line of missionExtract.vision) lines.push(`- ${line}`);
+            }
+            if (missionExtract.mission.length) {
+                if (lines.length) lines.push("");
+                lines.push("MANO Mission:");
+                for (const line of missionExtract.mission) lines.push(`- ${line}`);
+            }
+
+            return {
+                answer: lines.join("\n"),
+                sources: [...new Set(sourceSet)].slice(0, 6),
             };
         }
     }
@@ -351,19 +721,33 @@ export async function answerQuestion(question, topK = DEFAULT_TOP_K) {
         };
     }
 
-    const fullPrompt = `CONTEXT:\n${context}\n\nQUESTION: ${question}`;
-    const result = await groq.client.chat.completions.create({
-        messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: fullPrompt }
-        ],
-        model: groq.model,
-        temperature: 0.2, // low temp for factual RAG answers
-    });
-    const rawAnswer = result.choices[0]?.message?.content || "No response generated.";
-    const answer = dedupeAnswerLines(rawAnswer);
+    const fullPrompt = `CONTEXT:\n${buildTrimmedContext(relevant)}\n\nQUESTION: ${question}`;
+    try {
+        const result = await groq.client.chat.completions.create({
+            messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: fullPrompt }
+            ],
+            model: groq.model,
+            temperature: 0.2, // low temp for factual RAG answers
+            max_tokens: MAX_LLM_OUTPUT_TOKENS,
+        });
+        const rawAnswer = result.choices[0]?.message?.content || "No response generated.";
+        const answer = dedupeAnswerLines(rawAnswer);
+        return { answer: answer.trim(), sources };
+    } catch (err) {
+        const isRateLimited = Number(err?.status) === 429 || err?.error?.error?.code === "rate_limit_exceeded";
+        const retryAfter = Number(err?.headers?.["retry-after"] || 0);
 
-    return { answer: answer.trim(), sources };
+        if (isRateLimited) {
+            const answer = buildExtractiveFallbackAnswer(question, relevant, retryAfter > 0 ? retryAfter : null);
+            return { answer, sources };
+        }
+
+        console.error("[RAG] LLM call failed:", err?.message || err);
+        const answer = buildExtractiveFallbackAnswer(question, relevant, null);
+        return { answer, sources };
+    }
 }
 
 // ─── Health: return vector count ──────────────────────────────────────────────
@@ -372,6 +756,11 @@ export async function getVectorCount() {
         const collection = await getCollection();
         return await collection.count();
     } catch {
-        return 0;
+        try {
+            const store = await getLocalChunkStore();
+            return store.chunks.length;
+        } catch {
+            return 0;
+        }
     }
 }

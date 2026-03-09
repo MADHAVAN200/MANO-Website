@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Bot, MessageCircle, Send, X, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import ChatbotWidgetDesktop from "./ChatbotWidgetDesktop";
+import ChatbotWidgetMobile from "./ChatbotWidgetMobile";
 
 const API_URL = import.meta.env.VITE_RAG_API_URL || "http://localhost:8001/chat";
 
@@ -17,8 +18,94 @@ const defaultSuggestedQuestions = [
     "How can I contact MANO?"
 ];
 
+const serviceQuestionsBySlug = {
+    "project-management": [
+        "What is included in Project Management services?",
+        "How does MANO improve project efficiency and control?",
+        "What KPIs does MANO track for project management?",
+        "Why choose MANO for project management consultancy?"
+    ],
+    "project-execution": [
+        "What is covered under Project Execution services?",
+        "How does MANO manage on-site coordination and supervision?",
+        "How does MANO ensure execution quality and safety?",
+        "How is daily progress tracked during execution?"
+    ],
+    "project-planning": [
+        "What planning methods does MANO use (CPM/PERT)?",
+        "How does MANO handle manpower and material planning?",
+        "How does MANO manage long-lead procurement planning?",
+        "Why is project planning important before execution?"
+    ],
+    "contract-management": [
+        "What is included in Contract Management services?",
+        "How does MANO handle tendering and vendor finalization?",
+        "How does MANO reduce contract and claim risks?",
+        "What are the benefits of MANO contract compliance systems?"
+    ],
+    "qa-audit": [
+        "What is covered under QA/QC and Auditing?",
+        "How does MANO perform quality inspections and snagging?",
+        "How does MANO ensure QA/QC compliance on projects?",
+        "What quality documentation does MANO maintain?"
+    ],
+    "cost-consultancy": [
+        "What is included in Cost Consultancy services?",
+        "How does MANO control project budgets and BOQs?",
+        "How does MANO perform rate analysis and cost tracking?",
+        "How does cost consultancy improve project ROI?"
+    ],
+    "qs-billing-audit": [
+        "What is included in QS and Auditing services?",
+        "How does MANO verify bills and joint measurements?",
+        "How does MANO prevent overbilling and quantity mismatch?",
+        "What audit controls are used in QS billing?"
+    ],
+    "ehs-audit": [
+        "What is included in EHS Audit services?",
+        "How does MANO monitor safety compliance on-site?",
+        "How does MANO manage hazards and incident reporting?",
+        "What are the key outcomes of MANO EHS audits?"
+    ],
+    epc: [
+        "What is included in MANO EPC services?",
+        "How does MANO integrate engineering, procurement, and construction?",
+        "How does MANO optimize EPC cost and timeline control?",
+        "What industries does MANO support under EPC?"
+    ]
+};
+
+const serviceSlugAliases = {
+    "qa-qc-auditing": "qa-audit",
+    "qaqc-auditing": "qa-audit",
+    "qs-auditing": "qs-billing-audit",
+    "project-execution-management": "project-execution"
+};
+
 function getSuggestedQuestionsByPath(pathname) {
-    const pagePath = (pathname || "").toLowerCase();
+    const pagePath = (pathname || "").toLowerCase().split("?")[0];
+
+    // Route format is `/:brand/services/:serviceSlug`.
+    const pathParts = pagePath.split("/").filter(Boolean);
+    const servicesIndex = pathParts.indexOf("services");
+
+    if (servicesIndex !== -1) {
+        const rawSlug = pathParts[servicesIndex + 1];
+
+        if (!rawSlug) {
+            return [
+                "What services does MANO offer?",
+                "Tell me about Contract Management key focus areas.",
+                "What is included in QA/QC services?",
+                "How does MANO handle project planning?"
+            ];
+        }
+
+        const normalizedSlug = serviceSlugAliases[rawSlug] || rawSlug;
+        if (serviceQuestionsBySlug[normalizedSlug]) {
+            return serviceQuestionsBySlug[normalizedSlug];
+        }
+    }
 
     if (pagePath.includes("/services")) {
         return [
@@ -61,11 +148,33 @@ function getSuggestedQuestionsByPath(pathname) {
 
 export default function ChatbotWidget() {
     const location = useLocation();
+    const [isMobileDevice, setIsMobileDevice] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([initialMessage]);
     const listRef = useRef(null);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const mobileWidthQuery = window.matchMedia("(max-width: 1023px)");
+        const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
+
+        const updateIsMobile = () => {
+            setIsMobileDevice(mobileWidthQuery.matches || coarsePointerQuery.matches);
+        };
+
+        updateIsMobile();
+
+        mobileWidthQuery.addEventListener("change", updateIsMobile);
+        coarsePointerQuery.addEventListener("change", updateIsMobile);
+
+        return () => {
+            mobileWidthQuery.removeEventListener("change", updateIsMobile);
+            coarsePointerQuery.removeEventListener("change", updateIsMobile);
+        };
+    }, []);
 
     useEffect(() => {
         if (listRef.current) {
@@ -131,93 +240,22 @@ export default function ChatbotWidget() {
 
     const suggestedQuestions = getSuggestedQuestionsByPath(location.pathname);
 
-    return (
-        <div className="fixed bottom-6 right-6 z-[120]">
-            {isOpen && (
-                <div className="absolute bottom-0 right-[calc(100%+12px)] w-[92vw] max-w-sm rounded-2xl border border-white/15 bg-black/80 backdrop-blur-xl shadow-2xl overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
-                        <div className="flex items-center gap-2 text-white">
-                            <Bot size={18} className="text-blue-400" />
-                            <span className="font-semibold">MANO Assistant</span>
-                        </div>
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className="text-gray-400 hover:text-white transition-colors"
-                            aria-label="Close chatbot"
-                        >
-                            <X size={18} />
-                        </button>
-                    </div>
+    const widgetProps = {
+        isOpen,
+        setIsOpen,
+        listRef,
+        messages,
+        loading,
+        suggestedQuestions,
+        sendMessage,
+        input,
+        setInput,
+        onKeyDown
+    };
 
-                    <div ref={listRef} className="h-80 overflow-y-auto custom-scrollbar px-3 py-3 space-y-3">
-                        {messages.map((message, index) => (
-                            <div key={`${message.role}-${index}`} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                                <div className={`max-w-[86%] rounded-xl px-3 py-2 text-sm leading-relaxed ${message.role === "user"
-                                    ? "bg-blue-600 text-white"
-                                    : "bg-white/10 text-gray-100 border border-white/10"
-                                    }`}>
-                                    <p className="whitespace-pre-wrap">{message.text}</p>
-                                </div>
-                            </div>
-                        ))}
+    if (isMobileDevice) {
+        return <ChatbotWidgetMobile {...widgetProps} />;
+    }
 
-                        {loading && (
-                            <div className="flex justify-start">
-                                <div className="max-w-[86%] rounded-xl px-3 py-2 text-sm bg-white/10 text-gray-100 border border-white/10 flex items-center gap-2">
-                                    <Loader2 size={14} className="animate-spin" />
-                                    Thinking...
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="px-3 pb-2">
-                        <p className="text-[11px] text-gray-400 mb-2">Recommended questions</p>
-                        <div className="flex flex-wrap gap-2">
-                            {suggestedQuestions.map((question) => (
-                                <button
-                                    key={question}
-                                    type="button"
-                                    onClick={() => sendMessage(question)}
-                                    disabled={loading}
-                                    className="text-xs px-2.5 py-1.5 rounded-full border border-white/15 bg-white/5 text-gray-200 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    {question}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="p-3 border-t border-white/10 bg-black/30">
-                        <div className="flex items-center gap-2">
-                            <textarea
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={onKeyDown}
-                                rows={1}
-                                placeholder="Ask about MANO..."
-                                className="flex-1 resize-none rounded-xl bg-white/10 border border-white/15 text-white placeholder-gray-400 px-3 py-2 text-sm focus:outline-none focus:border-blue-500/60"
-                            />
-                            <button
-                                onClick={sendMessage}
-                                disabled={loading || !input.trim()}
-                                className="h-10 w-10 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors"
-                                aria-label="Send message"
-                            >
-                                <Send size={16} />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <button
-                onClick={() => setIsOpen((prev) => !prev)}
-                className="h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-500 text-white shadow-xl flex items-center justify-center transition-all"
-                aria-label="Open chatbot"
-            >
-                <MessageCircle size={24} />
-            </button>
-        </div>
-    );
+    return <ChatbotWidgetDesktop {...widgetProps} />;
 }
