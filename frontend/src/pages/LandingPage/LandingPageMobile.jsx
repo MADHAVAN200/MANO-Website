@@ -24,15 +24,15 @@ const TestimonialsColumn = (props) => {
           ease: "linear",
           repeatType: "loop",
         }}
-        className="flex flex-col gap-6 pb-6"
+        className="flex flex-col gap-3 pb-3"
       >
         {[...new Array(2)].fill(0).map((_, index) => (
           <React.Fragment key={index}>
             {testimonials.map(({ text, image, name, role }, i) => (
-              <div className="group relative p-5 rounded-xl border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 w-full max-w-[18rem] animated-white-border" key={i}>
-                <div className="text-gray-300 text-sm leading-relaxed mb-4">{text}</div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-br from-blue-500/50 to-transparent">
+              <div className="group relative p-3 rounded-lg border border-white/10 hover:border-blue-500/30 transition-all shadow-lg overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 w-full max-w-[7rem] animated-white-border" key={i}>
+                <div className="text-gray-300 text-[10px] leading-snug mb-2 line-clamp-6">{text}</div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-6 h-6 rounded-full p-0.5 bg-gradient-to-br from-blue-500/50 to-transparent shrink-0">
                     <img
                       src={`${import.meta.env.BASE_URL}${image}`}
                       alt={name}
@@ -40,9 +40,9 @@ const TestimonialsColumn = (props) => {
                       className="w-full h-full rounded-full object-cover border border-black/50"
                     />
                   </div>
-                  <div className="flex flex-col">
-                    <div className="font-bold text-sm text-white tracking-wide">{name}</div>
-                    {role && <div className="text-xs text-blue-400 font-medium">{role}</div>}
+                  <div className="flex flex-col min-w-0">
+                    <div className="font-bold text-[9px] text-white tracking-wide truncate">{name}</div>
+                    {role && <div className="text-[8px] text-blue-400 font-medium truncate">{role}</div>}
                   </div>
                 </div>
               </div>
@@ -130,17 +130,14 @@ export default function LandingPageMobile() {
   const projects = [
     { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`] },
     { name: 'Triveni Crown', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.webp`] },
-    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..webp`] },
+    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}Ananda residency/Aerial.webp`] },
     { name: '30 Juin', images: [`${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.webp`] },
-    { name: 'Sati Darshan', images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..webp`] },
-    { name: 'Westside', images: [`${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).webp`] },
-    { name: 'Zudio', images: [`${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).webp`] },
-    { name: 'Prima Plastics', images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..webp`] },
-    { name: 'Celestia', images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..webp`] },
-    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..webp`] },
-    { name: 'More Hyper Mart', images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..webp`] },
-    { name: 'KAPCO Banquets', images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..webp`] },
-    { name: 'Amazon Warehouse', images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..webp`] },
+    { name: 'Ariana Residency', images: [`${import.meta.env.BASE_URL}Ariana Residency - HD Pictures/Ariana Night View.webp`] },
+    { name: 'Triveni Classics', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (NEW view) in progress.webp`] },
+    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}NSCI/20.webp`] },
+    { name: 'NIDIMO Kamala Mill', images: [`${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123025 1.webp`] },
+    { name: 'Golf Apartment', images: [`${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 1 .jpg.webp`] },
+    { name: 'Vista Meadows', images: [`${import.meta.env.BASE_URL}Vista Meadows - Vikhroli/WhatsApp Image 2026-02-09 at 2.16.56 PM.webp`] },
   ];
 
   const handleMouseMove = (e) => {
@@ -600,10 +597,10 @@ export default function LandingPageMobile() {
           <div className="mx-auto w-full">
             <h2 className="text-2xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-2">Testimonials</h2>
 
-            <div className="relative flex h-[390px] w-full flex-row items-center justify-center gap-3 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+            <div className="relative flex h-[350px] w-full flex-row items-center justify-center gap-2 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
               <TestimonialsColumn testimonials={testimonials} duration={15} />
-              <TestimonialsColumn testimonials={[...testimonials].reverse()} duration={19} className="hidden md:block" />
-              <TestimonialsColumn testimonials={testimonials} duration={17} className="hidden lg:block" />
+              <TestimonialsColumn testimonials={[...testimonials].reverse()} duration={19} />
+              <TestimonialsColumn testimonials={testimonials} duration={17} />
             </div>
           </div>
         </RevealOnScroll>

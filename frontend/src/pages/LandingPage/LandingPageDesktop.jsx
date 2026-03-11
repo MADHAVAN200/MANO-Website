@@ -126,25 +126,18 @@ export default function LandingPageDesktop() {
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, section: null });
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth < 640;
-  });
 
   const projects = [
     { name: 'Hotel Moon Palace', images: [`${import.meta.env.BASE_URL}Hotel Moon Kinshasa/001 (3).webp`] },
     { name: 'Triveni Crown', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Crown, Kalyan/MAIN GATE/1.option 01-crown gate 01.webp`] },
-    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}projects_img/Ananda Residency - Paradigm Ambit Buildcon..webp`] },
+    { name: 'Ananda Residency', images: [`${import.meta.env.BASE_URL}Ananda residency/Aerial.webp`] },
     { name: '30 Juin', images: [`${import.meta.env.BASE_URL}30 Juin/Tranjio Hotel 03.webp`] },
-    { name: 'Sati Darshan', images: [`${import.meta.env.BASE_URL}projects_img/Sati Darshan - Goyal Group..webp`] },
-    { name: 'Westside', images: [`${import.meta.env.BASE_URL}projects_img/Westside – Tata Trent Ltd.(1).webp`] },
-    { name: 'Zudio', images: [`${import.meta.env.BASE_URL}projects_img/Zudio – Tata Trent Ltd.(3).webp`] },
-    { name: 'Prima Plastics', images: [`${import.meta.env.BASE_URL}projects_img/Prima Plastics Limited..webp`] },
-    { name: 'Celestia', images: [`${import.meta.env.BASE_URL}projects_img/Celestia - Shree Ram Samarth..webp`] },
-    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}projects_img/NSCI Dome – National Sports Club of India..webp`] },
-    { name: 'More Hyper Mart', images: [`${import.meta.env.BASE_URL}projects_img/More Hyper Mart -Aher Constructions Pvt. Ltd..webp`] },
-    { name: 'KAPCO Banquets', images: [`${import.meta.env.BASE_URL}projects_img/KAPCO Banquets & Catering Pvt. Ltd..webp`] },
-    { name: 'Amazon Warehouse', images: [`${import.meta.env.BASE_URL}projects_img/Gaiwadi Industrial Estate - Amazon Warehouse..webp`] },
+    { name: 'Ariana Residency', images: [`${import.meta.env.BASE_URL}Ariana Residency - HD Pictures/Ariana Night View.webp`] },
+    { name: 'Triveni Classics', images: [`${import.meta.env.BASE_URL}HD Picture TRIVENI Classics, Kalyan/Triveni CLASSIC (NEW view) in progress.webp`] },
+    { name: 'NSCI Dome', images: [`${import.meta.env.BASE_URL}NSCI/20.webp`] },
+    { name: 'NIDIMO Kamala Mill', images: [`${import.meta.env.BASE_URL}NIDIMO - Kamala mill/2025-12-19 123025 1.webp`] },
+    { name: 'Golf Apartment', images: [`${import.meta.env.BASE_URL}Golf Apartment/Golf Appartment 1 .jpg.webp`] },
+    { name: 'Vista Meadows', images: [`${import.meta.env.BASE_URL}Vista Meadows - Vikhroli/WhatsApp Image 2026-02-09 at 2.16.56 PM.webp`] },
   ];
 
   const handleMouseMove = (e) => {
@@ -253,13 +246,6 @@ export default function LandingPageDesktop() {
       targetIndexRef.current += 1;
     }, 1500);
     return () => clearInterval(interval);
-  }, []);
-
-  // Keep mobile layout behavior in sync with viewport size.
-  useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (
@@ -516,7 +502,7 @@ export default function LandingPageDesktop() {
         <RevealOnScroll>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 sm:mb-20 bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-6">Featured Projects</h2>
           <div className="relative h-[400px] sm:h-[520px] flex items-center justify-center">
-            <div className="relative w-full max-w-7xl mx-auto flex items-center justify-center">
+            <div className="relative w-full flex items-center justify-center">
               {projects.map((project, index) => {
                 // compute positions based on the current (rounded) index
                 const position = (index - currentProjectIndex + projects.length) % projects.length;
@@ -526,12 +512,11 @@ export default function LandingPageDesktop() {
                 const isRight1 = position === 1;
                 const isRight2 = position === 2;
 
-                // Responsive translation values
-                const translateX_Left1 = isMobile ? '-125%' : '-110%';
-                const translateX_Left2 = isMobile ? '-175%' : '-170%';
-                const translateX_Right1 = isMobile ? '25%' : '-10%';
-                const translateX_Right2 = isMobile ? '75%' : '60%';
-                const showOnMobile = isCenter || isLeft1 || isRight1;
+                // Full-width translation values pushing side cards to screen edges
+                const translateX_Left1 = '-120%';
+                const translateX_Left2 = '-195%';
+                const translateX_Right1 = '-0%';
+                const translateX_Right2 = '75%';
 
                 let transform = 'translateX(-50%) scale(0.6) translateZ(-160px)';
                 let zIndex = 1;
@@ -544,26 +529,21 @@ export default function LandingPageDesktop() {
                   opacity = 1;
                   blur = 'blur(0px)';
                 } else if (isLeft1) {
-                  transform = `translateX(${translateX_Left1}) scale(0.88) translateZ(-60px)`;
+                  transform = `translateX(${translateX_Left1}) scale(0.85) translateZ(-60px)`;
                   zIndex = 50;
-                  opacity = isMobile ? 0.5 : 0.75;
+                  opacity = 0.7;
                 } else if (isLeft2) {
-                  transform = `translateX(${translateX_Left2}) scale(0.72) translateZ(-120px)`;
+                  transform = `translateX(${translateX_Left2}) scale(0.7) translateZ(-120px)`;
                   zIndex = 40;
-                  opacity = 0.55;
+                  opacity = 0.45;
                 } else if (isRight1) {
-                  transform = `translateX(${translateX_Right1}) scale(0.88) translateZ(-60px)`;
+                  transform = `translateX(${translateX_Right1}) scale(0.85) translateZ(-60px)`;
                   zIndex = 50;
-                  opacity = isMobile ? 0.5 : 0.75;
+                  opacity = 0.7;
                 } else if (isRight2) {
-                  transform = `translateX(${translateX_Right2}) scale(0.72) translateZ(-120px)`;
+                  transform = `translateX(${translateX_Right2}) scale(0.7) translateZ(-120px)`;
                   zIndex = 40;
-                  opacity = 0.55;
-                }
-
-                if (isMobile && !showOnMobile) {
-                  opacity = 0;
-                  zIndex = 1;
+                  opacity = 0.45;
                 }
 
                 return (
@@ -577,7 +557,7 @@ export default function LandingPageDesktop() {
                       filter: blur
                     }}
                   >
-                    <div className="w-[78vw] max-w-[320px] sm:max-w-none sm:w-[560px] h-[300px] sm:h-[520px] relative group">
+                    <div className="w-[80vw] max-w-[320px] sm:max-w-none sm:w-[42vw] md:w-[38vw] lg:w-[32vw] h-[300px] sm:h-[520px] relative group">
                       {/* Liquid glass card */}
                       <div className="relative h-full rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 shadow-2xl">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
