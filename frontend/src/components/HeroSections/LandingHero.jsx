@@ -212,8 +212,8 @@ export default function LandingHero() {
 
                 {/* Marquee Section - Bottom Full Width */}
                 <div className="mt-8">
-                    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-6 backdrop-blur-xl">
-                        <h3 className="mb-4 px-8 text-center text-sm font-medium text-zinc-400 uppercase tracking-widest">Trusted by Industry Leaders</h3>
+                    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-3 sm:py-6 backdrop-blur-xl">
+                        <h3 className="mb-2 sm:mb-4 px-8 text-center text-xs sm:text-sm font-medium text-zinc-400 uppercase tracking-widest">Trusted by Industry Leaders</h3>
                         <div
                             className="relative flex overflow-hidden"
                             style={{
@@ -245,7 +245,7 @@ export default function LandingHero() {
                                                     alt={client.name}
                                                     loading="lazy"
                                                     className={`w-auto object-contain transition-all duration-300 
-                                                ${client.isExtraLarge ? 'h-14 sm:h-24' : (client.isLarge ? 'h-10 sm:h-16' : 'h-8 sm:h-12')} 
+                                                ${client.isExtraLarge ? 'h-8 sm:h-24' : (client.isLarge ? 'h-6 sm:h-16' : 'h-5 sm:h-12')} 
                                                 ${client.hasBackground
                                                             ? 'mix-blend-screen brightness-125 contrast-125 grayscale hover:grayscale-0'
                                                             : 'brightness-0 invert hover:brightness-100 hover:invert-0'
