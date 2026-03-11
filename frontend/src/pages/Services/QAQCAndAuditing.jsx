@@ -1,38 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import QAQCAndAuditingDesktop from './QAQCAndAuditingDesktop';
 import QAQCAndAuditingMobile from './QAQCAndAuditingMobile';
+import QAQCAndAuditingTablet from './QAQCAndAuditingTablet';
 
-const MOBILE_BREAKPOINT = '(max-width: 767px)';
+export default function QAQCAndAuditing() {
+    const deviceType = useDeviceType();
 
-const QAQCAndAuditing = () => {
-    const getIsMobile = () => {
-        if (typeof window === 'undefined' || !window.matchMedia) {
-            return false;
-        }
-        return window.matchMedia(MOBILE_BREAKPOINT).matches;
-    };
-
-    const [isMobile, setIsMobile] = useState(getIsMobile);
-
-    useEffect(() => {
-        if (typeof window === 'undefined' || !window.matchMedia) {
-            return undefined;
-        }
-
-        const mediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
-        const handleChange = (event) => {
-            setIsMobile(event.matches);
-        };
-
-        setIsMobile(mediaQuery.matches);
-        mediaQuery.addEventListener('change', handleChange);
-
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, []);
-
-    return isMobile ? <QAQCAndAuditingMobile /> : <QAQCAndAuditingDesktop />;
-};
-
-export default QAQCAndAuditing;
+    if (deviceType === 'mobile') return <QAQCAndAuditingMobile />;
+    if (deviceType === 'tablet') return <QAQCAndAuditingTablet />;
+    return <QAQCAndAuditingDesktop />;
+}

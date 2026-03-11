@@ -102,7 +102,7 @@ const Navbar = () => {
     return (
         <nav className="absolute top-4 lg:top-6 left-0 right-0 z-50 flex items-center justify-center pointer-events-none">
             <div
-                className={`backdrop-blur-md bg-white/5 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden rounded-2xl lg:rounded-[32px] w-[92%] sm:w-[95%] max-w-[1400px]`}
+                className={`backdrop-blur-xl bg-black/70 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden rounded-2xl lg:rounded-[32px] w-[92%] sm:w-[95%] max-w-[1400px] lg:backdrop-blur-md lg:bg-white/5`}
                 onMouseLeave={() => setIsServicesOpen(false)}
             >
                 {/* Top Row: Logo, Links (Desktop), Hamburger, CTA */}

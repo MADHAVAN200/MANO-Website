@@ -1,24 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import CostConsultancyDesktop from './CostConsultancyDesktop';
 import CostConsultancyMobile from './CostConsultancyMobile';
+import CostConsultancyTablet from './CostConsultancyTablet';
 
-const CostConsultancy = () => {
-    const [isMobile, setIsMobile] = useState(() => {
-        if (typeof window === 'undefined') return false;
-        return window.matchMedia('(max-width: 767px)').matches;
-    });
+export default function CostConsultancy() {
+    const deviceType = useDeviceType();
 
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 767px)');
-        const handleChange = (event) => setIsMobile(event.matches);
-
-        mediaQuery.addEventListener('change', handleChange);
-        setIsMobile(mediaQuery.matches);
-
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
-
-    return isMobile ? <CostConsultancyMobile /> : <CostConsultancyDesktop />;
-};
-
-export default CostConsultancy;
+    if (deviceType === 'mobile') return <CostConsultancyMobile />;
+    if (deviceType === 'tablet') return <CostConsultancyTablet />;
+    return <CostConsultancyDesktop />;
+}

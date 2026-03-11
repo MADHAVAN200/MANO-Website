@@ -1,38 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import ProjectExecutionDesktop from './ProjectExecutionDesktop';
 import ProjectExecutionMobile from './ProjectExecutionMobile';
+import ProjectExecutionTablet from './ProjectExecutionTablet';
 
-const MOBILE_BREAKPOINT = '(max-width: 767px)';
+export default function ProjectExecution() {
+    const deviceType = useDeviceType();
 
-const ProjectExecution = () => {
-    const getIsMobile = () => {
-        if (typeof window === 'undefined' || !window.matchMedia) {
-            return false;
-        }
-        return window.matchMedia(MOBILE_BREAKPOINT).matches;
-    };
-
-    const [isMobile, setIsMobile] = useState(getIsMobile);
-
-    useEffect(() => {
-        if (typeof window === 'undefined' || !window.matchMedia) {
-            return undefined;
-        }
-
-        const mediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
-        const handleChange = (event) => {
-            setIsMobile(event.matches);
-        };
-
-        setIsMobile(mediaQuery.matches);
-        mediaQuery.addEventListener('change', handleChange);
-
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, []);
-
-    return isMobile ? <ProjectExecutionMobile /> : <ProjectExecutionDesktop />;
-};
-
-export default ProjectExecution;
+    if (deviceType === 'mobile') return <ProjectExecutionMobile />;
+    if (deviceType === 'tablet') return <ProjectExecutionTablet />;
+    return <ProjectExecutionDesktop />;
+}

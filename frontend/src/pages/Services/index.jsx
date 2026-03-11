@@ -1,33 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import ServicesPageDesktop from './ServicesPageDesktop';
 import ServicesPageMobile from './ServicesPageMobile';
+import ServicesPageTablet from './ServicesPageTablet';
 
 export default function ServicesPage() {
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia('(max-width: 767px)').matches;
-  });
+    const deviceType = useDeviceType();
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    const handleChange = (event) => setIsMobile(event.matches);
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-    } else {
-      mediaQuery.addListener(handleChange);
-    }
-
-    setIsMobile(mediaQuery.matches);
-
-    return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener('change', handleChange);
-      } else {
-        mediaQuery.removeListener(handleChange);
-      }
-    };
-  }, []);
-
-  return isMobile ? <ServicesPageMobile /> : <ServicesPageDesktop />;
+    if (deviceType === 'mobile') return <ServicesPageMobile />;
+    if (deviceType === 'tablet') return <ServicesPageTablet />;
+    return <ServicesPageDesktop />;
 }

@@ -1,24 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import ProjectsDesktop from './ProjectsDesktop';
 import ProjectsMobile from './ProjectsMobile';
+import ProjectsTablet from './ProjectsTablet';
 
-const Projects = () => {
-    const [isMobile, setIsMobile] = useState(() => {
-        if (typeof window === 'undefined') return false;
-        return window.matchMedia('(max-width: 767px)').matches;
-    });
+export default function Projects() {
+    const deviceType = useDeviceType();
 
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 767px)');
-        const handleChange = (event) => setIsMobile(event.matches);
-
-        mediaQuery.addEventListener('change', handleChange);
-        setIsMobile(mediaQuery.matches);
-
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
-
-    return isMobile ? <ProjectsMobile /> : <ProjectsDesktop />;
-};
-
-export default Projects;
+    if (deviceType === 'mobile') return <ProjectsMobile />;
+    if (deviceType === 'tablet') return <ProjectsTablet />;
+    return <ProjectsDesktop />;
+}

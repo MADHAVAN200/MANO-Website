@@ -1,24 +1,12 @@
-import { useEffect, useState } from 'react';
+import useDeviceType from '../../hooks/useDeviceType';
 import EHSAuditingDesktop from './EHSAuditingDesktop';
 import EHSAuditingMobile from './EHSAuditingMobile';
+import EHSAuditingTablet from './EHSAuditingTablet';
 
-const EHSAuditing = () => {
-    const [isMobile, setIsMobile] = useState(() => {
-        if (typeof window === 'undefined') return false;
-        return window.matchMedia('(max-width: 767px)').matches;
-    });
+export default function EHSAuditing() {
+    const deviceType = useDeviceType();
 
-    useEffect(() => {
-        const mediaQuery = window.matchMedia('(max-width: 767px)');
-        const handleChange = (event) => setIsMobile(event.matches);
-
-        mediaQuery.addEventListener('change', handleChange);
-        setIsMobile(mediaQuery.matches);
-
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
-
-    return isMobile ? <EHSAuditingMobile /> : <EHSAuditingDesktop />;
-};
-
-export default EHSAuditing;
+    if (deviceType === 'mobile') return <EHSAuditingMobile />;
+    if (deviceType === 'tablet') return <EHSAuditingTablet />;
+    return <EHSAuditingDesktop />;
+}
