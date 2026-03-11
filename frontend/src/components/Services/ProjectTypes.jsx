@@ -20,6 +20,8 @@ const ProjectTypes = ({ title, description, items, compactMobile = false }) => {
                                 className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
                                 src={item.image}
                                 alt={item.name}
+                                loading="lazy"
+                                decoding="async"
                             />
                             <div className="absolute inset-0 flex flex-col justify-end items-center text-center group-hover:items-start group-hover:text-left p-6 text-white bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-all duration-300 opacity-100 group-hover/accordion:opacity-0 group-hover:!opacity-100">
                                 <h3 className="text-xl md:text-2xl font-bold leading-tight">{item.name}</h3>

@@ -77,6 +77,7 @@ const ImageSlider = ({ images, title, autoScrollTrigger }) => {
                     }}
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                 />
             </AnimatePresence>
 

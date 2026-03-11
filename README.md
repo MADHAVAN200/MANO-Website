@@ -74,6 +74,42 @@ MANO_Website/
 	- `knowledge_base/`: 16 files
 	- `scripts/`: 1 file
 
+## Image & Performance Optimizations
+
+The site uses 160+ image references (90+ as CSS background-image). The following optimizations reduce initial page load and improve perceived speed on slow networks:
+
+### Lazy Background Images (`LazyBgDiv`)
+
+`frontend/src/components/LazyBgDiv.jsx` — drop-in replacement for `<div style={{backgroundImage}}>`.
+
+- Uses `IntersectionObserver` to defer loading background images until the element is near the viewport (default `rootMargin: 200px`).
+- Supports `eager` prop for above-fold content that should load immediately.
+- Applied across: `PageHero.jsx` (40 instances), `LandingPageDesktop.jsx`, `LandingPageMobile.jsx`, `ProjectsMobile.jsx`.
+
+### Optimized Image Component (`OptimizedImage`)
+
+`frontend/src/components/OptimizedImage.jsx` — enhanced `<img>` wrapper.
+
+- Native `loading="lazy"` + `decoding="async"` to avoid blocking the main thread.
+- Optional `priority` prop sets `fetchpriority="high"` for critical above-fold images.
+- Smooth fade-in on load for better perceived performance.
+
+### Critical Image Preloading
+
+`index.html` includes `<link rel="preload">` for the first hero images (`hero-collage-1.webp`, `landing-hero-new-1.webp`) so the browser starts fetching them before JS executes.
+
+### Build Optimizations (Vite)
+
+- **Vendor chunk splitting**: `react-vendor` (React/ReactDOM/Router) and `animation` (Framer Motion) are split into separate cached chunks.
+- **Asset inlining**: Small assets under 8KB are inlined as base64 to reduce HTTP round-trips.
+
+### Image Best Practices Applied
+
+- `loading="lazy"` on all below-fold `<img>` tags (projects, careers, testimonials, logos).
+- `decoding="async"` on all images to prevent decode-time main thread blocking.
+- WebP format used for all project/hero images.
+- Tailwind `object-cover` for responsive sizing without layout shift.
+
 ## Frontend App Behavior
 
 ### Brand routing model

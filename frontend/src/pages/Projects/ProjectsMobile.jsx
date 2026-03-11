@@ -9,6 +9,7 @@ import {
 import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';
 import ContactModal from '../../components/ContactModal';
+import LazyBgDiv from '../../components/LazyBgDiv';
 import { useNavigate } from 'react-router-dom';
 import { useCompany } from '../../context/CompanyContext';
 
@@ -21,11 +22,10 @@ const ProjectsHeroMobile = () => {
                 transition={{ duration: 8, ease: 'easeOut' }}
                 className="absolute inset-0 z-0"
             >
-                <div
+                <LazyBgDiv
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{
-                        backgroundImage: `url(${import.meta.env.BASE_URL}projects-hero.webp)`,
-                    }}
+                    src={`${import.meta.env.BASE_URL}projects-hero.webp`}
+                    eager
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/75 to-black/90" />
             </motion.div>
@@ -161,6 +161,7 @@ const ImageSlider = ({ images, title, autoScrollTrigger }) => {
                     }}
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                 />
             </AnimatePresence>
 
@@ -583,6 +584,7 @@ const ProjectsMobile = () => {
                                             src={project.images[0]}
                                             alt={project.title}
                                             loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <span className="absolute top-3 right-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-full text-[10px] font-bold text-white border border-white/10">

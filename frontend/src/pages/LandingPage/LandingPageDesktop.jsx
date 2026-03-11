@@ -7,6 +7,8 @@ import LandingHero from '../../components/HeroSections/LandingHero';
 import { useCompany } from '../../context/CompanyContext';
 import ContactForm from '../../components/ContactForm';
 import DigitalERPSection from '../../components/DigitalERPSection';
+import LazyBgDiv from '../../components/LazyBgDiv';
+import OptimizedImage from '../../components/OptimizedImage';
 
 
 const TestimonialsColumn = (props) => {
@@ -473,9 +475,9 @@ export default function LandingPageDesktop() {
                   className={`group relative h-[420px] sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-2xl animated-white-border flex flex-col justify-end ${isEPC ? 'w-full max-w-4xl' : ''}`}
                 >
                   {/* Background Image with Filter */}
-                  <div
+                  <LazyBgDiv
                     className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${service.bgImage})` }}
+                    src={service.bgImage}
                   />
 
                   {/* Overlays */}
@@ -587,7 +589,7 @@ export default function LandingPageDesktop() {
 
                         {/* Image area with padding and inner frame */}
                         <div className="absolute left-4 sm:left-6 right-4 sm:right-6 bottom-4 sm:bottom-6 top-16 sm:top-20 z-10 rounded-lg overflow-hidden bg-black">
-                          <img src={project.images[0]} alt={project.name} loading="lazy" className="w-full h-full object-cover" />
+                          <img src={project.images[0]} alt={project.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>
                       </div>
