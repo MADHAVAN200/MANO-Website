@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { X, Send, User, Mail, MessageSquare, Building2, Phone, Briefcase, ChevronDown, Loader2 } from 'lucide-react';
 import { useCompany } from '../context/CompanyContext';
+import { useToast } from './Toast';
 
 const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
     const { isEPC } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
     const [selectedService, setSelectedService] = useState(initialService);
+    const showToast = useToast();
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         name: '',
         company_name: '',
@@ -28,11 +31,18 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = 'Full name is required';
+        if (!formData.email.trim()) newErrors.email = 'Email address is required';
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Enter a valid email address';
+        if (!selectedService) newErrors.service = 'Please select a service';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async () => {
-        if (!formData.name || !formData.email || !selectedService) {
-            alert("Please fill in all required fields (Name, Email, Service).");
-            return;
-        }
+        if (!validate()) return;
 
         setLoading(true);
         const API_URL = "https://erp.mano.co.in/api/enquiry_api/enquiry";
@@ -52,7 +62,7 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
             const result = await response.json();
 
             if (response.ok) {
-                alert("Enquiry submitted successfully!");
+                showToast("Enquiry submitted successfully!", 'success');
                 setFormData({
                     name: '',
                     company_name: '',
@@ -63,11 +73,11 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
                 setSelectedService('');
                 onClose();
             } else {
-                alert("Failed to submit enquiry: " + result.message);
+                showToast("Failed to submit enquiry: " + result.message, 'error');
             }
         } catch (error) {
             console.error("Network Error:", error);
-            alert("Network error. Please try again later.");
+            showToast("Network error. Please try again later.", 'error');
         } finally {
             setLoading(false);
         }
@@ -127,16 +137,19 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
                         {/* Name */}
-                        <div className="relative group">
-                            <User className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="Full Name *"
-                                className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
-                            />
+                        <div>
+                            <div className="relative group">
+                                <User className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={(e) => { handleChange(e); if (errors.name) setErrors(prev => ({ ...prev, name: '' })); }}
+                                    placeholder="Full Name *"
+                                    className={`w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border ${errors.name ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium`}
+                                />
+                            </div>
+                            {errors.name && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.name}</p>}
                         </div>
 
                         {/* Company Name */}
@@ -166,26 +179,30 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
                         </div>
 
                         {/* Email */}
-                        <div className="relative group">
-                            <Mail className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="Email Address *"
-                                className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium"
-                            />
+                        <div>
+                            <div className="relative group">
+                                <Mail className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={(e) => { handleChange(e); if (errors.email) setErrors(prev => ({ ...prev, email: '' })); }}
+                                    placeholder="Email Address *"
+                                    className={`w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border ${errors.email ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium`}
+                                />
+                            </div>
+                            {errors.email && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.email}</p>}
                         </div>
 
                         {/* Service Required (Full Width) */}
-                        <div className="relative group md:col-span-2">
-                            <Briefcase className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors z-10" />
-                            <div className="relative">
-                                <button
-                                    type="button"
-                                    onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
-                                    className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-left rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium text-sm sm:text-base flex justify-between items-center"
+                        <div className="md:col-span-2">
+                            <div className="relative group">
+                                <Briefcase className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors z-10" />
+                                <div className="relative">
+                                    <button
+                                        type="button"
+                                        onClick={() => { setServiceDropdownOpen(!serviceDropdownOpen); if (errors.service) setErrors(prev => ({ ...prev, service: '' })); }}
+                                        className={`w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-left rounded-xl bg-white/5 border ${errors.service ? 'border-red-500/70' : 'border-white/10'} text-white focus:outline-none focus:bg-white/10 focus:border-blue-500/50 hover:border-blue-500/30 transition-all font-medium text-sm sm:text-base flex justify-between items-center`}
                                 >
                                     <span className={selectedService ? "text-white" : "text-gray-500"}>
                                         {selectedService || "Service Required"}
@@ -211,6 +228,8 @@ const ContactModal = ({ isOpen, onClose, initialService = '' }) => {
                                     </div>
                                 )}
                             </div>
+                            </div>
+                            {errors.service && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.service}</p>}
                         </div>
 
                         {/* Project Details (Full Width) */}

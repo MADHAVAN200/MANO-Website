@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useCompany } from '../context/CompanyContext';
 import { Send, ChevronDown, Loader2 } from 'lucide-react';
+import { useToast } from './Toast';
 
 const ContactForm = () => {
     const { isEPC } = useCompany();
     const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
     const [selectedService, setSelectedService] = useState('');
     const [loading, setLoading] = useState(false);
+    const showToast = useToast();
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         name: '',
         company_name: '',
@@ -19,11 +22,18 @@ const ContactForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = 'Full name is required';
+        if (!formData.email.trim()) newErrors.email = 'Email address is required';
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Enter a valid email address';
+        if (!selectedService) newErrors.service = 'Please select a service';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async () => {
-        if (!formData.name || !formData.email || !selectedService) {
-            alert("Please fill in all required fields (Name, Email, Service).");
-            return;
-        }
+        if (!validate()) return;
 
         setLoading(true);
         const API_URL = "https://erp.mano.co.in/api/enquiry_api/enquiry";
@@ -43,7 +53,7 @@ const ContactForm = () => {
             const result = await response.json();
 
             if (response.ok) {
-                alert("Enquiry submitted successfully!");
+                showToast("Enquiry submitted successfully!", 'success');
                 setFormData({
                     name: '',
                     company_name: '',
@@ -53,11 +63,11 @@ const ContactForm = () => {
                 });
                 setSelectedService('');
             } else {
-                alert("Failed to submit enquiry: " + result.message);
+                showToast("Failed to submit enquiry: " + result.message, 'error');
             }
         } catch (error) {
             console.error("Network Error:", error);
-            alert("Network error. Please try again later.");
+            showToast("Network error. Please try again later.", 'error');
         } finally {
             setLoading(false);
         }
@@ -74,14 +84,17 @@ const ContactForm = () => {
     return (
         <div className="max-w-2xl mx-auto px-1 sm:px-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Full Name *"
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg"
-                />
+                <div>
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={(e) => { handleChange(e); if (errors.name) setErrors(prev => ({ ...prev, name: '' })); }}
+                        placeholder="Full Name *"
+                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border ${errors.name ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg`}
+                    />
+                    {errors.name && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.name}</p>}
+                </div>
                 <input
                     type="text"
                     name="company_name"
@@ -98,21 +111,25 @@ const ContactForm = () => {
                     placeholder="Contact / WhatsApp"
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg"
                 />
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email Address *"
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg"
-                />
+                <div>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={(e) => { handleChange(e); if (errors.email) setErrors(prev => ({ ...prev, email: '' })); }}
+                        placeholder="Email Address *"
+                        className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border ${errors.email ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg`}
+                    />
+                    {errors.email && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.email}</p>}
+                </div>
 
                 {/* Service Dropdown */}
-                <div className="relative md:col-span-2">
-                    <button
-                        type="button"
-                        onClick={() => setServiceDropdownOpen(!serviceDropdownOpen)}
-                        className="w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-left rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border border-white/10 text-white focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg flex justify-between items-center group"
+                <div className="md:col-span-2">
+                    <div className="relative">
+                        <button
+                            type="button"
+                            onClick={() => { setServiceDropdownOpen(!serviceDropdownOpen); if (errors.service) setErrors(prev => ({ ...prev, service: '' })); }}
+                            className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-left rounded-xl backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 border ${errors.service ? 'border-red-500/70' : 'border-white/10'} text-white focus:outline-none hover:border-blue-500/30 focus:border-blue-500/50 transition-all shadow-lg flex justify-between items-center group`}
                     >
                         <span className={selectedService ? "text-white" : "text-gray-500"}>{selectedService || "Service Required"}</span>
                         <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${serviceDropdownOpen ? 'rotate-180' : ''}`} />
@@ -126,6 +143,8 @@ const ContactForm = () => {
                             ))}
                         </div>
                     )}
+                    </div>
+                    {errors.service && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.service}</p>}
                 </div>
 
                 <textarea

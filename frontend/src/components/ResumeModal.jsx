@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { X, Send, User, Mail, Briefcase, Upload, FileText, Loader2, CheckCircle2 } from 'lucide-react';
+import { useToast } from './Toast';
 
 const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [dragActive, setDragActive] = useState(false);
     const fileInputRef = useRef(null);
+    const showToast = useToast();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -20,10 +22,11 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
         const file = e.target.files[0];
         if (file) {
             if (file.size > 50 * 1024 * 1024) {
-                alert("File size exceeds 50MB limit.");
+                showToast("File size exceeds 50MB limit.", 'error');
                 return;
             }
             setFormData({ ...formData, file });
+            if (errors.file) setErrors(prev => ({ ...prev, file: '' }));
         }
     };
 
@@ -44,19 +47,27 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
             const file = e.dataTransfer.files[0];
             if (file.size > 50 * 1024 * 1024) {
-                alert("File size exceeds 50MB limit.");
+                showToast("File size exceeds 50MB limit.", 'error');
                 return;
             }
             setFormData({ ...formData, file });
+            if (errors.file) setErrors(prev => ({ ...prev, file: '' }));
         }
+    };
+
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = 'Full name is required';
+        if (!formData.email.trim()) newErrors.email = 'Email address is required';
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Enter a valid email address';
+        if (!formData.file) newErrors.file = 'Please upload your resume';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.email || !formData.file) {
-            alert("Please fill in all required fields and upload your resume.");
-            return;
-        }
+        if (!validate()) return;
 
         setLoading(true);
         const API_URL = "https://erp.mano.co.in/api/resume-upload/upload";
@@ -83,11 +94,11 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
                     setFormData({ name: '', email: '', job_role: '', file: null });
                 }, 3000);
             } else {
-                alert("Failed to upload resume: " + (result.message || "Unknown error"));
+                showToast("Failed to upload resume: " + (result.message || "Unknown error"), 'error');
             }
         } catch (error) {
             console.error("Upload Error:", error);
-            alert("Network error. Please try again later.");
+            showToast("Network error. Please try again later.", 'error');
         } finally {
             setLoading(false);
         }
@@ -132,34 +143,39 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
                                 <p className="text-gray-400 text-xs sm:text-sm">Upload your resume and we'll be in touch.</p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-5">
-                                <div className="relative group">
-                                    <User className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
-                                    <input
-                                        type="text"
-                                        required
-                                        placeholder="Full Name *"
-                                        className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    />
+                            <form onSubmit={handleSubmit} noValidate className="space-y-3.5 sm:space-y-5">
+                                <div>
+                                    <div className="relative group">
+                                        <User className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                        <input
+                                            type="text"
+                                            placeholder="Full Name *"
+                                            className={`w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border ${errors.name ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all`}
+                                            value={formData.name}
+                                            onChange={(e) => { setFormData({ ...formData, name: e.target.value }); if (errors.name) setErrors(prev => ({ ...prev, name: '' })); }}
+                                        />
+                                    </div>
+                                    {errors.name && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.name}</p>}
                                 </div>
 
-                                <div className="relative group">
-                                    <Mail className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
-                                    <input
-                                        type="email"
-                                        required
-                                        placeholder="Email Address *"
-                                        className="w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    />
+                                <div>
+                                    <div className="relative group">
+                                        <Mail className="absolute left-3.5 sm:left-4 top-3 sm:top-3.5 w-4.5 h-4.5 sm:w-5 sm:h-5 text-gray-500 group-focus-within:text-blue-400 transition-colors" />
+                                        <input
+                                            type="email"
+                                            placeholder="Email Address *"
+                                            className={`w-full pl-10 sm:pl-12 pr-4 sm:pr-5 py-3 sm:py-3.5 text-sm sm:text-base rounded-xl bg-white/5 border ${errors.email ? 'border-red-500/70' : 'border-white/10'} text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 hover:border-blue-500/30 transition-all`}
+                                            value={formData.email}
+                                            onChange={(e) => { setFormData({ ...formData, email: e.target.value }); if (errors.email) setErrors(prev => ({ ...prev, email: '' })); }}
+                                        />
+                                    </div>
+                                    {errors.email && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.email}</p>}
                                 </div>
 
                                 {/* File Upload Zone */}
+                                <div>
                                 <div
-                                    className={`relative group border-2 border-dashed rounded-xl p-4 sm:p-8 transition-all flex flex-col items-center justify-center text-center cursor-pointer ${dragActive ? 'border-blue-500 bg-blue-500/10' : 'border-white/10 bg-white/5 hover:border-white/20'}`}
+                                    className={`relative group border-2 border-dashed rounded-xl p-4 sm:p-8 transition-all flex flex-col items-center justify-center text-center cursor-pointer ${dragActive ? 'border-blue-500 bg-blue-500/10' : errors.file ? 'border-red-500/70 bg-white/5' : 'border-white/10 bg-white/5 hover:border-white/20'}`}
                                     onDragEnter={handleDrag}
                                     onDragLeave={handleDrag}
                                     onDragOver={handleDrag}
@@ -199,6 +215,8 @@ const ResumeModal = ({ isOpen, onClose, jobRole = "" }) => {
                                             <p className="text-gray-600 text-[10px] mt-4 uppercase tracking-widest">PDF, DOC, DOCX up to 50MB</p>
                                         </>
                                     )}
+                                </div>
+                                {errors.file && <p className="mt-1 ml-1 text-[10px] sm:text-xs lg:text-sm text-red-400">{errors.file}</p>}
                                 </div>
 
                                 <button
