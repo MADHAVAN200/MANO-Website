@@ -15,6 +15,8 @@ export default function ChatbotWidgetDesktop({
     return (
         <div className="fixed bottom-6 right-6 z-[120]">
             {isOpen && (
+                <>
+                <div className="fixed inset-0 z-[124]" onClick={() => setIsOpen(false)} />
                 <div className="fixed right-3 top-3 bottom-3 z-[125] w-[94vw] rounded-2xl border border-white/15 bg-black/45 backdrop-blur-2xl shadow-2xl overflow-hidden flex flex-col sm:right-4 sm:top-4 sm:bottom-4 sm:w-[72vw] md:w-[48vw] lg:w-[30vw] xl:w-[20vw] xl:min-w-[320px] xl:max-w-[420px]">
                     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
                         <div className="flex items-center gap-2 text-white">
@@ -53,22 +55,22 @@ export default function ChatbotWidgetDesktop({
                                 </div>
                             </div>
                         )}
-                    </div>
 
-                    <div className="px-3 pb-2">
-                        <p className="text-[11px] text-gray-400 mb-2">Recommended questions</p>
-                        <div className="flex flex-wrap gap-2">
-                            {suggestedQuestions.map((question) => (
-                                <button
-                                    key={question}
-                                    type="button"
-                                    onClick={() => sendMessage(question)}
-                                    disabled={loading}
-                                    className="text-xs px-2.5 py-1.5 rounded-full border border-white/15 bg-white/5 text-gray-200 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    {question}
-                                </button>
-                            ))}
+                        <div className="pt-2">
+                            <p className="text-[11px] text-gray-400 mb-2">Recommended questions</p>
+                            <div className="flex flex-wrap gap-2">
+                                {suggestedQuestions.map((question) => (
+                                    <button
+                                        key={question}
+                                        type="button"
+                                        onClick={() => sendMessage(question)}
+                                        disabled={loading}
+                                        className="text-xs px-2.5 py-1.5 rounded-full border border-white/15 bg-white/5 text-gray-200 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        {question}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -93,6 +95,7 @@ export default function ChatbotWidgetDesktop({
                         </div>
                     </div>
                 </div>
+                </>
             )}
 
             <button

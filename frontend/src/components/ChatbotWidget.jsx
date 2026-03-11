@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ChatbotWidgetDesktop from "./ChatbotWidgetDesktop";
+import ChatbotWidgetTablet from "./ChatbotWidgetTablet";
 import ChatbotWidgetMobile from "./ChatbotWidgetMobile";
 
 const API_URL = import.meta.env.VITE_RAG_API_URL || "http://localhost:8001/chat";
@@ -149,6 +150,7 @@ function getSuggestedQuestionsByPath(pathname) {
 export default function ChatbotWidget() {
     const location = useLocation();
     const [isMobileDevice, setIsMobileDevice] = useState(false);
+    const [isTabletDevice, setIsTabletDevice] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -158,21 +160,28 @@ export default function ChatbotWidget() {
     useEffect(() => {
         if (typeof window === "undefined") return;
 
-        const mobileWidthQuery = window.matchMedia("(max-width: 1023px)");
+        const mobileWidthQuery = window.matchMedia("(max-width: 767px)");
+        const tabletWidthQuery = window.matchMedia("(min-width: 768px) and (max-width: 1023px)");
         const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
 
-        const updateIsMobile = () => {
-            setIsMobileDevice(mobileWidthQuery.matches || coarsePointerQuery.matches);
+        const updateDevice = () => {
+            const isMobile = mobileWidthQuery.matches;
+            const isTablet = tabletWidthQuery.matches;
+            const isCoarse = coarsePointerQuery.matches;
+            setIsMobileDevice(isMobile || (isCoarse && !isTablet));
+            setIsTabletDevice(isTablet);
         };
 
-        updateIsMobile();
+        updateDevice();
 
-        mobileWidthQuery.addEventListener("change", updateIsMobile);
-        coarsePointerQuery.addEventListener("change", updateIsMobile);
+        mobileWidthQuery.addEventListener("change", updateDevice);
+        tabletWidthQuery.addEventListener("change", updateDevice);
+        coarsePointerQuery.addEventListener("change", updateDevice);
 
         return () => {
-            mobileWidthQuery.removeEventListener("change", updateIsMobile);
-            coarsePointerQuery.removeEventListener("change", updateIsMobile);
+            mobileWidthQuery.removeEventListener("change", updateDevice);
+            tabletWidthQuery.removeEventListener("change", updateDevice);
+            coarsePointerQuery.removeEventListener("change", updateDevice);
         };
     }, []);
 
@@ -181,6 +190,16 @@ export default function ChatbotWidget() {
             listRef.current.scrollTop = listRef.current.scrollHeight;
         }
     }, [messages, loading, isOpen]);
+
+    // Lock background scroll when chatbot is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [isOpen]);
 
     const sendMessage = async (overrideQuestion) => {
         const question = (overrideQuestion ?? input).trim();
@@ -255,6 +274,10 @@ export default function ChatbotWidget() {
 
     if (isMobileDevice) {
         return <ChatbotWidgetMobile {...widgetProps} />;
+    }
+
+    if (isTabletDevice) {
+        return <ChatbotWidgetTablet {...widgetProps} />;
     }
 
     return <ChatbotWidgetDesktop {...widgetProps} />;

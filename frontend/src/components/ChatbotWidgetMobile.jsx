@@ -15,6 +15,8 @@ export default function ChatbotWidgetMobile({
     return (
         <div className="fixed bottom-3 right-3 z-[120]">
             {isOpen && (
+                <>
+                <div className="fixed inset-0 z-[124]" onClick={() => setIsOpen(false)} />
                 <div className="fixed right-3 bottom-[68px] z-[125] w-[88vw] max-w-[340px] h-[62vh] max-h-[520px] min-h-[360px] rounded-2xl border border-white/15 bg-black/50 backdrop-blur-2xl shadow-2xl overflow-hidden flex flex-col">
                     <div className="flex items-center justify-between px-3 py-2.5 border-b border-white/10 bg-white/5">
                         <div className="flex items-center gap-2 text-white">
@@ -53,22 +55,22 @@ export default function ChatbotWidgetMobile({
                                 </div>
                             </div>
                         )}
-                    </div>
 
-                    <div className="px-2.5 pb-2">
-                        <p className="text-[10px] text-gray-400 mb-1.5">Recommended questions</p>
-                        <div className="flex flex-wrap gap-1.5">
-                            {suggestedQuestions.map((question) => (
-                                <button
-                                    key={question}
-                                    type="button"
-                                    onClick={() => sendMessage(question)}
-                                    disabled={loading}
-                                    className="text-[11px] px-2 py-1 rounded-full border border-white/15 bg-white/5 text-gray-200 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    {question}
-                                </button>
-                            ))}
+                        <div className="pt-1.5">
+                            <p className="text-[10px] text-gray-400 mb-1.5">Recommended questions</p>
+                            <div className="flex flex-wrap gap-1.5">
+                                {suggestedQuestions.map((question) => (
+                                    <button
+                                        key={question}
+                                        type="button"
+                                        onClick={() => sendMessage(question)}
+                                        disabled={loading}
+                                        className="text-[11px] px-2 py-1 rounded-full border border-white/15 bg-white/5 text-gray-200 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        {question}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -93,6 +95,7 @@ export default function ChatbotWidgetMobile({
                         </div>
                     </div>
                 </div>
+                </>
             )}
 
             <button
