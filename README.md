@@ -16,10 +16,24 @@ Official MANO website monorepo with:
 
 ```text
 MANO_Website/
+|- .vite/                    # Vite cache/artifacts (generated)
+|- backend/                  # RAG API service
+|  |- .env                   # Local backend env config
+|  |- chunk_data.ipynb       # Notebook helper for chunking experimentation
+|  |- chunk_data.py          # Parse KB pages into chunk JSON
+|  |- index_knowledge.py     # Index chunks into Chroma
+|  |- rag.js                 # Retrieval + ranking + LLM answering
+|  |- requirements.txt       # Python deps for indexing pipeline
+|  |- server.js              # Express routes (/health, /chat)
+|  |- package.json
+|  |- README.md
+|- chroma/                   # Local Chroma persistent DB files
+|  |- chroma.sqlite3
 |- frontend/                 # React app
 |  |- src/
 |  |  |- components/
 |  |  |- context/
+|  |  |- data/
 |  |  |- pages/
 |  |  |  |- Gateway/
 |  |  |  |- LandingPage/
@@ -31,26 +45,34 @@ MANO_Website/
 |  |  |- main.jsx
 |  |- public/               # Static image/logo assets
 |  |- package.json
-|
-|- backend/                  # RAG API service
-|  |- server.js             # Express routes (/health, /chat)
-|  |- rag.js                # Retrieval + ranking + LLM answering
-|  |- index_knowledge.py    # Index chunks into Chroma
-|  |- chunk_data.py         # Parse KB pages into chunk JSON
-|  |- requirements.txt      # Python deps for indexing pipeline
-|  |- .env                  # Local backend env config
-|  |- package.json
-|
 |- knowledge_base/
-|  |- pages/                # Scraped page text files
+|  |- pages/                # Scraped page text files (14 page-level txt files)
 |  |- chunks.json           # Parsed chunks used by indexer
+|  |- website_content.txt   # Full-site scraped aggregate text
 |
 |- scripts/
 |  |- scrape_website.py     # Playwright site scraper
 |
+|- package.json             # Root workspace scripts (start both frontend+backend)
+|- package-lock.json
 |- test_chat.py             # Simple chatbot endpoint test script
 |- README.md
+|- node_modules/            # Root dependencies (generated)
 ```
+
+## Directory Analysis (Current)
+
+- This repository is a monorepo with two runnable apps: `frontend/` (Vite React) and `backend/` (Node RAG API).
+- Persistent local vector data is stored under `chroma/chroma.sqlite3`.
+- Knowledge assets are split into source page text in `knowledge_base/pages/`, intermediate chunks in `knowledge_base/chunks.json`, and ingestion scripts in `backend/`.
+- Generated/dependency directories such as `.vite/` and `node_modules/` are environment-specific and should not be treated as source.
+- Top-level folder sizes by file count at time of analysis:
+	- `.vite/`: 2 files
+	- `backend/`: 11 files
+	- `chroma/`: 1 file
+	- `frontend/`: 490 files
+	- `knowledge_base/`: 16 files
+	- `scripts/`: 1 file
 
 ## Frontend App Behavior
 
@@ -155,6 +177,23 @@ RAG_HYBRID_KEYWORD_WEIGHT=0.3
 ```
 
 ## Local Development
+
+### Run frontend + backend together (recommended)
+
+From the repository root:
+
+```bash
+npm install
+npm run install:all
+npm start
+```
+
+This starts:
+
+- Frontend on `http://localhost:5173`
+- Backend API on `http://localhost:8001`
+
+The root `npm start` launches both services together without stopping existing processes.
 
 ### 1. Start frontend
 
