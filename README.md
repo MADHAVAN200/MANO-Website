@@ -1,20 +1,40 @@
-# MANO-Website
+# frontend/ — MANO Website React App
 
-Completely revamped modern website built with React + Vite
+## Structure
 
-## React + Vite
+```
+frontend/
+├── src/                  ← React components, pages, context, data
+│   ├── components/
+│   ├── pages/
+│   ├── data/
+│   ├── context/
+│   ├── App.jsx
+│   └── main.jsx
+├── public/               ← Static assets (logos, images)
+├── index.html
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── postcss.config.js
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Running the Frontend
 
-Currently, two official plugins are available:
+```bash
+cd frontend
+npm install       # only needed once or after package changes
+npm run dev       # Dev server: http://localhost:5173/pcpl
+npm run build     # Production build → frontend/dist/
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Chatbot Widget (Coming Next)
 
-## React Compiler
+Will be added at: `src/components/ChatbotWidget.jsx`
+Registered in: `src/App.jsx` → `BrandLayout`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Add to `frontend/.env`:
+```
+VITE_RAG_API_URL=http://localhost:8001/chat        # local dev
+VITE_RAG_API_URL=https://yourdomain.com/rag/chat  # production
+```

@@ -10,6 +10,8 @@ import RevealOnScroll from '../../components/RevealOnScroll';
 import RainbowButton from '../../components/RainbowButton';
 import ProjectsHero from '../../components/HeroSections/ProjectsHero';
 import ContactModal from '../../components/ContactModal';
+import { useNavigate } from 'react-router-dom';
+import { useCompany } from '../../context/CompanyContext';
 
 const ImageSlider = ({ images, title, autoScrollTrigger }) => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -114,6 +116,8 @@ const ImageSlider = ({ images, title, autoScrollTrigger }) => {
 };
 
 const Projects = () => {
+    const navigate = useNavigate();
+    const { brand, isEPC } = useCompany();
     const [activeCategory, setActiveCategory] = useState("All");
     const [isContactOpen, setIsContactOpen] = useState(false);
     const [autoScrollTrigger, setAutoScrollTrigger] = useState(0);
@@ -547,7 +551,10 @@ const Projects = () => {
                                 </span>
                             </RainbowButton>
                         </div>
-                        <button className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm">
+                        <button
+                            onClick={() => navigate(`/${brand.toLowerCase()}${isEPC ? '/services/epc' : '/services'}`)}
+                            className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-colors text-white font-semibold text-lg flex items-center justify-center backdrop-blur-sm"
+                        >
                             View More Services <ArrowRight className="ml-2 w-5 h-5" />
                         </button>
                     </div>

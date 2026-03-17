@@ -1,24 +1,33 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChevronRight, Menu, X } from 'lucide-react';
 import RainbowButton from './RainbowButton';
 import { useCompany } from '../context/CompanyContext';
 import ContactModal from './ContactModal';
 import ResumeModal from './ResumeModal';
+import MobileNavbar from './MobileNavbar';
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const currentPath = location.pathname;
     const { brand, isEPC } = useCompany();
     const brandPath = `/${brand.toLowerCase()}`;
 
-    const [activeService, setActiveService] = useState(0);
+    const [activeService, setActiveService] = useState(null);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isContactOpen, setIsContactOpen] = useState(false);
     const [isResumeOpen, setIsResumeOpen] = useState(false);
 
     const isCareersPage = currentPath === `${brandPath}/careers` || currentPath === `${brandPath}/careers/`;
+
+    const handleLogoClick = (e) => {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        setIsServicesOpen(false);
+        navigate('/');
+    };
 
     const handleContactClick = (e) => {
         e.preventDefault();
@@ -73,7 +82,7 @@ const Navbar = () => {
         if (foundIndex !== -1) {
             setActiveService(foundIndex);
         } else {
-            setActiveService(0);
+            setActiveService(null);
         }
     }, [currentPath, isServicesOpen, services, brandPath]);
 
@@ -93,13 +102,13 @@ const Navbar = () => {
     return (
         <nav className="absolute top-4 lg:top-6 left-0 right-0 z-50 flex items-center justify-center pointer-events-none">
             <div
-                className={`backdrop-blur-md bg-white/5 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden rounded-2xl lg:rounded-[32px] w-[92%] sm:w-[95%] max-w-[1400px]`}
+                className={`backdrop-blur-xl bg-black/70 border border-white/20 transition-all duration-300 ease-out flex flex-col shadow-[0_4px_30px_rgba(0,0,0,0.1)] pointer-events-auto overflow-hidden rounded-2xl lg:rounded-[32px] w-[92%] sm:w-[95%] max-w-[1400px] lg:backdrop-blur-md lg:bg-white/5`}
                 onMouseLeave={() => setIsServicesOpen(false)}
             >
                 {/* Top Row: Logo, Links (Desktop), Hamburger, CTA */}
                 <div className="flex items-center justify-between px-4 sm:px-8 py-3 lg:py-4 w-full">
                     {/* Logo Section */}
-                    <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group">
+                    <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 sm:gap-3 flex-shrink-0 group">
                         <img src={`${import.meta.env.BASE_URL}mano-logo.svg`} alt="Mano Logo" className="h-8 sm:h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
                         <span className="text-xl sm:text-2xl font-bold text-white tracking-wide">
                             MANO
@@ -107,7 +116,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* Desktop Navigation Links */}
-                    <div className="hidden lg:flex items-center gap-10 xl:gap-14">
+                    <div className="hidden xl:flex items-center gap-10 xl:gap-14">
                         <Link to={getLink('/')} className={`${linkBaseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
                             Home
                         </Link>
@@ -134,11 +143,14 @@ const Navbar = () => {
                         <Link to={getLink('/careers')} className={`${linkBaseClass} ${isActive('/careers') ? activeClass : inactiveClass}`}>
                             Careers
                         </Link>
+                        <Link to={getLink('/blog')} className={`${linkBaseClass} ${isActive('/blog') ? activeClass : inactiveClass}`}>
+                            Blog
+                        </Link>
                     </div>
 
                     {/* Right Side: CTA Button and Mobile Menu Toggle */}
                     <div className="flex items-center gap-4">
-                        <div className="hidden lg:block">
+                        <div className="hidden xl:block">
                             <div onClick={handleContactClick} className="cursor-pointer">
                                 <RainbowButton borderRadius="rounded-xl">
                                     {isCareersPage ? 'Apply' : 'Get in Touch'}
@@ -147,61 +159,44 @@ const Navbar = () => {
                             </div>
                         </div>
 
-                        {/* Mobile Menu Toggle Button */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                            className="xl:hidden p-2.5 text-white hover:bg-white/10 rounded-lg transition-colors"
+                            aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+                            aria-expanded={isMobileMenuOpen}
                         >
-                            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                            {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
                         </button>
                     </div>
                 </div>
 
-                {/* Mobile Menu Dropdown */}
-                <div
-                    className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-[80vh] opacity-100 border-t border-white/10' : 'max-h-0 opacity-0'}`}
-                >
-                    <div className="flex flex-col p-6 gap-2">
-                        <Link to={getLink('/')} className={`${linkBaseClass} ${isActive('/') ? activeClass : inactiveClass}`}>
-                            Home
-                        </Link>
-                        <Link to={getLink('/about-us')} className={`${linkBaseClass} ${isActive('/about-us') ? activeClass : inactiveClass}`}>
-                            About Us
-                        </Link>
-                        <Link to={isEPC ? getLink('/services/epc') : getLink('/services')} className={`${linkBaseClass} ${isActive(isEPC ? '/services/epc' : '/services') ? activeClass : inactiveClass}`}>
-                            {isEPC ? 'Service' : 'Services'}
-                        </Link>
-                        <Link to={getLink('/projects')} className={`${linkBaseClass} ${isActive('/projects') ? activeClass : inactiveClass}`}>
-                            Projects
-                        </Link>
-                        <Link to={getLink('/careers')} className={`${linkBaseClass} ${isActive('/careers') ? activeClass : inactiveClass}`}>
-                            Careers
-                        </Link>
-                        <div className="pt-4" onClick={handleContactClick}>
-                            <RainbowButton borderRadius="rounded-xl w-full">
-                                {isCareersPage ? 'Apply' : 'Get in Touch'}
-                                <ChevronRight className="w-4 h-4 ml-2" />
-                            </RainbowButton>
-                        </div>
-                    </div>
-                </div>
+                <MobileNavbar
+                    isOpen={isMobileMenuOpen}
+                    onClose={() => setIsMobileMenuOpen(false)}
+                    isActive={isActive}
+                    getLink={getLink}
+                    isEPC={isEPC}
+                    isCareersPage={isCareersPage}
+                    handleContactClick={handleContactClick}
+                    services={services}
+                />
 
                 {/* Desktop Expanding Mega Menu Section (Existing) */}
                 <div
-                    className={`hidden lg:block w-full transition-all duration-300 ease-out ${isServicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
+                    className={`hidden xl:block w-full transition-all duration-300 ease-out ${isServicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                     <div className="px-12 pb-8 pt-2 flex gap-12 border-t border-white/10 mt-2 mx-8">
                         <div className="w-1/3 flex flex-col justify-between pt-4">
                             <div>
                                 <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                                    {services[activeService]?.title}
+                                    {activeService !== null ? services[activeService]?.title : "Our Services"}
                                 </h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    {services[activeService]?.desc}
+                                    {activeService !== null ? services[activeService]?.desc : "Explore our comprehensive range of services tailored to meet your project needs."}
                                 </p>
                             </div>
-                            <Link to={getLink(services[activeService]?.path || '#')} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
-                                Explore Service <ChevronRight className="w-4 h-4" />
+                            <Link to={activeService !== null ? getLink(services[activeService]?.path || '#') : (isEPC ? getLink('/services/epc') : getLink('/services'))} className="px-6 py-3 bg-white text-black rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors inline-flex items-center gap-2 w-fit">
+                                Explore {activeService !== null ? 'Service' : 'Services'} <ChevronRight className="w-4 h-4" />
                             </Link>
                         </div>
 
@@ -224,7 +219,17 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+                initialService={
+                    (() => {
+                        const relativePath = currentPath.replace(brandPath, '') || '/';
+                        const foundService = services.find(s => s.path === relativePath);
+                        return foundService ? foundService.title : '';
+                    })()
+                }
+            />
             <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} jobRole="General Application" />
         </nav >
     );

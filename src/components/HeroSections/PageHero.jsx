@@ -1,4 +1,5 @@
 import React from "react";
+import LazyBgDiv from "../LazyBgDiv";
 import { Link } from 'react-router-dom';
 import {
     ArrowRight,
@@ -38,7 +39,8 @@ export default function PageHero({
     },
     badgeText = "Premium Construction Services",
     showCards = false,
-    showContactButton = true
+    showContactButton = true,
+    headingClassName = ""
 }) {
     return (
         <div className="relative w-full min-h-screen flex flex-col justify-center text-white overflow-hidden font-sans">
@@ -81,17 +83,17 @@ export default function PageHero({
                         {layout === 'split' ? (
                             <div className="grid h-full w-full grid-cols-2 gap-1">
                                 {/* Left Large Image */}
-                                <div
+                                <LazyBgDiv
                                     className="h-full w-full bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                                 {/* Right Stacked Images */}
                                 <div className="grid grid-rows-2 gap-1 h-full">
                                     {images.slice(1, 3).map((img, index) => (
-                                        <div
+                                        <LazyBgDiv
                                             key={index}
                                             className="h-full w-full bg-cover bg-center"
-                                            style={{ backgroundImage: `url(${img})` }}
+                                            src={img}
                                         />
                                     ))}
                                 </div>
@@ -99,17 +101,17 @@ export default function PageHero({
                         ) : layout === 'horizontal-split' ? (
                             <div className="grid h-full w-full grid-rows-2 gap-1">
                                 {/* Top Large Image */}
-                                <div
+                                <LazyBgDiv
                                     className="h-full w-full bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                                 {/* Bottom Split Images */}
                                 <div className="grid grid-cols-2 gap-1 h-full">
                                     {images.slice(1, 3).map((img, index) => (
-                                        <div
+                                        <LazyBgDiv
                                             key={index}
                                             className="h-full w-full bg-cover bg-center rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-500"
-                                            style={{ backgroundImage: `url(${img})` }}
+                                            src={img}
                                         />
                                     ))}
                                 </div>
@@ -117,29 +119,29 @@ export default function PageHero({
                         ) : layout === 'quad-grid' ? (
                             <div className="grid h-full w-full grid-cols-2 gap-2 p-2">
                                 {images.slice(0, 4).map((img, index) => (
-                                    <div
+                                    <LazyBgDiv
                                         key={index}
                                         className="h-full w-full bg-cover bg-center rounded-2xl border border-white/10 shadow-lg hover:scale-[1.02] transition-transform duration-500"
-                                        style={{ backgroundImage: `url(${img})` }}
+                                        src={img}
                                     />
                                 ))}
                             </div>
                         ) : layout === 'masonry-3' ? (
                             <div className="grid h-full w-full grid-cols-12 gap-4 p-4">
                                 {/* Left Vertical - 5 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-12 lg:col-span-5 h-[40vh] lg:h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-2xl"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                                 {/* Right Stack - 7 cols */}
                                 <div className="col-span-12 lg:col-span-7 grid grid-rows-2 gap-4 h-[40vh] lg:h-full">
-                                    <div
+                                    <LazyBgDiv
                                         className="h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[1]})` }}
+                                        src={images[1]}
                                     />
-                                    <div
+                                    <LazyBgDiv
                                         className="h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[2]})` }}
+                                        src={images[2]}
                                     />
                                 </div>
                             </div>
@@ -147,51 +149,51 @@ export default function PageHero({
                             <div className="grid h-full w-full grid-cols-12 gap-4 p-4">
                                 {/* Left Stack - 5 cols */}
                                 <div className="col-span-12 lg:col-span-5 grid grid-rows-2 gap-4 h-[40vh] lg:h-full">
-                                    <div
+                                    <LazyBgDiv
                                         className="h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[0]})` }}
+                                        src={images[0]}
                                     />
-                                    <div
+                                    <LazyBgDiv
                                         className="h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[1]})` }}
+                                        src={images[1]}
                                     />
                                 </div>
                                 {/* Right Large Vertical - 7 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-12 lg:col-span-7 h-[40vh] lg:h-full w-full bg-cover bg-center rounded-3xl border border-white/10 shadow-2xl"
-                                    style={{ backgroundImage: `url(${images[2]})` }}
+                                    src={images[2]}
                                 />
                             </div>
                         ) : layout === 'mosaic-5' ? (
                             <div className="grid h-full w-full grid-cols-12 gap-2 p-2 relative">
                                 {/* 1. Main Large (Left) - Spans 6 cols, 2 rows */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-12 lg:col-span-6 row-span-2 h-[50vh] lg:h-full w-full bg-cover bg-center rounded-2xl border border-white/10"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
 
                                 {/* 2. Top Middle - Spans 3 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-6 lg:col-span-3 h-[25vh] lg:h-full w-full bg-cover bg-center rounded-2xl border border-white/10"
-                                    style={{ backgroundImage: `url(${images[1]})` }}
+                                    src={images[1]}
                                 />
 
                                 {/* 3. Top Right - Spans 3 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-6 lg:col-span-3 h-[25vh] lg:h-full w-full bg-cover bg-center rounded-2xl border border-white/10"
-                                    style={{ backgroundImage: `url(${images[2]})` }}
+                                    src={images[2]}
                                 />
 
                                 {/* 4. Bottom Middle - Spans 3 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-6 lg:col-span-3 h-[25vh] lg:h-full w-full bg-cover bg-center rounded-2xl border border-white/10"
-                                    style={{ backgroundImage: `url(${images[3]})` }}
+                                    src={images[3]}
                                 />
 
                                 {/* 5. Bottom Right - Spans 3 cols */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-6 lg:col-span-3 h-[25vh] lg:h-full w-full bg-cover bg-center rounded-2xl border border-white/10"
-                                    style={{ backgroundImage: `url(${images[4]})` }}
+                                    src={images[4]}
                                 />
                             </div>
                         ) : layout === 'diagonal-4' ? (
@@ -199,27 +201,27 @@ export default function PageHero({
                                 {/* Col 1 */}
                                 <div className="col-span-6 grid grid-rows-4 gap-1 h-full">
                                     {/* Tall Top (3/4) */}
-                                    <div
+                                    <LazyBgDiv
                                         className="row-span-3 w-full h-full bg-cover bg-center rounded-xl border border-white/5 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[0]})` }}
+                                        src={images[0]}
                                     />
                                     {/* Short Bottom (1/4) */}
-                                    <div
+                                    <LazyBgDiv
                                         className="row-span-1 w-full h-full bg-cover bg-center rounded-xl border border-white/5 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[1]})` }}
+                                        src={images[1]}
                                     />
                                 </div>
                                 {/* Col 2 */}
                                 <div className="col-span-6 grid grid-rows-4 gap-1 h-full">
                                     {/* Short Top (1/4) */}
-                                    <div
+                                    <LazyBgDiv
                                         className="row-span-1 w-full h-full bg-cover bg-center rounded-xl border border-white/5 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[2]})` }}
+                                        src={images[2]}
                                     />
                                     {/* Tall Bottom (3/4) */}
-                                    <div
+                                    <LazyBgDiv
                                         className="row-span-3 w-full h-full bg-cover bg-center rounded-xl border border-white/5 shadow-xl"
-                                        style={{ backgroundImage: `url(${images[3]})` }}
+                                        src={images[3]}
                                     />
                                 </div>
                             </div>
@@ -227,16 +229,16 @@ export default function PageHero({
                             <div className="grid h-full w-full grid-cols-12 gap-1 relative">
                                 {/* Left Column - 2 Large Stacked */}
                                 <div className="col-span-4 grid grid-rows-2 gap-1 h-full">
-                                    <div className="bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[0]})` }} />
-                                    <div className="bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[1]})` }} />
+                                    <LazyBgDiv src={images[0]} className="bg-cover bg-center rounded-xl border border-white/5" />
+                                    <LazyBgDiv src={images[1]} className="bg-cover bg-center rounded-xl border border-white/5" />
                                 </div>
                                 {/* Middle Column - 1 Large Vertical */}
-                                <div className="col-span-4 bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[2]})` }} />
+                                <LazyBgDiv src={images[2]} className="col-span-4 bg-cover bg-center rounded-xl border border-white/5" />
                                 {/* Right Column - 3 Small Stacked */}
                                 <div className="col-span-4 grid grid-rows-3 gap-1 h-full">
-                                    <div className="bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[3]})` }} />
-                                    <div className="bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[4]})` }} />
-                                    <div className="bg-cover bg-center rounded-xl border border-white/5" style={{ backgroundImage: `url(${images[5]})` }} />
+                                    <LazyBgDiv src={images[3]} className="bg-cover bg-center rounded-xl border border-white/5" />
+                                    <LazyBgDiv src={images[4]} className="bg-cover bg-center rounded-xl border border-white/5" />
+                                    <LazyBgDiv src={images[5]} className="bg-cover bg-center rounded-xl border border-white/5" />
                                 </div>
                             </div>
                         ) : layout === 'split-reverse' ? (
@@ -244,65 +246,65 @@ export default function PageHero({
                                 {/* Left Stacked Images */}
                                 <div className="grid grid-rows-2 gap-1 h-full">
                                     {images.slice(1, 3).map((img, index) => (
-                                        <div
+                                        <LazyBgDiv
                                             key={index}
                                             className="h-full w-full bg-cover bg-center"
-                                            style={{ backgroundImage: `url(${img})` }}
+                                            src={img}
                                         />
                                     ))}
                                 </div>
                                 {/* Right Large Image */}
-                                <div
+                                <LazyBgDiv
                                     className="h-full w-full bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                             </div>
                         ) : layout === 'bento-5' ? (
                             <div className="grid h-full w-full grid-cols-10 gap-0.5 relative">
                                 {/* Large Left - 6/10 width */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-6 h-full bg-cover bg-center border border-white/5"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                                 {/* Right 2x2 Grid - 4/10 width */}
                                 <div className="col-span-4 h-full grid grid-cols-2 grid-rows-2 gap-0.5">
-                                    <div className="bg-cover bg-center border border-white/5" style={{ backgroundImage: `url(${images[1]})` }} />
-                                    <div className="bg-cover bg-center border border-white/5" style={{ backgroundImage: `url(${images[2]})` }} />
-                                    <div className="bg-cover bg-center border border-white/5" style={{ backgroundImage: `url(${images[3]})` }} />
-                                    <div className="bg-cover bg-center border border-white/5" style={{ backgroundImage: `url(${images[4]})` }} />
+                                    <LazyBgDiv src={images[1]} className="bg-cover bg-center border border-white/5" />
+                                    <LazyBgDiv src={images[2]} className="bg-cover bg-center border border-white/5" />
+                                    <LazyBgDiv src={images[3]} className="bg-cover bg-center border border-white/5" />
+                                    <LazyBgDiv src={images[4]} className="bg-cover bg-center border border-white/5" />
                                 </div>
                             </div>
                         ) : layout === 'dense-collage' ? (
                             <div className="grid h-full w-full grid-cols-6 grid-rows-2 gap-0.5 relative">
                                 {images.slice(0, 12).map((img, index) => (
-                                    <div
+                                    <LazyBgDiv
                                         key={index}
                                         className="h-full w-full bg-cover bg-center border border-white/5"
-                                        style={{ backgroundImage: `url(${img})` }}
+                                        src={img}
                                     />
                                 ))}
                             </div>
                         ) : layout === 'collage-4' ? (
                             <div className="grid h-full w-full grid-cols-12 gap-0.5 relative">
                                 {/* Left Main - Covers text area */}
-                                <div
+                                <LazyBgDiv
                                     className="col-span-7 h-full bg-cover bg-center border border-white/5"
-                                    style={{ backgroundImage: `url(${images[0]})` }}
+                                    src={images[0]}
                                 />
                                 {/* Right Side - Mixed Grid */}
                                 <div className="col-span-5 grid grid-rows-2 gap-0.5 h-full">
-                                    <div
+                                    <LazyBgDiv
                                         className="w-full h-full bg-cover bg-center border border-white/5"
-                                        style={{ backgroundImage: `url(${images[1]})` }}
+                                        src={images[1]}
                                     />
                                     <div className="grid grid-cols-2 gap-0.5 h-full">
-                                        <div
+                                        <LazyBgDiv
                                             className="w-full h-full bg-cover bg-center border border-white/5"
-                                            style={{ backgroundImage: `url(${images[2]})` }}
+                                            src={images[2]}
                                         />
-                                        <div
+                                        <LazyBgDiv
                                             className="w-full h-full bg-cover bg-center border border-white/5"
-                                            style={{ backgroundImage: `url(${images[3]})` }}
+                                            src={images[3]}
                                         />
                                     </div>
                                 </div>
@@ -311,21 +313,19 @@ export default function PageHero({
                             // Default Grid Layout
                             <div className={`grid h-full w-full gap-1 ${images.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
                                 {images.map((img, index) => (
-                                    <div
+                                    <LazyBgDiv
                                         key={index}
                                         className="h-full w-full bg-cover bg-center"
-                                        style={{ backgroundImage: `url(${img})` }}
+                                        src={img}
                                     />
                                 ))}
                             </div>
                         )}
                     </div>
                 ) : (
-                    <div
+                    <LazyBgDiv
                         className="h-full w-full bg-cover bg-center"
-                        style={{
-                            backgroundImage: `url(${images && images.length > 0 ? images[0] : bgImage})`
-                        }}
+                        src={images && images.length > 0 ? images[0] : bgImage}
                     />
                 )}
             </div>
@@ -396,7 +396,7 @@ export default function PageHero({
 
                             {/* Heading */}
                             <h1
-                                className="animate-fade-in delay-200 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4"
+                                className={`animate-fade-in delay-200 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter leading-[1.0] pb-4 ${headingClassName}`}
                             >
                                 <span className="bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
                                     {title}

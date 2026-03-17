@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 
 import {
     ChevronRight, Briefcase, Calculator, TrendingUp, ShieldCheck,
@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import RainbowButton from '../../components/RainbowButton';
+import ContactModal from '../../components/ContactModal';
 import ServiceHero from '../../components/HeroSections/ServiceHero';
 import { useCompany } from '../../context/CompanyContext';
 import DigitalERPSection from '../../components/DigitalERPSection';
@@ -42,9 +43,10 @@ const RevealOnScroll = ({ children }) => {
 
 
 
-const ServicesPage = () => {
+const ServicesPageTablet = () => {
     const { brand, isEPC } = useCompany();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isContactOpen, setIsContactOpen] = useState(false);
 
     useEffect(() => {
         const handleInteraction = () => {
@@ -428,7 +430,7 @@ const ServicesPage = () => {
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-gray-500 to-white pb-4 leading-normal">Service Delivery Model</h2>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     {deliveryModel.map((step, index) => (
                                         <div key={index} className="group relative p-8 rounded-2xl border border-white/10 overflow-hidden hover:border-blue-500/30 transition-all shadow-lg backdrop-blur-xl bg-gradient-to-r from-transparent to-white/5 hover:to-blue-600/10 animated-white-border">
                                             <div className="absolute top-6 right-6 text-6xl font-bold text-white/5 group-hover:text-blue-500/10 transition-colors pointer-events-none">
@@ -464,18 +466,26 @@ const ServicesPage = () => {
                                 Partner with MANO Project Consultants to plan smarter, execute better, and achieve guaranteed project success.
                             </p>
                             <div className="flex justify-center">
-                                <RainbowButton>
-                                    <span className="flex items-center text-lg font-semibold px-4">
-                                        Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
-                                    </span>
-                                </RainbowButton>
+                                <div onClick={() => setIsContactOpen(true)}>
+                                    <RainbowButton>
+                                        <span className="flex items-center text-lg font-semibold px-4">
+                                            Start Your Project <ChevronRight className="ml-2 w-5 h-5" />
+                                        </span>
+                                    </RainbowButton>
+                                </div>
                             </div>
                         </div>
                     </section>
                 </>
             )}
+
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+                initialService="General Inquiry"
+            />
         </div>
     );
 };
 
-export default ServicesPage;
+export default ServicesPageTablet;
