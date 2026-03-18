@@ -4,7 +4,8 @@ import ChatbotWidgetDesktop from "./ChatbotWidgetDesktop";
 import ChatbotWidgetTablet from "./ChatbotWidgetTablet";
 import ChatbotWidgetMobile from "./ChatbotWidgetMobile";
 
-const API_URL = import.meta.env.VITE_RAG_API_URL || "http://localhost:5555/chat-corporate/chat";
+const API_URL = import.meta.env.VITE_RAG_API_URL || "http://localhost:5555";
+const CHAT_API_URL = `${API_URL}/chat-corporate/chat`;
 
 const initialMessage = {
     role: "assistant",
@@ -211,7 +212,7 @@ export default function ChatbotWidget() {
         setLoading(true);
 
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(CHAT_API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ question })
